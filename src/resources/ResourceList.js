@@ -1,4 +1,4 @@
-import {MainResource} from './main';
+import {MainResource} from './MainResource';
 
 export class ResourceList{
 
@@ -10,5 +10,4 @@ export class ResourceList{
     get list(){
         return this.resources;
     }
-
 }

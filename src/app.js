@@ -16,5 +16,4 @@ export class App{
         let config = App.config;
         console.log('Server listening to '+config.server.ip+':'+config.server.port);
     }
-
 }

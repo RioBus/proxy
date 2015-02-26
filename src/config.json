@@ -1,11 +1,7 @@
 {
-  "main": "src/app",
   "server": {
     "ip": "127.0.0.1",
     "port": "80",
-    "driver": "express",
-    "resources": [
-      { "url": "/", "modulePath": "./src/resources/main"}
-    ]
+    "driver": "express"
   }
 }
