@@ -1,4 +1,4 @@
 var gulp = require('gulp');
-require('./serve');
+require('./build');
 
-gulp.task('default', ['serve'], function() {} );
+gulp.task('default', ['build'], function() {} );

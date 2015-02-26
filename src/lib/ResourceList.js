@@ -1,10 +1,11 @@
-import {MainResource} from './MainResource';
-
 export class ResourceList{
 
     constructor(){
         this.resources = [];
-        this.resources.push(new MainResource());
+    }
+
+    registerResource(resource){
+        this.resources.push(resource);
     }
 
     get list(){

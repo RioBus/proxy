@@ -30,10 +30,10 @@ export class Server{
 
     registerResources(resources){
         for(var resource of resources){
-            this.route('get', resource.getRoute(), resource.get);
-            this.route('post', resource.getRoute(), resource.post);
-            this.route('put', resource.getRoute(), resource.put);
-            this.route('delete', resource.getRoute(), resource.delete);
+            this.route('get', resource.route(), resource.get);
+            this.route('post', resource.route(), resource.post);
+            this.route('put', resource.route(), resource.put);
+            this.route('delete', resource.route(), resource.delete);
         }
     }
 

@@ -2,7 +2,7 @@ let route = '/';
 
 export class Resource{
 
-    getRoute(){
+    route(){
         return route;
     }
 

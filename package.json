@@ -5,6 +5,7 @@
     "type": "git",
     "url": "http://github.com/fmsouza/nodelicious"
   },
+  "main": "dist/commonjs/nodelicious.js",
   "dependencies": {
     "express": "^4.12.0"
   },
