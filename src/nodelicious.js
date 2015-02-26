@@ -6,5 +6,5 @@ traceur.require.makeDefault(function(filename) {
     return filename.indexOf('node_modules') === -1;
 });
 
-var App = require('./src/app').App;
+var App = require('./app').App;
 App.main(JSON.parse(FileSystem.readFileSync('src/config.json')));
