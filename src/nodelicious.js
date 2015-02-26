@@ -1,5 +1,8 @@
-require('traceur').require.makeDefault(function(filename) {
-    // don't transpile our dependencies, just our app
-    return filename.indexOf('node_modules') === -1;
-});
-require('./App').App.main(JSON.parse(require('fs').readFileSync('src/config.json')));
+export class Nodelicious{
+
+    static bootstrap(callback){
+        var config = JSON.parse(require('fs').readFileSync('src/config.json'));
+        callback(config);
+    }
+
+}

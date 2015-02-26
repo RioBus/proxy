@@ -1,21 +1,23 @@
 {
   "name": "nodelicious",
   "version": "0.0.1",
-  "repository": "",
-  "application": {
-    "src": "src",
-    "build": "dist"
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/fmsouza/nodelicious"
   },
   "dependencies": {
-    "express": "^4.12.0",
-    "gulp-concat": "^2.5.2",
-    "gulp-nodemon": "^1.0.5",
-    "gulp-sourcemaps": "^1.4.0",
-    "gulp-traceur": "^0.17.0",
-    "traceur": "0.0.85"
+    "express": "^4.12.0"
   },
   "devDependencies": {
     "gulp": "^3.8.11",
-    "gulp-traceur": "^0.17.0"
+    "gulp-babel": "^4.0.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-nodemon": "^1.0.5",
+    "gulp-sourcemaps": "^1.4.0",
+    "require-dir": "^0.1.0",
+    "run-sequence": "^1.0.2",
+    "vinyl-paths": "^1.0.0",
+    "del": "^1.1.0",
+    "object.assign": "^1.0.3"
   }
 }
