@@ -1,9 +1,7 @@
-let route = '/';
-
 export class Resource{
 
     route(){
-        return route;
+        return '/';
     }
 
     get(request, response, next) {

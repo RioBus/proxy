@@ -1,24 +1,31 @@
 {
   "name": "nodelicious",
   "version": "0.0.1",
+  "description": "A simple HTTP server written in ECMAScript 6",
   "repository": {
     "type": "git",
     "url": "http://github.com/fmsouza/nodelicious"
   },
-  "main": "dist/commonjs/nodelicious.js",
+  "compiler": "common",
+  "keywords": ["es6", "ECMAscript6", "nodejs", "node", "desktop", "server", "wrapper", "infrastructure"],
+  "author": "Fred Souza <fredericoamsouza@gmail.com> (http://fmsouza.github.io)",
+  "license": "GNU-GPL v2",
+  "bugs": {
+    "url": "https://github.com/fmsouza/nodelicious/issues"
+  },
   "dependencies": {
     "express": "^4.12.0"
   },
   "devDependencies": {
+    "del": "^1.1.0",
     "gulp": "^3.8.11",
     "gulp-babel": "^4.0.0",
     "gulp-concat": "^2.5.2",
     "gulp-nodemon": "^1.0.5",
     "gulp-sourcemaps": "^1.4.0",
+    "object.assign": "^1.0.3",
     "require-dir": "^0.1.0",
     "run-sequence": "^1.0.2",
-    "vinyl-paths": "^1.0.0",
-    "del": "^1.1.0",
-    "object.assign": "^1.0.3"
+    "vinyl-paths": "^1.0.0"
   }
 }

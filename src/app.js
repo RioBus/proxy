@@ -4,19 +4,24 @@ import {MainResource} from './resources/MainResource';
 
 export class App{
 
-	static main(config){
-        App.config = config;
-        var server = new Server(App.config.server);
-        var resources = new ResourceList();
+    static get config(){
+        return {
+            ip: '127.0.0.1',
+            port: '80',
+            driver: 'express'
+        }
+    }
 
+	static main(){
+        var server = new Server(App.config);
+        var resources = new ResourceList();
         App.registerResourceList(resources);
         server.registerResources(resources.list);
         server.start(App.startCallback);
 	}
 
     static startCallback(){
-        let config = App.config;
-        console.log('Server listening to '+config.server.ip+':'+config.server.port);
+        console.log('Server listening to '+App.config.ip+':'+App.config.port);
     }
 
     static registerResourceList(handler){

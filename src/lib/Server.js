@@ -2,7 +2,7 @@ export class Server{
 
     constructor(config){
         this.config = config;
-        this.registerDriver(config.driver);
+        this.registerDriver(this.config.driver);
     }
 
     route(method, route, callback){
