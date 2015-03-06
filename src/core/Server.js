@@ -1,43 +1,16 @@
 export class Server{
 
-    constructor(config){
+    constructor(config, router){
         this.config = config;
-        this.registerDriver(this.config.driver);
-    }
-
-    route(method, route, callback){
-        switch(method){
-            case 'post':
-                break;
-            case 'put':
-                break;
-            case 'delete':
-                break;
-            case 'get':
-            default:
-                this.driver.get(route, callback);
-                break;
-        }
-    }
-
-    registerDriver(driver){
-        switch(driver){
-            default:
-                let Express = require('express');
-                this.driver = new Express();
-        }
-    }
-
-    registerResources(resources){
-        for(var resource of resources){
-            this.route('get', resource.route(), resource.get);
-            this.route('post', resource.route(), resource.post);
-            this.route('put', resource.route(), resource.put);
-            this.route('delete', resource.route(), resource.delete);
-        }
+        this.router = router;
     }
 
     start(callback=null){
-        this.driver.listen(this.config.port, this.config.ip, callback);
+        let ip = this.config.ip;
+        let port = this.config.port;
+        this.router.start(ip, port, function(){
+            if(callback!==null) callback();
+            console.log('Server listening to '+ip+':'+port+' ...');
+        });
     }
 }

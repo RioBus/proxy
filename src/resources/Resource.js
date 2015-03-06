@@ -20,18 +20,3 @@ export class Resource{
         response.json({type: "error", message: "Operation not implemented"});
     }
 }
-
-export class ResourceList{
-
-    constructor(){
-        this.resources = [];
-    }
-
-    registerResource(resource){
-        this.resources.push(resource);
-    }
-
-    get list(){
-        return this.resources;
-    }
-}
