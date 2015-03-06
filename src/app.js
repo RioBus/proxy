@@ -1,19 +1,12 @@
-import {Server} from './lib/server';
-import {ResourceList} from './lib/ResourceList';
-import {MainResource} from './resources/MainResource';
+import {Server} from './core/server';
+import {Resource, ResourceList} from './resources/resource';
+import {MainResource} from './resources/main';
 
 export class App{
 
-    static get config(){
-        return {
-            ip: '127.0.0.1',
-            port: '80',
-            driver: 'express'
-        }
-    }
-
 	static main(){
-        var server = new Server(App.config);
+        App.config = require('./config');
+        var server = new Server(App.config.server);
         var resources = new ResourceList();
         App.registerResourceList(resources);
         server.registerResources(resources.list);
@@ -21,7 +14,7 @@ export class App{
 	}
 
     static startCallback(){
-        console.log('Server listening to '+App.config.ip+':'+App.config.port);
+        console.log('Server listening to '+App.config.server.ip+':'+App.config.server.port);
     }
 
     static registerResourceList(handler){
