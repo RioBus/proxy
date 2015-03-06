@@ -1,4 +1,10 @@
 var gulp = require('gulp');
-require('./build');
 
-gulp.task('default', ['build'], function() {} );
+gulp.task('default', function() {
+    console.log();
+    console.log("Use one of the following commands:");
+    console.log("\tgulp build\t build the application");
+    console.log("\tgulp run\t run the application");
+    console.log("\tgulp clean\t to remove the last build and perform a clean build");
+    console.log();
+} );
