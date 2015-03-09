@@ -1,0 +1,27 @@
+{
+  "name": "riobus-web",
+  "version": "2.0.0",
+  "description": "Aplicacao do servidor que roda tanto o servidor http quanto o servidor REST do RioBus",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marco-jardim/riobus-web"
+  },
+  "keywords": [
+    "riobus",
+    "transporte",
+    "mobilidade",
+    "publico",
+    "rj",
+    "onibus"
+  ],
+  "author": "Fred Souza <fredericoamsouza@gmail.com> (http://fmsouza.github.io)",
+  "license": "https://github.com/marco-jardim/riobus-web/blob/master/LICENSE",
+  "bugs": {
+    "url": "https://github.com/marco-jardim/riobus-web/issues"
+  },
+  "homepage": "https://github.com/marco-jardim/riobus-web"
+}
