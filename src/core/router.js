@@ -1,6 +1,9 @@
+import {Utils} from '../common/utils';
+
 export class Router{
 
-    constructor(driver){
+    constructor(driver, root){
+        this.root = root;
         this.registerDriver(driver);
     }
 
@@ -22,10 +25,6 @@ export class Router{
         }
     }
 
-    get config(){
-        return this.conf;
-    }
-
     registerDriver(driver){
         let ServerDriver = require(driver);
         let compression = require('compression');
@@ -35,10 +34,9 @@ export class Router{
 
     registerResources(resources){
         for(var resource of resources){
-            let resourceModule = require('../'+resource);
-            let resourceModuleClass = Object.keys(resourceModule)[0];
-            let Resource = resourceModule[resourceModuleClass];
+            let Resource = Utils.dynamicClassImport('../'+resource);
             resource = new Resource();
+
             this.route('get', resource.route(), resource.get);
             this.route('post', resource.route(), resource.post);
             this.route('put', resource.route(), resource.put);

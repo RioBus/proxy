@@ -9,6 +9,5 @@ export class DataServerBusiness{
         ServerData.buses = response.json || ServerData.buses;
         ServerData.lastUpdate = response.lastUpdate || ServerData.lastUpdate;
         ServerData.lastStatus = response.lastStatus || ServerData.lastStatus;
-
     }
 }

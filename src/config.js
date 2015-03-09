@@ -43,5 +43,9 @@ module.exports = {
             filename: 'logs/data-service.log',
             timestamp: Utils.getTimestamp()
         }
+    },
+    analytics: {
+        ua: 'UA-49628280-3',
+        host: 'riob.us'
     }
 };

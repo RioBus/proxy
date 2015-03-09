@@ -12,8 +12,13 @@ export class Analytics{
         this.analytics.initialize(this.ua, this.host, callback);
     }
 
-    track(id, path, callback){
+    trackPage(id, path, callback){
         "use strict";
         this.analytics.trackPage(id, path, callback);
+    }
+
+    trackEvent(id, path, label, callback){
+        "use strict";
+        this.analytics.trackEvent(id, path, label, callback);
     }
 }
