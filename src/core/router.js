@@ -28,7 +28,9 @@ export class Router{
 
     registerDriver(driver){
         let ServerDriver = require(driver);
+        let compression = require('compression');
         this.driver = new ServerDriver();
+        this.driver.use(compression());
     }
 
     registerResources(resources){
