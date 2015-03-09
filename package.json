@@ -2,9 +2,10 @@
   "name": "riobus-web",
   "version": "2.0.0",
   "description": "Aplicacao do servidor que roda tanto o servidor http quanto o servidor REST do RioBus",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp build && sudo gulp run"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,11 @@
   },
   "homepage": "https://github.com/marco-jardim/riobus-web",
   "dependencies": {
-    "express": "^4.12.0"
+    "express": "^4.12.0",
+    "nodealytics": ">=0.0.6",
+    "compression": ">=1.2.0",
+    "winston": ">=0.8.3",
+    "slice-file": ">=0.2.1"
   },
   "devDependencies": {
     "del": "^1.1.0",
