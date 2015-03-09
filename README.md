@@ -1,8 +1,4 @@
-riobus-web data grabber
-==========
-
 Rio de Janeiro bus geolocalization web app
-
 
 http://riob.us
 
