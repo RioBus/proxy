@@ -2,11 +2,10 @@ import {Utils} from '../common/utils';
 
 export class DataRetrieverBusiness{
 
-    constructor(config, logger, status){
+    constructor(config, logger){
         "use strict";
         this.config = config;
         this.logger = logger;
-        this.status = status;
         this.serverResponse = {};
         this.http = require('http');
         this.pid = null;
@@ -25,8 +24,9 @@ export class DataRetrieverBusiness{
         };
     }
 
-    retrieveData(){
+    retrieveData(status){
         "use strict";
+        this.status = status;
         let requestProcess = this.http.get(this.options, this.requestFromServer);
         let self = this;
 

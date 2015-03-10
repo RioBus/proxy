@@ -1,17 +1,16 @@
-import {MainBusiness} from '../business/main';
-import {AllDataBusiness} from '../business/alldata';
+import {BusinessFactory} from '../business/businessfactory';
 
 export class MainService{
 
     parseQueryData(query){
         "use strict";
-        let business = new MainBusiness();
+        let business = BusinessFactory.getMainBusiness();
         return business.parseQueryData(query);
     }
 
     getAllData(){
         "use strict";
-        let business = new AllDataBusiness();
+        let business = BusinessFactory.getAllDataBusiness();
         return business.getAllData();
     }
 

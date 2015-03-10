@@ -1,16 +1,16 @@
 import {Resource} from './resource';
-import {AbstractFactory} from '../common/abstractfactory';
-import {MainService} from '../service/main';
+import {Factory} from '../common/factory';
+import {ServiceFactory} from '../service/servicefactory';
 
 let Strings = require('../strings');
 
 export class MainResource extends Resource{
 
     get(request, response, next){
-        let logger = AbstractFactory.logger;
+        let logger = Factory.getLogger();
         logger.info(Strings.resource.main.log.referrer + req.headers['referer']);
 
-        let service = new MainService();
+        let service = ServiceFactory.getMainService();
         let result = service.parseQueryData(request.query);
 
         if(result) response.jsonp(result);

@@ -2,34 +2,29 @@ import {Router} from './core/router';
 import {Server} from './core/server';
 import {Forker} from './core/forker';
 
-import {DataServerService} from './service/dataserver';
-import {Analytics} from './common/analytics';
+import {ServiceFactory} from './service/servicefactory';
+import {Factory} from './common/factory';
 
 export class App{
 
-    get root(){
-        "use strict";
-        return __dirname;
-    }
-
 	static main(){
-        App.config = require('./config');
+
+        let analytics = Factory.getAnalytics();
+        analytics.initialize();
+        analytics.trackPage('REST', '/en/serverside/test', App.analyticsResponse);
+
+        let config = Factory.getConfig();
         let forker = new Forker();
+        forker.addArg(config.server.dataRequirer);
+        let dataServer = forker.spawn(config.projectRoot+'/'+config.bootstrapper);
+        let service = ServiceFactory.getDataServerService();
+        service.serveData(dataServer);
 
-        App.analytics = new Analytics(App.config.analytics.ua, App.config.analytics.host);
-        App.analytics.initialize();
-        App.analytics.trackPage('REST', '/en/serverside/test', App.analyticsResponse);
+        let router = new Router(config.server.driver, App.root);
+        router.registerResources(config.resources);
 
-        let dataServer = forker.fork(App.config.bootstrapper, App.root, [App.config.server.dataRequirer]);
-
-        let dataService = new DataServerService();
-        dataService.serveData(dataServer);
-
-        App.router = new Router(App.config.server.driver, App.root);
-        App.router.registerResources(App.config.resources);
-
-        App.server = new Server(App.config.server.development, router);
-        App.server.start();
+        let server = new Server(config.server.environment.development, router);
+        server.start();
 	}
 
     static analyticsResponse(error, response){

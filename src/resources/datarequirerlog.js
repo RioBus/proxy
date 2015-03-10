@@ -1,6 +1,6 @@
 import {Resource} from './resource';
 
-export class DataReuirerResource extends Resource{
+export class DataRequirerResource extends Resource{
 
     route(){
         "use strict";

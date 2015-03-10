@@ -1,19 +1,18 @@
 import {Utils} from './common/utils';
 
 module.exports = {
+    projectRoot: __dirname,
     bootstrapper: 'index',
     server: {
-        development: {
-            port: '80',
-            ip: '127.0.0.1',
-            maxSearchedItems: 10,
-            numberOfLastLogLines: 40
-        },
-        production: {
-            port: '80',
-            ip: '66.228.60.200',
-            maxSearchedItems: 10,
-            numberOfLastLogLines: 40
+        environment: {
+            development: {
+                port: '80',
+                ip: '127.0.0.1'
+            },
+            production: {
+                port: '80',
+                ip: '66.228.60.200'
+            }
         },
         dataReporter: {
             intervalTime: 180000,
@@ -25,6 +24,8 @@ module.exports = {
             intervalTime: 15000,
             timeout: 20000
         },
+        maxSearchedItems: 10,
+        numberOfLastLogLines: 40,
         driver: 'express',
         dataRequirer: 'datarequirer'
     },

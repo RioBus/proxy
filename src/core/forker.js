@@ -3,12 +3,21 @@ export class Forker{
     constructor(){
         "use strict";
         this.process = require('child_process');
+        this.args = [];
     }
 
-    fork(moduleName, root, args=[]){
+    addArg(arg){
         "use strict";
-        let end = root.length;
-        if(root[end]!=='/') root += '/';
-        return this.process.fork(root + moduleName + '.js', args);
+        this.args.push(arg);
+    }
+
+    fork(moduleName){
+        "use strict";
+        return this.process.fork(moduleName + '.js', this.args);
+    }
+
+    spawn(moduleName){
+        "use strict";
+        return this.process.spawn('node',[moduleName+'.js', this.args.join(' ')]);
     }
 }

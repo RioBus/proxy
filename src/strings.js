@@ -3,7 +3,7 @@ module.exports = {
         main: {
             log: {
                 referrer: "User's referer is: "
-            },
+            }
         }
     },
     business: {

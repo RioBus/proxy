@@ -1,23 +1,22 @@
-import {Logger} from './common/logger';
 import {Utils} from './common/utils';
-import {AbstractFactory} from './common/abstractfactory';
-import {DataRetrieverService} from './service/dataretriever';
+import {Factory} from './common/factory';
+import {ServiceFactory} from './service/servicefactory';
 
 export class DataRequirer{
 
     static main(){
         "use strict";
-        let logger = AbstractFactory.logger;
-        let config = require('./config').server;
+        let logger = Factory.getLogger();
 
         logger.setEvent('error', DataRequirer.errorEvent);
+
         var lastStatus = {
             label: null,
             counter: 0
         }
 
-        let retriever = new DataRetrieverService();
-        retriever.retrieveData(lastStatus, logger, config.dataServer);
+        let retriever = ServiceFactory.getDataRetrieverService();;
+        retriever.retrieveData(lastStatus);
     }
 
     static errorEvent(e){

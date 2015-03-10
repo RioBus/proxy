@@ -1,11 +1,10 @@
-import {DataRetrieverBusiness} from '../business/dataretriever';
+import {BusinessFactory} from '../business/businessfactory';
 
 export class DataRetrieverService{
 
-    retrieveData(status, logger, config){
+    retrieveData(status){
         "use strict";
-        let business = new DataRetrieverBusiness(config, logger, status);
-        business.retrieveData();
+        BusinessFactory.getDataRetrieverBusiness().retrieveData(status);
     }
 
 }

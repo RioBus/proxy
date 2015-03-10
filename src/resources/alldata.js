@@ -1,5 +1,5 @@
 import {Resource} from './resource';
-import {MainService} from '../service/main';
+import {ServiceFactory} from '../service/servicefactory';
 
 export class AllDataResource extends Resource{
 
@@ -9,8 +9,7 @@ export class AllDataResource extends Resource{
     }
 
     get(request, response, next) {
-        let main = new MainService();
-        let result = main.getAllData();
+        let result = ServiceFactory.getMainService().getAllData();
         response.json(result);
     }
 }
