@@ -1,5 +1,6 @@
 import {App} from '../app';
 import {ServerData} from '../domain/serverdata';
+import {Utils} from '../common/utils';
 
 let Strings = require('../strings');
 
@@ -16,10 +17,11 @@ export class MainBusiness{
         if (busCode){
             searchInput = busCode;
             let analytics = App.analytics;
-            analytics.trackEvent('REST+Hit', 'REST', platform, this.track);
-            analytics.trackEvent('REST+Hit', 'Linha', searchInput, this.track);
+            let flag = Strings.analytics;
+            analytics.trackEvent(flag.event.restHit, flag.label.rest, platform, this.track);
+            analytics.trackEvent(flag.event.restHit, flag.label.busCode, searchInput, this.track);
 
-            return this.getQueriedItemAsJson(searchInput);
+            return Utils.getQueriedItemAsJson(searchInput, App.server.config);
         }
     }
 
@@ -32,49 +34,12 @@ export class MainBusiness{
 
     getPlatformName(platform){
         "use strict";
+        let string = Strings.business.main.platform;
         switch(platform){
-            case 1: return Strings.business.main.platform.web;
-            case 2: return Strings.business.main.platform.mobile;
-            case 3: return Strings.business.main.platform.legacy;
-            default: return Strings.business.main.platform.notSet;
+            case 1: return string.web;
+            case 2: return string.mobile;
+            case 3: return string.legacy;
+            default: return string.notSet;
         }
-    }
-
-    getQueriedItemAsJson(busCode){
-        let splitedQuery = this.returnQueriedItemsAsArray(queryString);
-        let returnData = this.selectAndConcatenateData(splitedQuery);
-        return {
-            COLUMNS:["DATAHORA","ORDEM","LINHA","LATITUDE","LONGITUDE","VELOCIDADE", "DIRECAO"],
-            DATA: returnData,
-            LASTUPDATE: ServerData.lastUpdate,
-            LASTSTATUS: ServerData.lastStatus
-        };
-    }
-
-    returnQueriedItemsAsArray(string){
-        if (!string) return [];
-
-        let configServer = App.server.config;
-
-        var queryItems = string.split(",");
-        if (queryItems.length > configServer.maxSearchedItems)
-            queryItems = queryItems.slice(0, configServer.maxSearchedItems);
-
-        var hash = {};
-        for (var i = queryItems.length - 1; i >= 0; i--) {
-            if (!hash[queryItems[i]])
-                hash[queryItems[i]] = true;
-        };
-        return Object.keys(hash);
-    }
-
-    selectAndConcatenateData(items){
-        var returnArray = [];
-        for (var i = items.length - 1; i >= 0; i--) {
-            var array = data[items[i].toUpperCase()];
-            if (array)
-                returnArray = returnArray.concat(array);
-        };
-        return returnArray;
     }
 }

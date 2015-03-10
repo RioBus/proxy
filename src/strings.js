@@ -18,6 +18,15 @@ module.exports = {
                 codeNotSent: 'Any code was informed'
             }
         }
+    },
+    analytics: {
+        event: {
+            restHit: 'REST+Hit'
+        },
+        label: {
+            rest: 'REST',
+            busCode: 'Bus Code'
+        }
     }
 
 };

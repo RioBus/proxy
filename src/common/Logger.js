@@ -15,4 +15,19 @@ export class Logger{
         "use strict";
         this.driver.info(message);
     }
+
+    log(level, message){
+        "use strict";
+        this.driver.log(level, message);
+    }
+
+    error(stack){
+        "use strict";
+        this.driver.error(stack);
+    }
+
+    setEvent(title, callback){
+        "use strict";
+        this.driver.on(title, callback);
+    }
 }

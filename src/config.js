@@ -29,7 +29,8 @@ module.exports = {
         dataRequirer: 'datarequirer'
     },
     resources: [
-        'resources/main'
+        'resources/main',
+        'resources/alldata'
     ],
     logger: {
         driver: 'winston',
