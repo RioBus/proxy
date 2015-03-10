@@ -5,6 +5,6 @@ import {Utils} from './common/utils';
 if(process.argv.length<=2){
     Nodelicious.bootstrap(App.main);
 } else {
-    DataRequirer = Utils.dynamicClassImport('./'+process.argv[2]);
-    Nodelicious.bootstrap(DataRequirer.main);
+    Application = Utils.dynamicClassImport('./'+process.argv[2]);
+    Nodelicious.bootstrap(Application.main);
 }

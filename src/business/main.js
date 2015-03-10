@@ -1,4 +1,3 @@
-import {App} from '../app';
 import {ServerData} from '../domain/serverdata';
 import {Utils} from '../common/utils';
 import {Factory} from '../common/factory';
