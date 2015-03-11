@@ -4,11 +4,11 @@ import {ServiceFactory} from './service/servicefactory';
 
 export class DataRequirer{
 
-    static main(){
+    static main(argv){
         "use strict";
-        let logger = Factory.getLogger();
-
-        logger.setEvent('error', DataRequirer.errorEvent);
+        Factory.getLogger().setEvent('error', function(e){
+            console.log(e);
+        });
 
         var lastStatus = {
             label: null,
@@ -17,10 +17,5 @@ export class DataRequirer{
 
         let retriever = ServiceFactory.getDataRetrieverService();;
         retriever.retrieveData(lastStatus);
-    }
-
-    static errorEvent(e){
-        "use strict";
-        console.log(e);
     }
 }

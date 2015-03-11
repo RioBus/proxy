@@ -10,6 +10,7 @@ export class AllDataResource extends Resource{
 
     get(request, response, next) {
         let result = ServiceFactory.getMainService().getAllData();
+        console.log(result);
         response.json(result);
     }
 }

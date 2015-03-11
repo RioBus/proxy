@@ -7,7 +7,7 @@ import {Factory} from './common/factory';
 
 export class App{
 
-	static main(){
+	static main(argv){
 
         let analytics = Factory.getAnalytics();
         analytics.initialize();
@@ -16,7 +16,10 @@ export class App{
         let config = Factory.getConfig();
         let forker = new Forker();
         forker.addArg(config.server.dataRequirer);
-        let dataServer = forker.spawn(config.projectRoot+'/'+config.bootstrapper);
+        forker.addArg(Factory.getLogger());
+        let dataServer = forker.fork(config.projectRoot+'/'+config.bootstrapper);
+        console.log(dataServer);
+
         let service = ServiceFactory.getDataServerService();
         service.serveData(dataServer);
 

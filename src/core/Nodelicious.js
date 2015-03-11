@@ -1,7 +1,7 @@
 export class Nodelicious{
 
-    static bootstrap(callback){
-        callback();
+    static bootstrap(callback, argv){
+        callback(argv);
     }
 
 }

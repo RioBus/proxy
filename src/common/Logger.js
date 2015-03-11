@@ -1,12 +1,12 @@
 export class Logger{
 
-    constructor(consoleConfig, fileConfig, driverName){
+    constructor(consoleConfig, fileConfig){
         "use strict";
-        let driver = require(driverName);
+        let driver = require('winston');
         this.driver = new driver.Logger({
             transports: [
-                new winston.transports.Console(consoleConfig),
-                new winston.transports.File(fileConfig)
+                new driver.transports.Console(consoleConfig),
+                new driver.transports.File(fileConfig)
             ]
         });
     }

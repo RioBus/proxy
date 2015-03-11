@@ -9,6 +9,5 @@ export class ServerLogResource extends Resource{
 
     get(request, response, next){
         "use strict";
-
     }
 }

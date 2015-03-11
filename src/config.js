@@ -1,4 +1,5 @@
 import {Utils} from './common/utils';
+import {Cache} from './core/cache';
 
 module.exports = {
     projectRoot: __dirname,
@@ -30,11 +31,14 @@ module.exports = {
         dataRequirer: 'datarequirer'
     },
     resources: [
+        'resources/alldata',
+        'resources/datarequirerlog',
+        'resources/log',
         'resources/main',
-        'resources/alldata'
+        'resources/search',
+        'resources/serverlog'
     ],
     logger: {
-        driver: 'winston',
         consoleConfig: {
             colorize: true,
             timestamp: Utils.getTimestamp()
@@ -49,5 +53,6 @@ module.exports = {
     analytics: {
         ua: 'UA-49628280-3',
         host: 'riob.us'
-    }
+    },
+    cache: new Cache()
 };

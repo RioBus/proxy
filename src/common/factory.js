@@ -15,7 +15,7 @@ export class Factory{
     static getLogger(){
         "use strict";
         let loggerConfig = Factory.getConfig().logger;
-        return new Logger(loggerConfig.consoleConfig, loggerConfig.fileConfig, loggerConfig.driver);
+        return new Logger(loggerConfig.consoleConfig, loggerConfig.fileConfig);
     }
 
     static getLogStream(){
@@ -32,5 +32,10 @@ export class Factory{
     static getStrings(){
         "use strict";
         return require('../strings');
+    }
+
+    static getCache(){
+        "use strict";
+        return Factory.getConfig().cache;
     }
 }
