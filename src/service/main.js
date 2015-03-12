@@ -1,4 +1,4 @@
-import {BusinessFactory} from '../business/businessfactory';
+import {BusinessFactory} from '../business/factory';
 
 export class MainService{
 

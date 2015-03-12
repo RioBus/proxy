@@ -1,5 +1,5 @@
 import {Resource} from './resource';
-import {ServiceFactory} from '../service/servicefactory';
+import {ServiceFactory} from '../service/factory';
 
 export class LogResource extends Resource{
 

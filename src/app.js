@@ -1,7 +1,7 @@
 import {Router} from './core/router';
 import {Server} from './core/server';
 
-import {ServiceFactory} from './service/servicefactory';
+import {ServiceFactory} from './service/factory';
 import {Factory} from './common/factory';
 
 let config = Factory.getConfig();
