@@ -19,10 +19,7 @@ export class App{
 
         let serverConfig = config.server.environment.development;
         let server = new Server(serverConfig, router);
-        server.start(function(){
-            "use strict";
-            console.log('Server running in http://%s:%s', serverConfig.ip, serverConfig.port);
-        });
+        server.start();
 	}
 
     static analyticsResponse(error, response){

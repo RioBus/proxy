@@ -1,39 +1,55 @@
 import {Utils} from '../common/utils';
+import {Factory} from '../common/factory';
 
 export class Router{
 
-    constructor(driver){
-        this.registerDriver(driver);
+    constructor(){
+        let ServerDriver = require('express');
+        let compression = require('compression');
+        this.driver = new ServerDriver();
+        this.driver.use(compression());
+        this.logger = Factory.getLogger('server.log');
     }
 
     route(method, route, callback){
+        let logger = this.logger;
         switch(method){
             case 'post':
-                this.driver.post(route, callback);
+                this.driver.post(route, function(request, response, next){
+                    "use strict";
+                    logger.info('Serving route '+route+' (POST)');
+                    callback(request, response, next);
+                });
                 break;
             case 'put':
-                this.driver.put(route, callback);
+                this.driver.put(route, function(request, response, next){
+                    "use strict";
+                    logger.info('Serving route '+route+' (PUT)');
+                    callback(request, response, next);
+                });
                 break;
             case 'delete':
-                this.driver.delete(route, callback);
+                this.driver.delete(route, function(request, response, next){
+                    "use strict";
+                    logger.info('Serving route '+route+' (DELETE)');
+                    callback(request, response, next);
+                });
                 break;
             case 'get':
             default:
-                this.driver.get(route, callback);
+                this.driver.get(route, function(request, response, next){
+                    "use strict";
+                    logger.info('Serving route '+route+' (GET)');
+                    callback(request, response, next);
+                });
                 break;
         }
     }
 
-    registerDriver(driver){
-        let ServerDriver = require(driver);
-        let compression = require('compression');
-        this.driver = new ServerDriver();
-        this.driver.use(compression());
-    }
-
     registerResources(resources){
         for(var resource of resources){
-            let Resource = Utils.dynamicClassImport('../'+resource);
+            let moduleName = resource;
+            let Resource = Utils.dynamicClassImport('../'+moduleName);
             resource = new Resource();
             let route = resource.route();
 
@@ -41,10 +57,16 @@ export class Router{
             this.route('post', route, resource.post);
             this.route('put', route, resource.put);
             this.route('delete', route, resource.delete);
+            this.logger.info('Resource registered: '+moduleName);
         }
     }
 
     start(ip, port, callback=null){
-        return this.driver.listen(port, ip, callback);
+        let self = this;
+        return this.driver.listen(port, ip, function(){
+            "use strict";
+            if(callback!==null) callback();
+            self.logger.info('Server started in http://'+ip+':'+port);
+        });
     }
 }

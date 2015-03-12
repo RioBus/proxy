@@ -1,6 +1,6 @@
 import {Utils} from './common/utils';
 import {Factory} from './common/factory';
-import {ServiceFactory} from './service/servicefactory';
+import {ServiceFactory} from './service/factory';
 
 export class DataRequirer{
 

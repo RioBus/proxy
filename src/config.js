@@ -27,7 +27,6 @@ module.exports = {
         },
         maxSearchedItems: 10,
         numberOfLastLogLines: 40,
-        driver: 'express',
         dataRequirer: 'datarequirer'
     },
     resources: [
@@ -38,18 +37,6 @@ module.exports = {
         'resources/search',
         'resources/serverlog'
     ],
-    logger: {
-        consoleConfig: {
-            colorize: true,
-            timestamp: Utils.getTimestamp()
-        },
-        fileConfig: {
-            colorize: true,
-            handleExceptions: true,
-            filename: 'logs/data-service.log',
-            timestamp: Utils.getTimestamp()
-        }
-    },
     analytics: {
         ua: 'UA-49628280-3',
         host: 'riob.us'

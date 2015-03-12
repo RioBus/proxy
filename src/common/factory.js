@@ -1,5 +1,4 @@
 import {Logger} from './logger';
-import {LogStream} from './logstream';
 import {Analytics} from './analytics';
 
 export class Factory{
@@ -12,25 +11,25 @@ export class Factory{
         return Factory.configuration;
     }
 
-    static getLogger(){
+    static getLogger(filePath){
         "use strict";
-        let loggerConfig = Factory.getConfig().logger;
-        return new Logger(loggerConfig.consoleConfig, loggerConfig.fileConfig);
-    }
-
-    static getLogStream(){
-        "use strict";
-        return new LogStream(Factory.getConfig().server.numberOfLastLogLines);
+        return new Logger(filePath);
     }
 
     static getAnalytics(){
         "use strict";
-        let config = Factory.getConfig().analytics;
-        return new Analytics(config.ua, config.host);
+        if(!Factory.analytics){
+            let config = Factory.getConfig().analytics;
+            Factory.analytics = new Analytics(config.ua, config.host);
+        }
+        return Factory.analytics;
     }
 
     static getStrings(){
         "use strict";
-        return require('../strings');
+        if(!Factory.strings){
+            Factory.strings = require('../strings');
+        }
+        return Factory.strings;
     }
 }

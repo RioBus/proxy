@@ -1,33 +1,29 @@
+import {Utils} from './utils';
+
 export class Logger{
 
-    constructor(consoleConfig, fileConfig){
+    constructor(fileName){
         "use strict";
-        let driver = require('winston');
-        this.driver = new driver.Logger({
-            transports: [
-                new driver.transports.Console(consoleConfig),
-                new driver.transports.File(fileConfig)
-            ]
-        });
+        this.driver = console;
+        this.filePath = fileName;
+        this.fileStream = require('fs');
+    }
+
+    log(message, level){
+        "use strict";
+        let time = Utils.getTimestamp();
+        let information = '['+time+']['+level+'] '+message;
+        this.driver.log(information);
+        this.fileStream.appendFile(this.filePath, information+'\n', function(e){ if(e) throw e; });
     }
 
     info(message){
         "use strict";
-        this.driver.info(message);
+        this.log(message, 'INFO');
     }
 
-    log(level, message){
+    error(message){
         "use strict";
-        this.driver.log(level, message);
-    }
-
-    error(stack){
-        "use strict";
-        this.driver.error(stack);
-    }
-
-    setEvent(title, callback){
-        "use strict";
-        this.driver.on(title, callback);
+        this.log(message, 'ERROR');
     }
 }
