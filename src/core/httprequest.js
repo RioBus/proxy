@@ -2,54 +2,26 @@ export class HttpRequest{
 
     constructor(){
         "use strict";
-        this.driver = require('http');
+        this.driver = require('sync-request');
     }
 
-    get options(){
+    get(host, options=null){
         "use strict";
-        return {
-            host: this.host,
-            path: this.path,
-            agent: this.agent,
-            headers: {
-                'Accept-Encoding': this.responseEncoding,
-                Accept: this.responseType
-            }
-        };
+        return this.driver('GET',host, options);
     }
 
-    set agent(value){
+    post(host, options=null){
         "use strict";
-        this.ag = value;
+        return this.driver('POST',host, options);
     }
 
-    get agent(){
+    put(host, options=null){
         "use strict";
-        return this.ag;
+        return this.driver('PUT',host, options);
     }
 
-    set responseType(value){
+    delete(host, options=null){
         "use strict";
-        this.rt = value;
-    }
-
-    get responseType(){
-        "use strict";
-        return this.rt;
-    }
-
-    set responseEncoding(value){
-        "use strict";
-        this.re = value;
-    }
-
-    get responseEncoding(){
-        "use strict";
-        return this.re;
-    }
-
-    get(host, callback){
-        "use strict";
-        return this.driver.get(host, callback);
+        return this.driver('DELETE',host, options);
     }
 }

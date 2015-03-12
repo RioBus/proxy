@@ -7,34 +7,31 @@ let Strings = Factory.getStrings();
 
 export class MainBusiness{
 
-    constructor(){
-        "use strict";
-        this.logger = Factory.getLogger();
-    }
-
     parseQueryData(request){
         "use strict";
         if(!(Object.keys(request.params).length>0)) return Strings.business.main.response.codeNotSent;
-
-        let busCode = request.params.lines;
+        let lines = request.params.lines;
         let platform = this.getPlatformName(request.platformId);
+        console.log('Searching for line(s): %s', lines);
 
         let analytics = Factory.getAnalytics();
         let flag = Strings.analytics;
         analytics.trackEvent(flag.event.restHit, flag.label.rest, platform, this.track);
-        analytics.trackEvent(flag.event.restHit, flag.label.busCode, busCode, this.track);
-
-        let lines = busCode.split(',');
-        this.logger.info('Searching for line(s): '+lines);
+        analytics.trackEvent(flag.event.restHit, flag.label.busCode, lines, this.track);
 
         let config = Factory.getConfig().server.dataServer;
 
-        let requirer = new HttpRequest();
-        let response = requirer.get('http://'+config.host+config.path, function(response){
-
-        });
-
-        return lines;
+        let http = new HttpRequest();
+        let options = {
+            headers: {
+                'Accept': '*/*',
+                'Cache-Control': 'no-cache'
+            },
+            json: true
+        };
+        let requestPath = 'http://' + config.host + config.path + '/' + lines;
+        let response = http.get(requestPath, options);
+        return JSON.parse(response.getBody()).DATA;
     }
 
     track(error, response){
