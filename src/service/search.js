@@ -1,6 +1,6 @@
 import {BusinessFactory} from '../business/factory';
 
-export class MainService{
+export class SearchService{
 
     parseQueryData(request){
         "use strict";

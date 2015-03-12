@@ -6,6 +6,6 @@ export class LogBusiness{
     prepareLogToSend(){
         "use strict";
         let dataAccess = DataAccessFactory.getLogDataAccess();
-        return dataAccess.getAll();
+        return dataAccess.getRuntimeLog();
     }
 }

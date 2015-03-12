@@ -12,20 +12,15 @@ export class App{
 
         let analytics = Factory.getAnalytics();
         analytics.initialize();
-        analytics.trackPage('REST', '/en/serverside/test', App.analyticsResponse);
+        analytics.trackPage('REST', '/en/serverside/test', function(error, response){});
 
-        let router = new Router(config.server.driver);
+        let logger = Factory.getLogger();
+        logger.info('Starting the server...');
+
+        let serverConfig = config.server;
+        let router = new Router(serverConfig.log);
         router.registerResources(config.resources);
-
-        let serverConfig = config.server.environment.development;
-        let server = new Server(serverConfig, router);
+        let server = new Server(serverConfig.environment.development, router);
         server.start();
 	}
-
-    static analyticsResponse(error, response){
-        "use strict";
-        if (!error && response.statusCode === 200) {
-            // console.log('Page has been tracked with Google Analytics');
-        }
-    }
 }

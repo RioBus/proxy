@@ -1,14 +1,17 @@
 import {Resource} from './resource';
+import {Factory} from '../common/factory';
+import {ServiceFactory} from '../service/factory';
 
 export class SearchResource extends Resource{
 
     route(){
         "use strict";
-        return '/busca/:busca';
+        return '/search/:platformId/:lines';
     }
 
     get(request, response, next){
-        "use strict";
-
+        let service = ServiceFactory.getSearchService();
+        let result = service.parseQueryData(request);
+        response.jsonp(result);
     }
 }

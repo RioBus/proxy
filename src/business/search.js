@@ -5,7 +5,7 @@ import {DataAccessFactory} from '../dataaccess/factory';
 
 let Strings = Factory.getStrings();
 
-export class MainBusiness{
+export class SearchBusiness{
 
     parseQueryData(request){
         "use strict";

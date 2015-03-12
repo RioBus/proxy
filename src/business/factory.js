@@ -1,8 +1,6 @@
 import {AllDataBusiness} from './alldata';
-import {DataRetrieverBusiness} from './dataretriever';
-import {DataServerBusiness} from './dataserver';
 import {LogBusiness} from './log';
-import {MainBusiness} from './main';
+import {SearchBusiness} from './search';
 
 import {Factory} from '../common/factory';
 
@@ -30,9 +28,9 @@ export class BusinessFactory{
         return new LogBusiness();
     }
 
-    static getMainBusiness(){
+    static getSearchBusiness(){
         "use strict";
-        return new MainBusiness();
+        return new SearchBusiness();
     }
 
 }

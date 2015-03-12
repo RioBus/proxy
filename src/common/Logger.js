@@ -22,6 +22,11 @@ export class Logger{
         this.log(message, 'INFO');
     }
 
+    alert(message){
+        "use strict";
+        this.log(message, 'ALERT');
+    }
+
     error(message){
         "use strict";
         this.log(message, 'ERROR');

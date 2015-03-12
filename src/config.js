@@ -4,6 +4,7 @@ import {Cache} from './core/cache';
 module.exports = {
     projectRoot: __dirname,
     bootstrapper: 'index',
+    runtimeLog: 'runtime.log',
     server: {
         environment: {
             development: {
@@ -25,15 +26,14 @@ module.exports = {
             intervalTime: 15000,
             timeout: 20000
         },
+        log: 'server.log',
         maxSearchedItems: 10,
         numberOfLastLogLines: 40,
         dataRequirer: 'datarequirer'
     },
     resources: [
         'resources/alldata',
-        'resources/datarequirerlog',
         'resources/log',
-        'resources/main',
         'resources/search',
         'resources/serverlog'
     ],

@@ -3,12 +3,12 @@ import {Factory} from '../common/factory';
 
 export class Router{
 
-    constructor(){
+    constructor(outputPath){
         let ServerDriver = require('express');
         let compression = require('compression');
         this.driver = new ServerDriver();
         this.driver.use(compression());
-        this.logger = Factory.getLogger('server.log');
+        this.logger = Factory.getLogger(outputPath);
     }
 
     route(method, route, callback){
@@ -17,21 +17,21 @@ export class Router{
             case 'post':
                 this.driver.post(route, function(request, response, next){
                     "use strict";
-                    logger.info('Serving route '+route+' (POST)');
+                    logger.info('Serving route '+request.url+' (POST)');
                     callback(request, response, next);
                 });
                 break;
             case 'put':
                 this.driver.put(route, function(request, response, next){
                     "use strict";
-                    logger.info('Serving route '+route+' (PUT)');
+                    logger.info('Serving route '+request.url+' (PUT)');
                     callback(request, response, next);
                 });
                 break;
             case 'delete':
                 this.driver.delete(route, function(request, response, next){
                     "use strict";
-                    logger.info('Serving route '+route+' (DELETE)');
+                    logger.info('Serving route '+request.url+' (DELETE)');
                     callback(request, response, next);
                 });
                 break;
@@ -39,7 +39,7 @@ export class Router{
             default:
                 this.driver.get(route, function(request, response, next){
                     "use strict";
-                    logger.info('Serving route '+route+' (GET)');
+                    logger.info('Serving route '+request.url+' (GET)');
                     callback(request, response, next);
                 });
                 break;

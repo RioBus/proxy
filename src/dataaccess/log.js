@@ -1,6 +1,6 @@
 export class LogDataAccess{
 
-    getAll(){
+    getRuntimeLog(){
         "use strict";
         return [];
     }

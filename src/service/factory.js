@@ -1,27 +1,15 @@
-import {DataRetrieverService} from './dataretriever';
-import {DataServerService} from './dataserver';
 import {LogService} from './log';
-import {MainService} from './main';
+import {SearchService} from './search';
 
 export class ServiceFactory{
-
-    static getDataRetrieverService(){
-        "use strict";
-        return new DataRetrieverService();
-    }
-
-    static getDataServerService(){
-        "use strict";
-        return new DataServerService();
-    }
 
     static getLogService(){
         "use strict";
         return new LogService();
     }
 
-    static getMainService(){
+    static getSearchService(){
         "use strict";
-        return new MainService();
+        return new SearchService();
     }
 }
