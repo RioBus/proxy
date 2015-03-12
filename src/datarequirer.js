@@ -13,9 +13,9 @@ export class DataRequirer{
         var lastStatus = {
             label: null,
             counter: 0
-        }
+        };
 
-        let retriever = ServiceFactory.getDataRetrieverService();;
+        let retriever = ServiceFactory.getDataRetrieverService();
         retriever.retrieveData(lastStatus);
     }
 }

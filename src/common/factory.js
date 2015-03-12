@@ -33,9 +33,4 @@ export class Factory{
         "use strict";
         return require('../strings');
     }
-
-    static getCache(){
-        "use strict";
-        return Factory.getConfig().cache;
-    }
 }

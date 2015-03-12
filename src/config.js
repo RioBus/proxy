@@ -7,7 +7,7 @@ module.exports = {
     server: {
         environment: {
             development: {
-                port: '80',
+                port: '8081',
                 ip: '127.0.0.1'
             },
             production: {
@@ -53,6 +53,5 @@ module.exports = {
     analytics: {
         ua: 'UA-49628280-3',
         host: 'riob.us'
-    },
-    cache: new Cache()
+    }
 };

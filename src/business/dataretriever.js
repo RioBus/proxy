@@ -6,7 +6,6 @@ export class DataRetrieverBusiness{
         "use strict";
         this.config = config;
         this.logger = logger;
-        this.serverResponse = {};
         this.http = require('http');
         this.pid = null;
     }
@@ -99,27 +98,28 @@ export class DataRetrieverBusiness{
 
     forwardData(response){
         "use strict";
-        var output = response;
-        if(response.headers['content-encoding']==='gzip'){
-            var gzip = require('zlib').createGunzip();
-            response.pipe(gzip);
-            output = gzip;
-        }
+        //var output = response;
+        //if(response.headers['content-encoding']==='gzip'){
+        let gzip = require('zlib').createGunzip();
+        response.pipe(gzip);
+        let output = gzip;
+        //}
 
+        let serverResponse = {};
         let self = this;
 
         output.on('data', function(chunk){
             "use strict";
-            self.serverResponse += chunk.toString('utf-8');
+            serverResponse += chunk.toString('utf-8');
         });
 
         output.on('end', function(){
             "use strict";
-            self.serverResponse = self.retrieveJson(self.serverResponse);
-            if(self.serverResponse!==null){
+            serverResponse = self.retrieveJson(serverResponse);
+            if(serverResponse!==null){
                 self.updateStatus('info', "Dadosabertos is fine. We have just got some data, code: " + response.statusCode, 'success', false);
                 var busData = {};
-                for(var d of self.serverResponse.DATA){
+                for(var d of serverResponse.DATA){
                     var bus = d;
                     var key = "" + bus[2];
 
@@ -132,7 +132,7 @@ export class DataRetrieverBusiness{
 
                     busData[bus[1]] = [bus];
                 }
-                process.send({data: busData, json: self.serverResponse, lastUpdate: Utils.getTimestamp(), lastStatus: self.status});
+                process.send({data: busData, json: serverResponse, lastUpdate: Utils.getTimestamp(), lastStatus: self.status});
             }
         });
     }

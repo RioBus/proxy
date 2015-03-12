@@ -8,9 +8,6 @@ export class Server{
     start(callback=null){
         let ip = this.config.ip;
         let port = this.config.port;
-        this.router.start(ip, port, function(){
-            if(callback!==null) callback();
-            console.log('Server listening to '+ip+':'+port+' ...');
-        });
+        return this.router.start(ip, port,callback);
     }
 }

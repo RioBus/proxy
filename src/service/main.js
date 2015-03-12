@@ -2,10 +2,10 @@ import {BusinessFactory} from '../business/businessfactory';
 
 export class MainService{
 
-    parseQueryData(query){
+    parseQueryData(request){
         "use strict";
         let business = BusinessFactory.getMainBusiness();
-        return business.parseQueryData(query);
+        return business.parseQueryData(request);
     }
 
     getAllData(){

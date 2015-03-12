@@ -1,9 +1,10 @@
 import {Router} from './core/router';
 import {Server} from './core/server';
-import {Forker} from './core/forker';
 
 import {ServiceFactory} from './service/servicefactory';
 import {Factory} from './common/factory';
+
+let config = Factory.getConfig();
 
 export class App{
 
@@ -13,21 +14,15 @@ export class App{
         analytics.initialize();
         analytics.trackPage('REST', '/en/serverside/test', App.analyticsResponse);
 
-        let config = Factory.getConfig();
-        let forker = new Forker();
-        forker.addArg(config.server.dataRequirer);
-        forker.addArg(Factory.getLogger());
-        let dataServer = forker.fork(config.projectRoot+'/'+config.bootstrapper);
-        console.log(dataServer);
-
-        let service = ServiceFactory.getDataServerService();
-        service.serveData(dataServer);
-
-        let router = new Router(config.server.driver, App.root);
+        let router = new Router(config.server.driver);
         router.registerResources(config.resources);
 
-        let server = new Server(config.server.environment.development, router);
-        server.start();
+        let serverConfig = config.server.environment.development;
+        let server = new Server(serverConfig, router);
+        server.start(function(){
+            "use strict";
+            console.log('Server running in http://%s:%s', serverConfig.ip, serverConfig.port);
+        });
 	}
 
     static analyticsResponse(error, response){

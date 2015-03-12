@@ -2,8 +2,7 @@ import {Utils} from '../common/utils';
 
 export class Router{
 
-    constructor(driver, root){
-        this.root = root;
+    constructor(driver){
         this.registerDriver(driver);
     }
 
@@ -36,15 +35,16 @@ export class Router{
         for(var resource of resources){
             let Resource = Utils.dynamicClassImport('../'+resource);
             resource = new Resource();
+            let route = resource.route();
 
-            this.route('get', resource.route(), resource.get);
-            this.route('post', resource.route(), resource.post);
-            this.route('put', resource.route(), resource.put);
-            this.route('delete', resource.route(), resource.delete);
+            this.route('get', route, resource.get);
+            this.route('post', route, resource.post);
+            this.route('put', route, resource.put);
+            this.route('delete', route, resource.delete);
         }
     }
 
     start(ip, port, callback=null){
-        this.driver.listen(port, ip, callback);
+        return this.driver.listen(port, ip, callback);
     }
 }

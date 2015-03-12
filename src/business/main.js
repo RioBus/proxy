@@ -1,28 +1,40 @@
 import {ServerData} from '../domain/serverdata';
 import {Utils} from '../common/utils';
 import {Factory} from '../common/factory';
+import {HttpRequest} from '../core/httprequest';
 
 let Strings = Factory.getStrings();
 
 export class MainBusiness{
 
-    parseQueryData(query){
+    constructor(){
         "use strict";
-        if(!(Object.keys(query).length>0)) return false;
+        this.logger = Factory.getLogger();
+    }
 
-        let busCode = query.busca;
-        let platform = this.getPlatformName(query.s);
+    parseQueryData(request){
+        "use strict";
+        if(!(Object.keys(request.params).length>0)) return Strings.business.main.response.codeNotSent;
 
-        var searchInput = Strings.business.main.response.codeNotSent;
-        if (busCode){
-            searchInput = busCode;
-            let analytics = Factory.getAnalytics();
-            let flag = Strings.analytics;
-            analytics.trackEvent(flag.event.restHit, flag.label.rest, platform, this.track);
-            analytics.trackEvent(flag.event.restHit, flag.label.busCode, searchInput, this.track);
+        let busCode = request.params.lines;
+        let platform = this.getPlatformName(request.platformId);
 
-            return Utils.getQueriedItemAsJson(searchInput, Factory.getConfig().server);
-        }
+        let analytics = Factory.getAnalytics();
+        let flag = Strings.analytics;
+        analytics.trackEvent(flag.event.restHit, flag.label.rest, platform, this.track);
+        analytics.trackEvent(flag.event.restHit, flag.label.busCode, busCode, this.track);
+
+        let lines = busCode.split(',');
+        this.logger.info('Searching for line(s): '+lines);
+
+        let config = Factory.getConfig().server.dataServer;
+
+        let requirer = new HttpRequest();
+        let response = requirer.get('http://'+config.host+config.path, function(response){
+
+        });
+
+        return lines;
     }
 
     track(error, response){
