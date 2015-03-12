@@ -5,11 +5,11 @@ export class AllDataResource extends Resource{
 
     route(){
         "use strict";
-        return '/all';
+        return '/search';
     }
 
     get(request, response, next) {
-        let result = ServiceFactory.getMainService().getAllData();
+        let result = ServiceFactory.getSearchService().getAllData();
         response.json(result);
     }
 }

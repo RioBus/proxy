@@ -3,9 +3,15 @@ import {DataAccessFactory} from '../dataaccess/factory';
 
 export class LogBusiness{
 
-    prepareLogToSend(){
+    getRuntimeLog(){
         "use strict";
         let dataAccess = DataAccessFactory.getLogDataAccess();
         return dataAccess.getRuntimeLog();
+    }
+
+    getServerLog(){
+        "use strict";
+        let dataAccess = DataAccessFactory.getLogDataAccess();
+        return dataAccess.getServerLog();
     }
 }

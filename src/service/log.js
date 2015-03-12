@@ -2,9 +2,15 @@ import {BusinessFactory} from '../business/factory';
 
 export class LogService{
 
-    prepareLogToSend(){
+    getRuntimeLog(){
         "use strict";
         let business = BusinessFactory.getLogBusiness();
-        return business.prepareLogToSend();
+        return business.getRuntimeLog();
+    }
+
+    getServerLog(){
+        "use strict";
+        let business = BusinessFactory.getLogBusiness();
+        return business.getServerLog();
     }
 }

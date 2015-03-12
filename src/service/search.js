@@ -4,13 +4,13 @@ export class SearchService{
 
     parseQueryData(request){
         "use strict";
-        let business = BusinessFactory.getMainBusiness();
+        let business = BusinessFactory.getSearchBusiness();
         return business.parseQueryData(request);
     }
 
     getAllData(){
         "use strict";
-        let business = BusinessFactory.getAllDataBusiness();
+        let business = BusinessFactory.getSearchBusiness();
         return business.getAllData();
     }
 

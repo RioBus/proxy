@@ -10,7 +10,9 @@ export class LogResource extends Resource{
 
     get(request, response, next){
         "use strict";
-        response.send(ServiceFactory.getLogService().prepareLogToSend());
+        let service = ServiceFactory.getLogService();
+        response.set('Content-Type', 'text/plain');
+        response.send(service.getRuntimeLog());
     }
 
 }

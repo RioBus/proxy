@@ -1,4 +1,3 @@
-import {ServerData} from '../domain/serverdata';
 import {Utils} from '../common/utils';
 import {Factory} from '../common/factory';
 import {DataAccessFactory} from '../dataaccess/factory';
@@ -9,10 +8,10 @@ export class SearchBusiness{
 
     parseQueryData(request){
         "use strict";
-        if(!(Object.keys(request.params).length>0)) return Strings.business.main.response.codeNotSent;
+        let logger = Factory.getLogger();
         let lines = request.params.lines;
         let platform = this.getPlatformName(request.platformId);
-        console.log('Searching for line(s): %s', lines);
+        logger.info('Requesting line(s): '+lines);
 
         let analytics = Factory.getAnalytics();
         let flag = Strings.analytics;
@@ -21,6 +20,14 @@ export class SearchBusiness{
 
         let dataAccess = DataAccessFactory.getBusDataAccess();
         return dataAccess.getByLines(lines);
+    }
+
+    getAllData(){
+        "use strict";
+        let logger = Factory.getLogger();
+        logger.info('Requesting all lines');
+        let dataAccess = DataAccessFactory.getBusDataAccess();
+        return dataAccess.getAllLines();
     }
 
     track(error, response){
