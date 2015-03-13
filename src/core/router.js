@@ -8,7 +8,7 @@ export class Router{
         let compression = require('compression');
         this.driver = new ServerDriver();
         this.driver.use(compression());
-        this.logger = Factory.getLogger(outputPath);
+        this.logger = Factory.getLogger(outputPath, 'SERVER');
     }
 
     route(method, route, callback){

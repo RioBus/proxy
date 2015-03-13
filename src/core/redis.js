@@ -5,7 +5,7 @@ export class RedisClient{
 
     constructor(port=6379, host='127.0.0.1', options={}){
         "use strict";
-        this.logger = Factory.getLogger(Factory.getConfig().server.dataServer.log);
+        this.logger = Factory.getLogger(Factory.getConfig().server.dataServer.log, 'DATA PROVIDER');
         this.driver = require('redis');
         this.port = port;
         this.host = host;

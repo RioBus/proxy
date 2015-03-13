@@ -13,4 +13,10 @@ export class LogService{
         let business = BusinessFactory.getLogBusiness();
         return business.getServerLog();
     }
+
+    getDataProviderLog(){
+        "use strict";
+        let business = BusinessFactory.getLogBusiness();
+        return business.getDataProviderLog();
+    }
 }

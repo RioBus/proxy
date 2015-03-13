@@ -2,10 +2,11 @@ import {Utils} from './utils';
 
 export class Logger{
 
-    constructor(fileName){
+    constructor(fileName, flag){
         "use strict";
         this.driver = console;
         this.filePath = fileName;
+        this.flag = (flag.length>0)? flag:'RUNTIME';
         this.fileStream = require('fs');
     }
 
@@ -19,16 +20,16 @@ export class Logger{
 
     info(message){
         "use strict";
-        this.log(message, 'INFO');
+        this.log(message, this.flag + ' - INFO');
     }
 
     alert(message){
         "use strict";
-        this.log(message, 'ALERT');
+        this.log(message, this.flag + ' - ALERT');
     }
 
     error(message){
         "use strict";
-        this.log(message, 'ERROR');
+        this.log(message, this.flag + ' - ERROR');
     }
 }

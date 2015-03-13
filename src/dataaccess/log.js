@@ -21,6 +21,13 @@ export class LogDataAccess{
         return this.getFromFile(filePath);
     }
 
+    getDataProviderLog(){
+        "use strict";
+        let filePath = Factory.getConfig().server.dataServer.log;
+        this.logger.info('Reading log: '+filePath);
+        return this.getFromFile(filePath);
+    }
+
     getFromFile(fileName){
         "use strict";
         let fs = require('fs');

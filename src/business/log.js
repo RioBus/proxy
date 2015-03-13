@@ -14,4 +14,10 @@ export class LogBusiness{
         let dataAccess = DataAccessFactory.getLogDataAccess();
         return dataAccess.getServerLog();
     }
+
+    getDataProviderLog(){
+        "use strict";
+        let dataAccess = DataAccessFactory.getLogDataAccess();
+        return dataAccess.getDataProviderLog();
+    }
 }

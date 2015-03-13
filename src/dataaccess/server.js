@@ -5,6 +5,12 @@ import {Bus} from '../domain/bus';
 
 export class ServerDataAccess{
 
+    constructor(){
+        "use strict";
+        this.client = new RedisClient();
+        this.client.connect();
+    }
+
     getAllData(){
         "use strict";
         let body = this.requestFromServer();
@@ -22,9 +28,7 @@ export class ServerDataAccess{
 
     storeData(data){
         "use strict";
-        let client = new RedisClient();
-        client.connect();
-        client.setObject('busData', data);
+        this.client.setObject('busData', data);
     }
 
     requestFromServer(){

@@ -11,10 +11,10 @@ export class Factory{
         return Factory.configuration;
     }
 
-    static getLogger(filePath=null){
+    static getLogger(filePath=null, flag=''){
         "use strict";
         if(!filePath) filePath = Factory.getConfig().runtimeLog;
-        return new Logger(filePath);
+        return new Logger(filePath, flag);
     }
 
     static getAnalytics(){
