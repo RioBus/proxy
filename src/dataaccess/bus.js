@@ -13,18 +13,16 @@ export class BusDataAccess{
 
     getByLines(lines){
         "use strict";
-        let response = this.requestFromServer();
-        let data = JSON.parse(response.data);
+        let lineSearchLimit = Factory.getConfig().server.maxSearchItems;
         lines = lines.split(',');
-
-        var busList = [];
+        if(lines.length>lineSearchLimit) lines.splice(lineSearchLimit, lines.length-lineSearchLimit);
 
         this.logger.info('Searching for: '+lines);
-        for(var d of data){
-            if(lines.indexOf(d.line.toString())<0) continue;
-            let bus = new Bus(d.line,d.order,d.speed,d.direction,d.latitude,d.longitude,d.timestamp);
-            busList.push(bus);
-        }
+        let response = this.requestFromServer();
+        let busList = JSON.parse(response.data)
+            .filter(function(bus){
+                return (lines.indexOf(bus.line.toString())>=0);
+            });
         this.logger.info(busList.length + ' results.');
         return busList;
     }
@@ -32,14 +30,8 @@ export class BusDataAccess{
     getAllLines(){
         "use strict";
         let response = this.requestFromServer();
-        let data = JSON.parse(response.data);
-        this.logger.info('Total: ' + data.length + ' results.');
-
-        var busList = [];
-        for(var d of data){
-            let bus = new Bus(d.line,d.order,d.speed,d.direction,d.latitude,d.longitude,d.timestamp);
-            busList.push(bus);
-        }
+        let busList = JSON.parse(response.data);
+        this.logger.info('Total: ' + busList.length + ' results.');
         return busList;
     }
 

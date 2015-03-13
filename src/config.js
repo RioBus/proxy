@@ -27,7 +27,7 @@ module.exports = {
             log: 'data-server.log'
         },
         log: 'server.log',
-        maxSearchedItems: 10,
+        maxSearchItems: 10,
         numberOfLastLogLines: 40
     },
     providers: [
