@@ -3,7 +3,7 @@ import {Cache} from './core/cache';
 
 module.exports = {
     projectRoot: __dirname,
-    bootstrapper: 'index',
+    main: 'index',
     runtimeLog: 'runtime.log',
     server: {
         environment: {
@@ -28,14 +28,16 @@ module.exports = {
         },
         log: 'server.log',
         maxSearchedItems: 10,
-        numberOfLastLogLines: 40,
-        dataRequirer: 'datarequirer'
+        numberOfLastLogLines: 40
     },
+    providers: [
+        'provider/data'
+    ],
     resources: [
-        'resources/alldata',
-        'resources/log',
-        'resources/search',
-        'resources/serverlog'
+        'resource/alldata',
+        'resource/log',
+        'resource/search',
+        'resource/serverlog'
     ],
     analytics: {
         ua: 'UA-49628280-3',

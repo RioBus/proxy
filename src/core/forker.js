@@ -11,6 +11,11 @@ export class Forker{
         this.args.push(arg);
     }
 
+    flush(){
+        "use strict";
+        this.args = [];
+    }
+
     fork(moduleName){
         "use strict";
         return this.process.fork(moduleName + '.js', this.args);

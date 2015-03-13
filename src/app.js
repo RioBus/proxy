@@ -1,5 +1,6 @@
 import {Router} from './core/router';
 import {Server} from './core/server';
+import {Provider} from './core/provider';
 
 import {ServiceFactory} from './service/factory';
 import {Factory} from './common/factory';
@@ -16,6 +17,9 @@ export class App{
 
         let logger = Factory.getLogger();
         logger.info('Starting the server...');
+
+        let provider = new Provider(config.providers);
+        provider.start();
 
         let serverConfig = config.server;
         let router = new Router(serverConfig.log);
