@@ -53,14 +53,15 @@ export class RedisClient{
 
     getObject(key){
         this.logger.info("Requesting '"+key+"' to Redis server...");
-        var result = null;
-        this.client.hmgetall(key, function(error, response){
+        var result;
+        var self = this;
+        this.client.hgetall(key, function(error, response){
             if(error) throw error;
-            this.logger.info('Response: SUCCESS');
-            console.log(response);
-            result = response.toString();
+            self.logger.info('Response: SUCCESS');
+            result = response;
         });
-        while(!result);
+        let DeAsync = require('deasync');
+        while(!result) DeAsync.runLoopOnce();
         return result;
     }
 
@@ -68,10 +69,8 @@ export class RedisClient{
         "use strict";
         this.logger.info("Storing object in '"+key+"'...");
         let obj = {
-            data: {
-                data: value,
-                timestamp: Utils.getTimestamp()
-            }
+            data: value,
+            timestamp: Utils.getTimestamp()
         };
         this.client.hmset(key, obj, function(error){
             if(error) throw error;

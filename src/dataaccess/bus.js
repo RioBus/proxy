@@ -6,26 +6,38 @@ import {RedisClient} from '../core/redis';
 
 export class BusDataAccess{
 
+    constructor(){
+        "use strict";
+        this.logger = Factory.getLogger();
+    }
+
     getByLines(lines){
         "use strict";
-        let lines = this.getAllLines();
+        let response = this.requestFromServer();
+        let data = JSON.parse(response.data);
+        lines = lines.split(',');
 
         var busList = [];
+
+        this.logger.info('Searching for: '+lines);
         for(var d of data){
-            let bus = new Bus(d[2],d[1],d[5],d[6],d[3],d[4],d[0]);
+            if(lines.indexOf(d.line.toString())<0) continue;
+            let bus = new Bus(d.line,d.order,d.speed,d.direction,d.latitude,d.longitude,d.timestamp);
             busList.push(bus);
         }
+        this.logger.info(busList.length + ' results.');
         return busList;
     }
 
     getAllLines(){
         "use strict";
         let response = this.requestFromServer();
-        let data = response.data;
+        let data = JSON.parse(response.data);
+        this.logger.info('Total: ' + data.length + ' results.');
 
         var busList = [];
         for(var d of data){
-            let bus = new Bus(d[2],d[1],d[5],d[6],d[3],d[4],d[0]);
+            let bus = new Bus(d.line,d.order,d.speed,d.direction,d.latitude,d.longitude,d.timestamp);
             busList.push(bus);
         }
         return busList;
