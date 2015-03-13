@@ -1,6 +1,5 @@
 import {HttpRequest} from '../core/httprequest';
 import {Factory} from '../common/factory';
-import {Bus} from '../domain/bus';
 
 import {RedisClient} from '../core/redis';
 
