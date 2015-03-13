@@ -29,8 +29,8 @@
   "dependencies": {
     "compression": "^1.4.1",
     "express": "^4.12.0",
-    "mc": "^1.0.6",
     "nodealytics": "0.0.6",
+    "redis": "^0.12.1",
     "sync-request": "^2.0.1"
   },
   "devDependencies": {

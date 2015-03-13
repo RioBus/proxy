@@ -1,5 +1,6 @@
 import {LogService} from './log';
 import {SearchService} from './search';
+import {ServerService} from './server';
 
 export class ServiceFactory{
 
@@ -11,5 +12,10 @@ export class ServiceFactory{
     static getSearchService(){
         "use strict";
         return new SearchService();
+    }
+
+    static getServerService(){
+        "use strict";
+        return new ServerService();
     }
 }

@@ -1,5 +1,4 @@
 import {Utils} from './common/utils';
-import {Cache} from './core/cache';
 
 module.exports = {
     projectRoot: __dirname,
@@ -24,7 +23,8 @@ module.exports = {
             host: 'dadosabertos.rio.rj.gov.br',
             path: '/apiTransporte/apresentacao/rest/index.cfm/onibus',
             intervalTime: 15000,
-            timeout: 20000
+            timeout: 20000,
+            log: 'data-server.log'
         },
         log: 'server.log',
         maxSearchedItems: 10,

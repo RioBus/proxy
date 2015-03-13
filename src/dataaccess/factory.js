@@ -1,5 +1,6 @@
 import {BusDataAccess} from './bus';
 import {LogDataAccess} from './log';
+import {ServerDataAccess} from './server';
 
 export class DataAccessFactory{
 
@@ -11,5 +12,10 @@ export class DataAccessFactory{
     static getLogDataAccess(){
         "use strict";
         return new LogDataAccess();
+    }
+
+    static getServerDataAccess(){
+        "use strict";
+        return new ServerDataAccess();
     }
 }

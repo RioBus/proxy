@@ -2,14 +2,13 @@ import {HttpRequest} from '../core/httprequest';
 import {Factory} from '../common/factory';
 import {Bus} from '../domain/bus';
 
+import {RedisClient} from '../core/redis';
+
 export class BusDataAccess{
 
     getByLines(lines){
         "use strict";
-        let body = this.requestFromServer(lines);
-        let data = body.DATA;
-        let columns = body.COLUMNS;
-        // columns: ['DATAHORA', 'ORDEM', 'LINHA', 'LATITUDE', 'LONGITUDE', 'VELOCIDADE', 'DIRECAO']
+        let lines = this.getAllLines();
 
         var busList = [];
         for(var d of data){
@@ -21,10 +20,8 @@ export class BusDataAccess{
 
     getAllLines(){
         "use strict";
-        let body = this.requestFromServer();
-        let data = body.DATA;
-        let columns = body.COLUMNS;
-        // columns: ['DATAHORA', 'ORDEM', 'LINHA', 'LATITUDE', 'LONGITUDE', 'VELOCIDADE', 'DIRECAO']
+        let response = this.requestFromServer();
+        let data = response.data;
 
         var busList = [];
         for(var d of data){
@@ -34,20 +31,10 @@ export class BusDataAccess{
         return busList;
     }
 
-    requestFromServer(lines=''){
+    requestFromServer(){
         "use strict";
-        let config = Factory.getConfig().server.dataServer;
-        let http = new HttpRequest();
-        let options = {
-            headers: {
-                'Accept': '*/*',
-                'Cache-Control': 'no-cache'
-            },
-            json: true
-        };
-        lines = (lines.length>0)? '/'+lines : lines;
-        let requestPath = 'http://' + config.host + config.path + lines;
-        let response = http.get(requestPath, options);
-        return JSON.parse(response.getBody());
+        let client = new RedisClient();
+        client.connect();
+        return client.getObject('busData');
     }
 }
