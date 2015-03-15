@@ -15,6 +15,8 @@ export class ServerDataAccess{
     getAllData(){
         "use strict";
         let body = this.requestFromServer();
+
+        if(body.type) return body;
         let data = body.DATA;
         //let columns = body.COLUMNS;
         // columns: ['DATAHORA', 'ORDEM', 'LINHA', 'LATITUDE', 'LONGITUDE', 'VELOCIDADE', 'DIRECAO']

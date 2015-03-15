@@ -14,4 +14,10 @@ export class SearchService{
         return business.getAllData();
     }
 
+    getLastUpdateTime(){
+        "use strict";
+        let business = BusinessFactory.getSearchBusiness();
+        return business.getLastUpdate();
+    }
+
 }

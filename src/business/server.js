@@ -12,7 +12,9 @@ export class ServerBusiness{
         "use strict";
         let intervalTime = Factory.getConfig().server.dataServer.intervalTime;
         let data = this.dataAccess.getAllData();
-        this.dataAccess.storeData(JSON.stringify(data));
+        if(!data.type){
+            this.dataAccess.storeData(JSON.stringify(data));
+        }
         let DeAsync = require('deasync');
         while(true){
             DeAsync.sleep(intervalTime);

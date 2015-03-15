@@ -35,10 +35,10 @@ export class RedisClient{
     getString(key){
         "use strict";
         this.logger.info("Requesting '"+key+"' to Redis server...");
-        var result = null;
+        var result;
         this.client.get(key, function(error, response){
             if(error) throw error;
-            this.logger.info('Response: '+response);
+            this.logger.info('Response: SUCCESS');
             result = response.toString();
         });
         while(!result) DeAsync.runLoopOnce();

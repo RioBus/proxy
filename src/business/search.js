@@ -33,6 +33,12 @@ export class SearchBusiness{
         return dataAccess.getAllLines();
     }
 
+    getLastUpdate(){
+        "use strict";
+        let dataAccess = DataAccessFactory.getBusDataAccess();
+        return dataAccess.requestLastUpdate();
+    }
+
     track(error, response){
         "use strict";
         if (!error && response.statusCode === 200) {

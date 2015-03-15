@@ -39,7 +39,8 @@ module.exports = {
         'resource/log',
         'resource/search',
         'resource/serverlog',
-        'resource/dataproviderlog'
+        'resource/dataproviderlog',
+        'resource/lastupdate'
     ],
     analytics: {
         ua: 'UA-49628280-3',

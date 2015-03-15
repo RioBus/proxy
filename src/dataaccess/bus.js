@@ -8,6 +8,8 @@ export class BusDataAccess{
     constructor(){
         "use strict";
         this.logger = Factory.getRuntimeLogger();
+        this.client = new RedisClient();
+        this.client.connect();
     }
 
     getByLines(lines){
@@ -17,7 +19,7 @@ export class BusDataAccess{
         if(lines.length>lineSearchLimit) lines.splice(lineSearchLimit, lines.length-lineSearchLimit);
 
         this.logger.info('Searching for: '+lines);
-        let response = this.requestFromServer();
+        let response = this.requestBusData();
         let busList = JSON.parse(response.data)
             .filter(function(bus){
                 return (lines.indexOf(bus.line.toString())>=0);
@@ -28,16 +30,20 @@ export class BusDataAccess{
 
     getAllLines(){
         "use strict";
-        let response = this.requestFromServer();
+        let response = this.requestBusData();
         let busList = JSON.parse(response.data);
         this.logger.info('Total: ' + busList.length + ' results.');
         return busList;
     }
 
-    requestFromServer(){
+    requestLastUpdate(){
         "use strict";
-        let client = new RedisClient();
-        client.connect();
-        return client.getObject(Factory.getConfig().projectName+'.busData');
+        let response = this.requestBusData();
+        return response.timestamp;
+    }
+
+    requestBusData(){
+        "use strict";
+        return this.client.getObject(Factory.getConfig().projectName+'.busData');
     }
 }
