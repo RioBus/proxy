@@ -38,6 +38,6 @@ export class BusDataAccess{
         "use strict";
         let client = new RedisClient();
         client.connect();
-        return client.getObject('busData');
+        return client.getObject(Factory.getConfig().projectName+'.busData');
     }
 }

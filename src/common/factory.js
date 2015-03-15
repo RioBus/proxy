@@ -32,7 +32,7 @@ export class Factory{
     static getDataProviderLogger(){
         "use strict";
         let providerLogPath = Factory.getConfig().server.dataServer.log;
-        return Factory.getLogger(serverLogPath, 'DATA PROVIDER');
+        return Factory.getLogger(providerLogPath, 'DATA PROVIDER');
     }
 
     static getAnalytics(){

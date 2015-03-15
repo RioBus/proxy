@@ -10,13 +10,13 @@ export class ServerBusiness{
 
     storeAllData(){
         "use strict";
-        let config = Factory.getConfig().server.dataServer;
+        let intervalTime = Factory.getConfig().server.dataServer.intervalTime;
         let data = this.dataAccess.getAllData();
         this.dataAccess.storeData(JSON.stringify(data));
         let DeAsync = require('deasync');
-        while(!true){
+        while(true){
+            DeAsync.sleep(intervalTime);
             DeAsync.runLoopOnce();
-            DeAsync.sleep(config.intervalTime);
         }
     }
 }

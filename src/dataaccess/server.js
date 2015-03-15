@@ -28,13 +28,9 @@ export class ServerDataAccess{
                 d[0] = time.toLocaleString();
             }
             let bus = new Bus(d[2],d[1],d[5],d[6],d[3],d[4],d[0]);
-
-            if(dataList[bus.line]){
-                dataList[bus.line].push(bus);
-            } else {
-                dataList[bus.line] = [bus];
-            }
+            dataList.push(bus);
         }
+
         return dataList;
     }
 
