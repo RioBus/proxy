@@ -17,6 +17,24 @@ export class Factory{
         return new Logger(filePath, flag);
     }
 
+    static getRuntimeLogger(){
+        "use strict";
+        let runtimeLogPath = Factory.getConfig().runtimeLog;
+        return Factory.getLogger(runtimeLogPath, 'RUNTIME');
+    }
+
+    static getServerLogger(){
+        "use strict";
+        let serverLogPath = Factory.getConfig().server.log;
+        return Factory.getLogger(serverLogPath, 'SERVER');
+    }
+
+    static getDataProviderLogger(){
+        "use strict";
+        let providerLogPath = Factory.getConfig().server.dataServer.log;
+        return Factory.getLogger(serverLogPath, 'DATA PROVIDER');
+    }
+
     static getAnalytics(){
         "use strict";
         if(!Factory.analytics){

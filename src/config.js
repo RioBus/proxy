@@ -2,6 +2,7 @@ import {Utils} from './common/utils';
 
 module.exports = {
     projectRoot: __dirname,
+    projectName: 'RioBus',
     main: 'index',
     runtimeLog: 'runtime.log',
     server: {
