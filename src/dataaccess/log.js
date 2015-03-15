@@ -4,7 +4,7 @@ export class LogDataAccess{
 
     constructor(){
         "use strict";
-        this.logger = Factory.getLogger();
+        this.logger = Factory.getRuntimeLogger();
     }
 
     getRuntimeLog(){

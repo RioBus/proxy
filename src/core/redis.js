@@ -1,11 +1,13 @@
 import {Factory} from '../common/factory';
 import {Utils} from '../common/utils';
 
+let DeAsync = require('deasync');
+
 export class RedisClient{
 
     constructor(port=6379, host='127.0.0.1', options={}){
         "use strict";
-        this.logger = Factory.getLogger(Factory.getConfig().server.dataServer.log, 'DATA PROVIDER');
+        this.logger = Factory.getDataProviderLogger();
         this.driver = require('redis');
         this.port = port;
         this.host = host;
@@ -39,7 +41,7 @@ export class RedisClient{
             this.logger.info('Response: '+response);
             result = response.toString();
         });
-        while(!result);
+        while(!result) DeAsync.runLoopOnce();
         return result;
     }
 
@@ -60,7 +62,6 @@ export class RedisClient{
             self.logger.info('Response: SUCCESS');
             result = response;
         });
-        let DeAsync = require('deasync');
         while(!result) DeAsync.runLoopOnce();
         return result;
     }

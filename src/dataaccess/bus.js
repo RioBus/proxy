@@ -7,7 +7,7 @@ export class BusDataAccess{
 
     constructor(){
         "use strict";
-        this.logger = Factory.getLogger();
+        this.logger = Factory.getRuntimeLogger();
     }
 
     getByLines(lines){

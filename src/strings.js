@@ -2,7 +2,7 @@ module.exports = {
     resource: {
         main: {
             log: {
-                referrer: "User's referer is: "
+                referrer: "User's referrer is: "
             }
         }
     },

@@ -6,7 +6,7 @@ export class Logger{
         "use strict";
         this.driver = console;
         this.filePath = fileName;
-        this.flag = (flag.length>0)? flag:'RUNTIME';
+        this.flag = (flag)? flag:'RUNTIME';
         this.fileStream = require('fs');
     }
 

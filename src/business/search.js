@@ -6,12 +6,16 @@ let Strings = Factory.getStrings();
 
 export class SearchBusiness{
 
+    constructor(){
+        "use strict";
+        this.logger = Factory.getRuntimeLogger();
+    }
+
     parseQueryData(request){
         "use strict";
-        let logger = Factory.getLogger();
         let lines = request.params.lines;
         let platform = this.getPlatformName(request.platformId);
-        logger.info('Requesting line(s): '+lines);
+        this.logger.info('Requesting line(s): '+lines);
 
         let analytics = Factory.getAnalytics();
         let flag = Strings.analytics;
@@ -24,8 +28,7 @@ export class SearchBusiness{
 
     getAllData(){
         "use strict";
-        let logger = Factory.getLogger();
-        logger.info('Requesting all lines');
+        this.logger.info('Requesting all lines');
         let dataAccess = DataAccessFactory.getBusDataAccess();
         return dataAccess.getAllLines();
     }

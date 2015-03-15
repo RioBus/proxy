@@ -5,8 +5,7 @@ export class DataProvider{
 
     static main(argv){
         "use strict";
-        let logPath = Factory.getConfig().server.dataServer.log;
-        let logger = Factory.getLogger(logPath, 'DATA PROVIDER');
+        let logger = Factory.getDataProviderLogger();
         logger.info("Started data provider");
         let service = ServiceFactory.getServerService();
         service.storeAllData();

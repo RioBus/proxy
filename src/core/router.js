@@ -3,12 +3,12 @@ import {Factory} from '../common/factory';
 
 export class Router{
 
-    constructor(outputPath){
+    constructor(){
         let ServerDriver = require('express');
         let compression = require('compression');
         this.driver = new ServerDriver();
         this.driver.use(compression());
-        this.logger = Factory.getLogger(outputPath, 'SERVER');
+        this.logger = Factory.getServerLogger();
     }
 
     route(method, route, callback){
