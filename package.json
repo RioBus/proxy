@@ -2,6 +2,12 @@
   "name": "nodelicious",
   "version": "0.0.1",
   "description": "A simple HTTP server written in ECMAScript 6",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp build && gulp run",
+    "build": "gulp build"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/fmsouza/nodelicious"
@@ -23,7 +29,9 @@
     "url": "https://github.com/fmsouza/nodelicious/issues"
   },
   "dependencies": {
-    "express": "^4.12.0"
+    "express": "^4.12.0",
+    "compression": "^1.4.1",
+    "sync-request": "^2.0.1"
   },
   "devDependencies": {
     "del": "^1.1.0",

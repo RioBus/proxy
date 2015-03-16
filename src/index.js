@@ -1,3 +1,5 @@
 import {Nodelicious} from './core/nodelicious';
-import {App} from './app';
-Nodelicious.bootstrap(App.main);
+
+var moduleName = (process.argv.length>2)? process.argv[2] : 'app';
+let Application = Nodelicious.dynamicClassImport(__dirname+'/'+moduleName);
+Nodelicious.bootstrap(Application.main, process.argv);

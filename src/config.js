@@ -1,10 +1,20 @@
 module.exports = {
+    projectRoot: __dirname,
+    projectName: 'Nodelicious',
+    main: 'index',
+    log: 'runtime.log',
     server: {
-        "ip": '127.0.0.1',
-        "port": '80',
-        "driver": 'express'
+        environment: {
+            development: {
+                "ip": '127.0.0.1',
+                "port": '8080'
+            }
+        },
+        "driver": 'express',
+        log: 'server.log'
     },
     resources: [
         'resources/main'
-    ]
+    ],
+    providers: []
 };
