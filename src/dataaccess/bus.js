@@ -1,15 +1,11 @@
 import {HttpRequest} from '../core/httprequest';
 import {Factory} from '../common/factory';
 
-import {RedisClient} from '../core/redis';
-
 export class BusDataAccess{
 
     constructor(){
         "use strict";
         this.logger = Factory.getRuntimeLogger();
-        this.client = new RedisClient();
-        this.client.connect();
     }
 
     getByLines(lines){
@@ -44,6 +40,9 @@ export class BusDataAccess{
 
     requestBusData(){
         "use strict";
-        return this.client.getObject(Factory.getConfig().projectName+'.busData');
+        let dataPath = Factory.getConfig().server.dataProvider.dataPath;
+        let fs = require('fs');
+        let data = fs.readFileSync(dataPath, 'utf8');
+        return JSON.parse(data);
     }
 }

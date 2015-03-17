@@ -1,5 +1,3 @@
-import {Utils} from './common/utils';
-
 module.exports = {
     projectRoot: __dirname,
     projectName: 'RioBus',
@@ -16,16 +14,13 @@ module.exports = {
                 ip: '66.228.60.200'
             }
         },
-        dataReporter: {
-            intervalTime: 180000,
-            busLines: [485, 210, 125, 616, 625, 341]
-        },
-        dataServer: {
+        dataProvider: {
             host: 'dadosabertos.rio.rj.gov.br',
             path: '/apiTransporte/apresentacao/rest/index.cfm/onibus',
             intervalTime: 15000,
             timeout: 20000,
-            log: 'data-server.log'
+            log: 'data-server.log',
+            dataPath: 'riobus.busData.json'
         },
         log: 'server.log',
         maxSearchItems: 10,

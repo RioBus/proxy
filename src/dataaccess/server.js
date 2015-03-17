@@ -1,5 +1,4 @@
 import {HttpRequest} from '../core/httprequest';
-import {RedisClient} from '../core/redis';
 import {Factory} from '../common/factory';
 import {Bus} from '../domain/bus';
 
@@ -8,8 +7,6 @@ export class ServerDataAccess{
     constructor(){
         "use strict";
         this.logger = Factory.getDataProviderLogger();
-        this.client = new RedisClient();
-        this.client.connect();
     }
 
     getAllData(){
@@ -38,12 +35,20 @@ export class ServerDataAccess{
 
     storeData(data){
         "use strict";
-        this.client.setObject(Factory.getConfig().projectName+'.busData', data);
+        let dataPath = Factory.getConfig().server.dataProvider.dataPath;
+        let fs = require('fs');
+        data = {
+            data: data,
+            timestamp: (new Date).toLocaleString()
+        };
+        fs.writeFile(dataPath, JSON.stringify(data), function(error){
+            if(error) throw error;
+        });
     }
 
     requestFromServer(){
         "use strict";
-        let config = Factory.getConfig().server.dataServer;
+        let config = Factory.getConfig().server.dataProvider;
         let http = new HttpRequest();
         let options = {
             headers: {

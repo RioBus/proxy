@@ -30,6 +30,5 @@ node_modules
 .idea
 dist
 .DS_Store
-dataGrabbed.json
 reports
-dataReporter.js
+riobus.busData.json

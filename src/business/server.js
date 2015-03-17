@@ -10,7 +10,7 @@ export class ServerBusiness{
 
     storeAllData(){
         "use strict";
-        let intervalTime = Factory.getConfig().server.dataServer.intervalTime;
+        let intervalTime = Factory.getConfig().server.dataProvider.intervalTime;
         let data = this.dataAccess.getAllData();
         if(!data.type){
             this.dataAccess.storeData(JSON.stringify(data));
