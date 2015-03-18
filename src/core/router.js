@@ -6,9 +6,14 @@ export class Router{
     constructor(){
         let ServerDriver = require('express');
         let compression = require('compression');
+        this.logger = Factory.getServerLogger();
         this.driver = new ServerDriver();
         this.driver.use(compression());
-        this.logger = Factory.getServerLogger();
+        this.driver.use(function(req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
     }
 
     route(method, route, callback){
