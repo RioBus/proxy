@@ -21,11 +21,11 @@ export class ServerDataAccess{
         var dataList = [];
         for(var d of data){
             // hotfix for wrong daylight saving time and transforming DATAHORA to standard format
-            if(d[1].substr(0,1) !== 'C'){
-                var time = new Date(d[0]);
-                time.setHours(time.getHours()+1);
-                d[0] = time.toLocaleString();
-            }
+            //if(d[1].substr(0,1) !== 'C'){
+            //    var time = new Date(d[0]);
+            //    time.setHours(time.getHours()+1);
+            //    d[0] = time.toLocaleString();
+            //}
             let bus = new Bus(d[2],d[1],d[5],d[6],d[3],d[4],d[0]);
             dataList.push(bus);
         }
