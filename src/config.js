@@ -16,7 +16,10 @@ module.exports = {
         },
         dataProvider: {
             host: 'dadosabertos.rio.rj.gov.br',
-            path: '/apiTransporte/apresentacao/rest/index.cfm/onibus',
+            path: {
+                bus: '/apiTransporte/apresentacao/rest/index.cfm/onibus',
+                itinerary: '/apiTransporte/Apresentacao/csv/gtfs/onibus/percursos/gtfs_linha$$-shapes.csv'
+            },
             intervalTime: 15000,
             timeout: 20000,
             log: 'data-server.log',
@@ -35,7 +38,8 @@ module.exports = {
         'resource/search',
         'resource/serverlog',
         'resource/dataproviderlog',
-        'resource/lastupdate'
+        'resource/lastupdate',
+        'resource/itinerary'
     ],
     analytics: {
         ua: 'UA-49628280-3',

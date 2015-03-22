@@ -57,7 +57,7 @@ export class ServerDataAccess{
             },
             json: true
         };
-        let requestPath = 'http://' + config.host + config.path;
+        let requestPath = 'http://' + config.host + config.path.bus;
         let response = http.get(requestPath, options);
         return this.respondRequest(response);
     }

@@ -1,6 +1,7 @@
 import {LogBusiness} from './log';
 import {SearchBusiness} from './search';
 import {ServerBusiness} from './server';
+import {ItineraryBusiness} from './itinerary';
 
 export class BusinessFactory{
 
@@ -17,6 +18,11 @@ export class BusinessFactory{
     static getServerBusiness(){
         "use strict";
         return new ServerBusiness();
+    }
+
+    static getItineraryBusiness(){
+        "use strict";
+        return new ItineraryBusiness();
     }
 
 }
