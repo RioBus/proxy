@@ -1,3 +1,8 @@
+/**
+ * Describes one spot of the Itinerary of a given line
+ * @class Itinerary
+ * @constructor
+ */
 export class Itinerary{
 
     constructor(sequential, line, description, agency, shape, latitude, longitude){

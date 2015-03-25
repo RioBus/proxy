@@ -1,3 +1,8 @@
+/**
+ * Describes a bus instance
+ * @class Bus
+ * @constructor
+ */
 export class Bus{
 
     constructor(line, order, speed, direction, latitude, longitude, timestamp){

@@ -5,8 +5,21 @@ import {Provider} from './core/provider';
 import {ServiceFactory} from './service/factory';
 import {Factory} from './common/factory';
 
+/**
+ * Main application process
+ * @class App
+ */
 export class App{
 
+    /**
+     * Init providers
+     * Init RESTful server
+     * Init the analytics
+     *
+     * @method main
+     * @param {Array} argv Process arg list
+     * @return {void}
+     */
 	static main(argv){
         let config = Factory.getConfig();
 
@@ -17,12 +30,14 @@ export class App{
         let logger = Factory.getRuntimeLogger();
         logger.info('Starting the server...');
 
+        // Registering providers
         let provider = new Provider(config.providers);
-        provider.start();
+        provider.start(); // Starting providers in child forks
 
+        // Configuring the RESTful router to handle HTTP requests
         let router = new Router();
-        router.registerResources(config.resources);
+        router.registerResources(config.resources); // Registering resources to handle the URLs
         let server = new Server(config.server.environment.development, router);
-        server.start();
+        server.start(); // Starting RESTful application
 	}
 }

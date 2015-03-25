@@ -1,3 +1,7 @@
+/**
+ * Application configuration
+ * You may use it to describe every global configuration data
+ */
 module.exports = {
     projectRoot: __dirname,
     projectName: 'RioBus',
