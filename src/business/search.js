@@ -4,6 +4,11 @@ import {DataAccessFactory} from '../dataaccess/factory';
 
 let Strings = Factory.getStrings();
 
+/**
+ * Data Search business logics
+ * @class SearchBusiness
+ * @constructor
+ */
 export class SearchBusiness{
 
     constructor(){
@@ -11,6 +16,11 @@ export class SearchBusiness{
         this.logger = Factory.getRuntimeLogger();
     }
 
+    /**
+     * Search for the requested lines
+     * @param {*} request
+     * @returns {Array}
+     */
     parseQueryData(request){
         "use strict";
         let lines = request.params.lines;
@@ -19,13 +29,17 @@ export class SearchBusiness{
 
         let analytics = Factory.getAnalytics();
         let flag = Strings.analytics;
-        analytics.trackEvent(flag.event.restHit, flag.label.rest, platform, this.track);
-        analytics.trackEvent(flag.event.restHit, flag.label.busCode, lines, this.track);
+        analytics.trackEvent(flag.event.restHit, flag.label.rest, platform, function(error, response){});
+        analytics.trackEvent(flag.event.restHit, flag.label.busCode, lines, function(error, response){});
 
         let dataAccess = DataAccessFactory.getBusDataAccess();
         return dataAccess.getByLines(lines);
     }
 
+    /**
+     * Search for all the lines
+     * @returns {Array}
+     */
     getAllData(){
         "use strict";
         this.logger.info('Requesting all lines');
@@ -33,19 +47,21 @@ export class SearchBusiness{
         return dataAccess.getAllLines();
     }
 
+    /**
+     * Gets the last data update timestamp
+     * @returns {String}
+     */
     getLastUpdate(){
         "use strict";
         let dataAccess = DataAccessFactory.getBusDataAccess();
         return dataAccess.requestLastUpdate();
     }
 
-    track(error, response){
-        "use strict";
-        if (!error && response.statusCode === 200) {
-            //console.log('Event has been tracked with Google Analytics');
-        }
-    }
-
+    /**
+     * Gets the given platform name
+     * @param platform
+     * @returns {String}
+     */
     getPlatformName(platform){
         "use strict";
         let string = Strings.business.main.platform;

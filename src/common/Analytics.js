@@ -39,7 +39,7 @@ export class Analytics{
      *
      * @param {String} id Tracking identifier
      * @param {String} path Request path
-     * @param {label} label Event label
+     * @param {String} label Event label
      * @param {Function} callback (params: error, response)
      */
     trackEvent(id, path, label, callback){
