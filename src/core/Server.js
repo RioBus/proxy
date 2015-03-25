@@ -1,3 +1,8 @@
+/**
+ * Abstracts the router server start
+ * @class Server
+ * @constructor
+ */
 export class Server{
 
     constructor(config, router){
@@ -5,6 +10,11 @@ export class Server{
         this.router = router;
     }
 
+    /**
+     * Starts the server
+     * @param {Function} callback
+     * @returns {*}
+     */
     start(callback=null){
         let ip = this.config.ip;
         let port = this.config.port;

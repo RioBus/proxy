@@ -1,3 +1,5 @@
+import {Utils} from './common/utils';
+
 /**
  * Bootstrap script.
  *
@@ -7,13 +9,7 @@
  * correct Provider and calls the main method in the new fork.
  *
  */
-
-import {Nodelicious} from './core/nodelicious';
-import {Utils} from './common/utils';
-
 // Get the provider path from process.argv or app and begin
 var moduleName = (process.argv.length>2)? process.argv[2] : 'app';
 let Application = Utils.dynamicClassImport(__dirname+'/'+moduleName);
-
-// Initializes main routine
-Nodelicious.bootstrap(Application.main, process.argv);
+Application.main(process.argv);

@@ -1,6 +1,12 @@
 import {Forker} from '../core/forker';
 import {Factory} from '../common/factory';
 
+/**
+ * Manages the providers loaded to the system
+ *
+ * @class Provider
+ * @constructor
+ */
 export class Provider{
 
     constructor(providers=[]){
@@ -11,11 +17,19 @@ export class Provider{
         this.registerProviders(providers);
     }
 
+    /**
+     * Registers the providers list
+     * @param {Array} providers
+     */
     registerProviders(providers){
         "use strict";
         this.providers = providers;
     }
 
+    /**
+     * Registers a new provider in runtime
+     * @param provider
+     */
     addProvider(provider){
         "use strict";
         if(this.childProcesses.length<=0) {
@@ -25,6 +39,10 @@ export class Provider{
         }
     }
 
+    /**
+     * Creates an instance of the given Provider
+     * @param {String} provider provider module math
+     */
     provide(provider){
         "use strict";
         var moduleName = provider.split('/');
@@ -34,12 +52,19 @@ export class Provider{
         this.childProcess[moduleName] = forker.fork(this.mainModule);
     }
 
+    /**
+     * Stops the given Provider defined process
+     * @param {String} name provider name
+     */
     stopProvider(name){
         "use strict";
         this.childProcess[name].kill('SIGINT');
         delete this.childProcess[name];
     }
 
+    /**
+     * Stops all Provider defined processes
+     */
     stop(){
         "use strict";
         let keys = Object.keys(this.childProcess);
@@ -48,6 +73,9 @@ export class Provider{
         }
     }
 
+    /**
+     * Starts all Provider defined processes
+     */
     start(){
         "use strict";
         for(var provider of this.providers){
