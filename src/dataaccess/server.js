@@ -2,6 +2,13 @@ import {HttpRequest} from '../core/httprequest';
 import {Factory} from '../common/factory';
 import {Bus} from '../domain/bus';
 
+/**
+ * DataAccess responsible for managing data access to the data stored in the
+ * external server.
+ *
+ * @class ServerDataAccess
+ * @constructor
+ */
 export class ServerDataAccess{
 
     constructor(){
@@ -9,9 +16,13 @@ export class ServerDataAccess{
         this.logger = Factory.getDataProviderLogger();
     }
 
+    /**
+     * Retrieves all data from the external storage
+     * @returns {Array}
+     */
     getAllData(){
         "use strict";
-        let body = this.requestFromServer();
+        let body = this.requestFromServer(); // Requesting to the external server
 
         if(body.type) return body;
         let data = body.DATA;
@@ -20,12 +31,7 @@ export class ServerDataAccess{
 
         var dataList = [];
         for(var d of data){
-            // hotfix for wrong daylight saving time and transforming DATAHORA to standard format
-            //if(d[1].substr(0,1) !== 'C'){
-            //    var time = new Date(d[0]);
-            //    time.setHours(time.getHours()+1);
-            //    d[0] = time.toLocaleString();
-            //}
+            // Converting external data do the application's pattern
             let bus = new Bus(d[2],d[1],d[5],d[6],d[3],d[4],d[0]);
             dataList.push(bus);
         }
@@ -33,6 +39,10 @@ export class ServerDataAccess{
         return dataList;
     }
 
+    /**
+     * Stores the given data to the local storage
+     * @param {String} data
+     */
     storeData(data){
         "use strict";
         let dataPath = Factory.getConfig().server.dataProvider.dataPath;
@@ -46,6 +56,10 @@ export class ServerDataAccess{
         });
     }
 
+    /**
+     * Does the request to the external server and retrieves the data
+     * @returns {*}
+     */
     requestFromServer(){
         "use strict";
         let config = Factory.getConfig().server.dataProvider;
@@ -62,6 +76,11 @@ export class ServerDataAccess{
         return this.respondRequest(response);
     }
 
+    /**
+     * Verifies the request response status and returns the correct output
+     * @param {*} response
+     * @returns {*}
+     */
     respondRequest(response){
         "use strict";
         switch(response.statusCode){

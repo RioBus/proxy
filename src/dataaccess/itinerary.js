@@ -2,6 +2,13 @@ import {HttpRequest} from '../core/httprequest';
 import {Itinerary} from '../domain/itinerary';
 import {Factory} from '../common/factory';
 
+/**
+ * DataAccess referred to Itinerary stored data
+ *
+ * Does operations over Itinerary data
+ * @class ItineraryDataAccess
+ * @constructor
+ */
 export class ItineraryDataAccess{
 
     constructor(){
@@ -9,16 +16,27 @@ export class ItineraryDataAccess{
         this.logger = Factory.getRuntimeLogger();
     }
 
+    /**
+     * Retrieves the Itinerary spots given a line
+     * @param {String} line
+     * @returns {*}
+     */
     getItinerary(line){
         let itineraryList = this.requestFromServer(line);
         var data = [];
         for(var it of itineraryList){
+            // Transforming the external data into an application's known
             let itinerary = new Itinerary(it[3],it[0],it[1],it[2],it[4],it[5],it[6]);
             data.push(itinerary);
         }
         return data;
     }
 
+    /**
+     * Retrieves the Itinerary data from the external server
+     * @param {String} line
+     * @returns {*}
+     */
     requestFromServer(line){
         "use strict";
         let config = Factory.getConfig().server.dataProvider;
@@ -36,14 +54,19 @@ export class ItineraryDataAccess{
         return this.respondRequest(response);
     }
 
+    /**
+     * Verifies the request response status and returns the correct output
+     * @param {*} response
+     * @returns {*}
+     * */
     respondRequest(response){
         "use strict";
-        switch(response.statusCode){
+        switch(response.statusCode){ // Verifying response statusCode
             case 200:
                 let body = response.getBody().toString().replace(/\r/g, "").replace(/\"/g, "").split("\n");
-                body.shift();
+                body.shift(); // Removes the CSV header line with column names
                 var result = [];
-                for(var i=0; i<body.length; i++){
+                for(var i=0; i<body.length; i++){ // Transforms the data array into a matrix
                     if(body[i].length>0)
                         result.push(body[i].split(','));
                 }

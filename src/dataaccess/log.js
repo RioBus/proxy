@@ -1,5 +1,10 @@
 import {Factory} from '../common/factory';
 
+/**
+ * DataAccess referred to the Logs
+ * @class LogDataAccess
+ * @constructor
+ */
 export class LogDataAccess{
 
     constructor(){
@@ -7,6 +12,10 @@ export class LogDataAccess{
         this.logger = Factory.getRuntimeLogger();
     }
 
+    /**
+     * Retrieves the Runtime log data from the storage
+     * @returns {*}
+     */
     getRuntimeLog(){
         "use strict";
         let filePath = Factory.getConfig().runtimeLog;
@@ -14,6 +23,10 @@ export class LogDataAccess{
         return this.getFromFile(filePath);
     }
 
+    /**
+     * Retrieves the Server log data from the storage
+     * @returns {*}
+     */
     getServerLog(){
         "use strict";
         let filePath = Factory.getConfig().server.log;
@@ -21,6 +34,10 @@ export class LogDataAccess{
         return this.getFromFile(filePath);
     }
 
+    /**
+     * Retrieves the DataProvider log data from the storage
+     * @returns {*}
+     */
     getDataProviderLog(){
         "use strict";
         let filePath = Factory.getConfig().server.dataServer.log;
@@ -28,6 +45,10 @@ export class LogDataAccess{
         return this.getFromFile(filePath);
     }
 
+    /**
+     * Helper method to access the storage and retrieve the data
+     * @returns {*}
+     */
     getFromFile(fileName){
         "use strict";
         let fs = require('fs');
