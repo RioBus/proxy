@@ -14,7 +14,7 @@ export class LogDataAccess{
 
     /**
      * Retrieves the Runtime log data from the storage
-     * @returns {*}
+     * @returns {Array}
      */
     getRuntimeLog(){
         "use strict";
@@ -25,7 +25,7 @@ export class LogDataAccess{
 
     /**
      * Retrieves the Server log data from the storage
-     * @returns {*}
+     * @returns {Array}
      */
     getServerLog(){
         "use strict";
@@ -36,7 +36,7 @@ export class LogDataAccess{
 
     /**
      * Retrieves the DataProvider log data from the storage
-     * @returns {*}
+     * @returns {Array}
      */
     getDataProviderLog(){
         "use strict";
@@ -47,7 +47,7 @@ export class LogDataAccess{
 
     /**
      * Helper method to access the storage and retrieve the data
-     * @returns {*}
+     * @returns {Array}
      */
     getFromFile(fileName){
         "use strict";

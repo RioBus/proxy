@@ -10,7 +10,7 @@ export class LogBusiness{
 
     /**
      * Returns the runtime logs
-     * @returns {*}
+     * @returns {Array}
      */
     getRuntimeLog(){
         "use strict";
@@ -20,7 +20,7 @@ export class LogBusiness{
 
     /**
      * Returns the server logs
-     * @returns {*}
+     * @returns {Array}
      */
     getServerLog(){
         "use strict";
@@ -30,7 +30,7 @@ export class LogBusiness{
 
     /**
      * Returns the DataProvider logs
-     * @returns {*}
+     * @returns {Array}
      */
     getDataProviderLog(){
         "use strict";
