@@ -29,18 +29,23 @@ Instalação
 Instale o Node.js
 
 Windows e Linux:
+
     http://nodebr.com/instalando-node-js-atraves-do-gerenciador-de-pacotes/
 
 Mac OS X:
+
     https://nodejs.org/download/
 
 Faça o download do projeto em sua máquina:
+
     $ git clone https://github.com/RioBus/server.git
 
 Entre na raiz do projeto e instale as dependências do Node.js:
+
     $ npm install
 
 Execute a aplicação:
+
     $ npm start
 
 
@@ -48,15 +53,19 @@ Comandos do NPM e Gulp
 ----------------------
 
 gulp build ou npm build
+
     Compila o projeto e gera o código em dist/
 
 gulp clean
+
     Limpa o diretório dist/ que é onde fica o código compilado
 
 gulp run
+
     gulp clean && Executa o código compilado
 
 npm start
+
     gulp build && gulp run
 
 ```OBS.: Para a aplicação funcionar, ela precisa estar em um projeto cujos módulos Node.js estejam instalados.```
