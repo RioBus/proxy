@@ -19,10 +19,10 @@ export class ItineraryDataAccess{
     /**
      * Retrieves the Itinerary spots given a line
      * @param {String} line
-     * @returns {*}
+     * @returns {Array}
      */
     getItinerary(line){
-        let itineraryList = this.requestFromServer(line);
+        let itineraryList = this.retrieveData(line);
         var data = [];
         var returning = 0;
         for(var it of itineraryList){
@@ -35,6 +35,27 @@ export class ItineraryDataAccess{
             data.push(itinerary);
         }
         return data;
+    }
+
+    /**
+     * Searches in the local storage for the itinerary data or request to the external server
+     * case not found.
+     * @param {String} line
+     * @returns {*}
+     */
+    retrieveData(line){
+        let fs = require('fs');
+        let filePath = Factory.getConfig().server.dataProvider.path.output + line;
+        this.logger.info('Searching for local data for line itinerary: '+line);
+
+        try{
+            let data = fs.readFileSync(filePath, 'utf8');
+            return JSON.parse(data);
+        } catch(e){
+            let data = this.requestFromServer(line);
+            this.storeData(filePath, data);
+            return data;
+        }
     }
 
     /**
@@ -60,9 +81,30 @@ export class ItineraryDataAccess{
     }
 
     /**
+     * Cached locally the itinerary
+     * @param {String} filePath Place to create the file and save the data
+     * @param {Array} data Itinerary list to be saved
+     * */
+    storeData(filePath, data){
+        let self = this;
+        let fs = require('fs');
+        let buffer = new Buffer(JSON.stringify(data));
+        fs.open(filePath, 'w+', function(e, filePath) {
+            if(e) throw e;
+
+            fs.write(filePath, buffer, 0, buffer.length, null, function(error) {
+                if (error) throw error;
+                fs.close(filePath, function(){
+                    self.logger.info('Data stored successfully.');
+                });
+            });
+        });
+    }
+
+    /**
      * Verifies the request response status and returns the correct output
      * @param {*} response
-     * @returns {*}
+     * @returns {Array}
      * */
     respondRequest(response){
         "use strict";
@@ -77,17 +119,17 @@ export class ItineraryDataAccess{
                 }
                 return result;
             case 302:
-                this.logger('(302) Server moved temporarily.');
-                return {type: 'error', code: response.statusCode};
+                this.logger.alert('(302) Server moved temporarily.');
+                return [];
             case 404:
-                this.logger('(404) Not found.');
-                return {type: 'error', code: response.statusCode};
+                this.logger.alert('(404) Not found.');
+                return [];
             case 503:
-                this.logger('(503) Server unavailable.');
-                return {type: 'error', code: response.statusCode};
+                this.logger.alert('(503) Server unavailable.');
+                return [];
             default:
-                this.logger('('+response.statusCode+') An error ocurred.');
-                return {type: 'error', code: response.statusCode};
+                this.logger.alert('('+response.statusCode+') An error ocurred.');
+                return [];
         }
     }
 }
