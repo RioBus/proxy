@@ -22,7 +22,8 @@ module.exports = {
             host: 'dadosabertos.rio.rj.gov.br',
             path: {
                 bus: '/apiTransporte/apresentacao/rest/index.cfm/onibus',
-                itinerary: '/apiTransporte/Apresentacao/csv/gtfs/onibus/percursos/gtfs_linha$$-shapes.csv'
+                itinerary: '/apiTransporte/Apresentacao/csv/gtfs/onibus/percursos/gtfs_linha$$-shapes.csv',
+                output: 'cachedData/'
             },
             intervalTime: 15000,
             timeout: 20000,
