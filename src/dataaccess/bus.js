@@ -1,5 +1,6 @@
 import {HttpRequest} from '../core/httprequest';
 import {Factory} from '../common/factory';
+import {ItineraryDataAccess} from './itinerary';
 
 /**
  * Bus data access layer
@@ -23,19 +24,19 @@ export class BusDataAccess{
     getByLines(lines){
         "use strict";
         let lineSearchLimit = Factory.getConfig().server.maxSearchItems;
-        lines = lines.split(',');
+        let lineList = lines.split(',');
 
         // Makes sure it won't search for more lines than the limit
-        if(lines.length>lineSearchLimit) lines.splice(lineSearchLimit, lines.length-lineSearchLimit);
+        if(lineList.length>lineSearchLimit) lineList.splice(lineSearchLimit, lines.length-lineSearchLimit);
 
         this.logger.info('Searching for: '+lines);
         let response = this.requestBusData(); // Gets all bus data
         let busList = JSON.parse(response.data) // and filters the list
             .filter(function(bus){
-                return (lines.indexOf(bus.line.toString())>=0);
+                return (lineList.indexOf(bus.line.toString())>=0);
             });
         this.logger.info(busList.length + ' results.');
-        return busList;
+        return this.identifySense(busList);
     }
 
     /**
@@ -48,6 +49,19 @@ export class BusDataAccess{
         let busList = JSON.parse(response.data);
         this.logger.info('Total: ' + busList.length + ' results.');
         return busList;
+    }
+
+    identifySense(data){
+        let itineraries = [];
+        let dataAccess = new ItineraryDataAccess();
+        for(var i=0; i<data.length; i++){
+            let bus = data[i];
+            if(Object.keys(itineraries).indexOf(bus.line.toString())<0){
+                itineraries[bus.line] = dataAccess.getItinerary(bus.line);
+            }
+            bus.sense = itineraries[bus.line][0].description.split('-')[1];
+        }
+        return data;
     }
 
     /**
