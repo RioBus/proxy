@@ -51,15 +51,44 @@ export class BusDataAccess{
         return busList;
     }
 
+    /**
+     * Identifies each bus sense and updates the list
+     * @returns {Array}
+     */
     identifySense(data){
         let itineraries = [];
         let dataAccess = new ItineraryDataAccess();
         for(var i=0; i<data.length; i++){
             let bus = data[i];
+            // Only requests the itinerary if not cached
             if(Object.keys(itineraries).indexOf(bus.line.toString())<0){
                 itineraries[bus.line] = dataAccess.getItinerary(bus.line);
             }
-            bus.sense = itineraries[bus.line][0].description.split('-')[1];
+            var nearest = null;
+            for(var itinerary of itineraries[bus.line]){
+                if(!nearest) nearest = itinerary;
+                else{
+                    var nearestDistanceLat = Math.abs(bus.latitude - nearest.latitude);
+                    var nearestDistanceLng = Math.abs(bus.longitude - nearest.longitude);
+                    var distanceLat = Math.abs(bus.latitude - itinerary.latitude);
+                    var distanceLng = Math.abs(bus.longitude - itinerary.longitude);
+                    // Compares the last nearest selected spot latitude and longitude difference with the bus
+                    // and changes the reference case the current itinerary spot is nearest
+                    if(nearestDistanceLat > distanceLat && nearestDistanceLng > distanceLng){
+                        nearest = itinerary;
+                    }
+                }
+            }
+            bus.returning = (nearest.sequential>0)? false:true; // identifies if the bus is returning or not
+            if(bus.returning){
+                var description = itineraries[bus.line][0].description.toUpperCase().split(' X ');
+                var tmp = description[0];
+                description[0] = description[1];
+                description[1] = tmp;
+                bus.sense = description.join(' X ');
+            } else{
+                bus.sense = itineraries[bus.line][0].description;
+            }
         }
         return data;
     }
