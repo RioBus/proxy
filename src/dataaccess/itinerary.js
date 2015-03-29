@@ -24,9 +24,14 @@ export class ItineraryDataAccess{
     getItinerary(line){
         let itineraryList = this.requestFromServer(line);
         var data = [];
+        var returning = 0;
         for(var it of itineraryList){
+            if(it[3]==0 && returning==0) returning = 1;
+            else if(it[3]==0 && returning==1) returning = -1;
             // Transforming the external data into an application's known
-            let itinerary = new Itinerary(it[3],it[0],it[1],it[2],it[4],it[5],it[6]);
+            var description = it[1].split('-');
+            description.shift();
+            let itinerary = new Itinerary(it[3]*returning,it[0],description.join('-'),it[2],it[4],it[5],it[6]);
             data.push(itinerary);
         }
         return data;
