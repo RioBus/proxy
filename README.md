@@ -44,6 +44,10 @@ Entre na raiz do projeto e instale as dependências do Node.js:
 
     $ npm install
 
+Todos os dados dos itinerários e das localizações dos ônibus são salvas em cache. O diretório até o arquivo deve existir
+para que seja possível criar os arquivos de cache e deve ser indicado em ```config.js```, em 
+```server.dataProvider.dataPath``` e em ```server.dataProvider.path.output```.
+
 Execute a aplicação:
 
     $ npm start
