@@ -28,7 +28,7 @@ module.exports = {
             intervalTime: 15000,
             timeout: 20000,
             log: 'data-server.log',
-            dataPath: 'riobus.busData.json'
+            dataPath: 'cachedData/riobus.busData.json'
         },
         log: 'server.log',
         maxSearchItems: 10,
