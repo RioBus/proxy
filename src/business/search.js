@@ -21,7 +21,7 @@ export class SearchBusiness{
      * @param {*} request
      * @returns {Array}
      */
-    parseQueryData(request){
+    getDataByLine(request){
         "use strict";
         let lines = request.params.lines;
         let platform = this.getPlatformName(request.platformId);
@@ -34,6 +34,26 @@ export class SearchBusiness{
 
         let dataAccess = DataAccessFactory.getBusDataAccess();
         return dataAccess.getByLines(lines);
+    }
+
+    /**
+     * Search for the requested cars
+     * @param {*} request
+     * @returns {Array}
+     */
+    getDataByCode(request){
+        "use strict";
+        let lines = request.params.lines;
+        let platform = this.getPlatformName(request.platformId);
+        this.logger.info('Requesting line(s): '+lines);
+
+        let analytics = Factory.getAnalytics();
+        let flag = Strings.analytics;
+        analytics.trackEvent(flag.event.restHit, flag.label.rest, platform, function(error, response){});
+        analytics.trackEvent(flag.event.restHit, flag.label.busCode, lines, function(error, response){});
+
+        let dataAccess = DataAccessFactory.getBusDataAccess();
+        return dataAccess.getByCode(lines);
     }
 
     /**

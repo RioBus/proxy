@@ -14,7 +14,9 @@ export class SearchService{
     parseQueryData(request){
         "use strict";
         let business = BusinessFactory.getSearchBusiness();
-        return business.parseQueryData(request);
+        let buses = business.getDataByLine(request);
+        if(buses.length>0) return buses;
+        return business.getDataByCode(request);
     }
 
     /**

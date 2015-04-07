@@ -17,7 +17,7 @@ export class BusDataAccess{
     }
 
     /**
-     * Gets all the bus data given a line or an list of.
+     * Gets all the bus data given a line or a list of.
      * @param {String} lines
      * @returns {Array}
      */
@@ -34,6 +34,29 @@ export class BusDataAccess{
         let busList = JSON.parse(response.data) // and filters the list
             .filter(function(bus){
                 return (lineList.indexOf(bus.line.toString())>=0);
+            });
+        this.logger.info(busList.length + ' results.');
+        return this.identifySense(busList);
+    }
+
+    /**
+     * Gets all the bus data given a code or a list of.
+     * @param {String} codes
+     * @returns {Array}
+     */
+    getByCode(codes){
+        "use strict";
+        let codeSearchLimit = Factory.getConfig().server.maxSearchItems;
+        let codeList = codes.split(',');
+
+        // Makes sure it won't search for more lines than the limit
+        if(codeList.length>codeSearchLimit) codeList.splice(codeSearchLimit, codes.length-codeSearchLimit);
+
+        this.logger.info('Searching for: '+codes);
+        let response = this.requestBusData(); // Gets all bus data
+        let busList = JSON.parse(response.data) // and filters the list
+            .filter(function(bus){
+                return (codeList.indexOf(bus.order.toString())>=0);
             });
         this.logger.info(busList.length + ' results.');
         return this.identifySense(busList);
