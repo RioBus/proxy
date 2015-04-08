@@ -32,10 +32,12 @@ module.exports = {
         },
         log: 'server.log',
         maxSearchItems: 10,
-        numberOfLastLogLines: 40
+        numberOfLastLogLines: 40,
+        reportFilePath: '/reports'
     },
     providers: [
-        'provider/data'
+        'provider/data',
+        'provider/rest'
     ],
     resources: [
         'resource/alldata',
@@ -44,7 +46,8 @@ module.exports = {
         'resource/serverlog',
         'resource/dataproviderlog',
         'resource/lastupdate',
-        'resource/itinerary'
+        'resource/itinerary',
+        'resource/intervalreports'
     ],
     analytics: {
         ua: 'UA-49628280-3',

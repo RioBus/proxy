@@ -2,6 +2,7 @@ import {BusDataAccess} from './bus';
 import {LogDataAccess} from './log';
 import {ServerDataAccess} from './server';
 import {ItineraryDataAccess} from './itinerary';
+import {ReportDataAccess} from './report';
 
 /**
  * DataAccessFactory provides decoupling to the DataAccess layer.
@@ -44,5 +45,14 @@ export class DataAccessFactory{
     static getItineraryDataAccess(){
         "use strict";
         return new ItineraryDataAccess();
+    }
+
+    /**
+     * Gets the ReportDataAccess instance
+     * @returns {ReportDataAccess}
+     */
+    static getReportDataAccess(){
+        "use strict";
+        return new ReportDataAccess();
     }
 }

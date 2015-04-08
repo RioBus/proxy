@@ -85,18 +85,19 @@ export class ServerDataAccess{
         "use strict";
         switch(response.statusCode){
             case 200:
+                this.logger.error('(200) Request OK.');
                 return JSON.parse(response.getBody());
             case 302:
-                this.logger('(302) Server moved temporarily.');
+                this.logger.error('(302) Server moved temporarily.');
                 return {type: 'error', code: response.statusCode};
             case 404:
-                this.logger('(404) Not found.');
+                this.logger.error('(404) Not found.');
                 return {type: 'error', code: response.statusCode};
             case 503:
-                this.logger('(503) Server unavailable.');
+                this.logger.error('(503) Server unavailable.');
                 return {type: 'error', code: response.statusCode};
             default:
-                this.logger('('+response.statusCode+') An error ocurred.');
+                this.logger.error('('+response.statusCode+') An error ocurred.');
                 return {type: 'error', code: response.statusCode};
         }
     }

@@ -1,11 +1,12 @@
 import {Resource} from './resource';
 import {ServiceFactory} from '../service/factory';
+import {Factory} from '../common/factory';
 
 /**
  * Reports request handler
  * @class ReportsResource
  */
-export class ReportsResource extends Resource{
+export class IntervalReportsResource extends Resource{
 
     /**
      * Request URL
@@ -13,7 +14,7 @@ export class ReportsResource extends Resource{
      */
     route(){
         "use strict";
-        return '/reports';
+        return '/reports/:minDate/:maxDate';
     }
 
     /**
@@ -24,7 +25,8 @@ export class ReportsResource extends Resource{
      * @param next
      */
     get(request, response, next) {
-        let result = ServiceFactory.getSearchService().getAllData();
+        let service = Factory.getReportService();
+        let result = service.getByDate(request.params);
         response.jsonp(result);
     }
 }

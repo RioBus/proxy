@@ -2,6 +2,7 @@ import {LogBusiness} from './log';
 import {SearchBusiness} from './search';
 import {ServerBusiness} from './server';
 import {ItineraryBusiness} from './itinerary';
+import {ReportBusiness} from './report';
 
 /**
  * BusinessFactory provides decoupling to the business logic layer.
@@ -46,6 +47,15 @@ export class BusinessFactory{
     static getItineraryBusiness(){
         "use strict";
         return new ItineraryBusiness();
+    }
+
+    /**
+     * Returns a ReportBusiness instance
+     * @returns {ReportBusiness}
+     */
+    static getReportBusiness(){
+        "use strict";
+        return new ReportBusiness();
     }
 
 }

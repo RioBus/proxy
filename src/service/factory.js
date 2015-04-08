@@ -2,6 +2,7 @@ import {LogService} from './log';
 import {SearchService} from './search';
 import {ServerService} from './server';
 import {ItineraryService} from './itinerary';
+import {ReportService} from './report';
 
 /**
  * ServiceFactory provides decoupling to the service layer.
@@ -47,5 +48,14 @@ export class ServiceFactory{
     static getItineraryService(){
         "use strict";
         return new ItineraryService();
+    }
+
+    /**
+     * Gets a ReportService instance
+     * @returns {ReportService}
+     */
+    static getReportService(){
+        "use strict";
+        return new ReportService();
     }
 }
