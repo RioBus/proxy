@@ -13,6 +13,7 @@ export class ServerBusiness{
     constructor(){
         "use strict";
         this.dataAccess = DataAccessFactory.getServerDataAccess();
+        this.intervalTime = Factory.getConfig().server.dataProvider.intervalTime;
     }
 
     /**
@@ -21,16 +22,11 @@ export class ServerBusiness{
      */
     storeAllData(){
         "use strict";
-        let intervalTime = Factory.getConfig().server.dataProvider.intervalTime;
         let data = this.dataAccess.getAllData(); // Get data pro external server
         if(!data.type){
             this.dataAccess.storeData(JSON.stringify(data)); // Stores the data in a local storage
         }
-        let DeAsync = require('deasync');
-        while(true){
-            // Makes sure it won't stop
-            DeAsync.sleep(intervalTime);
-            DeAsync.runLoopOnce();
-        }
+        let self = this;
+        setTimeout(function(){ self.storeAllData(); }, this.intervalTime);
     }
 }

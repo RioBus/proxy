@@ -75,9 +75,9 @@ export class BusDataAccess{
     getAllLines(){
         "use strict";
         let response = this.requestBusData();
-        let busList = JSON.parse(response.data).buses;
+        let busList = JSON.parse(response.data);
         this.logger.info('Total: ' + busList.length + ' results.');
-        return busList;
+        return busList.buses;
     }
 
     /**

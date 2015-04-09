@@ -32,6 +32,7 @@ export class ServerDataAccess{
 
         var dataList = {};
         var indexedList = {};
+        var busCount = 0;
         for(var d of data){
             // Converting external data do the application's pattern
             let bus = new Bus(d[2],d[1],d[5],d[6],d[3],d[4],d[0]);
@@ -42,9 +43,10 @@ export class ServerDataAccess{
             let index = dataList[bus.line.toString()].length;
             indexedList[bus.order] = {line: bus.line.toString(), position: index};
             dataList[bus.line.toString()].push(bus);
+            busCount++;
         }
 
-        return new BusList(dataList, indexedList);
+        return new BusList(dataList, indexedList, busCount);
     }
 
     /**
