@@ -1,6 +1,7 @@
 import {HttpRequest} from '../core/httprequest';
 import {Factory} from '../common/factory';
 import {Bus} from '../domain/bus';
+import {BusList} from '../domain/buslist';
 
 /**
  * DataAccess responsible for managing data access to the data stored in the
@@ -29,14 +30,21 @@ export class ServerDataAccess{
         //let columns = body.COLUMNS;
         // columns: ['DATAHORA', 'ORDEM', 'LINHA', 'LATITUDE', 'LONGITUDE', 'VELOCIDADE', 'DIRECAO']
 
-        var dataList = [];
+        var dataList = {};
+        var indexedList = {};
         for(var d of data){
             // Converting external data do the application's pattern
             let bus = new Bus(d[2],d[1],d[5],d[6],d[3],d[4],d[0]);
-            dataList.push(bus);
+            let lineExists = Object.keys(dataList).indexOf(bus.line.toString());
+
+            if(lineExists<0) dataList[bus.line.toString()] = [];
+
+            let index = dataList[bus.line.toString()].length;
+            indexedList[bus.order] = {line: bus.line.toString(), position: index};
+            dataList[bus.line.toString()].push(bus);
         }
 
-        return dataList;
+        return new BusList(dataList, indexedList);
     }
 
     /**
@@ -85,7 +93,7 @@ export class ServerDataAccess{
         "use strict";
         switch(response.statusCode){
             case 200:
-                this.logger.error('(200) Request OK.');
+                this.logger.info('(200) Request OK.');
                 return JSON.parse(response.getBody());
             case 302:
                 this.logger.error('(302) Server moved temporarily.');

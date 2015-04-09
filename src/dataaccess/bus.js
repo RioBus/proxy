@@ -31,10 +31,12 @@ export class BusDataAccess{
 
         this.logger.info('Searching for: '+lines);
         let response = this.requestBusData(); // Gets all bus data
-        let busList = JSON.parse(response.data) // and filters the list
-            .filter(function(bus){
-                return (lineList.indexOf(bus.line.toString())>=0);
-            });
+        let data = JSON.parse(response.data).buses;
+        var busList = [];
+        for(var line of lineList){
+            if(Object.keys(data).indexOf(line)>=0)
+                busList = busList.concat(data[line]);
+        }
         this.logger.info(busList.length + ' results.');
         return this.identifySense(busList);
     }
@@ -54,10 +56,14 @@ export class BusDataAccess{
 
         this.logger.info('Searching for: '+codes);
         let response = this.requestBusData(); // Gets all bus data
-        let busList = JSON.parse(response.data) // and filters the list
-            .filter(function(bus){
-                return (codeList.indexOf(bus.order.toString())>=0);
-            });
+        let data = JSON.parse(response.data);
+        let buses = data.buses;
+        let map = data.map;
+        var busList = [];
+        for(var code of codeList){
+            let path = map[code];
+            busList.push(buses[path.line.toString()][path.position]);
+        }
         this.logger.info(busList.length + ' results.');
         return this.identifySense(busList);
     }
@@ -69,7 +75,7 @@ export class BusDataAccess{
     getAllLines(){
         "use strict";
         let response = this.requestBusData();
-        let busList = JSON.parse(response.data);
+        let busList = JSON.parse(response.data).buses;
         this.logger.info('Total: ' + busList.length + ' results.');
         return busList;
     }
@@ -95,6 +101,7 @@ export class BusDataAccess{
                     var nearestDistanceLng = Math.abs(bus.longitude - nearest.longitude);
                     var distanceLat = Math.abs(bus.latitude - itinerary.latitude);
                     var distanceLng = Math.abs(bus.longitude - itinerary.longitude);
+
                     // Compares the last nearest selected spot latitude and longitude difference with the bus
                     // and changes the reference case the current itinerary spot is nearest
                     if(nearestDistanceLat > distanceLat && nearestDistanceLng > distanceLng){
@@ -102,8 +109,8 @@ export class BusDataAccess{
                     }
                 }
             }
-            bus.returning = (nearest.sequential>0)? false:true; // identifies if the bus is returning or not
-            if(bus.returning){
+            let returning = !(nearest.sequential>0); // identifies if the bus is returning or not
+            if(returning){
                 var description = itineraries[bus.line][0].description.toUpperCase().split(' X ');
                 var tmp = description[0];
                 description[0] = description[1];
