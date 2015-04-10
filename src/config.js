@@ -1,8 +1,12 @@
+/**
+ * Application configuration
+ * You may use it to describe every global configuration data
+ */
 module.exports = {
     projectRoot: __dirname,
     projectName: 'Nodelicious',
     main: 'index',
-    log: 'runtime.log',
+    runtimeLog: 'runtime.log',
     server: {
         environment: {
             development: {
@@ -10,11 +14,12 @@ module.exports = {
                 "port": '8080'
             }
         },
-        "driver": 'express',
         log: 'server.log'
     },
     resources: [
         'resources/main'
     ],
-    providers: []
+    providers: [
+        'provider/rest'
+    ]
 };

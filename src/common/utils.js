@@ -1,27 +1,28 @@
-import {Logger} from './logger';
-
+/**
+ * Utilities class
+ */
 export class Utils{
 
-    static getConfig(){
+    /**
+     * Get the current Date string
+     * @returns {string}
+     */
+    static getTimestamp(){
         "use strict";
-        return require('../config');
+        return (new Date()).toLocaleString();
     }
 
-    static getLogger(filePath=null, flag=''){
+    /**
+     * Imports dynamically the index-th class in the module
+     * @param {String} moduleName Module to import the class
+     * @param {Integer} index Index of the class in the module
+     * @returns {*}
+     */
+    static dynamicClassImport(moduleName, index=0){
         "use strict";
-        if(!filePath) filePath = Utils.getConfig().log;
-        return new Logger(filePath, flag);
+        moduleName = require(moduleName);
+        let moduleClass = Object.keys(moduleName)[index];
+        return moduleName[moduleClass];
     }
 
-    static getRuntimeLogger(){
-        "use strict";
-        let runtimeLogPath = Utils.getConfig().log;
-        return Utils.getLogger(runtimeLogPath, 'RUNTIME');
-    }
-
-    static getServerLogger(){
-        "use strict";
-        let serverLogPath = Utils.getConfig().server.log;
-        return Utils.getLogger(serverLogPath, 'SERVER');
-    }
 }
