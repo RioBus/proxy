@@ -40,7 +40,7 @@ export class LogDataAccess{
      */
     getDataProviderLog(){
         "use strict";
-        let filePath = Factory.getConfig().server.dataServer.log;
+        let filePath = Factory.getConfig().server.dataProvider.log;
         this.logger.info('Reading log: '+filePath);
         return this.getFromFile(filePath);
     }
