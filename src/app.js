@@ -1,4 +1,3 @@
-import {ServiceFactory} from './service/factory';
 import {Factory} from './common/factory';
 import {Provider} from './core/provider';
 
