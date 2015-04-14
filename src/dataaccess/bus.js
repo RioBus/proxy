@@ -65,7 +65,8 @@ export class BusDataAccess{
             busList.push(buses[path.line.toString()][path.position]);
         }
         this.logger.info(busList.length + ' results.');
-        return this.identifySense(busList);
+
+        return (busList[0].line!=="sem linha")? this.identifySense(busList) : busList;
     }
 
     /**

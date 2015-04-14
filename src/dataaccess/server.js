@@ -36,6 +36,7 @@ export class ServerDataAccess{
         for(var d of data){
             // Converting external data do the application's pattern
             let bus = new Bus(d[2],d[1],d[5],d[6],d[3],d[4],d[0]);
+            if(bus.line==="") bus.line = "sem linha";
             let lineExists = Object.keys(dataList).indexOf(bus.line.toString());
 
             if(lineExists<0) dataList[bus.line.toString()] = [];
