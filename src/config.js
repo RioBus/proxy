@@ -23,17 +23,17 @@ module.exports = {
             path: {
                 bus: '/apiTransporte/apresentacao/rest/index.cfm/onibus',
                 itinerary: '/apiTransporte/Apresentacao/csv/gtfs/onibus/percursos/gtfs_linha$$-shapes.csv',
-                output: 'cachedData/'
+                output: '/tmp/riobus'
             },
             intervalTime: 15000,
             timeout: 20000,
             log: 'data-server.log',
-            dataPath: 'cachedData/riobus.busData.json'
+            dataPath: '/tmp/riobus/riobus.busData.json'
         },
         log: 'server.log',
         maxSearchItems: 10,
         numberOfLastLogLines: 40,
-        reportFilePath: '/reports'
+        reportFilePath: './reports/'
     },
     providers: [
         'provider/data',
