@@ -38,7 +38,9 @@ export class BusDataAccess{
                 busList = busList.concat(data[line]);
         }
         this.logger.info(busList.length + ' results.');
-        return this.identifySense(busList);
+
+        console.log(busList);
+        return (busList.length>0 && busList[0].line!=="sem linha")? this.identifySense(busList) : busList;
     }
 
     /**
@@ -62,11 +64,12 @@ export class BusDataAccess{
         var busList = [];
         for(var code of codeList){
             let path = map[code];
-            busList.push(buses[path.line.toString()][path.position]);
+            if(path)
+                busList.push(buses[path.line.toString()][path.position]);
         }
         this.logger.info(busList.length + ' results.');
 
-        return (busList[0].line!=="sem linha")? this.identifySense(busList) : busList;
+        return (busList.length>0 && busList[0].line!=="sem linha")? this.identifySense(busList) : busList;
     }
 
     /**
@@ -95,6 +98,9 @@ export class BusDataAccess{
                 itineraries[bus.line] = dataAccess.getItinerary(bus.line);
             }
             var nearest = null;
+
+            if(!itineraries[bus.line]) return data;
+
             for(var itinerary of itineraries[bus.line]){
                 if(!nearest) nearest = itinerary;
                 else{

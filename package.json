@@ -1,10 +1,10 @@
 {
   "name": "riobus-web",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Aplicacao do servidor que roda tanto o servidor http quanto o servidor REST do RioBus",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "karma start karma.conf.js",
     "start": "gulp build && gulp run",
     "build": "gulp build"
   },
@@ -21,11 +21,11 @@
     "onibus"
   ],
   "author": "Fred Souza <fredericoamsouza@gmail.com> (http://fmsouza.github.io)",
-  "license": "https://github.com/marco-jardim/riobus-web/blob/master/LICENSE",
+  "license": "http://github.com/RioBus/server/blob/master/LICENSE",
   "bugs": {
-    "url": "https://github.com/marco-jardim/riobus-web/issues"
+    "url": "http://github.com/RioBus/server/issues"
   },
-  "homepage": "https://github.com/marco-jardim/riobus-web",
+  "homepage": "http://github.com/RioBus/server",
   "dependencies": {
     "compression": "^1.4.1",
     "express": "^4.12.0",
@@ -41,6 +41,12 @@
     "gulp-shell": "^0.3.0",
     "gulp-sourcemaps": "^1.4.0",
     "gulp-uglify": "^1.1.0",
+    "karma": "^0.12.31",
+    "karma-browserify": "~3.0.2",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.5",
+    "browserify": "^9.0.3",
+    "babelify": "~5.0.3",
     "object.assign": "^1.0.3",
     "require-dir": "^0.1.0",
     "run-sequence": "^1.0.2",
