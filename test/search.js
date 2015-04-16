@@ -11,6 +11,7 @@ describe("Search tests", function() {
         let search3 = "486,     663, 123";
         let search4 = "9999";
         let search5 = "bdkjbaskd";
+        let search6 = "SV790";
 
         let service = ServiceFactory.getSearchService();
         let platformId = 0;
@@ -25,11 +26,13 @@ describe("Search tests", function() {
         assert(buses3.length > 0);
 
         let buses4 = service.parseQueryData(search4, platformId);
-        assert.equal(buses4.length, 0);
+        assert(buses4.length === 0);
 
         let buses5 = service.parseQueryData(search5, platformId);
-        assert.equal(buses5.length, 0);
+        assert(buses5.length === 0);
 
+        let buses6 = service.parseQueryData(search6, platformId);
+        assert(buses6.length > 0);
         done();
     });
 
@@ -39,6 +42,7 @@ describe("Search tests", function() {
         let search2 = "B31083, B31050";
         let search3 = "B31078,     B31153, B31137";
         let search4 = "B99999";
+        let search5 = "D30019";
 
         let service = ServiceFactory.getSearchService();
         let platformId = 0;
@@ -53,21 +57,22 @@ describe("Search tests", function() {
         assert(buses3.length > 0);
 
         let buses4 = service.parseQueryData(search4, platformId);
-        assert.equal(buses4.length, 0);
+        assert(buses4.length === 0);
 
+        let buses5 = service.parseQueryData(search5, platformId);
+        assert(buses5.length > 0);
         done();
     });
 
     it("tests search by without line", function(done) {
         "use strict";
-        let search = "B71071";
+        let search = "B75668";
 
         let service = ServiceFactory.getSearchService();
         let platformId = 0;
 
         let buses = service.parseQueryData(search, platformId);
         assert(buses.length > 0);
-
         done();
     });
 });

@@ -115,15 +115,19 @@ export class BusDataAccess{
                     }
                 }
             }
-            let returning = !(nearest.sequential>0); // identifies if the bus is returning or not
-            if(returning){
-                var description = itineraries[bus.line][0].description.toUpperCase().split(' X ');
-                var tmp = description[0];
-                description[0] = description[1];
-                description[1] = tmp;
-                bus.sense = description.join(' X ');
-            } else{
-                bus.sense = itineraries[bus.line][0].description;
+            if(!nearest){
+                bus.sense = "desconhecido";
+            } else {
+                let returning = !(nearest.sequential>0); // identifies if the bus is returning or not
+                if(returning){
+                    var description = itineraries[bus.line][0].description.toUpperCase().split(' X ');
+                    var tmp = description[0];
+                    description[0] = description[1];
+                    description[1] = tmp;
+                    bus.sense = description.join(' X ');
+                } else{
+                    bus.sense = itineraries[bus.line][0].description;
+                }
             }
         }
         return data;
