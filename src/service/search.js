@@ -8,15 +8,16 @@ export class SearchService{
 
     /**
      * Parse the request and retrieves the bus data
-     * @param {*} request
+     * @param {string} lines
+     * @param {number} platformId
      * @returns {Array}
      */
-    parseQueryData(request){
+    parseQueryData(lines, platformId){
         "use strict";
         let business = BusinessFactory.getSearchBusiness();
-        let buses = business.getDataByLine(request);
+        let buses = business.getDataByLine(lines, platformId);
         if(buses.length>0) return buses;
-        return business.getDataByCode(request);
+        return business.getDataByCode(lines, platformId);
     }
 
     /**

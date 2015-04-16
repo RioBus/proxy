@@ -18,13 +18,13 @@ export class SearchBusiness{
 
     /**
      * Search for the requested lines
-     * @param {*} request
+     * @param {string} lines
+     * @param {number} platformId
      * @returns {Array}
      */
-    getDataByLine(request){
+    getDataByLine(lines, platformId){
         "use strict";
-        let lines = request.params.lines;
-        let platform = this.getPlatformName(request.platformId);
+        let platform = this.getPlatformName(platformId);
         this.logger.info('Requesting line(s): '+lines);
 
         let analytics = Factory.getAnalytics();
@@ -41,11 +41,10 @@ export class SearchBusiness{
      * @param {*} request
      * @returns {Array}
      */
-    getDataByCode(request){
+    getDataByCode(lines, platformId){
         "use strict";
-        let lines = request.params.lines;
-        let platform = this.getPlatformName(request.platformId);
-        this.logger.info('Requesting line(s): '+lines);
+        let platform = this.getPlatformName(platformId);
+        this.logger.info('Requesting order(s): '+lines);
 
         let analytics = Factory.getAnalytics();
         let flag = Strings.analytics;

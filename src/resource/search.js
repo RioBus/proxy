@@ -26,7 +26,8 @@ export class SearchResource extends Resource{
      */
     get(request, response, next){
         let service = ServiceFactory.getSearchService();
-        let result = service.parseQueryData(request);
+        let params = request.params;
+        let result = service.parseQueryData(params.lines, params.platformId);
         response.jsonp(result);
     }
 }
