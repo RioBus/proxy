@@ -39,7 +39,6 @@ export class BusDataAccess{
         }
         this.logger.info(busList.length + ' results.');
 
-        console.log(busList);
         return (busList.length>0 && busList[0].line!=="sem linha")? this.identifySense(busList) : busList;
     }
 

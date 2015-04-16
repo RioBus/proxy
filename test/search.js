@@ -13,7 +13,7 @@ describe("Search tests", function() {
         let search5 = "bdkjbaskd";
 
         let service = ServiceFactory.getSearchService();
-        let platformId = 3;
+        let platformId = 0;
 
         let buses1 = service.parseQueryData(search1, platformId);
         assert(buses1.length > 0);
@@ -33,11 +33,35 @@ describe("Search tests", function() {
 
     it("tests search by code", function() {
         "use strict";
-        assert(true);
+        let search1 = "B31083";
+        let search2 = "B31083, B31050";
+        let search3 = "B31078,     B31153, B31137";
+        let search4 = "B99999";
+
+        let service = ServiceFactory.getSearchService();
+        let platformId = 0;
+
+        let buses1 = service.parseQueryData(search1, platformId);
+        assert(buses1.length > 0);
+
+        let buses2 = service.parseQueryData(search2, platformId);
+        assert(buses2.length > 0);
+
+        let buses3 = service.parseQueryData(search3, platformId);
+        assert(buses3.length > 0);
+
+        let buses4 = service.parseQueryData(search4, platformId);
+        assert.equal(buses4.length, 0);
     });
 
     it("tests search by without line", function() {
         "use strict";
-        assert(true);
+        let search = "B71071";
+
+        let service = ServiceFactory.getSearchService();
+        let platformId = 0;
+
+        let buses = service.parseQueryData(search, platformId);
+        assert(buses.length > 0);
     });
 });
