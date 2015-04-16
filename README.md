@@ -1,5 +1,5 @@
-RioBus
-======
+RioBus [![Build Status](https://travis-ci.org/RioBus/server.svg)](https://travis-ci.org/RioBus/server)
+======================================================================================================
 
 O RioBus é um sistema colaborativo de monitoramento de ônibus em tempo real, que utiliza a API aberta de dados de
 mobilidade urbana fornecida pela parceria entre a Prefeitura do Rio de Janeiro e a FETRANSPOR.
