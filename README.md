@@ -73,3 +73,12 @@ npm start
     gulp build && gulp run
 
 ```OBS.: Para a aplicação funcionar, ela precisa estar em um projeto cujos módulos Node.js estejam instalados.```
+
+Compatibilidade
+---------------
+
+Esta aplicação é compatível com as seguintes versões do nodejs:
+
+* 0.12.x
+* 0.11.x
+* 0.10.x

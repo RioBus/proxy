@@ -62,6 +62,7 @@ export class ServerDataAccess{
             data: data,
             timestamp: (new Date).toLocaleString()
         };
+        //let dir = dataPath.split('/').slice(0, -1).join('/'); // do something to grant the directory existance
         fs.writeFile(dataPath, JSON.stringify(data), function(error){
             if(error) throw error;
         });
