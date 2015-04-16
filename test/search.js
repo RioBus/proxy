@@ -6,6 +6,8 @@ describe("Search tests", function() {
 
     it("tests search by line", function(done) {
         "use strict";
+        this.timeout(10000); // increasing timeout
+
         let search1 = "485";
         let search2 = "663, 386";
         let search3 = "486,     663, 123";
@@ -38,6 +40,8 @@ describe("Search tests", function() {
 
     it("tests search by code", function(done) {
         "use strict";
+        this.timeout(10000); // increasing timeout
+
         let search1 = "B31083";
         let search2 = "B31083, B31050";
         let search3 = "B31078,     B31153, B31137";
