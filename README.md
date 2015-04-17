@@ -68,6 +68,10 @@ gulp run
 
     gulp clean && Executa o código compilado
 
+npm test
+
+    Invoca o Mocha para executar as rotinas de teste definidas em test/
+
 npm start
 
     gulp build && gulp run

@@ -70,13 +70,17 @@ describe("Search tests", function() {
 
     it("tests search by without line", function(done) {
         "use strict";
-        let search = "B75668";
+        let search1 = "B75668";
+        let search2 = "B75668, B31083"; // without and with line
 
         let service = ServiceFactory.getSearchService();
         let platformId = 0;
 
-        let buses = service.parseQueryData(search, platformId);
-        assert(buses.length > 0);
+        let buses1 = service.parseQueryData(search1, platformId);
+        assert(buses1.length > 0);
+
+        let buses2 = service.parseQueryData(search2, platformId);
+        assert(buses2.length > 0);
         done();
     });
 });
