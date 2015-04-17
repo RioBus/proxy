@@ -24,7 +24,7 @@ export class ItineraryResource extends Resource{
      */
     get(request, response, next){
         let service = ServiceFactory.getItineraryService();
-        let result = service.getItinerary(request);
+        let result = service.getItinerary(request.params.line);
         response.jsonp(result);
     }
 }

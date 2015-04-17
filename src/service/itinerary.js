@@ -11,8 +11,8 @@ export class ItineraryService{
      * @param {*} request
      * @returns {*}
      */
-    getItinerary(request){
+    getItinerary(line){
         let business = BusinessFactory.getItineraryBusiness();
-        return business.getItinerary(request.params.line);
+        return business.getItinerary(line);
     }
 }

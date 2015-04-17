@@ -63,12 +63,21 @@ export class BusDataAccess{
         var busList = [];
         for(var code of codeList){
             let path = map[code];
-            if(path)
-                busList.push(buses[path.line.toString()][path.position]);
+
+            if(path instanceof Object){
+                path.line = path.line.toString();
+                path.position = parseInt(path.position);
+                this.logger.info("Line: "+path.line);
+                this.logger.info("Position: "+path.position);
+                let bus = buses[path.line][path.position];
+                if(bus.line!=="indefinido"){
+                    bus = this.identifySense([bus])[0];
+                }
+                busList.push(bus);
+            }
         }
         this.logger.info(busList.length + ' results.');
-
-        return (busList.length>0 && busList[0].line!=="indefinido")? this.identifySense(busList) : busList;
+        return busList;
     }
 
     /**
