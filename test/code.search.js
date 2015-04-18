@@ -42,7 +42,7 @@ describe("Order search test", function() {
 
     it("should find buses without line and then for bus with line through [A50061, B31151] search", function(done){
         "use strict";
-        let orders = "A50061, B31151";
+        let orders = "A50061,B31151";
         let buses = service.parseQueryData(orders, platformId);
         assert.equal(buses.length, 2);
         assert.equal(buses[0].line, "indefinido");
@@ -52,7 +52,7 @@ describe("Order search test", function() {
 
     it("should find buses for [B31083, B31050] search", function(done){
         "use strict";
-        let orders = "B31083, B31050";
+        let orders = "B31083,B31050";
         let buses = service.parseQueryData(orders, platformId);
         assert.equal(buses.length, 2);
         done();
@@ -60,7 +60,7 @@ describe("Order search test", function() {
 
     it("should find buses for [B31151, B31116, B31098] search", function(done){
         "use strict";
-        let orders = "B31151,     B31116, B31098";
+        let orders = "B31151,B31116,B31098";
         let buses = service.parseQueryData(orders, platformId); console.log(buses.length);
         assert.equal(buses.length, 3);
         done();
