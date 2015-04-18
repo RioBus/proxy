@@ -15,10 +15,10 @@ describe("Itineraries search", function() {
 
     it("should get no itinerary for unknown line", function(done) {
         "use strict";
-        let line = "sajhsjak"
+        let line = "sajhsjak";
         let service = ServiceFactory.getItineraryService();
         let itinerary = service.getItinerary(line);
-        assert(itinerary.length === 0);
+        assert.equal(itinerary.length, 0);
         done();
     });
 });
