@@ -2,13 +2,12 @@ import {Factory} from '../src/common/factory';
 
 let assert = require('assert');
 
-describe("Reads the config file", function() {
+describe("Config file reader", function() {
 
-    it("accesses name", function(done) {
+    it("should get the project name", function(done) {
         "use strict";
         let config = Factory.getConfig();
         assert.equal(config.projectName, "Nodelicious");
-
         done();
     });
 });

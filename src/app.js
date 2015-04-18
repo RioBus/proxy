@@ -1,5 +1,6 @@
 import {Factory} from './common/factory';
-import {Provider} from './core/provider';
+import {Router} from './core/router';
+import {Server} from './core/server';
 
 /**
  * Main application process.
@@ -8,17 +9,23 @@ import {Provider} from './core/provider';
 export class App{
 
     /**
-     * Init providers
+     * Init application
      *
      * @method main
      * @param {Array} argv Process arg list
      * @return {void}
      */
     static main(argv){
+        "use strict";
         let config = Factory.getConfig();
 
-        // Registering providers
-        let provider = new Provider(config.providers);
-        provider.start(); // Starting providers in child forks
+        let logger = Factory.getRuntimeLogger();
+        logger.info('Starting the server...');
+
+        // Configuring the RESTful router to handle HTTP requests
+        let router = new Router();
+        router.registerResources(config.resources); // Registering resources to handle the URLs
+        let server = new Server(config.server.environment.development, router);
+        server.start(); // Starting RESTful application
     }
 }
