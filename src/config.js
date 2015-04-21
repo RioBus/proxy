@@ -6,7 +6,7 @@ module.exports = {
     projectRoot: __dirname,
     projectName: 'RioBus',
     main: 'index',
-    runtimeLog: 'runtime.log',
+    runtimeLog: '/tmp/riobus/runtime.log',
     server: {
         environment: {
             development: {
@@ -27,13 +27,13 @@ module.exports = {
             },
             intervalTime: 15000,
             timeout: 20000,
-            log: 'data-server.log',
-            dataPath: '/tmp/riobus/riobus.busData.json'
+            log: '/tmp/riobus/data-server.log',
+            dataPath: '/tmp/riobus/busData.json'
         },
-        log: 'server.log',
+        log: '/tmp/riobus/server.log',
         maxSearchItems: 10,
         numberOfLastLogLines: 40,
-        reportFilePath: './reports/'
+        reportFilePath: '/tmp/riobus/reports/'
     },
     providers: [
         'provider/data',
