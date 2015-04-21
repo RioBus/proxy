@@ -2,6 +2,7 @@ import {HttpRequest} from '../core/httprequest';
 import {Factory} from '../common/factory';
 import {Bus} from '../domain/bus';
 import {BusList} from '../domain/buslist';
+import {File} from '../core/file';
 
 /**
  * DataAccess responsible for managing data access to the data stored in the
@@ -62,10 +63,8 @@ export class ServerDataAccess{
             data: data,
             timestamp: (new Date).toLocaleString()
         };
-        //let dir = dataPath.split('/').slice(0, -1).join('/'); // do something to grant the directory existance
-        fs.writeFile(dataPath, JSON.stringify(data), function(error){
-            if(error) throw error;
-        });
+        let file = new File(dataPath);
+        file.write(JSON.stringify(data));
     }
 
     /**

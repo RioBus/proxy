@@ -1,6 +1,6 @@
 {
-  "name": "riobus-web",
-  "version": "2.1.0",
+  "name": "riobus-server",
+  "version": "2.1.1",
   "description": "RioBus server application",
   "main": "dist/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/marco-jardim/riobus-web"
+    "url": "https://github.com/riobus/server"
   },
   "keywords": [
     "riobus",
@@ -29,6 +29,7 @@
   "dependencies": {
     "compression": "^1.4.1",
     "express": "^4.12.0",
+    "mkdirp": "^0.5.0",
     "nodealytics": "0.0.6",
     "sync-request": "^2.0.1"
   },
