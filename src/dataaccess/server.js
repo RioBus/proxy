@@ -84,8 +84,14 @@ export class ServerDataAccess{
             json: true
         };
         let requestPath = 'http://' + config.host + config.path.bus;
-        let response = http.get(requestPath, options);
-        return this.respondRequest(response);
+        try{
+            let response = http.get(requestPath, options);
+            return this.respondRequest(response);
+        } catch(e){
+            this.logger.error(e);
+            e.type = 'error';
+            return e;
+        }
     }
 
     /**
