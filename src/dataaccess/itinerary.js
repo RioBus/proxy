@@ -45,7 +45,7 @@ export class ItineraryDataAccess{
      */
     retrieveData(line){
         let fs = require('fs');
-        let filePath = Factory.getConfig().server.dataProvider.path.output + line;
+        let filePath = Factory.getConfig().server.dataProvider.path.output + '/'+ line;
         this.logger.info('Searching for local data for line itinerary: '+line);
 
         try{
