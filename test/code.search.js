@@ -42,7 +42,7 @@ describe("Order search test", function() {
 
     it("should find buses without line and then for bus with line through [A50061, B31151] search", function(done){
         "use strict";
-        let orders = "A50061,B31151";
+        let orders = "A50061,B31040";
         let buses = service.parseQueryData(orders, platformId);
         assert.equal(buses.length, 2);
         assert.equal(buses[0].line, "indefinido");

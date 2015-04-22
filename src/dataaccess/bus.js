@@ -144,7 +144,7 @@ export class BusDataAccess{
 
     /**
      * Get the timestamp of the last update from data source
-     * @returns {timestamp|*|rsign.oauth.timestamp|raccsign.oauth.timestamp|rupsign.oauth.timestamp|Number}
+     * @returns {string}
      */
     requestLastUpdate(){
         "use strict";
@@ -160,7 +160,11 @@ export class BusDataAccess{
         "use strict";
         let dataPath = Factory.getConfig().server.dataProvider.dataPath;
         let fs = require('fs');
-        let data = fs.readFileSync(dataPath, 'utf8');
-        return JSON.parse(data);
+        try{
+            let data = fs.readFileSync(dataPath, 'utf8');
+            return JSON.parse(data);
+        } catch (e){
+            return {};
+        }
     }
 }

@@ -22,7 +22,7 @@ export class File{
         let self = this;
         this.mkdirp(this.directory, function(e1){
             if(e1) throw e1;
-            else self.driver.appendFile(self.directory + '/' + self.file, content, function(e2){
+            else self.driver.writeFile(self.directory + '/' + self.file, content, function(e2){
                 if(e2) throw e2;
             });
         });
