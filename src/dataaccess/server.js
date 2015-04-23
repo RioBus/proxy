@@ -60,14 +60,26 @@ export class ServerDataAccess{
      */
     storeData(data){
         "use strict";
-        let dataPath = Factory.getConfig().server.dataProvider.dataPath;
-        let fs = require('fs');
+        let config = Factory.getConfig().server.dataProvider;
         data = {
             data: data,
             timestamp: (new Date).toLocaleString()
         };
-        let file = new File(dataPath);
+        let file = new File(config.dataPath);
         file.write(JSON.stringify(data));
+
+        let mock = new File(config.mock);
+        try{
+            let size = mock.read();
+            if(size<=0){
+                this.logger.info("Filling mock file");
+                mock.write(JSON.stringify(data));
+            }
+        } catch(e){
+            this.logger.info("Creating mock file");
+            mock.write(JSON.stringify(data));
+        }
+
     }
 
     /**

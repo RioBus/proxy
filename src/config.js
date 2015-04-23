@@ -10,7 +10,7 @@ module.exports = {
     server: {
         environment: {
             development: {
-                port: '8082',
+                port: '8081',
                 ip: '127.0.0.1'
             },
             production: {
@@ -28,7 +28,8 @@ module.exports = {
             intervalTime: 15000,
             timeout: 20000,
             log: '/tmp/riobus/data-server.log',
-            dataPath: '/tmp/riobus/busData.json'
+            dataPath: '/tmp/riobus/busData.json',
+            mock: '/tmp/riobus/mock.busData.json'
         },
         log: '/tmp/riobus/server.log',
         maxSearchItems: 10,

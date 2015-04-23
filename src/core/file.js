@@ -27,4 +27,8 @@ export class File{
             });
         });
     }
+
+    read(){
+        return this.driver.readFileSync(this.directory + '/' + this.file, 'utf8');
+    }
 }
