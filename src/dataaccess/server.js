@@ -26,7 +26,10 @@ export class ServerDataAccess{
         "use strict";
         let body = this.requestFromServer(); // Requesting to the external server
 
-        if(body.type) return body;
+        if(body.type || !body.DATA){
+            this.logger.error("JSON response error.");
+            return body;
+        }
         let data = body.DATA;
         //let columns = body.COLUMNS;
         // columns: ['DATAHORA', 'ORDEM', 'LINHA', 'LATITUDE', 'LONGITUDE', 'VELOCIDADE', 'DIRECAO']
@@ -82,7 +85,7 @@ export class ServerDataAccess{
             },
             json: true
         };
-        let requestPath = 'http://' + config.host + config.path.bus;
+        let requestPath = 'http://'+ config.host + config.path.bus;
         try{
             let response = http.get(requestPath, options);
             return this.respondRequest(response);

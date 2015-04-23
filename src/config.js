@@ -10,7 +10,7 @@ module.exports = {
     server: {
         environment: {
             development: {
-                port: '8081',
+                port: '8082',
                 ip: '127.0.0.1'
             },
             production: {
