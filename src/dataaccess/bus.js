@@ -93,6 +93,22 @@ export class BusDataAccess{
     }
 
     /**
+     * Gets the sample bus data
+     * @returns {Array}
+     */
+    getSamples(){
+        "use strict";
+        let dataPath = Factory.getConfig().server.dataProvider.dataPath;
+        let fs = require('fs');
+        try{
+            let data = fs.readFileSync(dataPath, 'utf8');
+            return JSON.parse(data);
+        } catch (e){
+            return {};
+        }
+    }
+
+    /**
      * Identifies each bus sense and updates the list
      * @returns {Array}
      */

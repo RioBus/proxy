@@ -48,7 +48,8 @@ module.exports = {
         'resource/dataproviderlog',
         'resource/lastupdate',
         'resource/itinerary',
-        'resource/intervalreports'
+        'resource/intervalreports',
+        'resource/sample'
     ],
     analytics: {
         ua: 'UA-49628280-3',

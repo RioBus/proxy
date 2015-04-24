@@ -31,6 +31,16 @@ export class SearchService{
     }
 
     /**
+     * Retrieves all bus data
+     * @returns {Array}
+     */
+    getSampleData(){
+        "use strict";
+        let business = BusinessFactory.getSearchBusiness();
+        return business.getSampleData();
+    }
+
+    /**
      * Retrieves the last data update timestamp
      * @returns {String}
      */

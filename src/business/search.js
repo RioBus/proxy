@@ -67,6 +67,17 @@ export class SearchBusiness{
     }
 
     /**
+     * Search for sample lines
+     * @returns {Array}
+     */
+    getSampleData(){
+        "use strict";
+        this.logger.info('Requesting samples');
+        let dataAccess = DataAccessFactory.getBusDataAccess();
+        return dataAccess.getSamples();
+    }
+
+    /**
      * Gets the last data update timestamp
      * @returns {String}
      */
