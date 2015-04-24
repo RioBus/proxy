@@ -1,4 +1,5 @@
 import {Utils} from './utils';
+import {File} from '../core/file';
 
 /**
  * Better logging interface
@@ -11,9 +12,8 @@ export class Logger{
     constructor(fileName, flag){
         "use strict";
         this.driver = console;
-        this.filePath = fileName;
         this.flag = (flag)? flag:'RUNTIME';
-        this.fileStream = require('fs');
+        this.fileStream = new File(fileName);
     }
 
     /**
@@ -26,7 +26,7 @@ export class Logger{
         let time = Utils.getTimestamp();
         let information = '['+time+']['+level+'] '+message;
         this.driver.log(information);
-        this.fileStream.appendFile(this.filePath, information+'\n', function(e){ if(e) throw e; });
+        this.fileStream.append(information);
     }
 
     /**

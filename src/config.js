@@ -6,7 +6,7 @@ module.exports = {
     projectRoot: __dirname,
     projectName: 'Nodelicious',
     main: 'index',
-    runtimeLog: 'runtime.log',
+    runtimeLog: './runtime.log',
     server: {
         environment: {
             development: {
@@ -14,7 +14,7 @@ module.exports = {
                 "port": '8080'
             }
         },
-        log: 'server.log'
+        log: './server.log'
     },
     resources: [
         'resources/main'
