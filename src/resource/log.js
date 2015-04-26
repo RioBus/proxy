@@ -13,7 +13,7 @@ export class LogResource extends Resource{
      */
     route(){
         "use strict";
-        return '/log';
+        return '/log/:size';
     }
 
     /**
@@ -27,7 +27,7 @@ export class LogResource extends Resource{
         "use strict";
         let service = ServiceFactory.getLogService();
         response.set('Content-Type', 'text/plain');
-        response.send(service.getRuntimeLog());
+        response.send(service.getRuntimeLog(request.params.size));
     }
 
 }

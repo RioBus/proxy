@@ -18,39 +18,40 @@ export class LogDataAccess{
      * Retrieves the Runtime log data from the storage
      * @returns {Array}
      */
-    getRuntimeLog(){
+    getRuntimeLog(size){
         "use strict";
-        return this.getFromFile(Factory.getConfig().runtimeLog);
+        return this.getFromFile(Factory.getConfig().runtimeLog, size);
     }
 
     /**
      * Retrieves the Server log data from the storage
      * @returns {Array}
      */
-    getServerLog(){
+    getServerLog(size){
         "use strict";
-        return this.getFromFile(Factory.getConfig().server.log);
+        return this.getFromFile(Factory.getConfig().server.log, size);
     }
 
     /**
      * Retrieves the DataProvider log data from the storage
      * @returns {Array}
      */
-    getDataProviderLog(){
+    getDataProviderLog(size){
         "use strict";
-        return this.getFromFile(Factory.getConfig().server.dataProvider.log);
+        return this.getFromFile(Factory.getConfig().server.dataProvider.log, size);
     }
 
     /**
      * Helper method to access the storage and retrieve the data
      * @returns {Array}
      */
-    getFromFile(fileName){
+    getFromFile(fileName, size=null){
         "use strict";
         this.logger.info(Strings.dataaccess.log.reading+fileName);
+        this.logger.info(Strings.dataaccess.log.totalLines+size);
         try{
             let file = new File(fileName);
-            return file.read();
+            return file.read().split('\n').filter(function(n){ return n != "" }).reverse().slice(0, size);
         } catch(e){
             this.logger.error(e);
             return e;

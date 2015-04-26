@@ -13,7 +13,7 @@ export class ServerLogResource extends Resource{
      */
     route(){
         "use strict";
-        return '/log/server';
+        return '/log/server/:size';
     }
 
     /**
@@ -27,6 +27,6 @@ export class ServerLogResource extends Resource{
         "use strict";
         let service = ServiceFactory.getLogService();
         response.set('Content-Type', 'text/plain');
-        response.send(service.getServerLog());
+        response.send(service.getServerLog(request.params.size));
     }
 }

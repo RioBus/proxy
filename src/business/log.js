@@ -10,31 +10,31 @@ export class LogBusiness{
 
     /**
      * Returns the runtime logs
-     * @returns {Array}
+     * @returns {String}
      */
-    getRuntimeLog(){
+    getRuntimeLog(size){
         "use strict";
         let dataAccess = DataAccessFactory.getLogDataAccess();
-        return dataAccess.getRuntimeLog();
+        return dataAccess.getRuntimeLog(size).join('\n');
     }
 
     /**
      * Returns the server logs
-     * @returns {Array}
+     * @returns {String}
      */
-    getServerLog(){
+    getServerLog(size){
         "use strict";
         let dataAccess = DataAccessFactory.getLogDataAccess();
-        return dataAccess.getServerLog();
+        return dataAccess.getServerLog(size).join('\n');
     }
 
     /**
      * Returns the DataProvider logs
-     * @returns {Array}
+     * @returns {String}
      */
-    getDataProviderLog(){
+    getDataProviderLog(size){
         "use strict";
         let dataAccess = DataAccessFactory.getLogDataAccess();
-        return dataAccess.getDataProviderLog();
+        return dataAccess.getDataProviderLog(size).join('\n');
     }
 }

@@ -8,31 +8,31 @@ export class LogService{
 
     /**
      * Gets Runtime log
-     * @returns {Array}
+     * @returns {String}
      */
-    getRuntimeLog(){
+    getRuntimeLog(size){
         "use strict";
         let business = BusinessFactory.getLogBusiness();
-        return business.getRuntimeLog();
+        return business.getRuntimeLog(size);
     }
 
     /**
      * Gets Server log
-     * @returns {Array}
+     * @returns {String}
      */
-    getServerLog(){
+    getServerLog(size){
         "use strict";
         let business = BusinessFactory.getLogBusiness();
-        return business.getServerLog();
+        return business.getServerLog(size);
     }
 
     /**
      * Gets DataProvider log
-     * @returns {Array}
+     * @returns {String}
      */
-    getDataProviderLog(){
+    getDataProviderLog(size){
         "use strict";
         let business = BusinessFactory.getLogBusiness();
-        return business.getDataProviderLog();
+        return business.getDataProviderLog(size);
     }
 }

@@ -56,7 +56,8 @@ module.exports = {
             stored: 'Data stored successfully.'
         },
         log: {
-            reading: 'Reading log: '
+            reading: 'Reading log: ',
+            totalLines: 'Total lines: '
         },
         server: {
             jsonError: 'JSON response error.',

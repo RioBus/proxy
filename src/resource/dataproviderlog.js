@@ -13,7 +13,7 @@ export class DataProviderLogResource extends Resource{
      */
     route(){
         "use strict";
-        return '/log/dataprovider';
+        return '/log/dataprovider/:size';
     }
 
     /**
@@ -27,6 +27,6 @@ export class DataProviderLogResource extends Resource{
         "use strict";
         let service = ServiceFactory.getLogService();
         response.set('Content-Type', 'text/plain');
-        response.send(service.getDataProviderLog());
+        response.send(service.getDataProviderLog(request.params.size));
     }
 }
