@@ -4,6 +4,8 @@ import {ServiceFactory} from '../service/factory';
 import {Router} from '../core/router';
 import {Server} from '../core/server';
 
+let strings = Factory.getStrings();
+
 /**
  * RestProvider process bootstrapper
  *
@@ -30,7 +32,7 @@ export class RestProvider{
         analytics.trackPage('REST', '/en/serverside/test', function(error, response){});
 
         let logger = Factory.getRuntimeLogger();
-        logger.info('Starting the server...');
+        logger.info(strings.provider.rest.start);
 
         // Configuring the RESTful router to handle HTTP requests
         let router = new Router();

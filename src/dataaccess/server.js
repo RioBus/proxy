@@ -4,6 +4,8 @@ import {Bus} from '../domain/bus';
 import {BusList} from '../domain/buslist';
 import {File} from '../core/file';
 
+let Strings = Factory.getStrings();
+
 /**
  * DataAccess responsible for managing data access to the data stored in the
  * external server.
@@ -27,7 +29,7 @@ export class ServerDataAccess{
         let body = this.requestFromServer(); // Requesting to the external server
 
         if(body.type || !body.DATA){
-            this.logger.error("JSON response error.");
+            this.logger.error(Strings.dataaccess.server.jsonError);
             return body;
         }
         let data = body.DATA;
@@ -40,7 +42,7 @@ export class ServerDataAccess{
         for(var d of data){
             // Converting external data do the application's pattern
             let bus = new Bus(d[2],d[1],d[5],d[6],d[3],d[4],d[0]);
-            if(bus.line==="") bus.line = "indefinido";
+            if(bus.line==="") bus.line = Strings.dataaccess.bus.blankLine;
             let lineExists = Object.keys(dataList).indexOf(bus.line.toString());
 
             if(lineExists<0) dataList[bus.line.toString()] = [];
@@ -72,11 +74,11 @@ export class ServerDataAccess{
         try{
             let size = mock.read();
             if(size<=0){
-                this.logger.info("Filling mock file");
+                this.logger.info(Strings.dataaccess.server.mock.fill);
                 mock.write(JSON.stringify(data));
             }
         } catch(e){
-            this.logger.info("Creating mock file");
+            this.logger.info(Strings.dataaccess.server.mock.create);
             mock.write(JSON.stringify(data));
         }
 
@@ -103,7 +105,7 @@ export class ServerDataAccess{
             return this.respondRequest(response);
         } catch(e){
             this.logger.error(e);
-            e.type = 'error';
+            e.type = Strings.keyword.error;
             return e;
         }
     }
@@ -117,20 +119,20 @@ export class ServerDataAccess{
         "use strict";
         switch(response.statusCode){
             case 200:
-                this.logger.info('(200) Request OK.');
+                this.logger.info(Strings.dataaccess.all.request.ok);
                 return JSON.parse(response.getBody());
             case 302:
-                this.logger.error('(302) Server moved temporarily.');
-                return {type: 'error', code: response.statusCode};
+                this.logger.alert(Strings.dataaccess.all.request.e302);
+                return {type: Strings.keyword.error, code: response.statusCode};
             case 404:
-                this.logger.error('(404) Not found.');
-                return {type: 'error', code: response.statusCode};
+                this.logger.alert(Strings.dataaccess.all.request.e404);
+                return {type: Strings.keyword.error, code: response.statusCode};
             case 503:
-                this.logger.error('(503) Server unavailable.');
-                return {type: 'error', code: response.statusCode};
+                this.logger.alert(Strings.dataaccess.all.request.e503);
+                return {type: Strings.keyword.error, code: response.statusCode};
             default:
-                this.logger.error('('+response.statusCode+') An error ocurred.');
-                return {type: 'error', code: response.statusCode};
+                this.logger.error('('+response.statusCode+') '+Strings.dataaccess.all.request.default);
+                return {type: Strings.keyword.error, code: response.statusCode};
         }
     }
 }

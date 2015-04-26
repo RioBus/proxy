@@ -25,7 +25,7 @@ export class SearchBusiness{
     getDataByLine(lines, platformId){
         "use strict";
         let platform = this.getPlatformName(platformId);
-        this.logger.info('Requesting line(s): '+lines);
+        this.logger.info(Strings.business.search.request.lines+lines);
 
         let analytics = Factory.getAnalytics();
         let flag = Strings.analytics;
@@ -38,21 +38,22 @@ export class SearchBusiness{
 
     /**
      * Search for the requested cars
-     * @param {*} request
+     * @param {string} orders
+     * @param {number} platformId
      * @returns {Array}
      */
-    getDataByCode(lines, platformId){
+    getDataByCode(orders, platformId){
         "use strict";
         let platform = this.getPlatformName(platformId);
-        this.logger.info('Requesting order(s): '+lines);
+        this.logger.info(Strings.business.search.request.orders+orders);
 
         let analytics = Factory.getAnalytics();
         let flag = Strings.analytics;
         analytics.trackEvent(flag.event.restHit, flag.label.rest, platform, function(error, response){});
-        analytics.trackEvent(flag.event.restHit, flag.label.busCode, lines, function(error, response){});
+        analytics.trackEvent(flag.event.restHit, flag.label.busCode, orders, function(error, response){});
 
         let dataAccess = DataAccessFactory.getBusDataAccess();
-        return dataAccess.getByCode(lines);
+        return dataAccess.getByCode(orders);
     }
 
     /**
@@ -61,7 +62,7 @@ export class SearchBusiness{
      */
     getAllData(){
         "use strict";
-        this.logger.info('Requesting all lines');
+        this.logger.info(Strings.business.search.request.all);
         let dataAccess = DataAccessFactory.getBusDataAccess();
         return dataAccess.getAllLines();
     }
@@ -72,7 +73,7 @@ export class SearchBusiness{
      */
     getSampleData(){
         "use strict";
-        this.logger.info('Requesting samples');
+        this.logger.info(Strings.business.search.request.samples);
         let dataAccess = DataAccessFactory.getBusDataAccess();
         return dataAccess.getSamples();
     }
@@ -94,7 +95,7 @@ export class SearchBusiness{
      */
     getPlatformName(platform){
         "use strict";
-        let string = Strings.business.main.platform;
+        let string = Strings.business.search.platform;
         switch(platform){
             case 1: return string.web;
             case 2: return string.mobile;

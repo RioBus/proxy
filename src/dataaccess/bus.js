@@ -1,6 +1,9 @@
 import {HttpRequest} from '../core/httprequest';
 import {Factory} from '../common/factory';
 import {ItineraryDataAccess} from './itinerary';
+import {File} from '../core/file';
+
+let Strings = Factory.getStrings();
 
 /**
  * Bus data access layer
@@ -14,6 +17,8 @@ export class BusDataAccess{
     constructor(){
         "use strict";
         this.logger = Factory.getRuntimeLogger();
+        this.blankLine = Strings.dataaccess.bus.blankLine;
+        this.blankSense = Strings.dataaccess.bus.blankSense;
     }
 
     /**
@@ -29,7 +34,7 @@ export class BusDataAccess{
         // Makes sure it won't search for more lines than the limit
         if(lineList.length>lineSearchLimit) lineList.splice(lineSearchLimit, lines.length-lineSearchLimit);
 
-        this.logger.info('Searching for: '+lines);
+        this.logger.info(Strings.dataaccess.bus.searching+lines);
         let response = this.requestBusData(); // Gets all bus data
         let data = JSON.parse(response.data).buses;
         var busList = [];
@@ -37,9 +42,9 @@ export class BusDataAccess{
             if(Object.keys(data).indexOf(line)>=0)
                 busList = busList.concat(data[line]);
         }
-        this.logger.info(busList.length + ' results.');
+        this.logger.info(busList.length + Strings.dataaccess.bus.results);
 
-        return (busList.length>0 && busList[0].line!=="sem linha")? this.identifySense(busList) : busList;
+        return (busList.length>0 && busList[0].line!==this.blankLine)? this.identifySense(busList) : busList;
     }
 
     /**
@@ -55,7 +60,7 @@ export class BusDataAccess{
         // Makes sure it won't search for more lines than the limit
         if(codeList.length>codeSearchLimit) codeList.splice(codeSearchLimit, codes.length-codeSearchLimit);
 
-        this.logger.info('Searching for: '+codes);
+        this.logger.info(Strings.dataaccess.bus.searching+codes);
         let response = this.requestBusData(); // Gets all bus data
         let data = JSON.parse(response.data);
         let buses = data.buses;
@@ -67,16 +72,14 @@ export class BusDataAccess{
             if(path instanceof Object){
                 path.line = path.line.toString();
                 path.position = parseInt(path.position);
-                this.logger.info("Line: "+path.line);
-                this.logger.info("Position: "+path.position);
                 let bus = buses[path.line][path.position];
-                if(bus.line!=="indefinido"){
+                if(bus.line!==this.blankLine){
                     bus = this.identifySense([bus])[0];
                 }
                 busList.push(bus);
             }
         }
-        this.logger.info(busList.length + ' results.');
+        this.logger.info(busList.length + Strings.dataaccess.bus.results);
         return busList;
     }
 
@@ -88,7 +91,7 @@ export class BusDataAccess{
         "use strict";
         let response = this.requestBusData();
         let busList = JSON.parse(response.data);
-        this.logger.info('Total: ' + busList.length + ' results.');
+        this.logger.info(Strings.dataaccess.bus.total + busList.length + Strings.dataaccess.bus.results);
         return busList.buses;
     }
 
@@ -98,13 +101,12 @@ export class BusDataAccess{
      */
     getSamples(){
         "use strict";
-        let dataPath = Factory.getConfig().server.dataProvider.dataPath;
-        let fs = require('fs');
         try{
-            let data = fs.readFileSync(dataPath, 'utf8');
-            return JSON.parse(data);
+            let dataPath = Factory.getConfig().server.dataProvider.dataPath;
+            let file = new File(dataPath);
+            return JSON.parse(file.read());
         } catch (e){
-            return {};
+            return [];
         }
     }
 
@@ -141,7 +143,7 @@ export class BusDataAccess{
                 }
             }
             if(!nearest){
-                bus.sense = "desconhecido";
+                bus.sense = this.blankSense;
             } else {
                 let returning = !(nearest.sequential>0); // identifies if the bus is returning or not
                 if(returning){
@@ -170,17 +172,16 @@ export class BusDataAccess{
 
     /**
      * Gets the data from the data storage
-     * @returns {Object}
+     * @returns {Array}
      */
     requestBusData(){
         "use strict";
-        let dataPath = Factory.getConfig().server.dataProvider.dataPath;
-        let fs = require('fs');
         try{
-            let data = fs.readFileSync(dataPath, 'utf8');
-            return JSON.parse(data);
+            let dataPath = Factory.getConfig().server.dataProvider.dataPath;
+            let file = new File(dataPath);
+            return JSON.parse(file.read());
         } catch (e){
-            return {};
+            return [];
         }
     }
 }

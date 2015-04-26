@@ -1,6 +1,7 @@
 import {Factory} from '../common/factory';
 import {ServiceFactory} from '../service/factory';
 
+let strings = Factory.getStrings();
 /**
  * DataProvider process bootstrapper
  *
@@ -20,7 +21,7 @@ export class DataProvider{
     static main(argv){
         "use strict";
         let logger = Factory.getDataProviderLogger();
-        logger.info("Starting data provider...");
+        logger.info(strings.provider.data.start);
 
         let service = ServiceFactory.getServerService();
         service.storeAllData();

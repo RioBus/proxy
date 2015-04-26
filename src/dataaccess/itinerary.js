@@ -1,6 +1,9 @@
 import {HttpRequest} from '../core/httprequest';
 import {Itinerary} from '../domain/itinerary';
 import {Factory} from '../common/factory';
+import {File} from '../core/file';
+
+let Strings = Factory.getStrings();
 
 /**
  * DataAccess referred to Itinerary stored data
@@ -44,13 +47,12 @@ export class ItineraryDataAccess{
      * @returns {*}
      */
     retrieveData(line){
-        let fs = require('fs');
         let filePath = Factory.getConfig().server.dataProvider.path.output + '/'+ line;
-        this.logger.info('Searching for local data for line itinerary: '+line);
+        this.logger.info(Strings.dataaccess.itinerary.searching+line);
 
         try{
-            let data = fs.readFileSync(filePath, 'utf8');
-            return JSON.parse(data);
+            let file = new File(filePath);
+            return JSON.parse(file.read());
         } catch(e){
             let data = this.requestFromServer(line);
             this.storeData(filePath, data);
@@ -75,7 +77,7 @@ export class ItineraryDataAccess{
             json: false
         };
         let requestPath = 'http://' + config.host + config.path.itinerary.replace("$$", line);
-        this.logger.info("Requesting to: "+requestPath);
+        this.logger.info(Strings.dataaccess.itinerary.searching+requestPath);
         let response = http.get(requestPath, options);
         return this.respondRequest(response);
     }
@@ -86,19 +88,14 @@ export class ItineraryDataAccess{
      * @param {Array} data Itinerary list to be saved
      * */
     storeData(filePath, data){
-        let self = this;
-        let fs = require('fs');
-        let buffer = new Buffer(JSON.stringify(data));
-        fs.open(filePath, 'w+', function(e, filePath) {
-            if(e) throw e;
-
-            fs.write(filePath, buffer, 0, buffer.length, null, function(error) {
-                if (error) throw error;
-                fs.close(filePath, function(){
-                    self.logger.info('Data stored successfully.');
-                });
-            });
-        });
+        try{
+            let file = new File(filePath);
+            file.write(JSON.stringify(data));
+            this.logger.info(Strings.dataaccess.itinerary.stored);
+        } catch(e){
+            this.logger.error(e);
+            throw e;
+        }
     }
 
     /**
@@ -119,16 +116,16 @@ export class ItineraryDataAccess{
                 }
                 return result;
             case 302:
-                this.logger.alert('(302) Server moved temporarily.');
+                this.logger.alert(Strings.dataaccess.all.request.e302);
                 return [];
             case 404:
-                this.logger.alert('(404) Not found.');
+                this.logger.alert(Strings.dataaccess.all.request.e404);
                 return [];
             case 503:
-                this.logger.alert('(503) Server unavailable.');
+                this.logger.alert(Strings.dataaccess.all.request.e503);
                 return [];
             default:
-                this.logger.alert('('+response.statusCode+') An error ocurred.');
+                this.logger.alert('('+response.statusCode+') '+Strings.dataaccess.all.request.default);
                 return [];
         }
     }

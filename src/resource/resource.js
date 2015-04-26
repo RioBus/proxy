@@ -1,3 +1,6 @@
+import {Factory} from '../common/factory';
+let Strings = Factory.getStrings();
+
 /**
  * Resource type superclass
  *
@@ -22,7 +25,10 @@ export class Resource{
      * @param next
      */
     get(request, response, next) {
-        response.json({type: "error", message: "Operation not implemented"});
+        response.json({
+            type: Strings.keyword.error,
+            message: Strings.resource.parent.response.error.message
+        });
     }
 
     /**
@@ -33,7 +39,10 @@ export class Resource{
      * @param next
      */
     post(request, response, next) {
-        response.json({type: "error", message: "Operation not implemented"});
+        response.json({
+            type: Strings.keyword.error,
+            message: Strings.resource.parent.response.error.message
+        });
     }
 
     /**
@@ -44,7 +53,10 @@ export class Resource{
      * @param next
      */
     put(request, response, next) {
-        response.json({type: "error", message: "Operation not implemented"});
+        response.json({
+            type: Strings.keyword.error,
+            message: Strings.resource.parent.response.error.message
+        });
     }
 
     /**
@@ -55,6 +67,9 @@ export class Resource{
      * @param next
      */
     delete(request, response, next) {
-        response.json({type: "error", message: "Operation not implemented"});
+        response.json({
+            type: Strings.keyword.error,
+            message: Strings.resource.parent.response.error.message
+        });
     }
 }

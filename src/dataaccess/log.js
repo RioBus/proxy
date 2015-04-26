@@ -1,5 +1,7 @@
 import {Factory} from '../common/factory';
+import {File} from '../core/file';
 
+let Strings = Factory.getStrings();
 /**
  * DataAccess referred to the Logs
  * @class LogDataAccess
@@ -18,9 +20,7 @@ export class LogDataAccess{
      */
     getRuntimeLog(){
         "use strict";
-        let filePath = Factory.getConfig().runtimeLog;
-        this.logger.info('Reading log: '+filePath);
-        return this.getFromFile(filePath);
+        return this.getFromFile(Factory.getConfig().runtimeLog);
     }
 
     /**
@@ -29,9 +29,7 @@ export class LogDataAccess{
      */
     getServerLog(){
         "use strict";
-        let filePath = Factory.getConfig().server.log;
-        this.logger.info('Reading log: '+filePath);
-        return this.getFromFile(filePath);
+        return this.getFromFile(Factory.getConfig().server.log);
     }
 
     /**
@@ -40,9 +38,7 @@ export class LogDataAccess{
      */
     getDataProviderLog(){
         "use strict";
-        let filePath = Factory.getConfig().server.dataProvider.log;
-        this.logger.info('Reading log: '+filePath);
-        return this.getFromFile(filePath);
+        return this.getFromFile(Factory.getConfig().server.dataProvider.log);
     }
 
     /**
@@ -51,7 +47,13 @@ export class LogDataAccess{
      */
     getFromFile(fileName){
         "use strict";
-        let fs = require('fs');
-        return fs.readFileSync(fileName, "utf8");
+        this.logger.info(Strings.dataaccess.log.reading+fileName);
+        try{
+            let file = new File(fileName);
+            return file.read();
+        } catch(e){
+            this.logger.error(e);
+            return e;
+        }
     }
 }

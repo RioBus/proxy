@@ -1,6 +1,8 @@
 import {Utils} from '../common/utils';
 import {Factory} from '../common/factory';
 
+let Strings = Factory.getStrings();
+
 /**
  * Class Router represents the RESTful router, which
  * handles all the HTTP routes configured in the application.
@@ -35,21 +37,21 @@ export class Router{
             case 'post':
                 this.driver.post(route, function(request, response, next){
                     "use strict";
-                    logger.info('Serving route '+request.url+' (POST)');
+                    logger.info(Strings.core.router.serving+request.url+' (POST)');
                     callback(request, response, next);
                 });
                 break;
             case 'put':
                 this.driver.put(route, function(request, response, next){
                     "use strict";
-                    logger.info('Serving route '+request.url+' (PUT)');
+                    logger.info(Strings.core.router.serving+request.url+' (PUT)');
                     callback(request, response, next);
                 });
                 break;
             case 'delete':
                 this.driver.delete(route, function(request, response, next){
                     "use strict";
-                    logger.info('Serving route '+request.url+' (DELETE)');
+                    logger.info(Strings.core.router.serving+request.url+' (DELETE)');
                     callback(request, response, next);
                 });
                 break;
@@ -57,7 +59,7 @@ export class Router{
             default:
                 this.driver.get(route, function(request, response, next){
                     "use strict";
-                    logger.info('Serving route '+request.url+' (GET)');
+                    logger.info(Strings.core.router.serving+request.url+' (GET)');
                     callback(request, response, next);
                 });
                 break;
@@ -79,7 +81,7 @@ export class Router{
             this.route('post', route, resource.post);
             this.route('put', route, resource.put);
             this.route('delete', route, resource.delete);
-            this.logger.info('Resource registered: '+moduleName);
+            this.logger.info(Strings.core.router.registered+moduleName);
         }
     }
 
@@ -95,7 +97,7 @@ export class Router{
         return this.driver.listen(port, ip, function(){
             "use strict";
             if(callback!==null) callback();
-            self.logger.info('Server started in http://'+ip+':'+port);
+            self.logger.info(Strings.core.router.start+ip+':'+port);
         });
     }
 }
