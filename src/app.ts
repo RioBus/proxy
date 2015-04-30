@@ -26,7 +26,10 @@ class Application{
         // Configuring the RESTful router to handle HTTP requests
         var router:Router = new Router();
         router.registerResources(Config.resources); // Registering resources to handle the URLs
-        var environment:any = Config.environment.development;
+        
+        var environment:any = (argv.indexOf("--production")>-1)?
+         Config.environment.production : Config.environment.development;
+         
         router.start(environment.ip, environment.port); // Starting RESTful application
     }
 }

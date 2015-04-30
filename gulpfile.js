@@ -20,6 +20,7 @@ gulp.task("release", ["typescript"], function (){
 });
 
 gulp.task('run', shell.task('node build/index.js'));
+gulp.task('run:release', shell.task('node dist/index.js --production'));
  
 gulp.task("build:dev", ["compile"]);
 gulp.task("build:release", ["release"]); 

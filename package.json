@@ -4,8 +4,9 @@
   "description": "Just a simple HTTP server written in Typescript",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha --compilers js:mocha-traceur test/",
+    "test": "mocha --compilers ts:typescript-require test/",
     "start": "gulp && gulp run",
+    "deploy": "gulp build:dev && gulp build:release && gulp run:release",
     "build": "gulp build:dev",
     "release": "gulp build:release"
   },
@@ -39,6 +40,7 @@
     "gulp-shell": "^0.4.1",
     "gulp-typescript": "^2.6.0",
     "gulp-uglify": "^1.1.0",
-    "mocha": "^2.2.4"
+    "mocha": "^2.2.4",
+    "typescript-require": "^0.2.8"
   }
 }
