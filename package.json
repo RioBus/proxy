@@ -5,10 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "mocha --compilers ts:typescript-require test/",
-    "start": "gulp && gulp run",
-    "deploy": "gulp build:dev && gulp build:release && gulp run:release",
-    "build": "gulp build:dev",
-    "release": "gulp build:release"
+    "build": "gulp build",
+    "release": "gulp release",
+    "start": "gulp build && gulp run",
+    "deploy": "gulp build && gulp release && gulp run-release"
   },
   "repository": {
     "type": "git",

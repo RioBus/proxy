@@ -13,15 +13,14 @@ gulp.task("compile", function () {
         .pipe(gulp.dest("./build"));
 });
 
-gulp.task("release", ["typescript"], function (){
+gulp.task("release", ["compile"], function (){
     gulp.src(["./build/**/*.js"])
     .pipe(uglify())
     .pipe(gulp.dest("./dist/")); 
 });
 
 gulp.task('run', shell.task('node build/index.js'));
-gulp.task('run:release', shell.task('node dist/index.js --production'));
- 
-gulp.task("build:dev", ["compile"]);
-gulp.task("build:release", ["release"]); 
-gulp.task("default", ["compile"]);
+gulp.task('run-release', shell.task('node dist/index.js --production'));
+
+gulp.task("build", ["compile"]); 
+gulp.task("default", ["build"]);
