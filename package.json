@@ -1,10 +1,10 @@
 {
   "name": "riobus-server",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "RioBus server application",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha --compilers js:mocha-traceur test/",
+    "test": "mocha --timeout 3000 --compilers js:mocha-traceur test/",
     "start": "gulp build && gulp run",
     "build": "gulp build"
   },

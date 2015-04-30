@@ -60,7 +60,6 @@ describe("Order search test", function() {
 
     it("should find buses for [B31151, B31116, B31098] search", function(done){
         "use strict";
-        this.timeout(10000);
         let orders = "B31151,B31116,B31098";
         let buses = service.parseQueryData(orders, platformId);
         assert.equal(buses.length, 3);
