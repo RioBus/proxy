@@ -19,6 +19,11 @@ module.exports = {
             }
         },
         dataProvider: {
+            host: 'dadosabertos.rio.rj.gov.br',
+            path: {
+                itinerary: '/apiTransporte/Apresentacao/csv/gtfs/onibus/percursos/gtfs_linha$$-shapes.csv',
+                output: '/tmp/riobus'
+            },
             log: '/tmp/riobus/data-server.log',
             dataPath: '/tmp/riobus/busData.json',
             mock: '/tmp/riobus/mock.busData.json'

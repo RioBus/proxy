@@ -23,9 +23,9 @@ describe("Order search test", function() {
         done();
     });
 
-    it("should find a bus without line for A41170 search", function(done){
+    it("should find a bus without line for A41253 search", function(done){
         "use strict";
-        let order = "A41170";
+        let order = "A41253";
         let bus = service.parseQueryData(order, platformId);
         assert.equal(bus.length, 1);
         assert.equal(bus[0].line, "indefinido");
@@ -40,9 +40,9 @@ describe("Order search test", function() {
         done();
     });
 
-    it("should find buses without line and then for bus with line through [B44561, D30019] search", function(done){
+    it("should find buses without line and then for bus with line through [A41253, D30019] search", function(done){
         "use strict";
-        let orders = "B44561,D30019";
+        let orders = "A41253,D30019";
         let buses = service.parseQueryData(orders, platformId);
         assert.equal(buses.length, 2);
         assert.equal(buses[0].line, "indefinido");

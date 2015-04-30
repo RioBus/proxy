@@ -11,7 +11,7 @@ describe("Line search test", function() {
         "use strict";
         let line = "485";
         let buses = service.parseQueryData(line, platformId);
-        assert.equal(buses.length, 13);
+        assert.equal(buses.length, 18);
         done();
     });
 
@@ -27,7 +27,7 @@ describe("Line search test", function() {
         "use strict";
         let lines = "663,386";
         let buses = service.parseQueryData(lines, platformId);
-        assert.equal(buses.length, 25);
+        assert.equal(buses.length, 20);
         done();
     });
 
@@ -35,7 +35,7 @@ describe("Line search test", function() {
         "use strict";
         let lines = "486,663,123";
         let buses = service.parseQueryData(lines, platformId);
-        assert.equal(buses.length, 21);
+        assert.equal(buses.length, 18);
         done();
     });
 
