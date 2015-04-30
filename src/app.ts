@@ -1,20 +1,33 @@
-/// <reference path="../defs/express/express.d.ts" />
-var Express = require("express");
+/// <reference path="../defs/node/node.d.ts" />
+import Factory = require("./common/factory");
+import Router = require("./core/router");
+import Config = require("./config");
 
+/**
+ * Main application process.
+ * @class App
+ */
 class Application{
-	
-	static main(argv: string[]){
-		var server = Express();
-		server.get("/test", function(req, res, next){
-			console.log("Acessei aqui");
-			res.jsonp({greeting: "hello world"});
-		});
-		
-        server.listen(8081, "127.0.0.1", function(){
-            "use strict";
-            console.log('Server started in http://127.0.0.1:8081');
-        });
-	}
+
+    /**
+     * Init application
+     *
+     * @method main
+     * @param {Array} argv Process arg list
+     * @return {void}
+     */
+    static main(argv){
+        "use strict";
+
+        var logger = Factory.getRuntimeLogger();
+        logger.info('Starting the server...');
+
+        // Configuring the RESTful router to handle HTTP requests
+        var router = new Router();
+        router.registerResources(Config.resources); // Registering resources to handle the URLs
+        var environment = Config.environment.development;
+        router.start(environment.ip, environment.port); // Starting RESTful application
+    }
 }
 
 export = Application;
