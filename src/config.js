@@ -14,19 +14,11 @@ module.exports = {
                 ip: '127.0.0.1'
             },
             production: {
-                port: '80',
-                ip: '66.228.60.200'
+                port: '8081',
+                ip: '0.0.0.0'
             }
         },
         dataProvider: {
-            host: 'dadosabertos.rio.rj.gov.br',
-            path: {
-                bus: '/apiTransporte/apresentacao/rest/index.cfm/onibus',
-                itinerary: '/apiTransporte/Apresentacao/csv/gtfs/onibus/percursos/gtfs_linha$$-shapes.csv',
-                output: '/tmp/riobus'
-            },
-            intervalTime: 15000,
-            timeout: 20000,
             log: '/tmp/riobus/data-server.log',
             dataPath: '/tmp/riobus/busData.json',
             mock: '/tmp/riobus/mock.busData.json'
@@ -36,10 +28,6 @@ module.exports = {
         numberOfLastLogLines: 40,
         reportFilePath: '/tmp/riobus/reports/'
     },
-    providers: [
-        'provider/data',
-        'provider/rest'
-    ],
     resources: [
         'resource/alldata',
         'resource/log',

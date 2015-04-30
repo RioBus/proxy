@@ -56,23 +56,23 @@ Execute a aplicação:
 Comandos do NPM e Gulp
 ----------------------
 
-gulp build ou npm build
+> gulp build ou npm run build
 
     Compila o projeto e gera o código em dist/
 
-gulp clean
+> gulp clean
 
     Limpa o diretório dist/ que é onde fica o código compilado
 
-gulp run
+> gulp run
 
     gulp clean && Executa o código compilado
 
-npm test
+> npm test
 
     Invoca o Mocha para executar as rotinas de teste definidas em test/
 
-npm start
+> npm start
 
     gulp build && gulp run
 

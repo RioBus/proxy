@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha --timeout 3000 --compilers js:mocha-traceur test/",
     "start": "gulp build && gulp run",
-    "build": "gulp build"
+    "build": "gulp build",
+    "deploy": "gulp build && gulp run-release"
   },
   "repository": {
     "type": "git",

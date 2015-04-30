@@ -9,7 +9,5 @@ import {Utils} from './common/utils';
  * correct Provider and calls the main method in the new fork.
  *
  */
-// Get the provider path from process.argv or app and begin
-var moduleName = (process.argv.length>2)? process.argv[2] : 'app';
-let Application = Utils.dynamicClassImport(__dirname+'/'+moduleName);
+let Application = Utils.dynamicClassImport(__dirname+'/app');
 Application.main(process.argv);
