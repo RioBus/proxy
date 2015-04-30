@@ -11,7 +11,7 @@ class Main implements IResource{
     /**
      * Request URL
      */
-    route:string = "/";
+    public route:string = "/";
 
     /**
      * GET method handler
@@ -20,7 +20,7 @@ class Main implements IResource{
      * @param response
      * @param next
      */
-    get(request, response, next):void {
+    public get(request:any, response:any, next:any): void {
         response.json({type: "error", message: "Operation not implemented"});
     }
 
@@ -31,7 +31,7 @@ class Main implements IResource{
      * @param response
      * @param next
      */
-    post(request, response, next):void {
+    public post(request:any, response:any, next:any): void {
         response.json({type: "error", message: "Operation not implemented"});
     }
 
@@ -42,7 +42,7 @@ class Main implements IResource{
      * @param response
      * @param next
      */
-    put(request, response, next):void {
+    public put(request:any, response:any, next:any): void {
         response.json({type: "error", message: "Operation not implemented"});
     }
 
@@ -53,7 +53,7 @@ class Main implements IResource{
      * @param response
      * @param next
      */
-    delete(request, response, next):void {
+    public delete(request:any, response:any, next:any): void {
         response.json({type: "error", message: "Operation not implemented"});
     }
 }

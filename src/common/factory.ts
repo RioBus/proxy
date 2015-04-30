@@ -15,7 +15,7 @@ class Factory{
      * @param flag Log flag (default: RUNTIME)
      * @returns {Logger}
      */
-    static getLogger(filePath=null, flag=''){
+    public static getLogger(filePath=null, flag=''): Logger{
         "use strict";
         if(!filePath) filePath = Config.log.runtime;
         return new Logger(filePath, flag);
@@ -25,7 +25,7 @@ class Factory{
      * Gets a new Logger instance to log runtime messages
      * @returns {Logger}
      */
-    static getRuntimeLogger(){
+    public static getRuntimeLogger(): Logger{
         "use strict";
         var runtimeLogPath = Config.log.runtime;
         return Factory.getLogger(runtimeLogPath, 'RUNTIME');
@@ -35,7 +35,7 @@ class Factory{
      * Gets a new Logger instance to log server messages
      * @returns {Logger}
      */
-    static getServerLogger(){
+    public static getServerLogger(): Logger{
         "use strict";
         var serverLogPath = Config.log.server;
         return Factory.getLogger(serverLogPath, 'SERVER');

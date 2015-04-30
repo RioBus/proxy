@@ -1,5 +1,6 @@
 /// <reference path="../defs/node/node.d.ts" />
 import Factory = require("./common/factory");
+import Logger = require("./common/logger");
 import Router = require("./core/router");
 import Config = require("./config");
 
@@ -16,16 +17,16 @@ class Application{
      * @param {Array} argv Process arg list
      * @return {void}
      */
-    static main(argv){
+    public static main(argv:string[]): void{
         "use strict";
 
-        var logger = Factory.getRuntimeLogger();
+        var logger:Logger = Factory.getRuntimeLogger();
         logger.info('Starting the server...');
 
         // Configuring the RESTful router to handle HTTP requests
-        var router = new Router();
+        var router:Router = new Router();
         router.registerResources(Config.resources); // Registering resources to handle the URLs
-        var environment = Config.environment.development;
+        var environment:any = Config.environment.development;
         router.start(environment.ip, environment.port); // Starting RESTful application
     }
 }

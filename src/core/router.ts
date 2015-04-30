@@ -1,6 +1,7 @@
 /// <reference path="../../defs/express/express.d.ts" />
 import Factory = require("../common/factory");
 import Logger = require("../common/logger");
+import IResource = require("../resources/iresource");
 
 /**
  * Class Router represents the RESTful router, which
@@ -13,11 +14,11 @@ class Router{
     private logger:Logger;
     private driver:any;
 
-    constructor(){
-        var ServerDriver = require('express');
-        var compression = require('compression');
+    public constructor(){
+        var Middleware:any = require('express');
+        var compression:any = require('compression');
         this.logger = Factory.getServerLogger();
-        this.driver = new ServerDriver();
+        this.driver = new Middleware();
         this.driver.use(compression());
         this.driver.use(function(request, response, next) {
             response.header("Access-Control-Allow-Origin", "*");
@@ -33,8 +34,8 @@ class Router{
      * @param {String} route
      * @param {Function} callback
      */
-    route(method, route, callback){
-        var logger = this.logger;
+    private route(method:string, route:string, callback): void{
+        var logger:Logger = this.logger;
         switch(method){
             case 'post':
                 this.driver.post(route, function(request, response, next){
@@ -72,13 +73,13 @@ class Router{
      * Registers a list of resources to handle routes
      * @param {Array} resources
      */
-    registerResources(resources){
+    public registerResources(resources:string[]): void{
         var self = this;
-        resources.forEach(function(resource){
-            var moduleName = resource;
-            var Resource = require('../'+moduleName);
-            resource = new Resource();
-            var route = resource.route;
+        resources.forEach(function(res:string){
+            var moduleName = res;
+            var Resource:any = require('../'+moduleName);
+            var resource:IResource = new Resource();
+            var route:string = resource.route;
 
             self.route('get', route, resource.get);
             self.route('post', route, resource.post);
@@ -95,9 +96,9 @@ class Router{
      * @param {Function} callback
      * @returns {http.Server}
      */
-    start(ip, port, callback=null){
+    public start(ip:string, port:string, callback=null): void{
         var self = this;
-        return this.driver.listen(port, ip, function(){
+        this.driver.listen(port, ip, function(){
             "use strict";
             if(callback!==null) callback();
             self.logger.info('Server started in http://'+ip+':'+port);

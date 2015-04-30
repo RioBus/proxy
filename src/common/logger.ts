@@ -12,7 +12,7 @@ class Logger{
 	private flag:string;
 	private fileStream:File;
 
-    constructor(fileName, flag){
+    public constructor(fileName, flag){
         "use strict";
         this.driver = console;
         this.flag = (flag)? flag:'RUNTIME';
@@ -24,7 +24,7 @@ class Logger{
      * @param message
      * @param level
      */
-    log(message, level){
+    private log(message, level): void{
         "use strict";
         var time = (new Date()).toLocaleString();
         var information = '['+time+']['+level+'] '+message;
@@ -36,7 +36,7 @@ class Logger{
      * Information-level message
      * @param message
      */
-    info(message){
+    public info(message): void{
         "use strict";
         this.log(message, this.flag + ' - INFO');
     }
@@ -45,7 +45,7 @@ class Logger{
      * Alert-level message
      * @param message
      */
-    alert(message){
+    public alert(message): void{
         "use strict";
         this.log(message, this.flag + ' - ALERT');
     }
@@ -54,7 +54,7 @@ class Logger{
      * Error-level message
      * @param message
      */
-    error(message){
+    public error(message): void{
         "use strict";
         this.log(message, this.flag + ' - ERROR');
     }
