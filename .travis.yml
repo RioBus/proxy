@@ -4,5 +4,4 @@ node_js:
   - "0.11"
 before_script:
   - mkdir /tmp/riobus
-  - npm start &
-  - sleep 10
+  - wget http://rest.riob.us/sample -O /tmp/riobus/busData.json
