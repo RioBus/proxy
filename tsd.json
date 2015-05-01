@@ -6,13 +6,13 @@
   "bundle": "defs/tsd.d.ts",
   "installed": {
     "node/node.d.ts": {
-      "commit": "a61199a4684d70334795302f09fb2a6b8ca016db"
+      "commit": "1400e07731048ae841bcebed658cb68539cbfb99"
     },
     "express/express.d.ts": {
-      "commit": "a61199a4684d70334795302f09fb2a6b8ca016db"
+      "commit": "1400e07731048ae841bcebed658cb68539cbfb99"
     },
     "mocha/mocha.d.ts": {
-      "commit": "a61199a4684d70334795302f09fb2a6b8ca016db"
+      "commit": "1400e07731048ae841bcebed658cb68539cbfb99"
     }
   }
 }
