@@ -19,10 +19,10 @@ class Config{
 			port: "80"
 		}
 	}
-	
-	public static resources:any = [
-		"resources/main"
-	]
+
+	public static resources: Object = {
+		"resources/main": "/"
+	}
 }
 
 export = Config;
