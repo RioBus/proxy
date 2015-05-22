@@ -1,4 +1,4 @@
-/// <reference path="../../defs/node/node.d.ts" />
+/// <reference path="../../defs/tsd.d.ts" />
 import Logger = require("./logger");
 import Config = require("../config");
 
@@ -15,9 +15,10 @@ class Factory{
      * @param flag Log flag (default: RUNTIME)
      * @returns {Logger}
      */
-    public static getLogger(filePath=null, flag=''): Logger{
+    public static getLogger(filePath?: String, flag?: String): Logger{
         "use strict";
         if(!filePath) filePath = Config.log.runtime;
+        if(!flag) flag = "";
         return new Logger(filePath, flag);
     }
 
@@ -27,7 +28,7 @@ class Factory{
      */
     public static getRuntimeLogger(): Logger{
         "use strict";
-        var runtimeLogPath = Config.log.runtime;
+        var runtimeLogPath: String = Config.log.runtime;
         return Factory.getLogger(runtimeLogPath, 'RUNTIME');
     }
 
@@ -37,7 +38,7 @@ class Factory{
      */
     public static getServerLogger(): Logger{
         "use strict";
-        var serverLogPath = Config.log.server;
+        var serverLogPath: String = Config.log.server;
         return Factory.getLogger(serverLogPath, 'SERVER');
     }
 }

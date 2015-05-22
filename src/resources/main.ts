@@ -16,7 +16,7 @@ class Main implements IResource{
      * @param next
      */
     public get(request: any, response: any, next: any): void {
-        response.json({type: "error", message: "Operation not implemented"});
+        response.json({type: "success", message: "Hello World!"});
     }
 
     /**

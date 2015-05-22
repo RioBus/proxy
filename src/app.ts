@@ -1,4 +1,4 @@
-/// <reference path="../defs/node/node.d.ts" />
+/// <reference path="../defs/tsd.d.ts" />
 import Factory = require("./common/factory");
 import Logger = require("./common/logger");
 import Router = require("./core/router");

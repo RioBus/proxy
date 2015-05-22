@@ -1,4 +1,4 @@
-/// <reference path="../../defs/node/node.d.ts" />
+/// <reference path="../../defs/tsd.d.ts" />
 import File = require("../core/file");
 /**
  * Better logging interface
@@ -8,11 +8,11 @@ import File = require("../core/file");
  */
 class Logger{
 	
-	private driver:any;
-	private flag:string;
-	private fileStream:File;
+	private driver: any;
+	private flag: String;
+	private fileStream: File;
 
-    public constructor(fileName, flag){
+    public constructor(fileName: String, flag: String){
         "use strict";
         this.driver = console;
         this.flag = (flag)? flag:'RUNTIME';
@@ -24,7 +24,7 @@ class Logger{
      * @param message
      * @param level
      */
-    private log(message, level): void{
+    private log(message: String, level: String): void{
         "use strict";
         var time = (new Date()).toLocaleString();
         var information = '['+time+']['+level+'] '+message;
@@ -36,7 +36,7 @@ class Logger{
      * Information-level message
      * @param message
      */
-    public info(message): void{
+    public info(message: String): void{
         "use strict";
         this.log(message, this.flag + ' - INFO');
     }
@@ -45,7 +45,7 @@ class Logger{
      * Alert-level message
      * @param message
      */
-    public alert(message): void{
+    public alert(message: String): void{
         "use strict";
         this.log(message, this.flag + ' - ALERT');
     }
@@ -54,7 +54,7 @@ class Logger{
      * Error-level message
      * @param message
      */
-    public error(message): void{
+    public error(message: String): void{
         "use strict";
         this.log(message, this.flag + ' - ERROR');
     }
