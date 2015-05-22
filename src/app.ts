@@ -14,20 +14,20 @@ class Application{
      * Init application
      *
      * @method main
-     * @param {Array} argv Process arg list
+     * @param {String[]} argv Process arg list
      * @return {void}
      */
-    public static main(argv:string[]): void{
+    public static main(argv: String[]): void{
         "use strict";
 
-        var logger:Logger = Factory.getRuntimeLogger();
+        var logger: Logger = Factory.getRuntimeLogger();
         logger.info('Starting the server...');
 
         // Configuring the RESTful router to handle HTTP requests
-        var router:Router = new Router();
+        var router: Router = new Router();
         router.registerResources(Config.resources); // Registering resources to handle the URLs
         
-        var environment:any = (argv.indexOf("--production")>-1)?
+        var environment: any = Config.isProduction()?
          Config.environment.production : Config.environment.development;
          
         router.start(environment.ip, environment.port); // Starting RESTful application

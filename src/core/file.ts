@@ -1,4 +1,4 @@
-/// <reference path="../../defs/node/node.d.ts" />
+/// <reference path="../../defs/tsd.d.ts" />
 /**
  * Manipulates files
  *
@@ -7,13 +7,13 @@
  */
 class File{
     
-    private file:string;
-    private directory:string;
-    private driver:any;
-    private mkdirp:any;
+    private file: String;
+    private directory: String;
+    private driver: any;
+    private mkdirp: any;
 
-    public constructor(path:string){
-        var splittedPath:string[] = path.split('/');
+    public constructor(path: String){
+        var splittedPath: String[] = path.split('/');
         this.file = splittedPath.pop();
         this.directory = splittedPath.join('/');
         this.driver = require('fs');
@@ -22,13 +22,13 @@ class File{
 
     /**
      * Appends content to end of file
-     * @param {string} content
+     * @param {String} content
      */
-    public append(content:string): void{
+    public append(content: String): void{
         var self = this;
-        this.mkdirp(this.directory, function(e1){
+        this.mkdirp(this.directory, (e1) => {
             if(e1) throw e1;
-            else self.driver.appendFile(self.directory + '/' + self.file, content+'\n', function(e2){
+            else self.driver.appendFile(self.directory + '/' + self.file, content+'\n', (e2) => {
                 if(e2) throw e2;
             });
         });
@@ -38,11 +38,11 @@ class File{
      * Writes the given content to a file. Ovewrites if it already has any content.
      * @param {*} content
      */
-    public write(content:string): void{
+    public write(content: String): void{
         var self = this;
-        this.mkdirp(this.directory, function(e1){
+        this.mkdirp(this.directory, (e1) => {
             if(e1) throw e1;
-            else self.driver.writeFile(self.directory + '/' + self.file, content, function(e2){
+            else self.driver.writeFile(self.directory + '/' + self.file, content, (e2) => {
                 if(e2) throw e2;
             });
         });
@@ -52,7 +52,7 @@ class File{
      * Reads the file content
      * @return string
      */
-    public read(): string[]{
+    public read(): String[]{
         return this.driver.readFileSync(this.directory + '/' + this.file, 'utf8');
     }
 }
