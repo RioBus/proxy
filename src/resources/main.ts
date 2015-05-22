@@ -1,5 +1,5 @@
-/// <reference path="../../defs/node/node.d.ts" />
-import IResource = require("./iresource");
+/// <reference path="../../defs/tsd.d.ts" />
+import IResource = require("./iResource");
 /**
  * Resource type superclass
  *
@@ -9,18 +9,13 @@ import IResource = require("./iresource");
 class Main implements IResource{
 
     /**
-     * Request URL
-     */
-    public route:string = "/";
-
-    /**
      * GET method handler
      *
      * @param request
      * @param response
      * @param next
      */
-    public get(request:any, response:any, next:any): void {
+    public get(request: any, response: any, next: any): void {
         response.json({type: "error", message: "Operation not implemented"});
     }
 
@@ -31,7 +26,7 @@ class Main implements IResource{
      * @param response
      * @param next
      */
-    public post(request:any, response:any, next:any): void {
+    public post(request: any, response: any, next: any): void {
         response.json({type: "error", message: "Operation not implemented"});
     }
 
@@ -42,7 +37,7 @@ class Main implements IResource{
      * @param response
      * @param next
      */
-    public put(request:any, response:any, next:any): void {
+    public put(request: any, response: any, next: any): void {
         response.json({type: "error", message: "Operation not implemented"});
     }
 
@@ -53,7 +48,7 @@ class Main implements IResource{
      * @param response
      * @param next
      */
-    public delete(request:any, response:any, next:any): void {
+    public delete(request: any, response: any, next: any): void {
         response.json({type: "error", message: "Operation not implemented"});
     }
 }

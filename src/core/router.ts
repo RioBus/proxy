@@ -1,7 +1,7 @@
-/// <reference path="../../defs/express/express.d.ts" />
+/// <reference path="../../defs/tsd.d.ts" />
 import Factory = require("../common/factory");
 import Logger = require("../common/logger");
-import IResource = require("../resources/iresource");
+import IResource = require("../resources/iResource");
 
 /**
  * Class Router represents the RESTful router, which
@@ -9,18 +9,18 @@ import IResource = require("../resources/iresource");
  * @class Router
  * @constructor
  */
-class Router{
-    
-    private logger:Logger;
-    private driver:any;
+class Router {
 
-    public constructor(){
-        var Middleware:any = require('express');
-        var compression:any = require('compression');
+    private logger: Logger;
+    private driver: any;
+
+    public constructor() {
+        var Middleware: any = require('express');
+        var compression: any = require('compression');
         this.logger = Factory.getServerLogger();
         this.driver = new Middleware();
         this.driver.use(compression());
-        this.driver.use(function(request, response, next) {
+        this.driver.use( (request, response, next) => {
             response.header("Access-Control-Allow-Origin", "*");
             response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             next();
@@ -34,35 +34,35 @@ class Router{
      * @param {String} route
      * @param {Function} callback
      */
-    private route(method:string, route:string, callback): void{
-        var logger:Logger = this.logger;
-        switch(method){
+    private route(method: String, route: String, callback: (request: any, response: any, next: any)=>void): void {
+        var logger: Logger = this.logger;
+        switch (method) {
             case 'post':
-                this.driver.post(route, function(request, response, next){
+                this.driver.post(route, function(request, response, next) {
                     "use strict";
-                    logger.info('Serving route '+request.url+' (POST)');
+                    logger.info('Serving route ' + request.url + ' (POST)');
                     callback(request, response, next);
                 });
                 break;
             case 'put':
-                this.driver.put(route, function(request, response, next){
+                this.driver.put(route, function(request, response, next) {
                     "use strict";
-                    logger.info('Serving route '+request.url+' (PUT)');
+                    logger.info('Serving route ' + request.url + ' (PUT)');
                     callback(request, response, next);
                 });
                 break;
             case 'delete':
-                this.driver.delete(route, function(request, response, next){
+                this.driver.delete(route, function(request, response, next) {
                     "use strict";
-                    logger.info('Serving route '+request.url+' (DELETE)');
+                    logger.info('Serving route ' + request.url + ' (DELETE)');
                     callback(request, response, next);
                 });
                 break;
             case 'get':
             default:
-                this.driver.get(route, function(request, response, next){
+                this.driver.get(route, function(request, response, next) {
                     "use strict";
-                    logger.info('Serving route '+request.url+' (GET)');
+                    logger.info('Serving route ' + request.url + ' (GET)');
                     callback(request, response, next);
                 });
                 break;
@@ -73,20 +73,19 @@ class Router{
      * Registers a list of resources to handle routes
      * @param {Array} resources
      */
-    public registerResources(resources:string[]): void{
-        var self = this;
-        resources.forEach(function(res:string){
-            var moduleName = res;
-            var Resource:any = require('../'+moduleName);
-            var resource:IResource = new Resource();
-            var route:string = resource.route;
+    public registerResources(resources: Object): void {
+        var keys = Object.keys(resources);
+        keys.forEach( (key) => {
+            var url = resources[key];
+            var Resource: any = require('../' + key);
+            var resource: IResource = new Resource();
 
-            self.route('get', route, resource.get);
-            self.route('post', route, resource.post);
-            self.route('put', route, resource.put);
-            self.route('delete', route, resource.delete);
-            self.logger.info('Resource registered: '+moduleName);
-        });
+            this.route('get', url, resource.get);
+            this.route('post', url, resource.post);
+            this.route('put', url, resource.put);
+            this.route('delete', url, resource.delete);
+            this.logger.info('Resource registered: ' + key);
+        }, this);
     }
 
     /**
@@ -96,12 +95,12 @@ class Router{
      * @param {Function} callback
      * @returns {http.Server}
      */
-    public start(ip:string, port:string, callback=null): void{
+    public start(ip: String, port: String, callback?: ()=>void): void {
         var self = this;
-        this.driver.listen(port, ip, function(){
+        this.driver.listen(port, ip, () => {
             "use strict";
-            if(callback!==null) callback();
-            self.logger.info('Server started in http://'+ip+':'+port);
+            if (callback !== undefined) callback();
+            self.logger.info('Server started in http://' + ip + ':' + port);
         });
     }
 }
