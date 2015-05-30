@@ -17,7 +17,7 @@ class Application{
      * @param {String[]} argv Process arg list
      * @return {void}
      */
-    public static main(argv: String[]): void{
+    public static main(argv: string[]): void{
         "use strict";
 
         var logger: Logger = Factory.getRuntimeLogger();

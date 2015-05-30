@@ -9,10 +9,10 @@ import File = require("../core/file");
 class Logger{
 	
 	private driver: any;
-	private flag: String;
+	private flag: string;
 	private fileStream: File;
 
-    public constructor(fileName: String, flag: String){
+    public constructor(fileName: string, flag: string){
         "use strict";
         this.driver = console;
         this.flag = (flag)? flag:'RUNTIME';
@@ -24,7 +24,7 @@ class Logger{
      * @param message
      * @param level
      */
-    private log(message: String, level: String): void{
+    private log(message: string, level: string): void{
         "use strict";
         var time = (new Date()).toLocaleString();
         var information = '['+time+']['+level+'] '+message;
@@ -36,7 +36,7 @@ class Logger{
      * Information-level message
      * @param message
      */
-    public info(message: String): void{
+    public info(message: string): void{
         "use strict";
         this.log(message, this.flag + ' - INFO');
     }
@@ -45,7 +45,7 @@ class Logger{
      * Alert-level message
      * @param message
      */
-    public alert(message: String): void{
+    public alert(message: string): void{
         "use strict";
         this.log(message, this.flag + ' - ALERT');
     }
@@ -54,7 +54,7 @@ class Logger{
      * Error-level message
      * @param message
      */
-    public error(message: String): void{
+    public error(message: string): void{
         "use strict";
         this.log(message, this.flag + ' - ERROR');
     }

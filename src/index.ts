@@ -1,3 +1,10 @@
 /// <reference path="../defs/tsd.d.ts" />
 import Application = require("./app");
-Application.main(process.argv);
+
+require("sync")(()=>{
+	try{
+		Application.main(process.argv);
+	} catch(e){
+		console.log(e);
+	}
+});

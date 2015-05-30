@@ -1,20 +1,25 @@
 class List<T> {
+    
     private items: Array<T>;
 
-    constructor() {
+    public constructor() {
         this.items = [];
     }
 
-    size(): number {
+    public size(): number {
         return this.items.length;
     }
 
-    add(value: T): void {
+    public add(value: T): void {
         this.items.push(value);
     }
 
-    get(index: number): T {
+    public get(index: number): T {
         return this.items[index];
+    }
+    
+    public getIterable(): Array<T>{
+        return this.items;
     }
 }
 export = List;

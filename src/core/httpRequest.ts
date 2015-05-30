@@ -11,7 +11,7 @@ class HttpRequest{
 
     public constructor(){
         "use strict";
-        this.driver = require('sync-request');
+        this.driver = require('request');
     }
 
     /**
@@ -20,9 +20,9 @@ class HttpRequest{
      * @param {Object} options
      * @returns {*}
      */
-    public get(host: String, options?: any): any{
+    public get(host: string, options?: any): any{
         "use strict";
-        return this.driver('GET', host, options);
+        return this.driver.get(host, options);
     }
 
     /**
@@ -31,31 +31,9 @@ class HttpRequest{
      * @param {Object} options
      * @returns {*}
      */
-    public post(host: String, options?: any): any{
+    public post(host: string, data: any, callback?: (error: Error, response: any, body: string)=>void): any{
         "use strict";
-        return this.driver('POST', host, options);
-    }
-
-    /**
-     * Makes PUT request
-     * @param {String} host Host URL
-     * @param {Object} options
-     * @returns {*}
-     */
-    public put(host: String, options?: any): any{
-        "use strict";
-        return this.driver('PUT', host, options);
-    }
-
-    /**
-     * Makes DELETE request
-     * @param {String} host Host URL
-     * @param {Object} options
-     * @returns {*}
-     */
-    public delete(host: String, options?: any): any{
-        "use strict";
-        return this.driver('DELETE', host, options);
+        return this.driver.post({url: host, formData: data}, callback);
     }
 }
 

@@ -7,28 +7,40 @@
  */
 class File{
     
-    private file: String;
-    private directory: String;
-    private driver: any;
-    private mkdirp: any;
+    private directory: string;
+    private file: string;
+    private fs: any;
+    private fullPath: string;
 
-    public constructor(path: String){
-        var splittedPath: String[] = path.split('/');
+    public constructor(path: string){
+        this.fullPath = path;
+        var splittedPath: string[] = path.split('/');
         this.file = splittedPath.pop();
         this.directory = splittedPath.join('/');
-        this.driver = require('fs');
-        this.mkdirp = require('mkdirp');
+        this.fs = require("fs-extra");
+    }
+    
+    public getFilePath(): string{
+        return this.fullPath;
+    }
+    
+    public getDirPath(): string{
+        return this.directory;
+    }
+    
+    public getFileName(): string{
+        return this.file;
     }
 
     /**
      * Appends content to end of file
-     * @param {String} content
+     * @param {string} content
      */
-    public append(content: String): void{
+    public append(content: string): void{
         var self = this;
-        this.mkdirp(this.directory, (e1) => {
+        this.fs.ensureFile(this.fullPath, (e1) => {
             if(e1) throw e1;
-            else self.driver.appendFile(self.directory + '/' + self.file, content+'\n', (e2) => {
+            else self.fs.appendFile(self.fullPath, content+'\n', (e2) => {
                 if(e2) throw e2;
             });
         });
@@ -38,13 +50,9 @@ class File{
      * Writes the given content to a file. Ovewrites if it already has any content.
      * @param {*} content
      */
-    public write(content: String): void{
-        var self = this;
-        this.mkdirp(this.directory, (e1) => {
-            if(e1) throw e1;
-            else self.driver.writeFile(self.directory + '/' + self.file, content, (e2) => {
-                if(e2) throw e2;
-            });
+    public write(content: string): void{
+        this.fs.outputFile(this.fullPath, content, (e2) => {
+            if(e2) throw e2;
         });
     }
 
@@ -52,8 +60,8 @@ class File{
      * Reads the file content
      * @return string
      */
-    public read(): String[]{
-        return this.driver.readFileSync(this.directory + '/' + this.file, 'utf8');
+    public read(): string[]{
+        return this.fs.readFileSync(this.fullPath, 'utf8');
     }
 }
 export = File;

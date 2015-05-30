@@ -34,25 +34,25 @@ class Router {
      * @param {String} route
      * @param {Function} callback
      */
-    private route(method: String, route: String, callback: (request: any, response: any, next: any)=>void): void {
+    private route(method: string, route: string, callback: (request: any, response: any, next: any)=>void): void {
         var logger: Logger = this.logger;
         switch (method) {
             case 'post':
-                this.driver.post(route, function(request, response, next) {
+                this.driver.post(route, (request, response, next) => {
                     "use strict";
                     logger.info('Serving route ' + request.url + ' (POST)');
                     callback(request, response, next);
                 });
                 break;
             case 'put':
-                this.driver.put(route, function(request, response, next) {
+                this.driver.put(route, (request, response, next) => {
                     "use strict";
                     logger.info('Serving route ' + request.url + ' (PUT)');
                     callback(request, response, next);
                 });
                 break;
             case 'delete':
-                this.driver.delete(route, function(request, response, next) {
+                this.driver.delete(route, (request, response, next) => {
                     "use strict";
                     logger.info('Serving route ' + request.url + ' (DELETE)');
                     callback(request, response, next);
@@ -60,7 +60,7 @@ class Router {
                 break;
             case 'get':
             default:
-                this.driver.get(route, function(request, response, next) {
+                this.driver.get(route, (request, response, next) => {
                     "use strict";
                     logger.info('Serving route ' + request.url + ' (GET)');
                     callback(request, response, next);
@@ -95,7 +95,7 @@ class Router {
      * @param {Function} callback
      * @returns {http.Server}
      */
-    public start(ip: String, port: String, callback?: ()=>void): void {
+    public start(ip: string, port: string, callback?: ()=>void): void {
         var self = this;
         this.driver.listen(port, ip, () => {
             "use strict";
