@@ -4,8 +4,8 @@
   "description": "Just a simple HTTP server written in Typescript",
   "main": "dist/index.js",
   "scripts": {
-    "configure": "gulp tsd",
-    "test": "mocha --compilers ts:typescript-require test/",
+    "configure": "tsd reinstall",
+    "test": "gulp buildTest && mocha compiled/test/",
     "build": "gulp build",
     "release": "gulp release",
     "start": "gulp build && gulp run",
@@ -31,20 +31,19 @@
     "url": "https://github.com/fmsouza/nodets/issues"
   },
   "dependencies": {
-    "compression": "^1.4.1",
-    "express": "^4.12.0",
+    "compression": "^1.4.4",
+    "emailjs": "^0.3.16",
+    "express": "^4.12.4",
     "fs-extra": "^0.18.4",
-    "request": "^2.56.0",
+    "request": "^2.57.0",
     "sync": "^0.2.5"
   },
   "devDependencies": {
-    "gulp": "^3.8.11",
+    "gulp": "^3.9.0",
     "gulp-load-plugins": "^0.10.0",
-    "gulp-shell": "^0.4.1",
-    "gulp-tsd": "0.0.4",
-    "gulp-typescript": "^2.6.0",
-    "gulp-uglify": "^1.1.0",
-    "mocha": "^2.2.4",
-    "typescript-require": "^0.2.8"
+    "gulp-shell": "^0.4.2",
+    "gulp-typescript": "^2.7.6",
+    "gulp-uglify": "^1.2.0",
+    "mocha": "^2.2.5"
   }
 }

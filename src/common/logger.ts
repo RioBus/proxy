@@ -27,7 +27,7 @@ class Logger{
     private log(message: string, level: string): void{
         "use strict";
         var time = (new Date()).toLocaleString();
-        var information = '['+time+']['+level+'] '+message;
+        var information = '['+time+'] ['+level+'] '+message;
         this.driver.log(information);
         this.fileStream.append(information);
     }
