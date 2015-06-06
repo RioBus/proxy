@@ -1,5 +1,7 @@
 /// <reference path="../defs/tsd.d.ts" />
 class Config {
+	
+	public static rootPath: string = __dirname;
 
 	public static log: any = {
 		runtime: "./runtime.log",

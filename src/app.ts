@@ -7,6 +7,8 @@ import MailServer = require("./core/mail/mailServer");
 import MailObject = require("./core/mail/mailObject");
 import Utils      = require("./common/tools/utils");
 
+import Foo = require("./teste/foo");
+
 /**
  * Main application process.
  * @class App
@@ -22,7 +24,7 @@ class Application{
      */
     public static main(argv: string[]): void{
         "use strict";
-
+        
         var logger: Logger = Factory.getRuntimeLogger();
         logger.info('Starting the server...');
 
