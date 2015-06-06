@@ -7,8 +7,6 @@ import MailServer = require("./core/mail/mailServer");
 import MailObject = require("./core/mail/mailObject");
 import Utils      = require("./common/tools/utils");
 
-import Foo = require("./teste/foo");
-
 /**
  * Main application process.
  * @class App
