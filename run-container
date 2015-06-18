@@ -1,3 +1,2 @@
 #!/bin/bash
-docker run -it -d -v $(pwd):/nodets --name nodejs nodejs
-docker attach nodejs
+docker run -it -p 8080:8080 -v $(pwd):/nodets --name nodejs nodejs /bin/bash

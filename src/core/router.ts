@@ -1,7 +1,8 @@
 /// <reference path="../../defs/tsd.d.ts" />
-import Factory = require("../common/factory");
-import Logger = require("../common/logger");
+import Factory   = require("../common/factory");
 import IResource = require("../resources/iResource");
+import Logger    = require("../common/logger");
+import $inject   = require("./inject");
 
 /**
  * Class Router represents the RESTful router, which
@@ -77,9 +78,7 @@ class Router {
         var keys = Object.keys(resources);
         keys.forEach( (key) => {
             var url = resources[key];
-            var Resource: any = require('../' + key);
-            var resource: IResource = new Resource();
-
+            var resource: IResource = $inject(key);
             this.route('get', url, resource.get);
             this.route('post', url, resource.post);
             this.route('put', url, resource.put);
