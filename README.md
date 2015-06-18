@@ -4,8 +4,9 @@ NodeTS
 It's an little infrastructure to start a new node.js project using typescript. It is focused in API
 development providing an abstraction to ExpressJS.
 
-Installing
-----------
+
+Installing on machine
+---------------------
 
 It's necessary to have ```node.js``` installed.
 > https://nodejs.org/download/
@@ -18,6 +19,19 @@ Go to the project root and install dependencies
 
 Also in the root, configure the environment
 > $ npm run configure
+
+
+Installing on docker
+--------------------
+
+Install docker
+> https://docs.docker.com/installation/
+
+Go to the project root and compile the container image
+> $ ./build-image
+
+Run The container
+> $ ./run-container
 
 NPM commands
 ------------
@@ -43,7 +57,4 @@ npm run deploy
 Compatibility
 -------------
 
-Node.js versions
-* 0.12.x
-* 0.11.x
-* 0.10.x
+Node.js version 0.11 or higher
