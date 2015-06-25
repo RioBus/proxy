@@ -8,9 +8,9 @@ import $inject   = require("../core/inject");
  * Defines a Resource and it's characteristics
  * @class ItineraryResource
  */
-class ItineraryResource implements IResource{
+class AllResource implements IResource {
     
-    public constructor(private context: IService = $inject("service/itineraryService")) {}
+    public constructor(private context: IService = $inject("service/searchService")) {}
 
     /**
      * GET method handler
@@ -20,8 +20,7 @@ class ItineraryResource implements IResource{
      * @param next
      */
     public get(request: any, response: any, next: any): void {
-        var line: string = request.params.line;
-        response.jsonp(this.context.retrieve(line));
+        response.jsonp(this.context.retrieveList());
     }
 
     /**
@@ -57,4 +56,4 @@ class ItineraryResource implements IResource{
         response.json({type: "error", message: "Operation not implemented"});
     }
 }
-export = ItineraryResource;
+export = AllResource;

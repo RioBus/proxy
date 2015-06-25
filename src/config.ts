@@ -43,10 +43,9 @@ class Config {
 		"resources/dataProviderLogResource" : "/log/dataprovider/:lines",
 		"resources/intervalReportsResource" : "/reports/:minDate/:maxDate",
 		"resources/itineraryResource"		: "/itinerary/:line",
-		"resources/lastUpdateResource"		: "/lastupdate",
 		"resources/runtimeLogResource"		: "/log/runtime/:lines",
 		"resources/searchResource"			: "/search/:platformId/:data",
-		"resources/serverLogResource"		: "/log/server/:lines",
+		"resources/serverLogResource"		: "/log/server/:lines"
 	}
 	
 	public static analytics: any = {
