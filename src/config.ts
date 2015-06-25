@@ -35,10 +35,24 @@ class Config {
 	public static isProduction(): Boolean {
 		return process.argv.indexOf("--production") > -1;
 	}
+	
+	public static maxSearchItems = 10;
 
 	public static resources: Object = {
-		"resources/main": "/"
+		"resources/all"				: "/search",
+		"resources/dataProviderLog" : "/log/dataprovider/:lines",
+		"resources/intervalReports" : "/reports/:minDate/:maxDate",
+		"resources/itinerary"		: "/itinerary/:line",
+		"resources/lastUpdate"		: "/lastupdate",
+		"resources/runtimeLog"		: "/log/runtime/:lines",
+		"resources/search"			: "/search/:platformId/:data",
+		"resources/serverLog"		: "/log/server/:lines",
 	}
+	
+	public static analytics: any = {
+        ua: 'UA-49628280-3',
+        host: 'riob.us'
+    };
 }
 
 export = Config;
