@@ -1,8 +1,8 @@
+import IBusiness 	 = require("../business/iBusiness");
+import IDataAccess   = require("../dataAccess/iDataAccess");
 import ItinerarySpot = require("../domain/itinerarySpot");
-import List = require("../common/tools/list");
-import $inject = require("../core/inject");
-import IBusiness = require("../business/iBusiness");
-import IDataAccess = require("../dataAccess/iDataAccess");
+import List 		 = require("../common/tools/list");
+import $inject 		 = require("../core/inject");
 
 class SearchBusiness implements IBusiness {
 	

@@ -1,8 +1,8 @@
-import IService = require("./iService");
+import IBusiness 	 = require("../business/iBusiness");
+import IService 	 = require("./iService");
 import ItinerarySpot = require("../domain/itinerarySpot");
-import List = require("../common/tools/list");
-import $inject = require("../core/inject");
-import IBusiness = require("../business/iBusiness");
+import List 		 = require("../common/tools/list");
+import $inject 		 = require("../core/inject");
 
 class SearchService implements IService {
 	
