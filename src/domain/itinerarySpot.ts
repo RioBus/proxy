@@ -3,7 +3,7 @@
  * @class Itinerary
  * @constructor
  */
-class Itinerary{
+class ItinerarySpot{
 
     public constructor(
 		private sequential: number, private line: string, private description: string, 
@@ -37,4 +37,4 @@ class Itinerary{
 		return this.longitude;
 	}
 }
-export = Itinerary;
+export = ItinerarySpot;

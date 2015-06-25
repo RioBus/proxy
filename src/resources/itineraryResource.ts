@@ -1,12 +1,16 @@
 /// <reference path="../../defs/tsd.d.ts" />
 import IResource = require("./iResource");
+import IService  = require("../service/iService");
+import $inject   = require("../core/inject");
 /**
- * Resource type superclass
+ * ItineraryResource class
  *
- * Defines the Resource type and it's characteristics
- * @class Main
+ * Defines a Resource and it's characteristics
+ * @class ItineraryResource
  */
-class Main implements IResource{
+class ItineraryResource implements IResource{
+    
+    public constructor(private context: IService = $inject("service/itineraryService")) {}
 
     /**
      * GET method handler
@@ -16,7 +20,8 @@ class Main implements IResource{
      * @param next
      */
     public get(request: any, response: any, next: any): void {
-        response.json({type: "success", message: "Hello World!"});
+        var line: string = request.params.line;
+        response.jsonp(this.context.retrieve(line));
     }
 
     /**

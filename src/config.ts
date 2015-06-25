@@ -39,14 +39,14 @@ class Config {
 	public static maxSearchItems = 10;
 
 	public static resources: Object = {
-		"resources/all"				: "/search",
-		"resources/dataProviderLog" : "/log/dataprovider/:lines",
-		"resources/intervalReports" : "/reports/:minDate/:maxDate",
-		"resources/itinerary"		: "/itinerary/:line",
-		"resources/lastUpdate"		: "/lastupdate",
-		"resources/runtimeLog"		: "/log/runtime/:lines",
-		"resources/search"			: "/search/:platformId/:data",
-		"resources/serverLog"		: "/log/server/:lines",
+		"resources/allResource"				: "/search",
+		"resources/dataProviderLogResource" : "/log/dataprovider/:lines",
+		"resources/intervalReportsResource" : "/reports/:minDate/:maxDate",
+		"resources/itineraryResource"		: "/itinerary/:line",
+		"resources/lastUpdateResource"		: "/lastupdate",
+		"resources/runtimeLogResource"		: "/log/runtime/:lines",
+		"resources/searchResource"			: "/search/:platformId/:data",
+		"resources/serverLogResource"		: "/log/server/:lines",
 	}
 	
 	public static analytics: any = {
