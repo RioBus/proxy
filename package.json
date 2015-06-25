@@ -1,13 +1,15 @@
 {
-  "name": "riobus-server",
+  "name": "server",
   "version": "2.1.2",
   "description": "RioBus server application",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha --timeout 3000 --compilers js:mocha-traceur test/",
-    "start": "gulp build && gulp run",
-    "build": "gulp build",
-    "deploy": "gulp build && gulp run-release"
+    "configure": "tsd reinstall && tsd rebundle",
+    "test": "node ./node_modules/gulp/bin/gulp.js buildTest && node_modules/mocha/bin/mocha .compiled/test/**/*",
+    "build": "node ./node_modules/gulp/bin/gulp.js build",
+    "release": "node ./node_modules/gulp/bin/gulp.js run release",
+    "start": "node ./node_modules/gulp/bin/gulp.js build && node ./node_modules/gulp/bin/gulp.js run",
+    "deploy": "node ./node_modules/gulp/bin/gulp.js build && node ./node_modules/gulp/bin/gulp.js release && node ./node_modules/gulp/bin/gulp.js run-release"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,14 @@
     "mobilidade",
     "publico",
     "rj",
-    "onibus"
+    "onibus",
+    "typescript",
+    "nodejs",
+    "node",
+    "desktop",
+    "server",
+    "wrapper",
+    "infrastructure"
   ],
   "author": "Fred Souza <fredericoamsouza@gmail.com> (http://fmsouza.github.io)",
   "license": "http://github.com/RioBus/server/blob/master/LICENSE",
@@ -28,26 +37,21 @@
   },
   "homepage": "http://github.com/RioBus/server",
   "dependencies": {
-    "compression": "^1.4.1",
-    "express": "^4.12.0",
-    "mkdirp": "^0.5.0",
+    "compression": "^1.4.4",
+    "deasync": "^0.1.0",
+    "emailjs": "^0.3.16",
+    "express": "^4.12.4",
+    "fs-extra": "^0.18.4",
     "nodealytics": "0.0.6",
-    "sync-request": "^2.0.1"
+    "request": "^2.57.0"
   },
   "devDependencies": {
-    "del": "^1.1.0",
-    "gulp": "^3.8.11",
-    "gulp-babel": "^4.0.0",
-    "gulp-concat": "^2.5.2",
-    "gulp-nodemon": "^1.0.5",
-    "gulp-shell": "^0.3.0",
-    "gulp-sourcemaps": "^1.4.0",
-    "gulp-uglify": "^1.1.0",
-    "mocha": "^2.2.4",
-    "mocha-traceur": "^2.1.0",
-    "object.assign": "^1.0.3",
-    "require-dir": "^0.1.0",
-    "run-sequence": "^1.0.2",
-    "vinyl-paths": "^1.0.0"
+    "gulp": "^3.9.0",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-shell": "^0.4.2",
+    "gulp-typescript": "^2.7.6",
+    "gulp-uglify": "^1.2.0",
+    "mocha": "^2.2.5",
+    "tsd": "^0.6.1"
   }
 }
