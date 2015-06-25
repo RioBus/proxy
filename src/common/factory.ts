@@ -1,6 +1,7 @@
 /// <reference path="../../defs/tsd.d.ts" />
-import Logger = require("./logger");
-import Config = require("../config");
+import Analytics = require("./analytics");
+import Logger    = require("./logger");
+import Config    = require("../config");
 
 /**
  * Factory Helper
@@ -40,6 +41,11 @@ class Factory {
         "use strict";
         var serverLogPath: string = Config.log.server;
         return Factory.getLogger(serverLogPath, 'SERVER');
+    }
+    
+    public static getAnalytics(): Analytics {
+        var config: any = Config.analytics;
+        return new Analytics(config.ua, config.host);;
     }
 }
 export = Factory;

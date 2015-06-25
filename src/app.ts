@@ -1,4 +1,5 @@
 /// <reference path="../defs/tsd.d.ts" />
+import Analytics  = require("./common/analytics");
 import Factory    = require("./common/factory");
 import Logger     = require("./common/logger");
 import Router     = require("./core/router");
@@ -22,6 +23,10 @@ class Application{
      */
     public static main(argv: string[]): void{
         "use strict";
+        
+        var analytics: Analytics = Factory.getAnalytics();
+        analytics.initialize();
+        analytics.trackPage('REST', '/en/serverside/test', ()=>{});
         
         var logger: Logger = Factory.getRuntimeLogger();
         logger.info('Starting the server...');
