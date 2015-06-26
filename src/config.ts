@@ -25,11 +25,19 @@ class Config {
 		},
 		development: {
 			ip: "127.0.0.1",
-			port: "8080"
+			port: "8080",
+			database: {
+				url: "http://riobus:riobus@arango:8529",
+				databaseName: "riobus"
+			}
 		},
 		production: {
 			ip: "0.0.0.0",
-			port: "80"
+			port: "80",
+			database: {
+				url: "http://riobus:riobus@arango:8529",
+				databaseName: "riobus"
+			}
 		}
 	}
 
