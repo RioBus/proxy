@@ -1,18 +1,18 @@
-import IBusiness 	 = require("../business/iBusiness");
-import IDataAccess   = require("../dataAccess/iDataAccess");
-import ItinerarySpot = require("../domain/itinerarySpot");
-import List 		 = require("../common/tools/list");
-import $inject 		 = require("../core/inject");
+import Bus 		   = require("../domain/bus");
+import IBusiness   = require("../business/iBusiness");
+import IDataAccess = require("../dataAccess/iDataAccess");
+import List 	   = require("../common/tools/list");
+import $inject 	   = require("../core/inject");
 
 class SearchBusiness implements IBusiness {
 	
 	public constructor(private context: IDataAccess = $inject("dataAccess/searchDataAccess")) {}
 	
-	public retrieve(line: string): List<ItinerarySpot> {
-		return this.context.retrieve(line);
+	public retrieve(data: string): List<Bus> {
+		return this.context.retrieve(data);
 	}
 	
-	public retrieveList(): List<ItinerarySpot> {
+	public retrieveList(): List<Bus> {
 		return this.context.retrieveList();
 	}
 	
