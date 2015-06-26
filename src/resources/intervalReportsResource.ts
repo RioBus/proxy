@@ -10,7 +10,7 @@ import $inject   = require("../core/inject");
  */
 class IntervalReportsResource implements IResource{
     
-    public constructor(private context: IService = $inject("service/intervalReportsService")) {}
+    public constructor(private context: IService = $inject("service/reportService")) {}
 
     /**
      * GET method handler
@@ -20,8 +20,10 @@ class IntervalReportsResource implements IResource{
      * @param next
      */
     public get(request: any, response: any, next: any): void {
-        var lines: string = request.params.lines;
-        response.jsonp(this.context.retrieve(lines));
+        var params: any = request.params;
+        var minDate: Date = new Date(params.minDate);
+        var maxDate: Date = new Date(params.maxDate);
+        response.jsonp(this.context.retrieve(minDate, maxDate));
     }
 
     /**

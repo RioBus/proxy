@@ -11,7 +11,7 @@ import $inject   = require("../core/inject");
  */
 class RuntimeLogResource implements IResource{
     
-    public constructor(private context: IService = $inject("service/dataProviderLogService")) {}
+    public constructor(private context: IService = $inject("service/logService")) {}
 
     /**
      * GET method handler
