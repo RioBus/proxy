@@ -1,6 +1,7 @@
 /// <reference path="../../defs/tsd.d.ts" />
 import IResource = require("./iResource");
 import IService  = require("../service/iService");
+import LogType   = require("../common/logType");
 import $inject   = require("../core/inject");
 /**
  * ItineraryResource class
@@ -10,7 +11,7 @@ import $inject   = require("../core/inject");
  */
 class DataProviderLogResource implements IResource{
     
-    public constructor(private context: IService = $inject("service/dataProviderLogService")) {}
+    public constructor(private context: IService = $inject("service/logService")) {}
 
     /**
      * GET method handler
@@ -21,7 +22,7 @@ class DataProviderLogResource implements IResource{
      */
     public get(request: any, response: any, next: any): void {
         var lines: string = request.params.lines;
-        response.jsonp(this.context.retrieve(lines));
+        response.jsonp(this.context.retrieve(LogType.DATA_PROVIDER, lines));
     }
 
     /**

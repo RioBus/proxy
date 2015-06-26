@@ -1,6 +1,7 @@
 /// <reference path="../../defs/tsd.d.ts" />
 import IResource = require("./iResource");
 import IService  = require("../service/iService");
+import LogType   = require("../common/logType");
 import $inject   = require("../core/inject");
 /**
  * ItineraryResource class
@@ -21,7 +22,7 @@ class ServerLogResource implements IResource{
      */
     public get(request: any, response: any, next: any): void {
         var lines: string = request.params.lines;
-        response.jsonp(this.context.retrieve(lines));
+        response.jsonp(this.context.retrieve(LogType.SERVER, lines));
     }
 
     /**
