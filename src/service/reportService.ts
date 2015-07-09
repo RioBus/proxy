@@ -10,11 +10,9 @@ class ReportService implements IService {
 		return this.context.retrieve(minDate, maxDate);
 	}
 	
-	public retrieveList(): any {}
+	public delete(): any {}
 	
-	public remove(): any {}
-	
-	public save(): any {}
+	public create(): any {}
 	
 	public update(): any {}
 }

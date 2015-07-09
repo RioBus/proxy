@@ -27,16 +27,28 @@ class Config {
 			ip: "127.0.0.1",
 			port: "8080",
 			database: {
-				url: "http://riobus:riobus@arango:8529",
-				databaseName: "riobus"
+				driver: "mongodb",
+				config: {
+					dbName: "riobus",
+					host: "mongo",
+					user: "riobus",
+					pass: "riobus",
+					port: "27017"
+				}
 			}
 		},
 		production: {
 			ip: "0.0.0.0",
 			port: "80",
 			database: {
-				url: "http://riobus:riobus@arango:8529",
-				databaseName: "riobus"
+				driver: "mongodb",
+				config: {
+					dbName: "riobus",
+					host: "mongo",
+					user: "riobus",
+					pass: "riobus",
+					port: "27017"
+				}
 			}
 		}
 	}

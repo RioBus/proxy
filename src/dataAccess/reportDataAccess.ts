@@ -5,11 +5,9 @@ class ReportDataAccess implements IDataAccess {
 	
 	public retrieve(minDate: Date, maxDate: Date): any {}
 	
-	public retrieveList(): any {}
+	public delete(): any {}
 	
-	public remove(): any {}
-	
-	public save(): any {}
+	public create(): any {}
 	
 	public update(): any {}
 }

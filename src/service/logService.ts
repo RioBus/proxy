@@ -1,7 +1,5 @@
 import IBusiness 	 = require("../business/iBusiness");
 import IService 	 = require("./iService");
-import ItinerarySpot = require("../domain/itinerarySpot");
-import List 		 = require("../common/tools/list");
 import $inject 		 = require("../core/inject");
 
 class LogService implements IService {
@@ -12,11 +10,9 @@ class LogService implements IService {
 		return this.context.retrieve(type, lines);
 	}
 	
-	public retrieveList(): any {}
+	public delete(): any {}
 	
-	public remove(): any {}
-	
-	public save(): any {}
+	public create(): any {}
 	
 	public update(): any {}
 }

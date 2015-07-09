@@ -5,11 +5,9 @@ class LogDataAccess implements IDataAccess {
 	
 	public retrieve(line: string): any {}
 	
-	public retrieveList(): any {}
+	public delete(): any {}
 	
-	public remove(): any {}
-	
-	public save(): any {}
+	public create(): any {}
 	
 	public update(): any {}
 }

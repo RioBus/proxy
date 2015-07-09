@@ -1,8 +1,7 @@
-interface IDataAccess {
-	remove(...args: Object[]): 		 any;
-	retrieve(...args: Object[]): 	 any;
-	retrieveList(...args: Object[]): any;
-	save(...args: Object[]): 		 any;
-	update(...args: Object[]): 		 any;
+interface IDataAccess{
+	create(...args: any[]): any;
+	retrieve(...args: any[]): any;
+	update(...args: any[]): any;
+	delete(...args: any[]): any;
 }
 export = IDataAccess;

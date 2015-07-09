@@ -1,4 +1,3 @@
-
 /**
  * Describes a bus instance
  * @class Bus
@@ -6,10 +5,9 @@
  */
 class Bus{
 
-    public constructor(
-		private line: string, private order: string, private speed: number, 
-		private direction: number, private latitude: number, 
-		private longitude: number, private timestamp: Date, private sense?: string){
+    public constructor(private line: string, private order: string, private speed: number, 
+				private direction: number, private latitude: number, 
+				private longitude: number, private timestamp: Date, private sense?: string){
     }
 	
 	public getLine(): string{

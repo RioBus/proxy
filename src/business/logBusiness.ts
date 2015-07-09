@@ -13,19 +13,17 @@ class LogBusiness implements IBusiness {
 		return this.context.retrieve(logPath, lines);
 	}
 	
-	public retrieveList(): any {}
+	public delete(): any {}
 	
-	public remove(): any {}
-	
-	public save(): any {}
+	public create(): any {}
 	
 	public update(): any {}
 	
 	private getLogFilePath(logType: number): string {
 		switch(logType) {
 			case LogType.DATA_PROVIDER: return Config.log.dataProvider;
-			case LogType.RUNTIME: return Config.log.runtime;
 			case LogType.SERVER: return Config.log.server;
+			case LogType.RUNTIME: default: return Config.log.runtime;
 		}
 	}
 }

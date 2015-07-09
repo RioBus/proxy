@@ -1,22 +1,18 @@
-import IBusiness 	 = require("../business/iBusiness");
-import IService 	 = require("./iService");
-import ItinerarySpot = require("../domain/itinerarySpot");
-import List 		 = require("../common/tools/list");
-import $inject 		 = require("../core/inject");
+import IBusiness = require("../business/iBusiness");
+import IService  = require("./iService");
+import $inject 	 = require("../core/inject");
 
 class ItineraryService implements IService {
 	
 	public constructor(private context: IBusiness = $inject("business/itineraryBusiness")) {}
 	
-	public retrieve(line: string): List<ItinerarySpot> {
+	public retrieve(line: string): any {
 		return this.context.retrieve(line);
 	}
 	
-	public retrieveList(): any {}
+	public delete(): any {}
 	
-	public remove(): any {}
-	
-	public save(): any {}
+	public create(): any {}
 	
 	public update(): any {}
 }
