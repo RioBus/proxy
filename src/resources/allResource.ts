@@ -20,7 +20,7 @@ class AllResource implements IResource {
      * @param next
      */
     public get(request: any, response: any, next: any): void {
-        response.jsonp(this.context.retrieveList());
+        response.jsonp(this.context.retrieve());
     }
 
     /**
