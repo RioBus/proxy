@@ -28,7 +28,9 @@ class SearchDataAccess implements IDataAccess {
 	}
 	
 	private searchBuses(data: string[]): Bus[] {
-		return null;
+		var params: any[] = [];
+		data.forEach( (d)=>{ params.push({line: d}); });
+		return this.collection.find(params);
 	}
 	
 	public delete(): any {}
