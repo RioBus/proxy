@@ -79,10 +79,10 @@ class Router {
         keys.forEach( (key) => {
             var url = resources[key];
             var resource: IResource = $inject(key);
-            this.route('get', url, resource.get);
-            this.route('post', url, resource.post);
-            this.route('put', url, resource.put);
-            this.route('delete', url, resource.delete);
+            this.route('get', url, (request, response, next)=>{ resource.get(request, response, next); });
+            this.route('post', url, (request, response, next)=>{ resource.post(request, response, next); });
+            this.route('put', url, (request, response, next)=>{ resource.put(request, response, next); });
+            this.route('delete', url,  (request, response, next)=>{ resource.delete(request, response, next); });
             this.logger.info('Resource registered: ' + key);
         }, this);
     }
