@@ -32,15 +32,11 @@ class SearchDataAccess implements IDataAccess {
 	}
 	
 	private getByLine(lines: string[]): Bus[] {
-		var query: any[] = [];
-		lines.forEach( (line)=>{ query.push({line: line}); });
-		return this.collection.find(query);
+		return this.collection.find({ line: { $in: lines }});
 	}
 	
 	private getByCode(codes: string[]): Bus[] {
-		var query: any[] = [];
-		codes.forEach( (code)=>{ query.push({order: code}); });
-		return this.collection.find(query);
+		return this.collection.find({ order: { $in: codes }});
 	}
 	
 	public delete(): any {}
