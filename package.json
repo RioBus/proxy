@@ -4,12 +4,12 @@
   "description": "RioBus server application",
   "main": "dist/index.js",
   "scripts": {
-    "configure": "tsd reinstall && tsd rebundle",
-    "test": "node ./node_modules/gulp/bin/gulp.js buildTest && node_modules/mocha/bin/mocha .compiled/test/**/*",
-    "build": "node ./node_modules/gulp/bin/gulp.js build",
-    "release": "node ./node_modules/gulp/bin/gulp.js run release",
-    "start": "node ./node_modules/gulp/bin/gulp.js build && node ./node_modules/gulp/bin/gulp.js run",
-    "deploy": "node ./node_modules/gulp/bin/gulp.js build && node ./node_modules/gulp/bin/gulp.js release && node ./node_modules/gulp/bin/gulp.js run-release"
+    "configure": "tsd reinstall && tsd rebundle && npm install",
+    "test": "gulp buildTest && mocha .compiled/test/**/**/*",
+    "build": "gulp build",
+    "release": "gulp release",
+    "start": "gulp build && gulp run",
+    "deploy": "gulp build && gulp release && gulp run-release"
   },
   "repository": {
     "type": "git",
@@ -37,13 +37,12 @@
   },
   "homepage": "http://github.com/RioBus/server",
   "dependencies": {
-    "arangojs": "^3.8.1",
     "compression": "^1.4.4",
     "deasync": "^0.1.0",
     "emailjs": "^0.3.16",
     "express": "^4.12.4",
     "fs-extra": "^0.18.4",
-    "nodealytics": "0.0.6",
+    "mongodb": "^2.0.36",
     "request": "^2.57.0"
   },
   "devDependencies": {
@@ -52,7 +51,6 @@
     "gulp-shell": "^0.4.2",
     "gulp-typescript": "^2.7.6",
     "gulp-uglify": "^1.2.0",
-    "mocha": "^2.2.5",
-    "tsd": "^0.6.1"
+    "mocha": "^2.2.5"
   }
 }
