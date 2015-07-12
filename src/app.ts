@@ -53,7 +53,7 @@ class Application{
             
             var mailServer: MailServer = new MailServer();
             mailServer.sendMail(mail, (error, message) =>{
-                if(error) console.log(error);
+                if(error) console.log(error.stack);
                 if(message) console.log(message);
                 process.exit(-1);
             });
