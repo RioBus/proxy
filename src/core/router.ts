@@ -75,7 +75,7 @@ class Router {
      * @param {Array} resources
      */
     public registerResources(resources: Object): void {
-        var keys = Object.keys(resources);
+        var keys: string[] = Object.keys(resources);
         keys.forEach( (key) => {
             var url = resources[key];
             var resource: IResource = $inject(key);
