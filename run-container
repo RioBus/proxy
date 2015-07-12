@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -it -p 8080:8080 --link mongo:mongo -v $(pwd):/app --name riobus-server riobus-server /bin/bash
+docker run -it -p 8080:8080 -p 80:80 --link mongo:mongo -v $(pwd):/app --name riobus-server riobus-server /bin/bash
