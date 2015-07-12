@@ -29,12 +29,11 @@ class ItineraryDataAccess implements IDataAccess{
     public constructor(){
         this.logger = Factory.getLogger();
         this.db = new DbContext();
-        this.collection = this.db.collection<Itinerary>(this.collectionName, new ItineraryModelMap);
+        this.collection = this.db.collection<Itinerary>(this.collectionName, new ItineraryModelMap());
     }
     
 	public retrieve(data?: string): Itinerary | Itinerary[] {
         var output = (data!==undefined)? this.getItinerary(data) : this.getItineraries();
-        this.db.closeConnection();
         return output;
     }
 
@@ -44,7 +43,7 @@ class ItineraryDataAccess implements IDataAccess{
      * @return List<Itinerary>
      */
     private getItinerary(line: string): Itinerary{
-		return this.collection.find({line: line})[0];
+		return this.collection.findOne({line: line});
     }
     
     private getItineraries(): Itinerary[]{

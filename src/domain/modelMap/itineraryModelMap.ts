@@ -4,6 +4,8 @@ import ItinerarySpot = require("../entity/itinerarySpot");
 
 class ItineraryModelMap implements IModelMap {
 	
+	public preConfig(): void {}
+	
 	public getInstance<T>(data: any): Itinerary {
 		var spots: Array<ItinerarySpot> = new Array<ItinerarySpot>();
 		data.spots.forEach( (spot)=>{
