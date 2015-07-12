@@ -1,1 +1,1 @@
-docker build -t nodejs .
+docker build -t riobus-server .

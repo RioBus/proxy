@@ -1,4 +1,4 @@
-/// <reference path="../../../../../defs/node/node.d.ts" />
+/// <reference path="../../../../../defs/tsd.d.ts" />
 import ICollection 		= require("../../iCollection");
 import IDatabase   		= require("../../iDatabase");
 import IModelMap		= require("../../iModelMap");
@@ -12,7 +12,11 @@ class MongoDb implements IDatabase {
 	private context: any;
 	
 	public constructor(dbConfig: any){
-		var url: string = "mongodb://"+dbConfig.host+":"+dbConfig.port+"/"+dbConfig.dbName;
+		var url: string;
+		if(dbConfig.user!=="" && dbConfig.pass!=="")
+			url = "mongodb://"+dbConfig.user+":"+dbConfig.pass+"@"+dbConfig.host+":"+dbConfig.port+"/"+dbConfig.dbName;
+		else
+			url = "mongodb://"+dbConfig.host+":"+dbConfig.port+"/"+dbConfig.dbName;
 		var context: any = Sync.promise(MongoClient, MongoClient.connect, url);
 		if(context instanceof Error) throw context;
 		this.context = context;

@@ -1,5 +1,5 @@
-/// <reference path="../../../defs/node/node.d.ts" />
-import Config 	  = require("../../config");
+/// <reference path="../../../defs/tsd.d.ts" />
+import Config = require("../../config");
 import MailObject = require("./mailObject");
 
 class MailServer{
