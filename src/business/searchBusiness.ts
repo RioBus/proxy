@@ -8,7 +8,7 @@ class SearchBusiness implements IBusiness {
 	
 	public constructor(private context: IDataAccess = $inject("dataAccess/searchDataAccess")) {}
 	
-	public retrieve(data?: string): Bus[] { 
+	public retrieve(data?: string[]): Bus[] { 
 		return this.context.retrieve(data);
 	}
 	

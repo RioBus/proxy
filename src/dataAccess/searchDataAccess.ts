@@ -10,16 +10,15 @@ class SearchDataAccess implements IDataAccess {
 	
 	private context: DbContext;
 	private collection: ICollection<Bus>;
-	private collectionName: string = "buses";
+	private collectionName: string = "bus";
 	
 	public constructor() {
 		this.context = new DbContext();
-		this.collection = this.context.collection<Bus>(this.collectionName, new BusModelMap);
+		this.collection = this.context.collection<Bus>(this.collectionName, new BusModelMap());
 	}
 	
-	public retrieve(data?: string): Bus[] {
-		var output: Bus[] = (data===undefined)? this.getAllBuses() : this.searchBuses(data.split(","));  
-		this.context.closeConnection();
+	public retrieve(data?: string[]): Bus[] {
+		var output: Bus[] = (data===undefined)? this.getAllBuses() : this.searchBuses(data);
 		return output;
 	}
 	
@@ -28,9 +27,20 @@ class SearchDataAccess implements IDataAccess {
 	}
 	
 	private searchBuses(data: string[]): Bus[] {
-		var params: any[] = [];
-		data.forEach( (d)=>{ params.push({line: d}); });
-		return this.collection.find(params);
+		var output: Bus[] = this.getByLine(data);
+		return (output.length>0)? output : this.getByCode(data);
+	}
+	
+	private getByLine(lines: string[]): Bus[] {
+		var query: any[] = [];
+		lines.forEach( (line)=>{ query.push({line: line}); });
+		return this.collection.find(query);
+	}
+	
+	private getByCode(codes: string[]): Bus[] {
+		var query: any[] = [];
+		codes.forEach( (code)=>{ query.push({order: code}); });
+		return this.collection.find(query);
 	}
 	
 	public delete(): any {}

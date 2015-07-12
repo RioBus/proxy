@@ -7,6 +7,7 @@ class SearchService implements IService {
 	public constructor(private context: IBusiness = $inject("business/searchBusiness")) {}
 	
 	public retrieve(line: string): any {
+		var data: string[] = line.split(",");
 		return this.context.retrieve(line);
 	}
 	
