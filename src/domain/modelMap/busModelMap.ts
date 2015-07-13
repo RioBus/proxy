@@ -6,10 +6,7 @@ var Moment		   = require("moment-timezone");
 
 class BusModelMap implements IModelMap {
 	
-	public preConfig(collection: ICollection<Bus>): void {
-		collection.createIndex({line: 1});
-		collection.createIndex({order: 1});
-	}
+	public preConfig(collection: ICollection<Bus>): void {}
 	
 	public prepareToInput(data: any): any {
 		if(data.line!==undefined) data.line = data.line.toString();
@@ -31,9 +28,7 @@ class BusModelMap implements IModelMap {
 	}
 	
 	public getInstance<T>(data: any): Bus {
-		if(data!==null)
-			return new Bus(data.line, data.order, data.speed, data.direction, data.coordinates[0], data.coordinates[1], data.timestamp, data.sense, data._id);
-		return null;
+		return new Bus(data.line, data._id, data.speed, data.direction, data.coordinates[0], data.coordinates[1], data.timestamp, data.sense);
 	}
 }
 export = BusModelMap;

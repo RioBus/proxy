@@ -5,9 +5,7 @@ import ItinerarySpot = require("../entity/itinerarySpot");
 
 class ItineraryModelMap implements IModelMap {
 	
-	preConfig(collection: ICollection<Itinerary>): void {
-		collection.createIndex({line: 1});
-	}
+	preConfig(collection: ICollection<Itinerary>): void {}
 	
 	public prepareToInput(data: any): any {
 		if(data.line!==undefined) data.line = data.line.toString();
