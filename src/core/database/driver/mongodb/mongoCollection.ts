@@ -8,19 +8,19 @@ class MongoCollection<T> implements ICollection<T>{
 		map.preConfig(this);
 	}
 	
-	count(query: any={}): number {
+	public count(query: any={}): number {
 		query = this.map.prepareToInput(query);
 		return Sync.promise(this.context, this.context.count, query);
 	}
 	
-	createIndex(fieldOrSpec: any, options: any = {}): void {
+	public createIndex(fieldOrSpec: any, options: any = {}): void {
 		return Sync.promise(this.context, this.context.ensureIndex, fieldOrSpec, options);
 	}
 	
 	public find(query: any = {}): T[] {
-		query = this.map.prepareToInput(query);
+		//query = this.map.prepareToInput(query); // It had problemas with queries with special attributes. Need to fix later.
 		var find: any = Sync.promise(this.context, this.context.find, query);
-		var data: Array<any> = Sync.promise(find, find.toArray);
+		var data: any[] = Sync.promise(find, find.toArray);
 		var list: T[] = new Array<T>();
 		data.forEach((obj) => {
 			list.push(this.map.getInstance<T>(obj));
