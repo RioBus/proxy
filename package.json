@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "configure": "tsd reinstall && tsd rebundle && npm install",
-    "test": "gulp buildTest && mocha .compiled/test/**/**/*",
+    "test": "gulp buildTest && mocha .compiled/test/**/**/* --timeout 5000",
     "build": "gulp build",
     "release": "gulp release",
     "start": "gulp build && gulp run",
