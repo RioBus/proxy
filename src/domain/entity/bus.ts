@@ -54,7 +54,7 @@ class Bus{
 	}
 	
 	public getUpdateTime(): Date{
-		return new Date(this.timestamp);
+		return (new Date(this.timestamp));
 	}
 }
 export = Bus;
