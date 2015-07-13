@@ -1,1 +1,1 @@
-docker build -t riobus-server .
+docker build -t riobus .
