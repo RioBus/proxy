@@ -22,7 +22,8 @@ class DataProviderLogResource implements IResource{
      */
     public get(request: any, response: any, next: any): void {
         var lines: string = request.params.lines;
-        response.jsonp(this.context.retrieve(LogType.DATA_PROVIDER, lines));
+        response.set('Content-Type', 'text/plain');
+        response.send(this.context.retrieve(LogType.DATA_PROVIDER, lines));
     }
 
     /**

@@ -6,7 +6,7 @@ class LogService implements IService {
 	
 	public constructor(private context: IBusiness = $inject("business/logBusiness")) {}
 	
-	public retrieve(type: string, lines: number): any {
+	public retrieve(type: string, lines: number): string[] {
 		return this.context.retrieve(type, lines);
 	}
 	
