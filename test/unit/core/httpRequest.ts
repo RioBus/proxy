@@ -15,7 +15,6 @@ describe("[UNIT] HttpRequest", () => {
     };
 	
 	it("should return something asynchronously from GET request", (done) => {
-		this.timeout(10000);
 		http.get("http://google.com/", (error: Error, response: any)=>{
 			if(error) Assert(error instanceof Error);
 			if(response) Assert(response.statusCode > 0);
@@ -24,7 +23,6 @@ describe("[UNIT] HttpRequest", () => {
 	});
 	
 	it("should return something synchronously from GET request", (done) => {
-		this.timeout(10000);
 		try{
 			var response = http.get("http://google.com/");
 			Assert(response.statusCode > 0);
@@ -36,7 +34,6 @@ describe("[UNIT] HttpRequest", () => {
 	});
 	
 	it("should return something synchronously from GET request using options object", (done) => {
-		this.timeout(10000);
 		try{
 			var response = http.get(options);
 			Assert(response.statusCode > 0);
