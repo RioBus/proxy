@@ -4,7 +4,7 @@
   "description": "RioBus server application",
   "main": "dist/index.js",
   "scripts": {
-    "configure": "tsd reinstall && tsd rebundle && npm install",
+    "configure": "tsd reinstall && tsd rebundle && npm install --python=python2.7",
     "test": "gulp buildTest && mocha .compiled/test/**/**/* --timeout 5000",
     "build": "gulp build",
     "release": "gulp release",
