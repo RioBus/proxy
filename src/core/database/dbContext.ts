@@ -28,7 +28,7 @@ class DbContext{
 		switch(connector) {
 			case "mongodb":
 			case "mongo":
-				connector = driverPath+"/mongodb/MongoDb";
+				connector = driverPath+"/mongodb/mongoDb";
 				break;
 			default: break;
 		}
