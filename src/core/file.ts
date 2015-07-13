@@ -60,7 +60,7 @@ class File{
      * Reads the file content
      * @return string
      */
-    public read(): string[]{
+    public read(): string {
         return this.fs.readFileSync(this.fullPath, 'utf8');
     }
 }
