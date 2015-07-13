@@ -62,7 +62,6 @@ class Config {
 	public static resources: Object = {
 		"resources/allResource"				: "/search",
 		"resources/dataProviderLogResource" : "/log/dataprovider/:lines",
-		"resources/intervalReportsResource" : "/reports/:minDate/:maxDate",
 		"resources/itineraryResource"		: "/itinerary/:line",
 		"resources/runtimeLogResource"		: "/log/runtime/:lines",
 		"resources/searchResource"			: "/search/:platformId/:data",
