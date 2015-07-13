@@ -8,9 +8,13 @@ class LogBusiness implements IBusiness {
 	
 	public constructor(private context: IDataAccess = $inject("dataAccess/logDataAccess")) {}
 	
-	public retrieve(logType: number, lines: string): string[] {
+	public retrieve(logType: number, lines: string): string {
 		var logPath: string = this.getLogFilePath(logType);
-		return this.context.retrieve(logPath, lines);
+		try{
+			return this.context.retrieve(logPath, lines).join("\n");
+		} catch (e) {
+			return "";
+		}
 	}
 	
 	public delete(): any {}
