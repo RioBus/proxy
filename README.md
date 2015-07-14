@@ -1,8 +1,8 @@
 RioBus
 ======
 
-[![Build Status](https://travis-ci.org/RioBus/server.svg)](https://travis-ci.org/RioBus/server)
-[![Coverage Status](https://coveralls.io/repos/RioBus/server/badge.svg)](https://coveralls.io/r/RioBus/server)
+[![Build Status](https://travis-ci.org/RioBus/proxy.svg)](https://travis-ci.org/RioBus/proxy)
+[![Coverage Status](https://coveralls.io/repos/RioBus/proxy/badge.svg)](https://coveralls.io/r/RioBus/proxy)
 
 O RioBus é um sistema colaborativo de monitoramento de ônibus em tempo real, que utiliza a API aberta de dados de
 mobilidade urbana fornecida pela parceria entre a Prefeitura do Rio de Janeiro e a FETRANSPOR.
