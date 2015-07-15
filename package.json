@@ -5,8 +5,6 @@
   "main": "dist/index.js",
   "scripts": {
     "configure": "tsd reinstall && tsd rebundle && npm install --python=python2.7",
-    "docker-image": "docker build -t riobus .",
-    "docker-container": "docker run -it -p 8080:8080 -p 80:80 --link mongo:mongo -v $(pwd):/app --name riobus-server riobus /bin/bash",
     "test": "gulp buildTest && mocha .compiled/test/**/**/* --timeout 5000",
     "build": "gulp build",
     "release": "gulp release",
