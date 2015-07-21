@@ -1,9 +1,10 @@
 import Bus 		   = require("../domain/entity/bus");
-import Config	   = require("../config");
 import IBusiness   = require("../business/iBusiness");
 import IDataAccess = require("../dataAccess/iDataAccess");
 import List 	   = require("../common/tools/list");
 import $inject 	   = require("../core/inject");
+
+declare var Config: any;
 
 class SearchBusiness implements IBusiness {
 	

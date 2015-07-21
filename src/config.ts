@@ -7,14 +7,14 @@ class Config {
 		dataProvider: "/tmp/riobus/data-provider.log",
 		runtime: 	  "/tmp/riobus/runtime.log",
 		server: 	  "/tmp/riobus/server.log"
-	}
+	};
 	
 	public static errorMailMessage: any = {
 		from: "No-reply <your@provider.com>",
 		to: "",
 		subject: "[ERROR] Server down!",
 		text: "An error ocurred in the server\n\n$$\n\nand it shut down."
-	}
+	};
 
 	public static environment: any = {
 		mailServer: {
@@ -51,11 +51,11 @@ class Config {
 				}
 			}
 		}
-	}
+	};
 
 	public static isProduction(): Boolean {
 		return process.argv.indexOf("--production") > -1;
-	}
+	};
 	
 	public static maxSearchItems = 10;
 
@@ -66,7 +66,7 @@ class Config {
 		"resources/runtimeLogResource"		: "/log/runtime/:lines",
 		"resources/searchResource"			: "/search/:platformId/:data",
 		"resources/serverLogResource"		: "/log/server/:lines"
-	}
+	};
 	
 	public static analytics: any = {
         ua: 'UA-49628280-3',

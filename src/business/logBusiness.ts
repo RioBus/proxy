@@ -1,8 +1,9 @@
-import Config	   = require("../config");
 import IBusiness   = require("../business/iBusiness");
 import IDataAccess = require("../dataAccess/iDataAccess");
 import LogType	   = require("../common/logType");
 import $inject 	   = require("../core/inject");
+
+declare var Config: any;
 
 class LogBusiness implements IBusiness {
 	

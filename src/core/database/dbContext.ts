@@ -1,10 +1,11 @@
 /// <reference path="../../../defs/node/node.d.ts" />
-import Config 		= require("../../config");
 import ICollection  = require("./iCollection");
 import IDatabase 	= require("./iDatabase");
 import IModelMap	= require("./iModelMap");
 import List 		= require("../../common/tools/list");
 import $inject 		= require("../inject");
+
+declare var Config: any;
 
 var config: any = (Config.isProduction())?
 	Config.environment.production.database : Config.environment.development.database;

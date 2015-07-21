@@ -1,7 +1,8 @@
 /// <reference path="../../defs/tsd.d.ts" />
 import Analytics = require("./analytics");
 import Logger    = require("./logger");
-import Config    = require("../config");
+
+declare var Config: any;
 
 /**
  * Factory Helper

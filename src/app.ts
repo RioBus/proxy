@@ -3,16 +3,16 @@ import Analytics  = require("./common/analytics");
 import Factory    = require("./common/factory");
 import Logger     = require("./common/logger");
 import Router     = require("./core/router");
-import Config     = require("./config");
 import MailServer = require("./core/mail/mailServer");
 import MailObject = require("./core/mail/mailObject");
 import Utils      = require("./common/tools/utils");
 
+declare var Config: any;
 /**
  * Main application process.
  * @class App
  */
-class Application{
+class App {
 
     /**
      * Init application
@@ -22,7 +22,6 @@ class Application{
      * @return {void}
      */
     public static main(argv: string[]): void{
-        "use strict";
         
         var analytics: Analytics = Factory.getAnalytics();
         analytics.initialize();
@@ -60,5 +59,4 @@ class Application{
         });
     }
 }
-
-export = Application;
+export = App;

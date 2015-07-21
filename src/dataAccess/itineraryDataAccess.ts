@@ -1,4 +1,3 @@
-import Config            = require("../config");
 import Factory           = require("../common/factory");
 import File              = require("../core/file");
 import ICollection       = require("../core/database/iCollection");
@@ -12,6 +11,7 @@ import Strings           = require("../strings");
 import DbContext         = require("../core/database/dbContext");
 import Sync              = require("../core/sync");
 
+declare var Config: any;
 /**
  * DataAccess referred to Itinerary stored data
  *
