@@ -3,8 +3,9 @@ import BusModelMap = require("../domain/modelMap/busModelMap");
 import DbContext   = require("../core/database/dbContext");
 import ICollection = require("../core/database/iCollection");
 import IDataAccess = require("../dataAccess/iDataAccess");
-import Sync		   = require("../core/sync");
 import $inject 	   = require("../core/inject");
+
+declare var database: DbContext;
 
 class SearchDataAccess implements IDataAccess {
 	
@@ -13,7 +14,7 @@ class SearchDataAccess implements IDataAccess {
 	private collectionName: string = "bus";
 	
 	public constructor() {
-		this.context = new DbContext();
+		this.context = database;
 		this.collection = this.context.collection<Bus>(this.collectionName, new BusModelMap());
 	}
 	

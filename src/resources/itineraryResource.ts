@@ -21,7 +21,9 @@ class ItineraryResource implements IResource{
      */
     public get(request: any, response: any, next: any): void {
         var line: string = request.params.line;
-        response.jsonp(this.context.retrieve(line));
+        var output: any = this.context.retrieve(line);
+        if(output===null) output = {};
+        response.jsonp(output);
     }
 
     /**

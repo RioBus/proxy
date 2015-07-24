@@ -8,14 +8,13 @@ describe("[UNIT] Itinerary", () => {
 	var line: string = "line";
 	var description: string = "description";
 	var agency: string = "agency";
-	var id: number = 693182736981237;
 	
 	var spots: ItinerarySpot[] = [];
 	spots[0] = new ItinerarySpot(10, 20, false);
 	spots[1] = new ItinerarySpot(11, 21, false);
 	spots[2] = new ItinerarySpot(7, 13, true);
 	
-	var itinerary: Itinerary = new Itinerary(line, description, agency, spots, id);
+	var itinerary: Itinerary = new Itinerary(line, description, agency, spots);
 	
 	it("should get line value", (done) => {
 		Assert.equal(itinerary.getLine(), line);
@@ -29,11 +28,6 @@ describe("[UNIT] Itinerary", () => {
 	
 	it("should get agency value", (done) => {
 		Assert.equal(itinerary.getAgency(), agency);
-		done();
-	});
-	
-	it("should get id value", (done) => {
-		Assert.equal(itinerary.getId(), id);
 		done();
 	});
 	

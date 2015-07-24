@@ -31,7 +31,7 @@ class ItineraryModelMap implements IModelMap {
 				spots.push(new ItinerarySpot(spot.coordinates[0], spot.coordinates[1], spot.returning));
 			});
 		}
-		return new Itinerary(data.line, data.description, data.agency, spots, data._id);
+		return new Itinerary(data.line, data.description, data.agency, spots);
 	}
 }
 export = ItineraryModelMap;

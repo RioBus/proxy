@@ -12,9 +12,8 @@ describe("[UNIT] Bus", () => {
 	var longitude: number = 20;
 	var timestamp: string = (new Date()).toISOString();
 	var sense: string = "sense";
-	var id: number = 693182736981237;
 	
-	var bus: Bus = new Bus(line, order, speed, direction, latitude, longitude, timestamp, sense, id);
+	var bus: Bus = new Bus(line, order, speed, direction, latitude, longitude, timestamp, sense);
 	
 	it("should get line value", (done) => {
 		Assert.equal(bus.getLine(), line);
@@ -67,11 +66,6 @@ describe("[UNIT] Bus", () => {
 		var newSense: string = "another sense value";
 		bus.setSense(newSense);
 		Assert.equal(bus.getSense(), newSense);
-		done();
-	});
-	
-	it("should get id value", (done) => {
-		Assert.equal(bus.getId(), id);
 		done();
 	});
 });

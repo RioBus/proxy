@@ -1,5 +1,6 @@
 /// <reference path="../defs/tsd.d.ts" />
 import Analytics  = require("./common/analytics");
+import DbContext  = require("./core/database/dbContext");
 import Factory    = require("./common/factory");
 import Logger     = require("./common/logger");
 import Router     = require("./core/router");
@@ -7,7 +8,7 @@ import MailServer = require("./core/mail/mailServer");
 import MailObject = require("./core/mail/mailObject");
 import Utils      = require("./common/tools/utils");
 
-declare var Config: any;
+declare var Config: any, global;
 /**
  * Main application process.
  * @class App
@@ -22,6 +23,9 @@ class App {
      * @return {void}
      */
     public static main(argv: string[]): void{
+        App.handleFatalError();
+        
+        global.database = new DbContext();
         
         var analytics: Analytics = Factory.getAnalytics();
         analytics.initialize();

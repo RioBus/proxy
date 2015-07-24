@@ -9,13 +9,9 @@ class Bus{
 
     public constructor(private line: string, private order: string, private speed: number, 
 				private direction: number, private latitude: number, 
-				private longitude: number, timestamp: string, private sense?: string, private _id?: number){
+				private longitude: number, timestamp: string, private sense?: string){
 		this.timestamp = (new Date(timestamp)).toISOString();
     }
-	
-	public getId(): number {
-		return this._id;
-	}
 	
 	public getLine(): string{
 		return this.line;
