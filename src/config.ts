@@ -64,7 +64,8 @@ class Config {
 		"resources/dataProviderLogResource" : "/log/dataprovider/:lines",
 		"resources/itineraryResource"		: "/itinerary/:line",
 		"resources/runtimeLogResource"		: "/log/runtime/:lines",
-		"resources/searchResource"			: "/search/:platformId/:data",
+		"resources/oldSearchResource"		: "/search/:platformId/:data",
+		"resources/searchResource"			: "/search/:data",
 		"resources/serverLogResource"		: "/log/server/:lines"
 	};
 	

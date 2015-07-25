@@ -8,7 +8,7 @@ import $inject   = require("../core/inject");
  * Defines a Resource and it's characteristics
  * @class ItineraryResource
  */
-class SearchResource implements IResource{
+class OldSearchResource implements IResource{
     
     public constructor(private context: IService = $inject("service/searchService")) {}
 
