@@ -29,7 +29,6 @@ class App {
         
         var analytics: Analytics = Factory.getAnalytics();
         analytics.initialize();
-        analytics.trackPage('REST', '/en/serverside/test', ()=>{});
         
         var logger: Logger = Factory.getRuntimeLogger();
         logger.info('Starting the server...');

@@ -2,7 +2,6 @@
 import ICollection 		= require("../../iCollection");
 import IDatabase   		= require("../../iDatabase");
 import IModelMap		= require("../../iModelMap");
-import List 	   		= require("../../../../common/tools/list");
 import MongoCollection  = require("./mongoCollection");
 import Sync		   		= require("../../../sync");
 var MongoClient    		= require('mongodb').MongoClient;
