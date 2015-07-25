@@ -41,8 +41,7 @@ class Strings {
             request: {
                 lines: 'Requesting line(s): ',
                 orders: 'Requesting orders(s): ',
-                all: 'Requesting all lines',
-                samples: 'Requesting samples'
+                all: 'Requesting all lines'
             }
         }
     };
