@@ -41,21 +41,18 @@ class Router {
         switch (method) {
             case 'post':
                 this.driver.post(route, (request, response, next) => {
-                    "use strict";
                     logger.info('Serving route ' + request.url + ' (POST)');
                     callback(request, response, next);
                 });
                 break;
             case 'put':
                 this.driver.put(route, (request, response, next) => {
-                    "use strict";
                     logger.info('Serving route ' + request.url + ' (PUT)');
                     callback(request, response, next);
                 });
                 break;
             case 'delete':
                 this.driver.delete(route, (request, response, next) => {
-                    "use strict";
                     logger.info('Serving route ' + request.url + ' (DELETE)');
                     callback(request, response, next);
                 });
@@ -63,7 +60,6 @@ class Router {
             case 'get':
             default:
                 this.driver.get(route, (request, response, next) => {
-                    "use strict";
                     logger.info('Serving route ' + request.url + ' (GET)');
                     callback(request, response, next);
                 });
@@ -91,9 +87,10 @@ class Router {
     public registerRedirects(paths: Object): void {
         var keys: string[] = Object.keys(paths);
         keys.forEach( (key) => {
-            var url = paths[key];
+            var url: string = paths[key];
             this.route("get", key, (request, response, next)=>{
-                var fullUrl: string = request.protocol + '://' + request.get('host') + url +request.originalUrl;
+                var fullUrl: string = (url.indexOf("://")>-1)? url : url+request.originalUrl;
+                this.logger.info("Redirecting to '" +fullUrl+"'...");
                 response.redirect(fullUrl);
             });
             this.logger.info("Path redirection registered: '" + key + "' to '"+url+"'");
