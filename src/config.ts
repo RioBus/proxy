@@ -62,13 +62,22 @@ class Config {
 	public static resources: Object = {
 		"resources/v2/allResource"			   : "/v2/search",
 		"resources/v2/dataProviderLogResource" : "/v2/log/dataprovider/:lines",
-		"resources/v2/itineraryResource"	   : "/v3/itinerary/:line",
+		"resources/v2/itineraryResource"	   : "/v2/itinerary/:line",
 		"resources/v2/runtimeLogResource"	   : "/v2/log/runtime/:lines",
 		"resources/v2/searchResource"	       : "/v2/search/:platformId/:data",
 		"resources/v2/serverLogResource"	   : "/v2/log/server/:lines",
 		
 		"resources/v3/itineraryResource"	   : "/v3/itinerary/:line",
 		"resources/v3/searchResource"		   : "/v3/search/:data"
+	};
+	
+	public static resourceRedirect: Object = {
+		"/search": 					 "/v2",
+		"/itinerary/:line" : 		 "/v2",
+		"/log/dataprovider/:lines":  "/v2",
+		"/log/runtime/:lines": 		 "/v2",
+		"/log/server/:lines": 		 "/v2",
+		"/search/:platformId/:data": "/v2"
 	};
 	
 	public static analytics: any = {

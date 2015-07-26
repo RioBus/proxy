@@ -31,8 +31,8 @@ class Router {
     /**
      * Schedules a route with a callback
      *
-     * @param {String} method
-     * @param {String} route
+     * @param {string} method
+     * @param {string} route
      * @param {Function} callback
      */
     private route(method: string, route: string, callback: (request: any, response: any, next: any)=>void): void {
@@ -72,7 +72,7 @@ class Router {
 
     /**
      * Registers a list of resources to handle routes
-     * @param {Array} resources
+     * @param {Object} resources
      */
     public registerResources(resources: Object): void {
         var keys: string[] = Object.keys(resources);
@@ -86,18 +86,29 @@ class Router {
             this.logger.info('Resource registered: ' + key);
         }, this);
     }
+    
+    public registerRedirects(paths: Object): void {
+        var keys: string[] = Object.keys(paths);
+        keys.forEach( (key) => {
+            var url = paths[key];
+            this.route("get", key, (request, response, next)=>{
+                var fullUrl: string = request.protocol + '://' + request.get('host') + url +request.originalUrl;
+                response.redirect(fullUrl);
+            });
+            this.logger.info("Path redirection registered: '" + key + "' to '"+url+"'");
+        }, this);
+    }
 
     /**
      * Starts the RESTful router
-     * @param {String} ip
+     * @param {string} ip
      * @param {int} port
      * @param {Function} callback
-     * @returns {http.Server}
+     * @returns {void}
      */
     public start(ip: string, port: string, callback?: ()=>void): void {
         var self = this;
         this.driver.listen(port, ip, () => {
-            "use strict";
             if (callback !== undefined) callback();
             self.logger.info('Server started in http://' + ip + ':' + port);
         });

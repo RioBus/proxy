@@ -36,6 +36,7 @@ class App {
         // Configuring the RESTful router to handle HTTP requests
         var router: Router = new Router();
         router.registerResources(Config.resources); // Registering resources to handle the URLs
+        router.registerRedirects(Config.resourceRedirect);
         
         var environment: any = Config.isProduction()?
          Config.environment.production : Config.environment.development;

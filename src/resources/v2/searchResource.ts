@@ -2,13 +2,15 @@
 import IResource = require("../iResource");
 import IService  = require("../../service/iService");
 import $inject   = require("../../core/inject");
+
+declare var Strings;
 /**
  * ItineraryResource class
  *
  * Defines a Resource and it's characteristics
  * @class ItineraryResource
  */
-class OldSearchResource implements IResource{
+class SearchResource implements IResource{
     
     public constructor(private context: IService = $inject("service/searchService")) {}
 
@@ -21,9 +23,23 @@ class OldSearchResource implements IResource{
      */
     public get(request: any, response: any, next: any): void {
         var searchData: any = request.params.data;
-        var userAgent: string = request.headers['user-agent'];
-        if(userAgent===undefined) userAgent = "desconhecido";
+        var userAgent: string = request.params.platformId;
         response.jsonp(this.context.retrieve(userAgent, searchData));
+    }
+
+    /**
+     * Gets the given platform name
+     * @param {number} platform
+     * @returns {string}
+     */
+    private getPlatformName(platform: number){
+        let text = Strings.business.search.platform;
+        switch(platform){
+            case 1: return text.web;
+            case 2: return text.mobile;
+            case 3: return text.legacy;
+            default: return text.notSet;
+        }
     }
 
     /**
