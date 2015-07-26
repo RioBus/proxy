@@ -1,4 +1,3 @@
-/// <reference path="../defs/tsd.d.ts" />
 import Analytics  = require("./common/analytics");
 import DbContext  = require("./core/database/dbContext");
 import Factory    = require("./common/factory");
@@ -8,7 +7,7 @@ import MailServer = require("./core/mail/mailServer");
 import MailObject = require("./core/mail/mailObject");
 import Utils      = require("./common/tools/utils");
 
-declare var Config: any, global;
+declare var Config, global, process;
 /**
  * Main application process.
  * @class App
@@ -19,7 +18,7 @@ class App {
      * Init application
      *
      * @method main
-     * @param {String[]} argv Process arg list
+     * @param {string[]} argv Process arg list
      * @return {void}
      */
     public static main(argv: string[]): void{

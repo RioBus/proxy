@@ -1,4 +1,4 @@
-/// <reference path="../defs/tsd.d.ts" />
+declare var __dirname, process;
 class Config {
 	
 	public static rootPath: string = __dirname;

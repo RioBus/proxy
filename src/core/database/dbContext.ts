@@ -1,10 +1,10 @@
-/// <reference path="../../../defs/tsd.d.ts" />
+declare var Config;
+
 import ICollection  = require("./iCollection");
 import IDatabase 	= require("./iDatabase");
 import IModelMap	= require("./iModelMap");
 import $inject 		= require("../inject");
 
-declare var Config;
 
 // Gets the global database configuration from Config
 var config: any = (Config.isProduction())?

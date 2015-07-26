@@ -1,4 +1,3 @@
-/// <reference path="../../defs/tsd.d.ts" />
 import Analytics = require("./analytics");
 import Logger    = require("./logger");
 
@@ -18,7 +17,6 @@ class Factory {
      * @returns {Logger}
      */
     public static getLogger(filePath?: string, flag?: string): Logger {
-        "use strict";
         if (!filePath) filePath = Config.log.runtime;
         if (!flag) flag = "";
         return new Logger(filePath, flag);

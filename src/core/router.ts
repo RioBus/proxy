@@ -1,4 +1,5 @@
-/// <reference path="../../defs/tsd.d.ts" />
+declare var require;
+
 import Factory   = require("../common/factory");
 import IResource = require("../resources/iResource");
 import Logger    = require("../common/logger");

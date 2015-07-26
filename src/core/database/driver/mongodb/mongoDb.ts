@@ -1,9 +1,11 @@
-/// <reference path="../../../../../defs/tsd.d.ts" />
+declare var require;
+
 import ICollection 		= require("../../iCollection");
 import IDatabase   		= require("../../iDatabase");
 import IModelMap		= require("../../iModelMap");
 import MongoCollection  = require("./mongoCollection");
 import Sync		   		= require("../../../sync");
+
 var MongoClient    		= require('mongodb').MongoClient;
 
 class MongoDb implements IDatabase {

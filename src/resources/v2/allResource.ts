@@ -2,6 +2,7 @@
 import IResource = require("../iResource");
 import IService  = require("../../service/iService");
 import $inject   = require("../../core/inject");
+
 /**
  * ItineraryResource class
  *

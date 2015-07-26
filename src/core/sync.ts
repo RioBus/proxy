@@ -1,4 +1,5 @@
-/// <reference path="../../defs/tsd.d.ts" />
+declare var require;
+
 var DeAsync = require("deasync");
 
 /**
