@@ -1,16 +1,16 @@
-/// <reference path="../../defs/tsd.d.ts" />
-import IResource = require("./iResource");
-import IService  = require("../service/iService");
-import $inject   = require("../core/inject");
+/// <reference path="../../../defs/tsd.d.ts" />
+import IResource = require("../iResource");
+import IService  = require("../../service/iService");
+import $inject   = require("../../core/inject");
 /**
  * ItineraryResource class
  *
  * Defines a Resource and it's characteristics
  * @class ItineraryResource
  */
-class AllResource implements IResource {
+class ItineraryResource implements IResource{
     
-    public constructor(private context: IService = $inject("service/searchService")) {}
+    public constructor(private context: IService = $inject("service/itineraryService")) {}
 
     /**
      * GET method handler
@@ -20,7 +20,10 @@ class AllResource implements IResource {
      * @param next
      */
     public get(request: any, response: any, next: any): void {
-        response.jsonp(this.context.retrieve());
+        var line: string = request.params.line;
+        var output: any = this.context.retrieve(line);
+        if(output===null) output = {};
+        response.jsonp(output);
     }
 
     /**
@@ -56,4 +59,4 @@ class AllResource implements IResource {
         response.json({type: "error", message: "Operation not implemented"});
     }
 }
-export = AllResource;
+export = ItineraryResource;

@@ -1,17 +1,16 @@
-/// <reference path="../../defs/tsd.d.ts" />
-import IResource = require("./iResource");
-import IService  = require("../service/iService");
-import LogType   = require("../common/logType");
-import $inject   = require("../core/inject");
+/// <reference path="../../../defs/tsd.d.ts" />
+import IResource = require("../iResource");
+import IService  = require("../../service/iService");
+import $inject   = require("../../core/inject");
 /**
  * ItineraryResource class
  *
  * Defines a Resource and it's characteristics
  * @class ItineraryResource
  */
-class DataProviderLogResource implements IResource{
+class AllResource implements IResource {
     
-    public constructor(private context: IService = $inject("service/logService")) {}
+    public constructor(private context: IService = $inject("service/searchService")) {}
 
     /**
      * GET method handler
@@ -21,9 +20,7 @@ class DataProviderLogResource implements IResource{
      * @param next
      */
     public get(request: any, response: any, next: any): void {
-        var lines: string = request.params.lines;
-        response.set('Content-Type', 'text/plain');
-        response.send(this.context.retrieve(LogType.DATA_PROVIDER, lines));
+        response.jsonp(this.context.retrieve());
     }
 
     /**
@@ -59,4 +56,4 @@ class DataProviderLogResource implements IResource{
         response.json({type: "error", message: "Operation not implemented"});
     }
 }
-export = DataProviderLogResource;
+export = AllResource;

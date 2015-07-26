@@ -1,8 +1,8 @@
-/// <reference path="../../defs/tsd.d.ts" />
-import IResource = require("./iResource");
-import IService  = require("../service/iService");
-import LogType   = require("../common/logType");
-import $inject   = require("../core/inject");
+/// <reference path="../../../defs/tsd.d.ts" />
+import IResource = require("../iResource");
+import IService  = require("../../service/iService");
+import LogType   = require("../../common/logType");
+import $inject   = require("../../core/inject");
 /**
  * ItineraryResource class
  *
