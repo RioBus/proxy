@@ -1,22 +1,18 @@
 import Factory           = require("../common/factory");
-import File              = require("../core/file");
 import ICollection       = require("../core/database/iCollection");
-import HttpRequest       = require("../core/httpRequest");
 import IDataAccess       = require("./iDataAccess");
 import Itinerary         = require("../domain/entity/itinerary");
-import ItinerarySpot     = require("../domain/entity/itinerarySpot");
 import ItineraryModelMap = require("../domain/modelMap/itineraryModelMap");
 import Logger            = require("../common/logger");
-import Strings           = require("../strings");
 import DbContext         = require("../core/database/dbContext");
 
 declare var Config: any, database: DbContext;
+
 /**
  * DataAccess referred to Itinerary stored data
  *
  * Does operations over Itinerary data
  * @class ItineraryDataAccess
- * @constructor
  */
 class ItineraryDataAccess implements IDataAccess{
     
@@ -30,7 +26,12 @@ class ItineraryDataAccess implements IDataAccess{
         this.db = database;
         this.collection = this.db.collection<Itinerary>(this.collectionName, new ItineraryModelMap());
     }
-    
+
+    /**
+     * Retrieves the Itinerary data.
+     * @param {string} line (optional)
+     * @return {Itinerary | Itinerary[]}
+     */
 	public retrieve(data?: string): Itinerary | Itinerary[] {
         var output = (data!==undefined)? this.getItinerary(data) : this.getItineraries();
         return output;
@@ -38,21 +39,34 @@ class ItineraryDataAccess implements IDataAccess{
 
     /**
      * Retrieves the Itinerary spots given a line
-     * @param {String} line
-     * @return List<Itinerary>
+     * @param {string} line
+     * @return {Itinerary}
      */
     private getItinerary(line: string): Itinerary{
 		return this.collection.findOne({line: line});
     }
-    
+
+    /**
+     * Retrieves all the Itineraries
+     * @return {Itinerary[]}
+     */
     private getItineraries(): Itinerary[]{
         return this.collection.find();
     }
-    
+	
+	/**
+	 * Not implemented.
+	 */
 	public update(...args: any[]): any {}
-    
+	
+	/**
+	 * Not implemented.
+	 */
 	public delete(...args: any[]): any {}
-    
+	
+	/**
+	 * Not implemented.
+	 */
     public create(...args: any[]): any {}
 }
 export = ItineraryDataAccess;

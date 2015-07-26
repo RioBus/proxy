@@ -26,10 +26,19 @@ class SearchBusiness implements IBusiness {
 		return this.context.retrieve(data);
 	}
 	
+	/**
+	 * Not implemented.
+	 */
 	public delete(): any {}
 	
+	/**
+	 * Not implemented.
+	 */
 	public create(): any {}
 	
+	/**
+	 * Not implemented.
+	 */
 	public update(): any {}
 }
 export = SearchBusiness;

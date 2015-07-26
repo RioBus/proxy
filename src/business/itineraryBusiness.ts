@@ -11,10 +11,19 @@ class ItineraryBusiness implements IBusiness {
 		return this.context.retrieve(line);
 	}
 	
+	/**
+	 * Not implemented.
+	 */
 	public delete(): any {}
 	
+	/**
+	 * Not implemented.
+	 */
 	public create(): any {}
 	
+	/**
+	 * Not implemented.
+	 */
 	public update(): any {}
 }
 export = ItineraryBusiness;

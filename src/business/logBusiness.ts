@@ -18,12 +18,6 @@ class LogBusiness implements IBusiness {
 		}
 	}
 	
-	public delete(): any {}
-	
-	public create(): any {}
-	
-	public update(): any {}
-	
 	private getLogFilePath(logType: number): string {
 		switch(logType) {
 			case LogType.DATA_PROVIDER: return Config.log.dataProvider;
@@ -31,5 +25,20 @@ class LogBusiness implements IBusiness {
 			case LogType.RUNTIME: default: return Config.log.runtime;
 		}
 	}
+	
+	/**
+	 * Not implemented.
+	 */
+	public delete(): any {}
+	
+	/**
+	 * Not implemented.
+	 */
+	public create(): any {}
+	
+	/**
+	 * Not implemented.
+	 */
+	public update(): any {}
 }
 export = LogBusiness;
