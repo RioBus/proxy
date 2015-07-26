@@ -15,8 +15,8 @@ class ItineraryService implements IService {
 	 * @param {string} line
 	 * @return {Itinerary}
 	 */
-	public retrieve(line: string): any {
-		return this.context.retrieve(line);
+	public retrieve(line: string, isLegacy?: boolean): any {
+		return this.context.retrieve(line, isLegacy);
 	}
 	
 	/**

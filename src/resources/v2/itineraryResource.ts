@@ -20,7 +20,7 @@ class ItineraryResource implements IResource{
      */
     public get(request: any, response: any, next: any): void {
         var line: string = request.params.line;
-        var output: any = this.context.retrieve(line); // need to manipulate do guaranteee retro-compatibility
+        var output: any = this.context.retrieve(line, true); // need to manipulate do guaranteee retro-compatibility
         if(output===null) output = {};
         response.jsonp(output);
     }
