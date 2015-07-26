@@ -5,11 +5,21 @@ import $inject 	   = require("../core/inject");
 
 declare var Config: any;
 
+/**
+ * Log access business logics
+ * @class LogBusiness
+ */
 class LogBusiness implements IBusiness {
 	
 	public constructor(private context: IDataAccess = $inject("dataAccess/logDataAccess")) {}
 	
-	public retrieve(logType: number, lines: string): string {
+	/**
+	 * Retrieves the logs of a given type
+	 * @param {number} logType code
+	 * @param {number} lines
+	 * @return {string}
+	 */
+	public retrieve(logType: number, lines: number): string {
 		var logPath: string = this.getLogFilePath(logType);
 		try{
 			return this.context.retrieve(logPath, lines).join("\n");
@@ -18,6 +28,11 @@ class LogBusiness implements IBusiness {
 		}
 	}
 	
+	/**
+	 * Gets the log file path for the given logType code
+	 * @param {number} logType
+	 * @return {string}
+	 */
 	private getLogFilePath(logType: number): string {
 		switch(logType) {
 			case LogType.DATA_PROVIDER: return Config.log.dataProvider;

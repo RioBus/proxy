@@ -7,6 +7,10 @@ import $inject 	   = require("../core/inject");
 
 declare var Config, Strings;
 
+/**
+ * Bus search business logics
+ * @class SearchBusiness
+ */
 class SearchBusiness implements IBusiness {
 	
 	private analytics: Analytics;
@@ -15,6 +19,12 @@ class SearchBusiness implements IBusiness {
 		this.analytics = Factory.getAnalytics();
 	}
 	
+	/**
+	 * Retrieves the Bus data for a given line
+	 * @param {string} userAgent for track event in Google Analytics
+	 * @param {string} line
+	 * @return {Bus[]}
+	 */
 	public retrieve(userAgent: string, data?: string[]): Bus[] {
 		var flag: any = Strings.analytics;
 		this.analytics.trackEvent(flag.event.restHit, flag.label.rest, userAgent, (error, response)=>{});

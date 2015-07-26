@@ -3,10 +3,19 @@ import IDataAccess = require("../dataAccess/iDataAccess");
 import Itinerary   = require("../domain/entity/itinerary");
 import $inject 	   = require("../core/inject");
 
+/**
+ * Itinerary business logics
+ * @class ItineraryBusiness
+ */
 class ItineraryBusiness implements IBusiness {
 	
 	public constructor(private context: IDataAccess = $inject("dataAccess/itineraryDataAccess")) {}
 	
+	/**
+	 * Retrieves the Itinerary for a given line
+	 * @param {string} line
+	 * @return {Itinerary}
+	 */
 	public retrieve(line: string): Itinerary {
 		return this.context.retrieve(line);
 	}
