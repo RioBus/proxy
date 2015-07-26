@@ -1,4 +1,5 @@
-/// <reference path="../../../defs/tsd.d.ts" />
+declare var require, describe, it;
+
 import Itinerary 	 = require("../../../src/domain/entity/itinerary");
 import ItinerarySpot = require("../../../src/domain/entity/itinerarySpot");
 var Assert 			 = require("assert");

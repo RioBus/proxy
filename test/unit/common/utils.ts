@@ -1,4 +1,5 @@
-/// <reference path="../../../defs/tsd.d.ts" />
+declare var require, describe, it;
+
 import Utils  = require("../../../src/common/tools/utils");
 var    Assert = require("assert");
 

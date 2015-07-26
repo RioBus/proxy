@@ -1,4 +1,3 @@
-/// <reference path="../../../defs/tsd.d.ts" />
 import IResource = require("../iResource");
 import IService  = require("../../service/iService");
 import $inject   = require("../../core/inject");

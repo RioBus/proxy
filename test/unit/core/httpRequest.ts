@@ -1,3 +1,5 @@
+declare var require, describe, it;
+
 import HttpRequest = require("../../../src/core/httpRequest");
 var Assert = require("assert");
 
