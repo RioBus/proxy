@@ -5,8 +5,18 @@ import ItinerarySpot = require("../entity/itinerarySpot");
 
 class ItineraryModelMap implements IModelMap {
 	
-	preConfig(collection: ICollection<Itinerary>): void {}
+	/**
+	 * Configures the collection before doing operations
+	 * @return {void}
+	 */
+	public preConfig(collection: ICollection<Itinerary>): void {}
 	
+	/**
+	 * Prepares the data used for querying in the database to be used, forcing the fields types
+	 * in the database. Use it to guarantee data types before sending the query to the database.
+	 * @param {any} data Input data
+	 * @return {any} 
+	 */
 	public prepareToInput(data: any): any {
 		if(data.line!==undefined) data.line = data.line.toString();
 		if(data.description!==undefined) data.description = data.description.toString();
@@ -24,6 +34,11 @@ class ItineraryModelMap implements IModelMap {
 		return data;
 	}
 	
+	/**
+	 * Converts the documents from the database to it's representation in application's entities.
+	 * @param {any} data The document from the database
+	 * @return {Itinerary}
+	 */
 	public getInstance<T>(data: any): Itinerary {
 		var spots: ItinerarySpot[] = new Array<ItinerarySpot>();
 		if(data.spots.length>0){

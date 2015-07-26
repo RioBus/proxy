@@ -1,3 +1,7 @@
+/**
+ * Object used to store the mail information to be loaded in MailServer instance
+ * @class MailObject
+ */
 class MailObject{
 	
 	private from: string;
@@ -6,43 +10,88 @@ class MailObject{
 	private text: string;
 	private cc: string;
 	
-	public getFromAddress(): string{
+	/**
+	 * Returns the From address text
+	 * @return {string}
+	 */
+	public getFromAddress(): string {
 		return this.from;
 	}
 	
-	public setFromAddress(from: string): void{
+	/**
+	 * Set the From address data
+	 * @param {string} from
+	 * @return {void}
+	 */
+	public setFromAddress(from: string): void {
 		this.from = from;
 	}
 	
-	public getToAddress(): string{
+	/**
+	 * Returns the To address text
+	 * @return {string}
+	 */
+	public getToAddress(): string {
 		return this.to;
 	}
 	
-	public setToAddress(to: string): void{
+	/**
+	 * Set the To address data
+	 * @param {string} to
+	 * @return {void}
+	 */
+	public setToAddress(to: string): void {
 		this.to = to;
 	}
 	
-	public getCopyAddress(): string{
+	/**
+	 * Returns the Copy address text
+	 * @return {string}
+	 */
+	public getCopyAddress(): string {
 		return this.cc;
 	}
 	
-	public setCopyAddress(copy: string): void{
+	/**
+	 * Set the Copy address data
+	 * @param {string} copy
+	 * @return {void}
+	 */
+	public setCopyAddress(copy: string): void {
 		this.cc = copy;
 	}
 	
-	public getSubject(): string{
+	/**
+	 * Returns the Subject text
+	 * @return {string}
+	 */
+	public getSubject(): string {
 		return this.subject;
 	}
 	
-	public setSubject(subject: string): void{
+	/**
+	 * Set the Subject data
+	 * @param {string} subject
+	 * @return {void}
+	 */
+	public setSubject(subject: string): void {
 		this.subject = subject;
 	}
 	
-	public getMessage(): string{
+	/**
+	 * Returns the Message text
+	 * @return {string}
+	 */
+	public getMessage(): string {
 		return this.text;
 	}
 	
-	public setMessage(message: string): void{
+	/**
+	 * Set the Message data
+	 * @param {string} message
+	 * @return {void}
+	 */
+	public setMessage(message: string): void {
 		this.text = message;
 	}
 }
