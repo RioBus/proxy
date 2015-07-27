@@ -2,6 +2,7 @@ import Factory           = require("../common/factory");
 import ICollection       = require("../core/database/iCollection");
 import IDataAccess       = require("./iDataAccess");
 import Itinerary         = require("../domain/entity/itinerary");
+import ItineraryHeader   = require("../domain/entity/itineraryHeader");
 import ItineraryModelMap = require("../domain/modelMap/itineraryModelMap");
 import Logger            = require("../common/logger");
 import DbContext         = require("../core/database/dbContext");
@@ -30,11 +31,10 @@ class ItineraryDataAccess implements IDataAccess{
     /**
      * Retrieves the Itinerary data.
      * @param {string} line (optional)
-     * @return {Itinerary | Itinerary[]}
+     * @return {Itinerary | ItineraryHeader[]}
      */
-	public retrieve(data?: string): Itinerary | Itinerary[] {
-        var output = (data!==undefined)? this.getItinerary(data) : this.getItineraries();
-        return output;
+	public retrieve(data?: string): Itinerary | ItineraryHeader[] {
+        return (data!==undefined)? this.getItinerary(data) : this.getItineraries();
     }
 
     /**
@@ -48,10 +48,17 @@ class ItineraryDataAccess implements IDataAccess{
 
     /**
      * Retrieves all the Itineraries
-     * @return {Itinerary[]}
+     * @return {ItineraryHeader[]}
      */
-    private getItineraries(): Itinerary[]{
-        return this.collection.find();
+    private getItineraries(): ItineraryHeader[] {
+        var collection: ICollection<ItineraryHeader> = this.db.collection<any>(this.collectionName, undefined);
+        var pipeline: any = [ { $group: { "_id": "$line", "description": { $first: "$description" } } } ];
+        var data: any = collection.aggregate(pipeline, {});
+        var list: ItineraryHeader[] = new Array<ItineraryHeader>();
+        data.forEach( (header)=>{
+            list.push(new ItineraryHeader(header._id, header.description));
+        });
+        return list;
     }
 	
 	/**

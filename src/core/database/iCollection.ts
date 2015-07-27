@@ -5,6 +5,7 @@ import IModelMap = require("./iModelMap");
  * @interface ICollection
  */
 interface ICollection<T> {
+	aggregate(commands: any[], options?: any): any;
 	count(query?: any): number;
 	createIndex(fieldOrSpec: any, options?: any): void;
 	find(query?: any): T[];

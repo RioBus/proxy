@@ -68,6 +68,7 @@ class Config {
 		"resources/v2/serverLogResource"	   : "/v2/log/server/:lines",
 		
 		"resources/v3/itineraryResource"	   : "/v3/itinerary/:line",
+		"resources/v3/allItineraryResource"	   : "/v3/itinerary",
 		"resources/v3/searchResource"		   : "/v3/search/:data"
 	};
 	
