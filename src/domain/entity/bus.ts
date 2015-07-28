@@ -5,12 +5,12 @@
  */
 class Bus{
 	
-	private timestamp: string;
+	private timeStamp: string;
 
     public constructor(private line: string, private order: string, private speed: number, 
 				private direction: number, private latitude: number, 
-				private longitude: number, timestamp: string, private sense?: string){
-		this.timestamp = (new Date(timestamp)).toISOString();
+				private longitude: number, timeStamp: string, private sense?: string){
+		this.timeStamp = (new Date(timeStamp)).toISOString();
     }
 	
 	public getLine(): string{
@@ -50,7 +50,7 @@ class Bus{
 	}
 	
 	public getUpdateTime(): Date{
-		return (new Date(this.timestamp));
+		return (new Date(this.timeStamp));
 	}
 }
 export = Bus;
