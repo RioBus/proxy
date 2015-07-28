@@ -61,6 +61,7 @@ class Router {
             default:
                 this.driver.get(route, (request, response, next) => {
                     logger.info('Serving route ' + request.url + ' (GET)');
+                    response.header('Access-Control-Allow-Origin', "http://riob.us");
                     callback(request, response, next);
                 });
                 break;
