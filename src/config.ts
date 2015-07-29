@@ -4,9 +4,9 @@ class Config {
 	public static rootPath: string = __dirname;
 
 	public static log: any = {
-		dataProvider: "/tmp/riobus/data-provider.log",
-		runtime: 	  "/tmp/riobus/runtime.log",
-		server: 	  "/tmp/riobus/server.log"
+		dataProvider: "/tmp/riobus/log/data-provider.log",
+		runtime: 	  "/tmp/riobus/log/runtime.log",
+		server: 	  "/tmp/riobus/log/server.log"
 	};
 	
 	public static errorMailMessage: any = {
