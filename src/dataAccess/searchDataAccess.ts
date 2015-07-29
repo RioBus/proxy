@@ -66,7 +66,7 @@ class SearchDataAccess implements IDataAccess {
 	 * @return {Bus[]}
 	 */
 	private getByCode(codes: string[]): Bus[] {
-		return this.collection.find({ _id: { $in: codes }});
+		return this.collection.find({ order: { $in: codes }});
 	}
 	
 	/**
