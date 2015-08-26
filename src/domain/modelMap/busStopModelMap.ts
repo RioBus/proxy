@@ -18,7 +18,9 @@ class BusStopModelMap implements IModelMap {
 	 * @param {any} data Input data
 	 * @return {any} 
 	 */
-	public prepareToInput(data: any): any {}
+	public prepareToInput(data: any): any {
+		return data;
+	}
 	
 	/**
 	 * Converts the documents from the database to it's representation in application's entities.
