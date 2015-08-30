@@ -30,7 +30,7 @@ class Config {
 				driver: "mongodb",
 				config: {
 					dbName: "riobus",
-					host: "mongo",
+					host: "localhost",
 					user: "riobus",
 					pass: "riobus",
 					port: "27017"
@@ -69,7 +69,8 @@ class Config {
 		
 		"resources/v3/itineraryResource"	   : "/v3/itinerary/:line",
 		"resources/v3/allItineraryResource"	   : "/v3/itinerary",
-		"resources/v3/searchResource"		   : "/v3/search/:data"
+		"resources/v3/searchResource"		   : "/v3/search/:data",
+		"resources/v3/busStopResource"         : "/v3/busstop/:line"
 	};
 	
 	public static resourceRedirect: Object = {
