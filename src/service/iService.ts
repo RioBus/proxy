@@ -25,5 +25,6 @@ interface IService {
 	 * Provides integration with the data removal logics
 	 */
 	delete(...args: any[]): any;
+	
 }
 export = IService;
