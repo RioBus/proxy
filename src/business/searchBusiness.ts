@@ -25,14 +25,14 @@ class SearchBusiness implements IBusiness {
 	 * @param {string} line
 	 * @return {Bus[]}
 	 */
-	public retrieve(userAgent: string, data?: string[]): Bus[] {
+	public retrieve(userAgent: string, data?: string[], lineFlag?: boolean): Bus[] {
 		var flag: any = Strings.analytics;
 		this.analytics.trackEvent(flag.event.restHit, flag.label.rest, userAgent, (error, response)=>{});
 		
-		if(data!==undefined && data.length>Config.maxSearchItems){
+		if(data!==undefined && data.length>Config.maxSearchItems && lineFlag === false){
 			data = data.slice(0, Config.maxSearchItems);
-			this.analytics.trackEvent(flag.event.restHit, flag.label.busCode, data.join(","), (error, response)=>{});
 		} 
+		this.analytics.trackEvent(flag.event.restHit, flag.label.busCode, data.join(","), (error, response)=>{});
 		return this.context.retrieve(data);
 	}
 	

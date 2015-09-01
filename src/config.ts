@@ -70,8 +70,7 @@ class Config {
 		"resources/v3/itineraryResource"	   : "/v3/itinerary/:line",
 		"resources/v3/allItineraryResource"	   : "/v3/itinerary",
 		"resources/v3/searchResource"		   : "/v3/search/:data",
-		"resources/v3/busStopResource"         : "/v3/busstop/:line",
-		"resources/v3/busCompanyResource"	   : "/v3/bus/:data"
+		"resources/v3/busStopResource"         : "/v3/busstop/:line"
 	};
 	
 	public static resourceRedirect: Object = {
