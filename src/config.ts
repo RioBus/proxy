@@ -31,7 +31,7 @@ class Config {
 				driver: "mongodb",
 				config: {
 					dbName: "riobus",
-					host: "mongo",
+					host: "localhost",
 					user: "",
 					pass: "",
 					port: "27017"
@@ -45,9 +45,9 @@ class Config {
 				driver: "mongodb",
 				config: {
 					dbName: "riobus",
-					host: "mongo",
-					user: "riobus",
-					pass: "riobus",
+					host: "localhost",
+					user: "",
+					pass: "",
 					port: "27017"
 				}
 			}
@@ -84,8 +84,8 @@ class Config {
 	};
 	
 	public static analytics: any = {
-        ua: 'UA-49628280-3',
-        host: 'riob.us',
+        ua: '',
+        host: '',
 		enable: false
     };
 }
