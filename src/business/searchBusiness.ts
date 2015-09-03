@@ -30,10 +30,12 @@ class SearchBusiness implements IBusiness {
 		var flag: any = Strings.analytics;
 		this.analytics.trackEvent(flag.event.restHit, flag.label.rest, userAgent, (error, response)=>{});
 		
-		if(data!==undefined && data.length>Config.maxSearchItems && mustLimit === true){
-			data = data.slice(0, Config.maxSearchItems);
+		if(data!==undefined){
+			this.analytics.trackEvent(flag.event.restHit, flag.label.busCode, data.join(","), (error, response)=>{});
+			if(data.length>Config.maxSearchItems && mustLimit === true){
+				data = data.slice(0, Config.maxSearchItems);
+			}
 		} 
-		this.analytics.trackEvent(flag.event.restHit, flag.label.busCode, data.join(","), (error, response)=>{});
 		return this.context.retrieve(data);
 	}
 	
