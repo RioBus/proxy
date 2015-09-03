@@ -1,14 +1,9 @@
-declare var Config;
-
 import ICollection  = require("./iCollection");
 import IDatabase 	= require("./iDatabase");
 import IModelMap	= require("./iModelMap");
 import $inject 		= require("../inject");
 
-
-// Gets the global database configuration from Config
-var config: any = (Config.isProduction())?
-	Config.environment.production.database : Config.environment.development.database;
+declare var Config;
 
 /**
  * Responsible for the connection with the database using the required driver
@@ -19,7 +14,8 @@ class DbContext {
 	private context: IDatabase;
 	
 	public constructor(dbConfig?: any) {
-		if(dbConfig===undefined) dbConfig = config;
+		if(dbConfig===undefined) dbConfig = (Config.isProduction())? // Gets the global database configuration from Config
+			Config.environment.production.database : Config.environment.development.database;
 		this.context = this.getContext(dbConfig);
 	}
 	

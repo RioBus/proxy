@@ -1,17 +1,17 @@
 declare var require;
-
+import Sync = require("./sync");
 /**
  * Manipulates files
  * @class File
  */
-class File{
+class File {
     
     private directory: string;
     private file: string;
     private fs: any;
     private fullPath: string;
 
-    public constructor(path: string){
+    public constructor(path: string) {
         this.fullPath = path;
         var splittedPath: string[] = path.split('/');
         this.file = splittedPath.pop();
@@ -46,27 +46,26 @@ class File{
     /**
      * Appends content to end of file
      * @param {string} content
-     * @return {void}
      */
     public append(content: string): void {
-        var self = this;
-        this.fs.ensureFile(this.fullPath, (e1) => {
-            if(e1) throw e1;
-            else self.fs.appendFile(self.fullPath, content+'\n', (e2) => {
-                if(e2) throw e2;
-            });
-        });
+        try {
+            Sync.promise(this.fs, this.fs.ensureFile, this.fullPath);
+            Sync.promise(this.fs, this.fs.appendFile, this.fullPath, content+'\n');
+        } catch (e) {
+            throw e;
+        }
     }
 
     /**
      * Writes the given content to a file. Ovewrites if it already has any content.
-     * @param {string} content
-     * @return {void}
+     * @param {*} content
      */
     public write(content: string): void {
-        this.fs.outputFile(this.fullPath, content, (e2) => {
-            if(e2) throw e2;
-        });
+        try {
+            Sync.promise(this.fs, this.fs.outputFile, this.fullPath, content);
+        } catch (e) {
+            throw e;
+        }
     }
 
     /**
