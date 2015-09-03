@@ -19,9 +19,10 @@ class SearchResource implements IResource{
      * @param next
      */
     public get(request: any, response: any, next: any): void {
-        var searchData: any = request.params.data;
+        var searchData: string = request.params.data;
         var userAgent: string = request.headers['user-agent'];
         if(userAgent===undefined) userAgent = "desconhecido";
+        console.log("teste");
         response.jsonp(this.context.retrieve(userAgent, searchData));
     }
 

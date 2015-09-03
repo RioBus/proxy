@@ -23,16 +23,17 @@ class SearchBusiness implements IBusiness {
 	 * Retrieves the Bus data for a given line
 	 * @param {string} userAgent for track event in Google Analytics
 	 * @param {string} line
+	 * @param {boolean} mustLimit
 	 * @return {Bus[]}
 	 */
-	public retrieve(userAgent: string, data?: string[]): Bus[] {
+	public retrieve(userAgent: string, data?: string[], mustLimit?: boolean): Bus[] {
 		var flag: any = Strings.analytics;
 		this.analytics.trackEvent(flag.event.restHit, flag.label.rest, userAgent, (error, response)=>{});
 		
-		if(data!==undefined && data.length>Config.maxSearchItems){
+		if(data!==undefined && data.length>Config.maxSearchItems && mustLimit === true){
 			data = data.slice(0, Config.maxSearchItems);
-			this.analytics.trackEvent(flag.event.restHit, flag.label.busCode, data.join(","), (error, response)=>{});
 		} 
+		this.analytics.trackEvent(flag.event.restHit, flag.label.busCode, data.join(","), (error, response)=>{});
 		return this.context.retrieve(data);
 	}
 	

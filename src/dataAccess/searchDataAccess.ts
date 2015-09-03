@@ -69,6 +69,7 @@ class SearchDataAccess implements IDataAccess {
 		return this.collection.find({ order: { $in: codes }});
 	}
 	
+	
 	/**
 	 * Not implemented.
 	 */
