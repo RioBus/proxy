@@ -1,4 +1,5 @@
 declare var __dirname, process;
+
 class Config {
 	
 	public static rootPath: string = __dirname;
@@ -30,9 +31,9 @@ class Config {
 				driver: "mongodb",
 				config: {
 					dbName: "riobus",
-					host: "localhost",
-					user: "riobus",
-					pass: "riobus",
+					host: "mongo",
+					user: "",
+					pass: "",
 					port: "27017"
 				}
 			}
@@ -53,11 +54,11 @@ class Config {
 		}
 	};
 
-	public static isProduction(): Boolean {
+	public static isProduction(): boolean {
 		return process.argv.indexOf("--production") > -1;
 	};
 	
-	public static maxSearchItems = 10;
+	public static maxSearchItems: number = 10;
 
 	public static resources: Object = {
 		"resources/v2/allResource"			   : "/v2/search",
@@ -84,7 +85,8 @@ class Config {
 	
 	public static analytics: any = {
         ua: 'UA-49628280-3',
-        host: 'riob.us'
+        host: 'riob.us',
+		enable: false
     };
 }
 
