@@ -20,9 +20,8 @@ class SearchResource implements IResource{
      */
     public get(request: any, response: any, next: any): void {
         var searchData: string = request.params.data;
-        var userAgent: string = request.headers['userAgent'];
-        if(userAgent===undefined) response.jsonp({type: "error", message: "Header 'userAgent' not set."});
-        else response.jsonp(this.context.retrieve(userAgent, searchData));
+        var userAgent: string = request.headers['user-agent'];
+        response.jsonp(this.context.retrieve(userAgent, searchData));
     }
 
     /**

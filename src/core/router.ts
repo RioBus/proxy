@@ -24,7 +24,7 @@ class Router {
         this.driver.use(compression());
         this.driver.use( (request, response, next) => {
             response.header("Access-Control-Allow-Origin", "*");
-            response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, userAgent");
+            response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             next();
         });
     }
@@ -90,7 +90,7 @@ class Router {
             var url: string = paths[key];
             this.route("get", key, (request, response, next)=>{
                 var fullUrl: string = (url.indexOf("://")>-1)? url : url+request.originalUrl;
-                this.logger.info("Redirecting to '" +fullUrl+"'...");
+                this.logger.info("Redirecting to: '" +fullUrl+"'");
                 response.redirect(fullUrl);
             });
             this.logger.info("Path redirection registered: '" + key + "' to '"+url+"'");
