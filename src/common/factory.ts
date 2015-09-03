@@ -27,7 +27,6 @@ class Factory {
      * @returns {Logger}
      */
     public static getRuntimeLogger(): Logger {
-        "use strict";
         var runtimeLogPath: string = Config.log.runtime;
         return Factory.getLogger(runtimeLogPath, 'RUNTIME');
     }
@@ -37,14 +36,13 @@ class Factory {
      * @returns {Logger}
      */
     public static getServerLogger(): Logger {
-        "use strict";
         var serverLogPath: string = Config.log.server;
         return Factory.getLogger(serverLogPath, 'SERVER');
     }
     
-    public static getAnalytics(): Analytics {
+    public static getAnalytics(enable: boolean): Analytics {
         var config: any = Config.analytics;
-        return new Analytics(config.ua, config.host);;
+        return (enable)? new Analytics(config.ua, config.host) : new Analytics();
     }
 }
 export = Factory;

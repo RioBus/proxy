@@ -1,6 +1,10 @@
+import Analytics = require("../common/analytics");
 import IBusiness = require("../business/iBusiness");
 import IService  = require("./iService");
+import Strings   = require("../strings");
 import $inject 	 = require("../core/inject");
+
+declare var analytics: Analytics, strings: Strings;
 
 /**
  * Responsible for integrating the outside's requests for Buses with the business logics
@@ -8,7 +12,11 @@ import $inject 	 = require("../core/inject");
  */
 class SearchService implements IService {
 	
-	public constructor(private context: IBusiness = $inject("business/searchBusiness"), private mustLimit: boolean = true) {}
+	private analytics: Analytics;
+	
+	public constructor(private context: IBusiness = $inject("business/searchBusiness"), private mustLimit: boolean = true) {
+		this.analytics = analytics;
+	}
 	
 	/**
 	 * Gets the Buses given a line or a list of, a bus order or a list of. If the search
@@ -18,7 +26,16 @@ class SearchService implements IService {
 	 * @return {Bus[]}
 	 */
 	public retrieve(userAgent: string, line?: string): any {
-		return (line!==undefined)? this.context.retrieve(userAgent, this.processData(line), this.mustLimit) : this.context.retrieve(userAgent);
+		if(line===undefined) return this.context.retrieve(userAgent);
+		else {
+			var flag: any = Strings.analytics;
+			var data: string[] = this.processData(line);
+			this.analytics.trackEvent(flag.event.restHit, flag.label.rest, userAgent, (error, response)=>{});
+			data.forEach((line)=>{
+				this.analytics.trackEvent(flag.event.restHit, flag.label.busCode, line, (error, response)=>{});
+			}, this);
+			return this.context.retrieve(userAgent, data, this.mustLimit);
+		}
 	}
 	
 	/**
@@ -26,8 +43,7 @@ class SearchService implements IService {
 	 * @param {string} data
 	 * @return {string[]}
 	 */
-	
-	private processData(data: string): any{
+	private processData(data: string): string[] {
 		var aux = data.toUpperCase();
 		switch(aux){
 			case "TRANSCARIOCA":
@@ -45,9 +61,7 @@ class SearchService implements IService {
 			default:
 				return data.split(",");
 		}
-		//return test;
 	}
-	
 	
 	/**
 	 * Not implemented.

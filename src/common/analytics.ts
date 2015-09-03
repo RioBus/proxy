@@ -10,7 +10,7 @@ class Analytics{
 	
 	private driver: any;
 
-    public constructor(private ua: string, private host: string){
+    public constructor(private ua?: string, private host?: string){
         this.driver = require("nodealytics");
     }
 
@@ -19,7 +19,8 @@ class Analytics{
      * @param {Function} callback (params: error, response)
      */
     public initialize(callback?: (params: Error, response: any) => void): void{
-        if(!callback) callback = function(){};
+        if(this.ua===undefined || this.host===undefined) return;
+        if(callback===undefined) callback = function(){};
         this.driver.initialize(this.ua, this.host, callback);
     }
 
@@ -31,6 +32,7 @@ class Analytics{
      * @param {Function} callback (params: error, response)
      */
     trackPage(id: string, path: string, callback: (params: Error, response: any) => void): void{
+        if(this.ua===undefined || this.host===undefined) return;
         this.driver.trackPage(id, path, callback);
     }
 
@@ -43,6 +45,7 @@ class Analytics{
      * @param {Function} callback (params: error, response)
      */
     trackEvent(id: string, path: string, label: string, callback: (params: Error, response: any) => void){
+        if(this.ua===undefined || this.host===undefined) return;
         this.driver.trackEvent(id, path, label, callback);
     }
 }

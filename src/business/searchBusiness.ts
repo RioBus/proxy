@@ -1,11 +1,9 @@
-import Analytics   = require("../common/analytics");
 import Bus 		   = require("../domain/entity/bus");
-import Factory	   = require("../common/factory");
 import IBusiness   = require("../business/iBusiness");
 import IDataAccess = require("../dataAccess/iDataAccess");
 import $inject 	   = require("../core/inject");
 
-declare var Config, Strings;
+declare var Config;
 
 /**
  * Bus search business logics
@@ -13,11 +11,7 @@ declare var Config, Strings;
  */
 class SearchBusiness implements IBusiness {
 	
-	private analytics: Analytics;
-	
-	public constructor(private context: IDataAccess = $inject("dataAccess/searchDataAccess")) {
-		this.analytics = Factory.getAnalytics();
-	}
+	public constructor(private context: IDataAccess = $inject("dataAccess/searchDataAccess")) {}
 	
 	/**
 	 * Retrieves the Bus data for a given line
@@ -27,13 +21,10 @@ class SearchBusiness implements IBusiness {
 	 * @return {Bus[]}
 	 */
 	public retrieve(userAgent: string, data?: string[], mustLimit?: boolean): Bus[] {
-		var flag: any = Strings.analytics;
-		this.analytics.trackEvent(flag.event.restHit, flag.label.rest, userAgent, (error, response)=>{});
-		
 		if(data!==undefined){
-			this.analytics.trackEvent(flag.event.restHit, flag.label.busCode, data.join(","), (error, response)=>{});
-			if(data.length>Config.maxSearchItems && mustLimit === true){
-				data = data.slice(0, Config.maxSearchItems);
+			var max: number = Config.maxSearchItems;
+			if(data.length>max && mustLimit){
+				data = data.slice(0, max);
 			}
 		} 
 		return this.context.retrieve(data);
@@ -53,5 +44,6 @@ class SearchBusiness implements IBusiness {
 	 * Not implemented.
 	 */
 	public update(): any {}
+	
 }
 export = SearchBusiness;
