@@ -80,7 +80,8 @@ class Config {
 		"/log/dataprovider/:lines":  "/v2",
 		"/log/runtime/:lines": 		 "/v2",
 		"/log/server/:lines": 		 "/v2",
-		"/search/:platformId/:data": "/v2"
+		"/search/:platformId/:data": "/v2",
+		"/"						   : "https://github.com/RioBus/proxy/wiki/REST-API"
 	};
 	
 	public static analytics: any = {
