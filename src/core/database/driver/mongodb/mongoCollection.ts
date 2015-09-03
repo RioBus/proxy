@@ -147,7 +147,7 @@ class MongoCollection<T> implements ICollection<T>{
 	 */
 	public remove(query: any = {}): boolean {
 		query = this.map.prepareToInput(query);
-		return Sync.promise(this.context, this.context.remove, query);
+		return Sync.promise(this.context, this.context.remove, query).result.n > 0;
 	}
 }
 export = MongoCollection;

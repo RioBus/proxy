@@ -29,34 +29,64 @@ describe("Database", () => {
 		Assert.notEqual(current, notExpected);
 		done();
 	});
-	
-	var collection: ICollection<Itinerary> = <ICollection<Itinerary>> context.collection("itinerary", new ItineraryModelMap());
+	var collection: ICollection<Itinerary>;
+	try{
+		collection = <ICollection<Itinerary>> context.collection("itinerary", new ItineraryModelMap());
+	}
+	catch(e){}
 	
 	it("should find the collection itinerary", (done) => {
-		Assert(collection !== undefined);
+		var current : ICollection<Itinerary> = collection;
+		var notExpected : ICollection<Itinerary> = undefined;
+		Assert.notEqual(current, notExpected);
 		done();
 	});
 	
-	var itinerary: Itinerary = new Itinerary("linha", "descricao", "agencia", []);
+	var description: string = (new Date()).toString();
+	
+	var itinerary: Itinerary = new Itinerary("linha", description, "agencia", []);
 	
 	it("should save the itinerary object to the database", (done) => {
-		var result = collection.save(itinerary);
-		Assert(result instanceof Itinerary);
+		var current: Itinerary = collection.save(itinerary);
+		var notExpected: Itinerary = null;
+		Assert.notEqual(current, notExpected);
 		done();
 	});
 	
 	it("should find or create the Itinerary object in the database", (done) => {
-		var result = collection.findOrCreate(itinerary);
-		Assert(result instanceof Itinerary);
+		var current: Itinerary = collection.findOrCreate(itinerary);
+		var notExpected : Itinerary = null;
+		Assert.notEqual(current, notExpected);
 		done();
 	});
 	
 	var list: Itinerary[] = collection.find({});
 	
-	it("should return a list of objects from the database", (done) => {
-		Assert(list.length > 0);
-		var first: Itinerary = list[0];
-		Assert(first instanceof Itinerary);
+	it("should return a list not empty", (done) =>{
+		var current: number = list.length;
+		var notExpected: number = 0;
+		Assert.notEqual(current, notExpected);
+		done();
+	});
+	
+	it("should find Itinerary instances from the collection", (done) => {
+		var current: boolean = list[0] instanceof Itinerary;
+		var expected: boolean = true;
+		Assert.equal(current, expected);
+		done();
+	});
+	
+	it("should return the number of documents from the collection", (done) => {
+		var current: number = collection.count({});
+		var notExpected: number = 0;
+		Assert.notEqual(current, notExpected);
+		done();
+	});
+	
+	it("should delete a document in the collection", done =>{
+		var current: boolean = collection.remove({ description: description });
+		var expected: boolean = true;
+		Assert.equal(current, expected);
 		done();
 	});
 	
