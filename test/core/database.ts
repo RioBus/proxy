@@ -83,17 +83,17 @@ describe("Database", () => {
 		done();
 	});
 	
-	it("should delete a document in the collection", done =>{
-		var current: boolean = collection.remove({ description: description });
-		var expected: boolean = true;
-		Assert.equal(current, expected);
-		done();
-	});
-	
 	it("should return one document", (done) => {
 		var current: Itinerary = collection.findOne(itinerary);
 		var notExpected: Itinerary = null;
 		Assert.notEqual(current, notExpected);
+		done();
+	});
+	
+	it("should delete a document in the collection", done =>{
+		var current: boolean = collection.remove({ description: description });
+		var expected: boolean = true;
+		Assert.equal(current, expected);
 		done();
 	});
 	
