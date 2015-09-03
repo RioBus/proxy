@@ -90,4 +90,11 @@ describe("Database", () => {
 		done();
 	});
 	
+	it("should return one document", (done) => {
+		var current: Itinerary = collection.findOne(itinerary);
+		var notExpected: Itinerary = null;
+		Assert.notEqual(current, notExpected);
+		done();
+	});
+	
 });
