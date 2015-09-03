@@ -26,8 +26,8 @@ class App {
         
         global.database = new DbContext();
         
-        var analytics: Analytics = Factory.getAnalytics();
-        analytics.initialize();
+        global.analytics = Factory.getAnalytics(Config.analytics.enable);
+        global.analytics.initialize();
         
         var logger: Logger = Factory.getRuntimeLogger();
         logger.info('Starting the server...');
