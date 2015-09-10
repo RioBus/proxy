@@ -1,4 +1,5 @@
 import {Utils} from './common/utils';
+import "babel/polyfill";
 
 /**
  * Bootstrap script.
