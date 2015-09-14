@@ -18,6 +18,7 @@ describe("Database", () => {
 			port: "47742"
 		}
 	};
+	
 	var context: DbContext;
 	try{
 		context = new DbContext(config);
@@ -29,6 +30,7 @@ describe("Database", () => {
 		Assert.notEqual(current, notExpected);
 		done();
 	});
+	
 	var collection: ICollection<Itinerary>;
 	try{
 		collection = <ICollection<Itinerary>> context.collection("itinerary", new ItineraryModelMap());
@@ -89,6 +91,25 @@ describe("Database", () => {
 		Assert.notEqual(current, notExpected);
 		done();
 	});
+	
+	it("should update one document", (done) => {
+		var current: Itinerary = collection.update({line: itinerary.getLine()}, {$set:{agency:"agency two"}});
+		var notExpected: Itinerary = undefined;
+		Assert.notEqual(current, notExpected);
+		done();
+	});
+	
+	it("should find a document and modify it", (done) =>{
+		var current: Itinerary = collection.findAndModify(itinerary.getLine, [["line", ("ascending")], ["agency", ("ascending")]], {$set: {agency: "new agency"}});
+		var notExpected: Itinerary = null;
+		Assert.notEqual(current, notExpected);
+		done();
+	});
+	
+	try {
+		collection.aggregate([{$sort: {line : -1}}]);
+	}
+	catch(e){};
 	
 	it("should delete a document in the collection", done =>{
 		var current: boolean = collection.remove({ description: description });
