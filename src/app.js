@@ -1,12 +1,12 @@
-import {Factory} from './common/factory';
-import {Router} from './core/router';
-import {Server} from './core/server';
+'use strict';
+var Factory = require('./common/factory');
+var Router  = require('./core/router');
 
 /**
  * Main application process.
  * @class App
  */
-export class App{
+class App{
 
     /**
      * Init application
@@ -16,7 +16,6 @@ export class App{
      * @return {void}
      */
     static main(argv){
-        "use strict";
         let config = Factory.getConfig();
 
         let logger = Factory.getRuntimeLogger();
@@ -25,7 +24,8 @@ export class App{
         // Configuring the RESTful router to handle HTTP requests
         let router = new Router();
         router.registerResources(config.resources); // Registering resources to handle the URLs
-        let server = new Server(config.server.environment.development, router);
-        server.start(); // Starting RESTful application
+        let env = config.server.environment.development;
+        router.start(env.ip, env.port); // Starting RESTful application
     }
 }
+module.exports = App;

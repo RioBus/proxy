@@ -1,3 +1,4 @@
+/* global __dirname; */
 /**
  * Application configuration
  * You may use it to describe every global configuration data
@@ -10,16 +11,13 @@ module.exports = {
     server: {
         environment: {
             development: {
-                "ip": '127.0.0.1',
-                "port": '8080'
+                'ip': '0.0.0.0',
+                'port': '8080'
             }
         },
         log: './server.log'
     },
     resources: [
         'resources/main'
-    ],
-    providers: [
-        'provider/rest'
     ]
 };

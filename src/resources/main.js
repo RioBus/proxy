@@ -1,18 +1,18 @@
-import {Resource} from './resource';
-import {Factory} from '../common/factory';
+'use strict';
+var Resource = require('./resource');
+var Factory = require('../common/factory');
 
 /**
  * Main request handler
  * @class MainResource
  */
-export class MainResource extends Resource{
+class MainResource extends Resource{
 
     /**
      * Request URL
      * @returns {string}
      */
     route(){
-        "use strict";
         return '/';
     }
 
@@ -28,3 +28,4 @@ export class MainResource extends Resource{
         response.jsonp({greet: strings.greeting});
     }
 }
+module.exports = MainResource;

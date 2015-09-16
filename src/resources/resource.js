@@ -1,10 +1,11 @@
+'use strict';
 /**
  * Resource type superclass
  *
  * Defines the Resource type and it's characteristics
  * @class Resource
  */
-export class Resource{
+class Resource{
 
     /**
      * Request URL
@@ -22,7 +23,7 @@ export class Resource{
      * @param next
      */
     get(request, response, next) {
-        response.json({type: "error", message: "Operation not implemented"});
+        response.json({type: 'error', message: 'Operation not implemented'});
     }
 
     /**
@@ -33,7 +34,7 @@ export class Resource{
      * @param next
      */
     post(request, response, next) {
-        response.json({type: "error", message: "Operation not implemented"});
+        response.json({type: 'error', message: 'Operation not implemented'});
     }
 
     /**
@@ -44,7 +45,7 @@ export class Resource{
      * @param next
      */
     put(request, response, next) {
-        response.json({type: "error", message: "Operation not implemented"});
+        response.json({type: 'error', message: 'Operation not implemented'});
     }
 
     /**
@@ -55,6 +56,7 @@ export class Resource{
      * @param next
      */
     delete(request, response, next) {
-        response.json({type: "error", message: "Operation not implemented"});
+        response.json({type: 'error', message: 'Operation not implemented'});
     }
 }
+module.exports = Resource;

@@ -1,10 +1,11 @@
+'use strict';
 /**
  * Manipulates files
  *
  * @class File
  * @constructor
  */
-export class File{
+class File{
 
     constructor(path){
         path = path.split('/');
@@ -50,3 +51,4 @@ export class File{
         return this.driver.readFileSync(this.directory + '/' + this.file, 'utf8');
     }
 }
+module.exports = File;

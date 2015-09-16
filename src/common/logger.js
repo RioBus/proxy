@@ -1,5 +1,5 @@
-import {Utils} from './utils';
-import {File} from '../core/file';
+'use strict';
+var File = require('../core/file');
 
 /**
  * Better logging interface
@@ -7,10 +7,9 @@ import {File} from '../core/file';
  * @class Logger
  * @constructor
  */
-export class Logger{
+class Logger{
 
     constructor(fileName, flag){
-        "use strict";
         this.driver = console;
         this.flag = (flag)? flag:'RUNTIME';
         this.fileStream = new File(fileName);
@@ -22,8 +21,7 @@ export class Logger{
      * @param level
      */
     log(message, level){
-        "use strict";
-        let time = Utils.getTimestamp();
+        let time = (new Date()).toLocaleString();
         let information = '['+time+']['+level+'] '+message;
         this.driver.log(information);
         this.fileStream.append(information);
@@ -34,7 +32,6 @@ export class Logger{
      * @param message
      */
     info(message){
-        "use strict";
         this.log(message, this.flag + ' - INFO');
     }
 
@@ -43,7 +40,6 @@ export class Logger{
      * @param message
      */
     alert(message){
-        "use strict";
         this.log(message, this.flag + ' - ALERT');
     }
 
@@ -52,7 +48,7 @@ export class Logger{
      * @param message
      */
     error(message){
-        "use strict";
         this.log(message, this.flag + ' - ERROR');
     }
 }
+module.exports = Logger;

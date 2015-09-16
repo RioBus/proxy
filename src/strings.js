@@ -1,3 +1,3 @@
 module.exports = {
-    greeting: "Hello Nodelicious!"
+    greeting: 'Hello Nodelicious!'
 };

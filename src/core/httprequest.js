@@ -1,13 +1,13 @@
+'use strict';
 /**
  * Creates a new synchronized HttpRequest
  *
  * @class HttpRequest
  * @constructor
  */
-export class HttpRequest{
+class HttpRequest{
 
     constructor(){
-        "use strict";
         this.driver = require('sync-request');
     }
 
@@ -17,9 +17,8 @@ export class HttpRequest{
      * @param {Object} options
      * @returns {*}
      */
-    get(host, options=null){
-        "use strict";
-        return this.driver('GET',host, options);
+    get(host, options){
+        return this.driver('GET', host, options);
     }
 
     /**
@@ -28,9 +27,8 @@ export class HttpRequest{
      * @param {Object} options
      * @returns {*}
      */
-    post(host, options=null){
-        "use strict";
-        return this.driver('POST',host, options);
+    post(host, options){
+        return this.driver('POST', host, options);
     }
 
     /**
@@ -39,9 +37,8 @@ export class HttpRequest{
      * @param {Object} options
      * @returns {*}
      */
-    put(host, options=null){
-        "use strict";
-        return this.driver('PUT',host, options);
+    put(host, options){
+        return this.driver('PUT', host, options);
     }
 
     /**
@@ -50,8 +47,8 @@ export class HttpRequest{
      * @param {Object} options
      * @returns {*}
      */
-    delete(host, options=null){
-        "use strict";
-        return this.driver('DELETE',host, options);
+    delete(host, options){
+        return this.driver('DELETE', host, options);
     }
 }
+module.exports = HttpRequest;

@@ -1,22 +1,19 @@
-import {Logger} from './logger';
+'use strict';
+var Logger = require('./logger');
 
 /**
  * Factory Helper
  *
  * Factories main objects to help decoupling the code
  */
-export class Factory{
+class Factory{
 
     /**
      * Gets the configuration data object
      * @returns {exports|*}
      */
     static getConfig(){
-        "use strict";
-        if(!Factory.configuration){
-            Factory.configuration = require('../config');
-        }
-        return Factory.configuration;
+        return require('../config');
     }
 
     /**
@@ -25,9 +22,9 @@ export class Factory{
      * @param flag Log flag (default: RUNTIME)
      * @returns {Logger}
      */
-    static getLogger(filePath=null, flag=''){
-        "use strict";
+    static getLogger(filePath, flag){
         if(!filePath) filePath = Factory.getConfig().runtimeLog;
+        if(!flag) flag = '';
         return new Logger(filePath, flag);
     }
 
@@ -36,7 +33,6 @@ export class Factory{
      * @returns {Logger}
      */
     static getRuntimeLogger(){
-        "use strict";
         let runtimeLogPath = Factory.getConfig().runtimeLog;
         return Factory.getLogger(runtimeLogPath, 'RUNTIME');
     }
@@ -46,7 +42,6 @@ export class Factory{
      * @returns {Logger}
      */
     static getServerLogger(){
-        "use strict";
         let serverLogPath = Factory.getConfig().server.log;
         return Factory.getLogger(serverLogPath, 'SERVER');
     }
@@ -56,10 +51,7 @@ export class Factory{
      * @returns {exports|*}
      */
     static getStrings(){
-        "use strict";
-        if(!Factory.strings){
-            Factory.strings = require('../strings');
-        }
-        return Factory.strings;
+        return require('../strings');
     }
 }
+module.exports = Factory;
