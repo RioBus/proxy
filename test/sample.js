@@ -1,3 +1,4 @@
+'use strict';
 var Factory = require("../src/common/factory");
 /* global describe, it; */
 
