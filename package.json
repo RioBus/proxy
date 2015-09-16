@@ -2,10 +2,10 @@
   "name": "nodelicious",
   "version": "1.0.0",
   "description": "A simple HTTP server written in ECMAScript 6",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha test/",
-    "start": "node src/index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
