@@ -65,11 +65,10 @@ class Router{
      * @param {Array} resources
      */
     registerResources(resources){
-        for(var resource of resources){
-            let moduleName = resource;
-            let Resource = require('../'+moduleName);
-            resource = new Resource();
-            let route = resource.route();
+        for(var res of Object.keys(resources)){
+            let Resource = require('../'+res);
+            let route = resources[res];
+            let resource = new Resource();
 
             this.route('get', route, function(request, response, next){
                 resource.get(request, response, next);
@@ -83,7 +82,7 @@ class Router{
             this.route('delete', route, function(request, response, next){
                 resource.delete(request, response, next);
             });
-            this.logger.info('Resource registered: '+moduleName);
+            this.logger.info('Resource registered: '+res);
         }
     }
 

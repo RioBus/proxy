@@ -17,7 +17,7 @@ module.exports = {
         },
         log: './server.log'
     },
-    resources: [
-        'resources/main'
-    ]
+    resources: {
+        'resources/main': '/'
+    }
 };

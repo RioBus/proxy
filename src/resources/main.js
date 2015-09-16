@@ -9,14 +9,6 @@ var Factory = require('../common/factory');
 class MainResource extends Resource{
 
     /**
-     * Request URL
-     * @returns {string}
-     */
-    route(){
-        return '/';
-    }
-
-    /**
      * GET method handler
      *
      * @param request

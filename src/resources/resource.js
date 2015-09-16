@@ -8,14 +8,6 @@
 class Resource{
 
     /**
-     * Request URL
-     * @returns {string}
-     */
-    route(){
-        return '/';
-    }
-
-    /**
      * GET method handler
      *
      * @param request
