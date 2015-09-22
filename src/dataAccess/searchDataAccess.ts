@@ -1,9 +1,11 @@
-import Bus 		   = require("../domain/entity/bus");
-import BusModelMap = require("../domain/modelMap/busModelMap");
-import DbContext   = require("../core/database/dbContext");
-import ICollection = require("../core/database/iCollection");
-import IDataAccess = require("../dataAccess/iDataAccess");
-import $inject 	   = require("../core/inject");
+import Bus 		         = require("../domain/entity/bus");
+import Itinerary         = require("../domain/entity/itinerary");
+import BusModelMap       = require("../domain/modelMap/busModelMap");
+import ItineraryModelMap = require("../domain/modelMap/itineraryModelMap");
+import DbContext         = require("../core/database/dbContext");
+import ICollection       = require("../core/database/iCollection");
+import IDataAccess       = require("../dataAccess/iDataAccess");
+import $inject 	         = require("../core/inject");
 
 declare var database: DbContext;
 
@@ -14,12 +16,15 @@ declare var database: DbContext;
 class SearchDataAccess implements IDataAccess {
 	
 	private context: DbContext;
-	private collection: ICollection<Bus>;
-	private collectionName: string = "bus";
+	private collectionBus: ICollection<Bus>;
+	private collectionItinerary: ICollection<Itinerary>;
+	private collectionNameBus: string = "bus";
+	private collectionNameItinerary: string = "itinerary";
 	
 	public constructor() {
 		this.context = database;
-		this.collection = this.context.collection<Bus>(this.collectionName, new BusModelMap());
+		this.collectionBus = this.context.collection<Bus>(this.collectionNameBus, new BusModelMap());
+		this.collectionItinerary = this.context.collection<Itinerary>(this.collectionNameItinerary, new ItineraryModelMap());
 	}
 
     /**
@@ -37,7 +42,7 @@ class SearchDataAccess implements IDataAccess {
 	 * @return {Bus[]}
 	 */
 	private getAllBuses(): Bus[] {
-		return this.collection.find();
+		return this.collectionBus.find();
 	}
 	
 	/**
@@ -48,7 +53,10 @@ class SearchDataAccess implements IDataAccess {
 	 */
 	private searchBuses(data: string[]): Bus[] {
 		var output: Bus[] = this.getByLine(data);
-		return (output.length>0)? output : this.getByCode(data);
+		if(output.length === 0) output = this.getByCode(data);
+		else output = this.getByKeywords(data);
+		var output: Bus[] = this.getByKeywords(data);
+		return output;
 	}
 	
 	/**
@@ -57,7 +65,7 @@ class SearchDataAccess implements IDataAccess {
 	 * @return {Bus[]}
 	 */
 	private getByLine(lines: string[]): Bus[] {
-		return this.collection.find({ line: { $in: lines }});
+		return this.collectionBus.find({ line: { $in: lines }});
 	}
 	
 	/**
@@ -66,9 +74,19 @@ class SearchDataAccess implements IDataAccess {
 	 * @return {Bus[]}
 	 */
 	private getByCode(codes: string[]): Bus[] {
-		return this.collection.find({ order: { $in: codes }});
+		return this.collectionBus.find({ order: { $in: codes }});
 	}
 	
+	private getByKeywords(keyword: string[]): Bus[]{
+		var itineraryList: Itinerary[] = this.collectionItinerary.find( { $text: { $search: keyword } } );
+		var listLines: string[];
+		var listBus: Bus[];
+		for(var i = 0; i < itineraryList.length; i++){
+			listLines.push(itineraryList[i].getLine());
+		}
+		listBus = this.getByLine(listLines);
+		return listBus;
+	}
 	
 	/**
 	 * Not implemented.
