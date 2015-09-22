@@ -1,6 +1,7 @@
 import IResource = require("../iResource");
 import IService  = require("../../service/iService");
 import $inject   = require("../../core/inject");
+import BusStopService = require("../../service/busStopService");
 /**
  * BusStopResource class
  *
@@ -9,7 +10,7 @@ import $inject   = require("../../core/inject");
  */
 class BusStopResource implements IResource{
     
-    public constructor(private context: IService = $inject("service/BusStopService")) {}
+    public constructor(private context: IService = $inject("service/busStopService")) {}
 
     /**
      * GET method handler
