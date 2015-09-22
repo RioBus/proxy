@@ -1,8 +1,8 @@
 declare var require, describe, it, global;
 import ItineraryService  = require("../../src/service/itineraryService");
-import IService        = require("../../src/service/iService");
+import IService          = require("../../src/service/iService");
 import Itinerary         = require("../../src/domain/entity/itinerary");
-import IBusiness       = require("../../src/business/iBusiness");
+import IBusiness         = require("../../src/business/iBusiness");
 
 
 var Assert = require("assert");
@@ -16,7 +16,7 @@ class MockedBusiness implements IBusiness{
 
 describe("ItineraryService", () => {	
 	var itineraryService : IService = new ItineraryService(new MockedBusiness());
-	var itinerary : Itinerary = new Itinerary("line", "description", "agency", []);
+	var itinerary : Itinerary = new Itinerary("line", "description", "agency", "keyword", []);
 	
 		
 	it("should return a Itinerary object given a line", (done) => {
