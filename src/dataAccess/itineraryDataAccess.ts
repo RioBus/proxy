@@ -43,7 +43,7 @@ class ItineraryDataAccess implements IDataAccess{
      * @return {Itinerary}
      */
     private getItinerary(line: string): Itinerary{
-		return this.collection.findOne({line: line});
+		return this.collection.findOne({line: line});    
     }
 
     /**
@@ -52,11 +52,11 @@ class ItineraryDataAccess implements IDataAccess{
      */
     private getItineraries(): ItineraryHeader[] {
         var collection: ICollection<ItineraryHeader> = this.db.collection<any>(this.collectionName, undefined);
-        var pipeline: any = [ { $group: { "_id": "$line", "description": { $first: "$description" } } } ];
+        var pipeline: any = [ { $group: { "_id": "$line", "description": { $first: "$description" }, "keywords" : { $first: "$keywords"} } } ];
         var data: any = collection.aggregate(pipeline, {});
         var list: ItineraryHeader[] = new Array<ItineraryHeader>();
         data.forEach( (header)=>{
-            list.push(new ItineraryHeader(header._id, header.description));
+            list.push(new ItineraryHeader(header._id, header.description, header.keywords));
         });
         return list;
     }
