@@ -37,8 +37,7 @@ class App {
         router.registerResources(Config.resources); // Registering resources to handle the URLs
         router.registerRedirects(Config.resourceRedirect);
         
-        var environment: any = Config.isProduction()?
-         Config.environment.production : Config.environment.development;
+        var environment: any = Config.environment;
          
         router.start(environment.ip, environment.port); // Starting RESTful application
     }
