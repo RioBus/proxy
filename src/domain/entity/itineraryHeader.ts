@@ -1,6 +1,6 @@
 class ItineraryHeader {
 	
-	public constructor(private line: string, private description: string, private keyword: string) {}
+	public constructor(private line: string, private description: string, private keywords: string) {}
 	
 	public getLine(): string {
 		return this.line;
@@ -10,8 +10,8 @@ class ItineraryHeader {
 		return this.description;
 	}
 	
-	public getKeyword() : string{
-		return this.keyword;
+	public getKeywords() : string{
+		return this.keywords;
 	}
 }
 export = ItineraryHeader;
