@@ -54,8 +54,7 @@ class SearchDataAccess implements IDataAccess {
 	private searchBuses(data: string[]): Bus[] {
 		var output: Bus[] = this.getByLine(data);
 		if(output.length === 0) output = this.getByCode(data);
-		else output = this.getByKeywords(data);
-		var output: Bus[] = this.getByKeywords(data);
+		if(output.length === 0) output = this.getByKeywords(data);
 		return output;
 	}
 	
@@ -77,9 +76,9 @@ class SearchDataAccess implements IDataAccess {
 		return this.collectionBus.find({ order: { $in: codes }});
 	}
 	
-	private getByKeywords(keyword: string[]): Bus[]{
-		var itineraryList: Itinerary[] = this.collectionItinerary.find( { $text: { $search: keyword } } );
-		var listLines: string[];
+	private getByKeywords(keyword: string[]): Bus[] {
+		var itineraryList: Itinerary[] = this.collectionItinerary.find( { $text: { $search: keyword.join(" ") } } );
+		var listLines: string[] = [];
 		var listBus: Bus[];
 		for(var i = 0; i < itineraryList.length; i++){
 			listLines.push(itineraryList[i].getLine());
