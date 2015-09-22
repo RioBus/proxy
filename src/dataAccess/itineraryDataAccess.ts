@@ -1,13 +1,21 @@
+import DbContext         = require("../core/database/dbContext");
 import Factory           = require("../common/factory");
 import ICollection       = require("../core/database/iCollection");
 import IDataAccess       = require("./iDataAccess");
+import IModelMap         = require("../core/database/iModelMap");
 import Itinerary         = require("../domain/entity/itinerary");
 import ItineraryHeader   = require("../domain/entity/itineraryHeader");
 import ItineraryModelMap = require("../domain/modelMap/itineraryModelMap");
 import Logger            = require("../common/logger");
-import DbContext         = require("../core/database/dbContext");
 
 declare var Config: any, database: DbContext;
+
+class ItineraryHeaderMap implements IModelMap {
+	public collectionName: string = "itinerary";
+	public preConfig(collection: ICollection<any>): void {}
+	public prepareToInput(data: any): any { return data; }
+	public getInstance<T>(data: any): any { return data; }
+}
 
 /**
  * DataAccess referred to Itinerary stored data
@@ -20,12 +28,11 @@ class ItineraryDataAccess implements IDataAccess{
     private logger: Logger;
     private db: DbContext;
     private collection: ICollection<Itinerary>;
-    private collectionName: string = "itinerary";
 
     public constructor(){
         this.logger = Factory.getLogger();
         this.db = database;
-        this.collection = this.db.collection<Itinerary>(this.collectionName, new ItineraryModelMap());
+        this.collection = this.db.collection<Itinerary>(new ItineraryModelMap());
     }
 
     /**
@@ -51,7 +58,7 @@ class ItineraryDataAccess implements IDataAccess{
      * @return {ItineraryHeader[]}
      */
     private getItineraries(): ItineraryHeader[] {
-        var collection: ICollection<ItineraryHeader> = this.db.collection<any>(this.collectionName, undefined);
+        var collection: ICollection<ItineraryHeader> = this.db.collection<any>(new ItineraryHeaderMap());
         var pipeline: any = [ { $group: { "_id": "$line", "description": { $first: "$description" }, "keywords" : { $first: "$keywords"} } } ];
         var data: any = collection.aggregate(pipeline, {});
         var list: ItineraryHeader[] = new Array<ItineraryHeader>();

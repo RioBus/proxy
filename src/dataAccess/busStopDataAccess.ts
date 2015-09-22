@@ -19,12 +19,11 @@ class BusStopDataAccess implements IDataAccess{
     private logger: Logger;
     private db: DbContext;
     private collection: ICollection<BusStop>;
-    private collectionName: string = "bus_stop";
 
     public constructor(){
         this.logger = Factory.getLogger();
         this.db = database;
-        this.collection = this.db.collection<BusStop>(this.collectionName, new BusStopModelMap());
+        this.collection = this.db.collection<BusStop>(new BusStopModelMap());
     }
 
     /**

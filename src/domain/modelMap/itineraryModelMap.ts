@@ -6,6 +6,11 @@ import ItinerarySpot = require("../entity/itinerarySpot");
 class ItineraryModelMap implements IModelMap {
 	
 	/**
+	 * @var {string} Collection name
+	 */
+	public collectionName: string = "itinerary";
+	
+	/**
 	 * Configures the collection before doing operations
 	 * @return {void}
 	 */

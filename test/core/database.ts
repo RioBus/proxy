@@ -1,27 +1,18 @@
 declare var require, describe, it, global;
+import Config = require("../../src/config");
 import DbContext = require("../../src/core/database/dbContext");
 import ICollection = require("../../src/core/database/iCollection");
 import Itinerary = require("../../src/domain/entity/itinerary");
 import ItineraryModelMap = require("../../src/domain/modelMap/itineraryModelMap");
 
 var Assert = require("assert");
+global.Config = Config;
 
 describe("Database", () => {
 	
-	var config: any = {
-		driver: "mongodb",
-		config: {
-			dbName: "riobus",
-			host: "ds047742.mongolab.com",
-			user: "riobus",
-			pass: "riobus",
-			port: "47742"
-		}
-	};
-	
 	var context: DbContext;
 	try{
-		context = new DbContext(config);
+		context = new DbContext();
 	}catch(e){}
 	
 	it("should connect to the database", (done) => {
@@ -33,7 +24,7 @@ describe("Database", () => {
 	
 	var collection: ICollection<Itinerary>;
 	try{
-		collection = <ICollection<Itinerary>> context.collection("itinerary", new ItineraryModelMap());
+		collection = <ICollection<Itinerary>> context.collection(new ItineraryModelMap());
 	}
 	catch(e){}
 	

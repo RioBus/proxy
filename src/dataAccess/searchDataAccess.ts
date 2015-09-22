@@ -1,11 +1,10 @@
 import Bus 		         = require("../domain/entity/bus");
-import Itinerary         = require("../domain/entity/itinerary");
 import BusModelMap       = require("../domain/modelMap/busModelMap");
-import ItineraryModelMap = require("../domain/modelMap/itineraryModelMap");
 import DbContext         = require("../core/database/dbContext");
 import ICollection       = require("../core/database/iCollection");
 import IDataAccess       = require("../dataAccess/iDataAccess");
-import $inject 	         = require("../core/inject");
+import Itinerary         = require("../domain/entity/itinerary");
+import ItineraryModelMap = require("../domain/modelMap/itineraryModelMap");
 
 declare var database: DbContext;
 
@@ -15,16 +14,12 @@ declare var database: DbContext;
  */
 class SearchDataAccess implements IDataAccess {
 	
-	private context: DbContext;
 	private collectionBus: ICollection<Bus>;
 	private collectionItinerary: ICollection<Itinerary>;
-	private collectionNameBus: string = "bus";
-	private collectionNameItinerary: string = "itinerary";
 	
 	public constructor() {
-		this.context = database;
-		this.collectionBus = this.context.collection<Bus>(this.collectionNameBus, new BusModelMap());
-		this.collectionItinerary = this.context.collection<Itinerary>(this.collectionNameItinerary, new ItineraryModelMap());
+		this.collectionBus = database.collection<Bus>(new BusModelMap());
+		this.collectionItinerary = database.collection<Itinerary>(new ItineraryModelMap());
 	}
 
     /**
