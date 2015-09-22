@@ -46,7 +46,7 @@ describe("Database", () => {
 	
 	var description: string = (new Date()).toString();
 	
-	var itinerary: Itinerary = new Itinerary("linha", description, "agencia", []);
+	var itinerary: Itinerary = new Itinerary("linha", description, "agencia", "keyword", []);
 	
 	it("should save the itinerary object to the database", (done) => {
 		var current: Itinerary = collection.save(itinerary);
@@ -106,10 +106,13 @@ describe("Database", () => {
 		done();
 	});
 	
-	try {
-		collection.aggregate([{$sort: {line : -1}}]);
-	}
-	catch(e){};
+	it("should aggregate the collection", (done) => {
+		try {
+			collection.aggregate([{$sort: {line : -1}}]);
+		}
+		catch(e){};
+		done();
+	});
 	
 	it("should delete a document in the collection", done =>{
 		var current: boolean = collection.remove({ description: description });
