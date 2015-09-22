@@ -7,6 +7,11 @@ import BusStopSpot = require("../entity/busStopSpot");
 class BusStopModelMap implements IModelMap {
 	
 	/**
+	 * @var {string} Collection name
+	 */
+	public collectionName: string = "bus_stop";
+	
+	/**
 	 * Configures the collection before doing operations
 	 * @return {void}
 	 */

@@ -24,38 +24,18 @@ class Config {
 			host: "smtp.gmail.com",
 			ssl: true
 		},
-		development: {
-			ip: "0.0.0.0",
-			port: "8080",
-			database: {
-				driver: "mongodb",
-				config: {
-					dbName: "riobus",
-					host: "localhost",
-					user: "",
-					pass: "",
-					port: "27017"
-				}
-			}
-		},
-		production: {
-			ip: "0.0.0.0",
-			port: "80",
-			database: {
-				driver: "mongodb",
-				config: {
-					dbName: "riobus",
-					host: "localhost",
-					user: "",
-					pass: "",
-					port: "27017"
-				}
+		ip: "0.0.0.0",
+		port: "8080",
+		database: {
+			driver: process.env.RIOBUS_DB_DRIVER,
+			config: {
+				dbName: process.env.RIOBUS_DB_NAME,
+				host: process.env.RIOBUS_DB_HOST,
+				user: process.env.RIOBUS_DB_USER,
+				pass: process.env.RIOBUS_DB_PASS,
+				port: process.env.RIOBUS_DB_PORT
 			}
 		}
-	};
-
-	public static isProduction(): boolean {
-		return process.argv.indexOf("--production") > -1;
 	};
 	
 	public static maxSearchItems: number = 10;
@@ -85,9 +65,8 @@ class Config {
 	};
 	
 	public static analytics: any = {
-        ua: '',
-        host: '',
-		enable: false
+        ua: process.env.RIOBUS_ANALYTICS_UA,
+        host: process.env.RIOBUS_ANALYTICS_HOST
     };
 }
 

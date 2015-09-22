@@ -8,6 +8,11 @@ var Moment		   = require("moment-timezone");
 class BusModelMap implements IModelMap {
 	
 	/**
+	 * @var {string} Collection name
+	 */
+	public collectionName: string = "bus";
+	
+	/**
 	 * Configures the collection before doing operations
 	 * @return {void}
 	 */
@@ -20,8 +25,6 @@ class BusModelMap implements IModelMap {
 	 * @return {any} 
 	 */
 	public prepareToInput(data: any): any {
-		if(data.line!==undefined) data.line = data.line.toString();
-		if(data.order!==undefined) data.order = data.order.toString();
 		if(data.speed!==undefined) {
 			data.speed = (data.speed!=="")? parseInt(data.speed) : 0;
 		}

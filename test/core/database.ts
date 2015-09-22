@@ -1,27 +1,18 @@
 declare var require, describe, it, global;
+import Config = require("../../src/config");
 import DbContext = require("../../src/core/database/dbContext");
 import ICollection = require("../../src/core/database/iCollection");
 import Itinerary = require("../../src/domain/entity/itinerary");
 import ItineraryModelMap = require("../../src/domain/modelMap/itineraryModelMap");
 
 var Assert = require("assert");
+global.Config = Config;
 
 describe("Database", () => {
 	
-	var config: any = {
-		driver: "mongodb",
-		config: {
-			dbName: "riobus",
-			host: "ds047742.mongolab.com",
-			user: "riobus",
-			pass: "riobus",
-			port: "47742"
-		}
-	};
-	
 	var context: DbContext;
 	try{
-		context = new DbContext(config);
+		context = new DbContext();
 	}catch(e){}
 	
 	it("should connect to the database", (done) => {
@@ -33,7 +24,7 @@ describe("Database", () => {
 	
 	var collection: ICollection<Itinerary>;
 	try{
-		collection = <ICollection<Itinerary>> context.collection("itinerary", new ItineraryModelMap());
+		collection = <ICollection<Itinerary>> context.collection(new ItineraryModelMap());
 	}
 	catch(e){}
 	
@@ -46,7 +37,7 @@ describe("Database", () => {
 	
 	var description: string = (new Date()).toString();
 	
-	var itinerary: Itinerary = new Itinerary("linha", description, "agencia", []);
+	var itinerary: Itinerary = new Itinerary("linha", description, "agencia", "keyword", []);
 	
 	it("should save the itinerary object to the database", (done) => {
 		var current: Itinerary = collection.save(itinerary);
@@ -106,10 +97,13 @@ describe("Database", () => {
 		done();
 	});
 	
-	try {
-		collection.aggregate([{$sort: {line : -1}}]);
-	}
-	catch(e){};
+	it("should aggregate the collection", (done) => {
+		try {
+			collection.aggregate([{$sort: {line : -1}}]);
+		}
+		catch(e){};
+		done();
+	});
 	
 	it("should delete a document in the collection", done =>{
 		var current: boolean = collection.remove({ description: description });

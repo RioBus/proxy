@@ -1,15 +1,12 @@
 {
   "name": "server",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "RioBus server application",
-  "main": "dist/index.js",
+  "main": ".compiled/src/index.js",
   "scripts": {
-    "configure": "npm install --python=python2.7",
     "test": "gulp buildTest && mocha .compiled/test/**/* --timeout 10000",
     "build": "gulp build",
-    "release": "gulp release",
-    "start": "gulp build && node .compiled/src/index.js",
-    "deploy": "gulp build && gulp release && gulp run-release"
+    "start": "gulp build && node .compiled/src/index.js"
   },
   "repository": {
     "type": "git",
@@ -51,9 +48,7 @@
   "devDependencies": {
     "gulp": "latest",
     "gulp-load-plugins": "latest",
-    "gulp-shell": "latest",
     "gulp-typescript": "latest",
-    "gulp-uglify": "latest",
     "gulp-util": "^3.0.6",
     "mocha": "latest"
   }

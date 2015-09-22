@@ -5,6 +5,11 @@
 interface IModelMap {
 	
 	/**
+	 * @var {string} Collection name
+	 */
+	collectionName: string;
+	
+	/**
 	 * Configure collection before operate
 	 * @param {any} collection Collection context object
 	 * @return {void}

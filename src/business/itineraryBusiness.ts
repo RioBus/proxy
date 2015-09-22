@@ -20,7 +20,7 @@ class ItineraryBusiness implements IBusiness {
 	 */
 	public retrieve(line: string, isLegacy?: boolean): Itinerary | LegacyItinerary[] {
 		var response: Itinerary = this.context.retrieve(line);
-		if(response===null) response = new Itinerary(line, "desconhecido", "desconhecido", []);
+		if(response===null) response = new Itinerary(line, "desconhecido", "desconhecido", "desconhecido", []);
 		return (isLegacy!==undefined && isLegacy)? this.convertToLegacy(response) : response;
 	}
 	

@@ -13,13 +13,21 @@ class Analytics{
     public constructor(private ua?: string, private host?: string){
         this.driver = require("nodealytics");
     }
+    
+    /**
+     * Checks if the configuration is set. If not, avoids the execution.
+     * @return {boolean}
+     */
+    private isDisabled(): boolean {
+        return (!this.ua || !this.host);
+    }
 
     /**
      * Starts the tracking service
      * @param {Function} callback (params: error, response)
      */
-    public initialize(callback?: (params: Error, response: any) => void): void{
-        if(this.ua===undefined || this.host===undefined) return;
+    public initialize(callback?: (params: Error, response: any) => void): void {
+        if(this.isDisabled()) return;
         if(callback===undefined) callback = function(){};
         this.driver.initialize(this.ua, this.host, callback);
     }
@@ -31,8 +39,8 @@ class Analytics{
      * @param {String} path Request path
      * @param {Function} callback (params: error, response)
      */
-    trackPage(id: string, path: string, callback: (params: Error, response: any) => void): void{
-        if(this.ua===undefined || this.host===undefined) return;
+    public trackPage(id: string, path: string, callback: (params: Error, response: any) => void): void {
+        if(this.isDisabled()) return;
         this.driver.trackPage(id, path, callback);
     }
 
@@ -44,8 +52,8 @@ class Analytics{
      * @param {String} label Event label
      * @param {Function} callback (params: error, response)
      */
-    trackEvent(id: string, path: string, label: string, callback: (params: Error, response: any) => void){
-        if(this.ua===undefined || this.host===undefined) return;
+    public trackEvent(id: string, path: string, label: string, callback: (params: Error, response: any) => void): void {
+        if(this.isDisabled()) return;
         this.driver.trackEvent(id, path, label, callback);
     }
 }

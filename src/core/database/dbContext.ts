@@ -14,8 +14,7 @@ class DbContext {
 	private context: IDatabase;
 	
 	public constructor(dbConfig?: any) {
-		if(dbConfig===undefined) dbConfig = (Config.isProduction())? // Gets the global database configuration from Config
-			Config.environment.production.database : Config.environment.development.database;
+		if(dbConfig===undefined) dbConfig = Config.environment.database;
 		this.context = this.getContext(dbConfig);
 	}
 	
@@ -25,8 +24,8 @@ class DbContext {
 	 * @param {IModelMap} map
 	 * @return {ICollection<T>}
 	 */
-	public collection<T>(name: string, map: IModelMap): ICollection<T> {
-		return this.context.collection<T>(name, map);
+	public collection<T>(map: IModelMap): ICollection<T> {
+		return this.context.collection<T>(map.collectionName, map);
 	}
 	
 	/**
@@ -35,6 +34,7 @@ class DbContext {
 	 * @return {IDatabase}
 	 */
 	private getContext(dbConfig: any): IDatabase {
+		if(dbConfig.driver===undefined || dbConfig.driver==="") throw new Error("Undefined database driver.");
 		var connector = dbConfig.driver.toLowerCase();
 		var driverPath = "core/database/driver";
 		switch(connector) {
