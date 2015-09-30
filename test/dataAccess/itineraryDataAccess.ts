@@ -30,7 +30,7 @@ describe("ItineraryDataAccess", () => {
 		done();
 	});
 	
-	it("shoulf return null when searching for an unexisting line", (done) => {
+	it("should return null when searching for an unexisting line", (done) => {
 		var expected: boolean = null;
 		var current: boolean = dataAccess.retrieve("unexisting line");
 		Assert.equal(current, expected);
