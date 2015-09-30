@@ -8,7 +8,7 @@ var Assert               = require("assert");
 
 class MockedBusiness implements IBusiness {
 	public create  (): void {}
-	public retrieve(userAgent: string, line: string[], mustLimit: boolean): any { return { userAgent: userAgent, line: line, mustLimit: mustLimit }; }
+	public retrieve(line: string[], mustLimit: boolean): any { return { line: line, mustLimit: mustLimit }; }
 	public update  (): void {}
 	public delete  (): void {}	
 }
@@ -30,33 +30,30 @@ describe("SearchService", () => {
 	
 	it("should propagate only the user-agent if the line information is not set", (done) => {
 		var expected: any = {
-			userAgent: "user-agent",
 			line: undefined,
 			mustLimit: undefined
 		};
-		var current: any = service.retrieve(expected.userAgent);
+		var current: any = service.retrieve("user-agent");
 		Assert.deepEqual(current, expected);
 		done();
 	});
 	
 	it("should propagate the user-agent, lines and limitation bool if the line information is set", (done) => {
 		var expected: any = {
-			userAgent: "user-agent",
 			line: ["123", "456", "789"],
 			mustLimit: limit
 		};
-		var current: any = service.retrieve(expected.userAgent, expected.line.join(","));
+		var current: any = service.retrieve("user-agent", expected.line.join(","));
 		Assert.deepEqual(current, expected);
 		done();
 	});
 	
 	it("should propagate the user-agent, line list and remove the limitation when searching for a consortium", (done) => {
 		var expected: any = {
-			userAgent: "user-agent",
 			line: consortiumLines,
 			mustLimit: false
 		};
-		var current: any = service.retrieve(expected.userAgent, "transcarioca");
+		var current: any = service.retrieve("user-agent", "transcarioca");
 		Assert.deepEqual(current, expected);
 		done();
 	});

@@ -25,7 +25,7 @@ class SearchService implements IService {
 	 * @return {Bus[]}
 	 */
 	public retrieve(userAgent: string, line?: string): any {
-		if(line===undefined) return this.business.retrieve(userAgent);
+		if(line===undefined) return this.business.retrieve();
 		else {
 			var data: string[] = this.processData(line);
 			var flag: any = Strings.analytics;
@@ -33,7 +33,7 @@ class SearchService implements IService {
 			data.forEach((line)=>{
 				this.analytics.trackEvent(flag.event.restHit, flag.label.busCode, line, (error, response)=>{});
 			}, this);
-			return this.business.retrieve(userAgent, data, this.mustLimit);
+			return this.business.retrieve(data, this.mustLimit);
 		}
 	}
 	
