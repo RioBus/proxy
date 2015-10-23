@@ -26,7 +26,7 @@ class App {
         
         global.database = new DbContext();
         
-        global.analytics = Factory.getAnalytics(Config.analytics.enable);
+        global.analytics = Factory.getAnalytics();
         global.analytics.initialize();
         
         var logger: Logger = Factory.getRuntimeLogger();

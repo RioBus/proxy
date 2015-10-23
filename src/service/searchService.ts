@@ -4,7 +4,8 @@ import IService  = require("./iService");
 import Strings   = require("../strings");
 import $inject 	 = require("../core/inject");
 
-declare var globalAnalytics: Analytics, strings: Strings;
+declare var analytics: Analytics, strings: Strings;
+var analytic: Analytics = analytics;
 
 /**
  * Responsible for integrating the outside's requests for Buses with the business logics
@@ -14,7 +15,7 @@ class SearchService implements IService {
 	
 	public constructor(private business: IBusiness = $inject("business/searchBusiness"), private mustLimit?: boolean, private analytics?: Analytics) {
 			if(!this.mustLimit) this.mustLimit = true;
-			if(!this.analytics) this.analytics = globalAnalytics;
+			if(!this.analytics) this.analytics = analytic;
 		}
 	
 	/**

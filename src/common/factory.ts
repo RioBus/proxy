@@ -40,9 +40,9 @@ class Factory {
         return Factory.getLogger(serverLogPath, 'SERVER');
     }
     
-    public static getAnalytics(enable: boolean): Analytics {
+    public static getAnalytics(): Analytics {
         var config: any = Config.analytics;
-        return (enable)? new Analytics(config.ua, config.host) : new Analytics();
+        return new Analytics(config.ua, config.host);
     }
 }
 export = Factory;
