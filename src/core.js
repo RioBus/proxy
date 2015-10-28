@@ -1,7 +1,7 @@
 module.exports = {
-	File: require('./file'),
-	HttpRequest: require('./httpRequest'),
-	Logger: require('./log/logger'),
-	LoggerFactory: require('./log/loggerFactory'),
-	Router: require('./router')
+	File: 			require('./file'),
+	Http: 			require('./http'),
+	Logger: 		require('./log/logger'),
+	LoggerFactory: 	require('./log/loggerFactory'),
+	Router: 		require('./router')
 }
