@@ -1,54 +1,67 @@
 'use strict';
 /**
- * Manipulates files
- *
- * @class File
- * @constructor
+ * Manipulates files access
+ * @class {File}
  */
-class File{
+class File {
 
-    constructor(path){
-        path = path.split('/');
-        this.file = path.pop();
-        this.directory = path.join('/');
-        this.driver = require('fs');
-        this.mkdirp = require('mkdirp');
+    constructor(path) {
+        this.fullPath = path;
+        var splittedPath = path.split('/');
+        this.file = splittedPath.pop();
+        this.directory = splittedPath.join('/');
+        this.fs = require("fs-extra");
+		this.fs.ensureFileSync(this.fullPath);
+    }
+    
+    /**
+     * Get the full file path
+     * @return {string}
+     */
+    get filePath() {
+        return this.fullPath;
+    }
+    
+    /**
+     * Get the directory where the file is
+     * @return {string}
+     */
+    get dirPath() {
+        return this.directory;
+    }
+    
+    /**
+     * Get the file name
+     * @return {string}
+     */
+    get fileName() {
+        return this.file;
     }
 
     /**
      * Appends content to end of file
-     * @param {string} content
+     * @param {string} content - Content to be written to the file
+	 * @return {void}
      */
-    append(content){
-        let self = this;
-        this.mkdirp(this.directory, function(e1){
-            if(e1) throw e1;
-            else self.driver.appendFile(self.directory + '/' + self.file, content+'\n', function(e2){
-                if(e2) throw e2;
-            });
-        });
+    append(content) {
+        this.fs.appendFileSync(this.fullPath, `${content}\n`);
     }
 
     /**
      * Writes the given content to a file. Ovewrites if it already has any content.
-     * @param {*} content
+     * @param {string} content - Content to be written to the file
+	 * @return {void}
      */
-    write(content){
-        let self = this;
-        this.mkdirp(this.directory, function(e1){
-            if(e1) throw e1;
-            else self.driver.writeFile(self.directory + '/' + self.file, content, function(e2){
-                if(e2) throw e2;
-            });
-        });
+    write(content) {
+        this.fs.outputFileSync(this.fullPath, `${content}\n`);
     }
 
     /**
      * Reads the file content
-     * @return string
+     * @return {string}
      */
-    read(){
-        return this.driver.readFileSync(this.directory + '/' + this.file, 'utf8');
+    read() {
+        return this.fs.readFileSync(this.fullPath, 'utf8');
     }
 }
 module.exports = File;

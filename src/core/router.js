@@ -1,103 +1,57 @@
 'use strict';
-var Factory = require('../common/factory');
+const Factory = require('../common/factory');
+const Config  = require('../config');
+const ServerDriver = require('express');
+const BodyParser = require("body-parser");
+const compression = require('compression');
+let logger = Factory.getServerLogger();
 
 /**
  * Class Router represents the RESTful router, which
  * handles all the HTTP routes configured in the application.
- * @class Router
- * @constructor
+ * @class {Router}
  */
-class Router{
+class Router {
 
     constructor(){
-        let ServerDriver = require('express');
-        let compression = require('compression');
-        this.logger = Factory.getServerLogger();
         this.driver = new ServerDriver();
         this.driver.use(compression());
+        this.driver.use(BodyParser.urlencoded({extended: true}));
+        this.driver.use(BodyParser.json());
         this.driver.use(function(req, res, next) {
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+            logger.info('Serving route '+req.url+' (GET)');
             next();
         });
-    }
-
-    /**
-     * Schedules a route with a callback
-     *
-     * @param {String} method
-     * @param {String} route
-     * @param {Function} callback
-     */
-    route(method, route, callback){
-        let logger = this.logger;
-        switch(method){
-            case 'post':
-                this.driver.post(route, function(request, response, next){
-                    logger.info('Serving route '+request.url+' (POST)');
-                    callback(request, response, next);
-                });
-                break;
-            case 'put':
-                this.driver.put(route, function(request, response, next){
-                    logger.info('Serving route '+request.url+' (PUT)');
-                    callback(request, response, next);
-                });
-                break;
-            case 'delete':
-                this.driver.delete(route, function(request, response, next){
-                    logger.info('Serving route '+request.url+' (DELETE)');
-                    callback(request, response, next);
-                });
-                break;
-            case 'get':
-            default:
-                this.driver.get(route, function(request, response, next){
-                    logger.info('Serving route '+request.url+' (GET)');
-                    callback(request, response, next);
-                });
-                break;
-        }
     }
 
     /**
      * Registers a list of resources to handle routes
      * @param {Array} resources
      */
-    registerResources(resources){
-        for(var res of Object.keys(resources)){
-            let Resource = require('../'+res);
-            let route = resources[res];
-            let resource = new Resource();
-
-            this.route('get', route, function(request, response, next){
-                resource.get(request, response, next);
-            });
-            this.route('post', route, function(request, response, next){
-                resource.post(request, response, next);
-            });
-            this.route('put', route, function(request, response, next){
-                resource.put(request, response, next);
-            });
-            this.route('delete', route, function(request, response, next){
-                resource.delete(request, response, next);
-            });
-            this.logger.info('Resource registered: '+res);
+    registerResources(resources) {
+        let root = Config.root;
+        for(var res of resources) {
+            let Resource = require(`${root}/${res}`);
+            var session = new ServerDriver();
+            let resource = new Resource(session);
+            this.driver.use(resource.base, session);
+            logger.info('Resource registered: '+res);
         }
     }
 
     /**
-     * Starts the RESTful router
-     * @param {String} ip
-     * @param {number} port
+     * Starts the RESTful server
+     * @param {string} ip - Server bind ip
+     * @param {number} port - Server bind port
      * @param {Function} callback
      * @returns {void}
      */
-    start(ip, port, callback){
-        let self = this;
+    start(ip, port, callback) {
         this.driver.listen(port, ip, function(){
             if(callback) callback();
-            self.logger.info('Server started in http://'+ip+':'+port);
+            logger.info(`Server started in http://${ip}:${port}`);
         });
     }
 }

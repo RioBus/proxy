@@ -1,54 +1,58 @@
 'use strict';
-var File = require('../core/file');
+const Config = require('../config');
+const File = require('../core/file');
 
 /**
- * Better logging interface
- *
- * @class Logger
- * @constructor
+ * Logger class
+ * 
+ * Improved logging interface
+ * @class {Logger}
  */
-class Logger{
-
-    constructor(fileName, flag){
-        this.driver = console;
-        this.flag = (flag)? flag:'RUNTIME';
-        this.fileStream = new File(fileName);
-    }
-
-    /**
-     * Stores the message in the log file and show in the console
-     * @param message
-     * @param level
-     */
-    log(message, level){
-        let time = (new Date()).toLocaleString();
-        let information = '['+time+']['+level+'] '+message;
-        this.driver.log(information);
-        this.fileStream.append(information);
-    }
-
-    /**
-     * Information-level message
-     * @param message
-     */
-    info(message){
-        this.log(message, this.flag + ' - INFO');
-    }
-
-    /**
-     * Alert-level message
-     * @param message
-     */
-    alert(message){
-        this.log(message, this.flag + ' - ALERT');
-    }
-
-    /**
-     * Error-level message
-     * @param message
-     */
-    error(message){
-        this.log(message, this.flag + ' - ERROR');
-    }
+class Logger {
+	
+	constructor(path) {
+		if(!path) path = Config.logs.runtime;
+		this.fs = new File(path);
+	}
+	
+	/**
+	 * Displays an alert level log
+	 * @param {string} content - Log message
+	 * @return {void}
+	 */
+	alert(content) {
+		this.log(content, 'ALERT');
+	}
+	
+	/**
+	 * Displays an error level log
+	 * @param {string} content - Log message
+	 * @return {void}
+	 */
+	error(content) {
+		this.log(content, 'ERROR');
+	}
+	
+	/**
+	 * Displays an information level log
+	 * @param {string} content - Log message
+	 * @return {void}
+	 */
+	info(content) {
+		this.log(content);
+	}
+	
+	/**
+	 * Displays an custom level log
+	 * @param {string} content - Log message
+	 * @param {string} level - Log level (Optional)
+	 * @return {void}
+	 */
+	log(content, level) {
+		if(!level) level = 'INFO';
+		var text = `[${new Date().toISOString()}] (${level}) ${content}`;
+		console.log(text);
+		this.fs.append(text);
+	}
 }
 module.exports = Logger;

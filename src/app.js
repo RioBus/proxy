@@ -1,31 +1,16 @@
 'use strict';
-var Factory = require('./common/factory');
-var Router  = require('./core/router');
+const Config  = require('./config');
+const Factory = require('./common/factory');
+const Router  = require('./core/router');
 
-/**
- * Main application process.
- * @class App
- */
-class App{
+(function main(){
 
-    /**
-     * Init application
-     *
-     * @method main
-     * @param {Array} argv Process arg list
-     * @return {void}
-     */
-    static main(argv){
-        let config = Factory.getConfig();
+    let logger = Factory.getRuntimeLogger();
+    logger.info('Starting the server...');
 
-        let logger = Factory.getRuntimeLogger();
-        logger.info('Starting the server...');
-
-        // Configuring the RESTful router to handle HTTP requests
-        let router = new Router();
-        router.registerResources(config.resources); // Registering resources to handle the URLs
-        let env = config.server.environment.development;
-        router.start(env.ip, env.port); // Starting RESTful application
-    }
-}
-module.exports = App;
+    // Configuring the RESTful router to handle HTTP requests
+    let router = new Router();
+    router.registerResources(Config.resources); // Registering resources to handle the URLs
+    let server = Config.server;
+    router.start(server.ip, server.port); // Starting RESTful application
+})();
