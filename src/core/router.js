@@ -1,10 +1,10 @@
 'use strict';
-const Factory = require('../common/factory');
+const LoggerFactory = require('../common/factory');
 const Config  = require('../config');
 const ServerDriver = require('express');
 const BodyParser = require("body-parser");
 const compression = require('compression');
-let logger = Factory.getServerLogger();
+let logger = LoggerFactory.getServerLogger();
 
 /**
  * Class Router represents the RESTful router, which

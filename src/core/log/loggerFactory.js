@@ -1,13 +1,13 @@
 'use strict';
 const Logger = require('./logger');
-const Config = require('../config');
+const Config = require('../../config');
 
 /**
- * Factory Helper
+ * LoggerFactory
  *
- * Factories main objects to help decoupling the code
+ * Factories Logger objects
  */
-class Factory {
+class LoggerFactory {
 
     /**
      * Gets a new Logger instance
@@ -27,7 +27,7 @@ class Factory {
      */
     static getRuntimeLogger() {
         let runtimeLogPath = Config.logs.runtime;
-        return Factory.getLogger(runtimeLogPath, 'RUNTIME');
+        return LoggerFactory.getLogger(runtimeLogPath, 'RUNTIME');
     }
 
     /**
@@ -36,7 +36,7 @@ class Factory {
      */
     static getServerLogger() {
         let serverLogPath = Config.logs.server;
-        return Factory.getLogger(serverLogPath, 'SERVER');
+        return LoggerFactory.getLogger(serverLogPath, 'SERVER');
     }
 }
-module.exports = Factory;
+module.exports = LoggerFactory;

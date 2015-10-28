@@ -1,6 +1,6 @@
 'use strict';
-const Config = require('../config');
-const File = require('../core/file');
+const Config = require('../../config');
+const File = require('../file');
 
 /**
  * Logger class
