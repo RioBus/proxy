@@ -33,11 +33,12 @@
     "compression": "^1.5.2",
     "express": "^4.13.3",
     "fs-extra": "^0.26.0",
-    "mongodb": "^2.0.47",
-    "mongorito": "^1.3.6",
-    "request-promise": "^1.0.2"
+    "mongodb": "^1.4.4",
+    "request-promise": "^1.0.2",
+    "robe": "^0.12.0"
   },
   "devDependencies": {
+    "co-mocha": "^1.1.2",
     "mocha": "^2.3.3"
   }
 }
