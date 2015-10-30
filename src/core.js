@@ -1,7 +1,9 @@
+const root = './core';
 module.exports = {
-	File: 			require('./file'),
-	Http: 			require('./http'),
-	Logger: 		require('./log/logger'),
-	LoggerFactory: 	require('./log/loggerFactory'),
-	Router: 		require('./router')
+	Database:		require(`${root}/database`),
+	File: 			require(`${root}/file`),
+	Http: 			require(`${root}/http`),
+	Logger: 		require(`${root}/log/logger`),
+	LoggerFactory: 	require(`${root}/log/loggerFactory`),
+	Router: 		require(`${root}/router`)
 }
