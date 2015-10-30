@@ -1,5 +1,5 @@
 'use strict';
-const LoggerFactory = require('../common/factory');
+const LoggerFactory = require('./log/loggerFactory');
 const Config  = require('../config');
 const ServerDriver = require('express');
 const BodyParser = require("body-parser");

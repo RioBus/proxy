@@ -1,11 +1,14 @@
 'use strict';
+/* global process; */
 const Config        = require('./config');
-const LoggerFactory = require('./core').LoggerFactory;
-const Router        = require('./core').Router;
+const Core          = require('./core');
+const LoggerFactory = Core.LoggerFactory;
+const Router        = Core.Router;
+const spawn         = require('co');
 
-(function main(){
+const logger = LoggerFactory.getRuntimeLogger();
 
-    let logger = LoggerFactory.getRuntimeLogger();
+spawn(function* main(){
     logger.info('Starting the server...');
 
     // Configuring the RESTful router to handle HTTP requests
@@ -14,4 +17,8 @@ const Router        = require('./core').Router;
     
     let server = Config.server;
     router.start(server.ip, server.port); // Starting RESTful application
-})();
+})
+.catch(function(error) {
+    logger.error(error);
+    process.exit(1);
+});
