@@ -37,6 +37,8 @@
     "compression": "^1.5.2",
     "express": "^4.13.3",
     "fs-extra": "^0.26.0",
+    "moment": "^2.10.6",
+    "moment-timezone": "^0.4.1",
     "mongodb": "^1.4.4",
     "request-promise": "^1.0.2",
     "robe": "^0.12.0"
