@@ -21,7 +21,7 @@ describe('ItineraryDAO', () => {
 	
 	it('should find all the itineraries', function*(done) {
 		let itinerary = yield dao.getAll();
-		//Assert(itinerary instanceof Array);
+		Assert(itinerary instanceof Array);
 		Assert.notEqual(itinerary.length, 0);
 		done();
 	});
@@ -34,7 +34,6 @@ describe('ItineraryDAO', () => {
 	
 	it('should find the itinerary with the keyword equal to \'keyword\'', function*(done) {
 		let itinerary = dao.getByKeyword(saved.keywords);
-		console.log(itinerary);
 		Assert.notEqual(itinerary.length, 0);
 		done();
 	});
