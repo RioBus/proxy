@@ -20,7 +20,7 @@ describe('BusDAO', () => {
 	});
 	
 	it('should find all buses from the collection', function*(done) {
-		let data = yield dao.getAll();	
+		let data = yield dao.getAll();
 		Assert(data instanceof Array);
 		Assert.equal(data.length, 1);			
 		done();
