@@ -7,31 +7,31 @@ const Assert = require('assert');
 const Database = require(`${base}/core`).Database;
 const Bus = require(`${base}/model/bus`);
 
-var dao, saved, col;
+var dao, bus, col;
 
 describe('Bus', () => {
 	
 	before(function*() {
-		saved = new Bus('', 'order', '', '', 23, 45, (new Date()).toDateString(), '');
+		bus = new Bus('', 'order', '', '', 23, 45, (new Date()).toDateString(), '');
 	});
 	
-	it('should put \'indefinido\' without a explicit line', function*(done) {	
-		Assert.equal(saved.line, 'indefinido');	
+	it('should set line to \'indefinido\' when not given', function*(done) {	
+		Assert.equal(bus.line, 'indefinido');	
 		done();
 	});
 	
-	it('should put zero without speed', function*(done){
-		Assert.equal(saved.speed, 0);
+	it('should set speed to 0 when not given', function*(done) {
+		Assert.equal(bus.speed, 0);
 		done();
 	});
 	
-	it('should put zero without direction', function*(done){
-		Assert.equal(saved.direction, 0);
+	it('should set direction to 0 when not given', function*(done) {
+		Assert.equal(bus.direction, 0);
 		done();
 	});
 	
-	it('should put \'desconhecido\' without sense', function*(done){
-		Assert.equal(saved.sense, 'desconhecido');
+	it('should set sense to \'desconhecido\' when not given', function*(done) {
+		Assert.equal(bus.sense, 'desconhecido');
 		done();
 	});
 
