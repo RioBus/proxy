@@ -14,7 +14,7 @@ class Bus extends Spot {
 		this.speed = speed || 0;
 		this.direction = direction || 0;
 		timestamp = (new Date(timestamp)).toISOString();
-		this.timestamp = Moment.tz(timestamp, "America/Sao_Paulo").format();
+		this.timestamp = Moment.tz(timestamp, "America/Sao_Paulo").toDate();
 		this.sense =  (!sense || sense==='')? 'desconhecido' : sense;
 		if(id) this._id = id;
     }
