@@ -1,46 +1,48 @@
 'use strict';
-/* global describe, it, before, global, __dirname, after; */
-const base = `${__dirname}/../../src`;
-const Moment = require('moment-timezone');
+/* global describe, it, before; */
 
 const Assert = require('assert');
-const Database = require(`${base}/core`).Database;
-const Bus = require(`${base}/model/bus`);
 
-var timestamp, bus, col;
+const base = '../../src';
+const Bus = require(`${base}/model/bus`);
 
 describe('Bus', () => {
 	
-	before(function() {
-		timestamp = (new Date()).toDateString();
-		bus = new Bus('', 'order', '', '', 23, 45, timestamp, '');
+	let bus;
+	
+	before( () => {
+		bus = new Bus('line', 'order', 0, 1, 2, 3, new Date(), 'sense');
 	});
 	
-	it('should set line to \'indefinido\' when not given', function(done) {	
-		Assert.equal(bus.line, 'indefinido');	
-		done();
+	it('should have a property \'line\' containing a string', () => {
+		Assert.equal(typeof bus.line, 'string');
 	});
 	
-	it('should set speed to 0 when not given', function(done) {
-		Assert.equal(bus.speed, 0);
-		done();
+	it('should have a property \'order\' containing a string', () => {
+		Assert.equal(typeof bus.order, 'string');
 	});
 	
-	it('should set direction to 0 when not given', function(done) {
-		Assert.equal(bus.direction, 0);
-		done();
+	it('should have a property \'sense\' containing a string', () => {
+		Assert.equal(typeof bus.sense, 'string');
 	});
 	
-	it('should set sense to \'desconhecido\' when not given', function(done) {
-		Assert.equal(bus.sense, 'desconhecido');
-		done();
+	it('should have a property \'timestamp\' containing a Date', () => {
+		Assert.equal(typeof bus.timestamp.getMonth, 'function');
 	});
 	
-	it('should set the time with correct format', function*(done){
-		timestamp = (new Date(timestamp)).toISOString();
-		timestamp = Moment.tz(timestamp, "America/Sao_Paulo").format();
-		Assert.equal(bus.timestamp, timestamp);
-		done();
+	it('should have a property \'speed\' containing a number', () => {
+		Assert.equal(typeof bus.speed, 'number');
 	});
 	
+	it('should have a property \'direction\' containing a number', () => {
+		Assert.equal(typeof bus.direction, 'number');
+	});
+	
+	it('should have a property \'latitude\' containing a number', () => {
+		Assert.equal(typeof bus.latitude, 'number');
+	});
+	
+	it('should have a property \'longitude\' containing a number', () => {
+		Assert.equal(typeof bus.longitude, 'number');
+	});
 });

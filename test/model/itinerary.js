@@ -1,42 +1,36 @@
 'use strict';
-/* global describe, it, before, global, __dirname, after; */
-const base = `${__dirname}/../../src`;
+/* global describe, it, before; */
 
 const Assert = require('assert');
-const Database = require(`${base}/core`).Database;
-const Itinerary = require(`${base}/model/itinerary`);
 
-var dao, itinerary, col;
+const base = '../../src';
+const Itinerary = require(`${base}/model/itinerary`);
 
 describe('Itinerary', () => {
 	
-	before(function*() {
-		itinerary = new Itinerary('', '', '', '', '');
+	let itinerary;
+	
+	before( () => {
+		itinerary = new Itinerary('line', 'description', 'agency', 'keywords', []);
 	});
 	
-	it('should set line \'indefinido\'when not given', function*(done) {	
-		Assert.equal(itinerary.line, 'indefinido');	
-		done();
+	it('should have a property \'line\' containing a string', () => {
+		Assert.equal(typeof itinerary.line, 'string');
 	});
 	
-	it('should set description \'desconhecido\' when not given', function*(done){
-		Assert.equal(itinerary.description, 'desconhecido');
-		done();
+	it('should have a property \'description\' containing a string', () => {
+		Assert.equal(typeof itinerary.description, 'string');
 	});
 	
-	it('should set agency with empty string when not given', function*(done){
-		Assert.equal(itinerary.agency, '');
-		done();
+	it('should have a property \'agency\' containing a string', () => {
+		Assert.equal(typeof itinerary.agency, 'string');
 	});
 	
-	it('should set keyword with empty string when not given', function*(done){
-		Assert.equal(itinerary.keywords, '');
-		done();
+	it('should have a property \'keywords\' containing a string', () => {
+		Assert.equal(typeof itinerary.keywords, 'string');
 	});
 	
-	it('should set spots with empty array when not given', function*(done){
-		Assert.equal(itinerary.spots.length, 0);
-		done();
+	it('should have a property \'spots\' containing an Array', () => {
+		Assert.equal(itinerary.spots instanceof Array, true);
 	});
-	
 });
