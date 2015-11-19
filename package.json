@@ -35,6 +35,7 @@
   "dependencies": {
     "body-parser": "^1.14.1",
     "co": "^4.6.0",
+    "co-express": "^1.2.1",
     "compression": "^1.5.2",
     "express": "^4.13.3",
     "fs-extra": "^0.26.0",
