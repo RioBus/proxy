@@ -4,7 +4,7 @@
 const Assert = require('assert');
 
 const base = '../../src';
-const Spot = require(`${base}/model/spot`);
+const Spot = require(`${base}/common/spotModel`);
 
 describe('Spot', () => {
 	
