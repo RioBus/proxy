@@ -4,7 +4,7 @@
 const Assert = require('assert');
 
 const base = '../../src';
-const Itinerary = require(`${base}/model/itinerary`);
+const Itinerary = require(`${base}/itinerary/itineraryModel`);
 
 describe('Itinerary', () => {
 	
