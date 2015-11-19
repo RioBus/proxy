@@ -7,8 +7,8 @@ class MainResource {
 		router.get('/', this.getMainRoute);
 	}
 
-	getMainRoute(request, response, next) {
-		response.jsonp({ type: 'success', message: 'hello world!' });
+	getMainRoute(request, response) {
+		response.redirect('https://github.com/RioBus/proxy/wiki/REST-API');
 	}
 }
 module.exports = MainResource;
