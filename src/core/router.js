@@ -46,10 +46,10 @@ class Router {
      * @param {string} ip - Server bind ip
      * @param {number} port - Server bind port
      * @param {Function} callback
-     * @returns {void}
+     * @returns {Object}
      */
     start(ip, port, callback) {
-        this.driver.listen(port, ip, function(){
+        return this.driver.listen(port, ip, function(){
             if(callback) callback();
             logger.info(`Server started in http://${ip}:${port}`);
         });
