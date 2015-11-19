@@ -13,8 +13,8 @@ const Itinerary    = require(`${base}/itinerary/itineraryModel`);
 describe('Itinerary API', () => {
 	
 	before(function*() {
-		global.connection = yield Database.connect();
-		yield global.connection.collection('itinerary').insert(new Itinerary('lineCode', 'description', 'agency', 'keywords', []));
+		global.database = yield Database.connect();
+		yield global.database.collection('itinerary').insert(new Itinerary('lineCode', 'description', 'agency', 'keywords', []));
 		
 		let router = new Router();
 		router.registerResources(['itinerary/itineraryResource']);
@@ -52,6 +52,6 @@ describe('Itinerary API', () => {
 	});
 	
 	after(function*() {
-		yield global.connection.collection('itinerary').remove({});
+		yield global.database.collection('itinerary').remove({});
 	});
 });

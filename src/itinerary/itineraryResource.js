@@ -1,5 +1,4 @@
 'use strict';
-/* global connection; */
 const wrap = require('co-express');
 const Core = require('../core');
 const Database = Core.Database;
@@ -16,13 +15,13 @@ class ItineraryResource {
 	}
 
 	*getMainRoute(request, response) {
-		const dao = new ItineraryDAO(connection);
+		const dao = new ItineraryDAO();
 		const data = yield dao.getAll();
 		response.jsonp(data);	
 	}
 
 	*getByLine(request, response) {
-		const dao = new ItineraryDAO(connection);
+		const dao = new ItineraryDAO();
 		const data = yield dao.getByLine(request.params.line);
 		response.jsonp(data);	
 	}
