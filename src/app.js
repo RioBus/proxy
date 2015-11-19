@@ -12,7 +12,7 @@ const logger = LoggerFactory.getRuntimeLogger();
 spawn(function*(){
     logger.info('Starting the server...');
     
-    global.connection = yield Database.connect(); // Creating connection to database
+    global.database = yield Database.connect(); // Creating connection to database
 
     // Configuring the RESTful router to handle HTTP requests
     let router = new Router();
