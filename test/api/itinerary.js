@@ -44,7 +44,6 @@ describe('Itinerary API', () => {
 		} catch(e) {
 			data = e;
 		} finally {
-			console.log(data);
 			Assert.equal(data.line, 'lineCode');
 			Assert.equal(data.description, 'description');
 			Assert.equal(data.agency, 'agency');
