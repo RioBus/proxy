@@ -1,6 +1,5 @@
 'use strict';
 /* global describe, it, before, global, __dirname, after; */
-require('co-mocha')(require('mocha'));
 const base = `${__dirname}/../../src`;
 
 const Assert = require('assert');
@@ -19,25 +18,22 @@ describe('BusDAO', () => {
 		saved = yield col.insert(new Bus('line', 'order', 0, 0, 23, 45, (new Date()).toDateString(), 'sense'));
 	});
 	
-	it('should find all buses from the collection', function*(done) {
+	it('should find all buses from the collection', function*() {
 		let data = yield dao.getAll();
 		Assert(data instanceof Array);
-		Assert.equal(data.length, 1);			
-		done();
+		Assert.equal(data.length, 1);
 	});
 	
-	it('should find all buses with the line equal to \'line\'', function*(done) {
+	it('should find all buses with the line equal to \'line\'', function*() {
 		let data = yield dao.getByLines([saved.line]);	
 		Assert(data instanceof Array);
-		Assert.equal(data.length, 1);			
-		done();
+		Assert.equal(data.length, 1);
 	});
 	
-	it('should find all buses with the order equal to \'order\'', function*(done) {
+	it('should find all buses with the order equal to \'order\'', function*() {
 		let data = yield dao.getByOrders([saved.order]);	
 		Assert(data instanceof Array);
-		Assert.equal(data.length, 1);			
-		done();
+		Assert.equal(data.length, 1);
 	});
 	
 	after(function*() {
