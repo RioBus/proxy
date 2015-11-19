@@ -4,7 +4,7 @@
 const Assert = require('assert');
 
 const base = '../../src';
-const Bus = require(`${base}/model/bus`);
+const Bus = require(`${base}/bus/busModel`);
 
 describe('Bus', () => {
 	

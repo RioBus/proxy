@@ -1,5 +1,5 @@
 'use strict';
-const Spot = require('./spot');
+const Spot = require('../common/spotModel');
 const Moment = require('moment-timezone');
 /**
  * Describes a bus instance

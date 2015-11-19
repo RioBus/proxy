@@ -4,8 +4,8 @@ const base = `${__dirname}/../../src`;
 
 const Assert = require('assert');
 const Database = require(`${base}/core`).Database;
-const Bus = require(`${base}/model/bus`);
-const BusDAO = require(`${base}/dao/busDAO`);
+const Bus = require(`${base}/bus/busModel`);
+const BusDAO = require(`${base}/bus/busDAO`);
 
 var dao, saved, col;
 
