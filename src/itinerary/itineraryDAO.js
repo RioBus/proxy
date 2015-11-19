@@ -17,7 +17,7 @@ class ItineraryDAO {
 	}
 	
 	getByLine(line){
-		return this.collection.find({line:line});
+		return this.collection.findOne({line:line});
 	}
 }
 module.exports = ItineraryDAO;

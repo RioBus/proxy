@@ -4,8 +4,8 @@ const base = `${__dirname}/../../src`;
 
 const Assert       = require('assert');
 const Database     = require(`${base}/core`).Database;
-const Itinerary    = require(`${base}/model/itinerary`);
-const ItineraryDAO = require(`${base}/dao/itineraryDAO`);
+const Itinerary    = require(`${base}/itinerary/itineraryModel`);
+const ItineraryDAO = require(`${base}/itinerary/itineraryDAO`);
 
 let dao, saved, col;
 
@@ -26,7 +26,7 @@ describe('ItineraryDAO', () => {
 		
 	it('should find the itinerary with the line equal to \'line\'', function*() {
 		let itinerary = yield dao.getByLine(saved.line);
-		Assert.notEqual(itinerary.lenght, 0);
+		Assert.equal(itinerary.line, saved.line);
 	});
 	
 	it('should find the itinerary with the keyword equal to \'keyword\'', function*() {
