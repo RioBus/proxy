@@ -5,7 +5,7 @@ const Database = Core.Database;
 const Bus = require('./busModel');
 const BusDAO = require('./busDAO');
 
-class ItineraryResource {
+class BusResource {
 
 	get base() { return '/v3/search'; }
 	
