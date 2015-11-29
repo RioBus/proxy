@@ -15,7 +15,7 @@ class BusResource {
 
 	*getByLines(request, response) {
 		const dao = new BusDAO();
-		const data = yield dao.getByLines(request.params.line);
+		const data = yield dao.getByLines(request.params.line.split(','));
 		response.jsonp(data);	
 	}
 }
