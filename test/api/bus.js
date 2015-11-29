@@ -7,7 +7,7 @@ const Core      = require(`${base}/core`);
 const Database  = Core.Database;
 const Http	    = Core.Http;
 const Router    = Core.Router;
-const Bus = require(`${base}/bus/busModel`);
+const Bus       = require(`${base}/bus/busModel`);
 
 describe('Bus API', () => {
 	
@@ -18,8 +18,7 @@ describe('Bus API', () => {
 		host = `http://${ip}:${port}`;
 		
 		global.database = yield Database.connect();
-		let bus = new Bus('line', 'order', 0, 0, 20, 30, (new Date()).toDateString(), 'sense');
-		yield global.database.collection('bus').insert(bus);
+		yield global.database.collection('bus').insert(new Bus('line', 'order', 0, 0, 20, 30, (new Date()).toDateString(), 'sense'));
 		
 		let router = new Router();
 		router.registerResources(['bus/busResource']);
@@ -36,12 +35,11 @@ describe('Bus API', () => {
 		} finally {
 			Assert.equal(data instanceof Array, true);
 			Assert.equal(data.length, 1);
-			Assert.equal(data[0].line, bus.line);
-			Assert.equal(data[0].order, bus.order);
-			Assert.equal(data[0].speed, bus.speed);
-			Assert.equal(data[0].direction, bus.direction);
-			Assert.equal(data[0].timeStamp, bus.timeStamp);
-			Assert.equal(data[0].sense, bus.sense);
+			Assert.equal(data[0].line, 'line');
+			Assert.equal(data[0].order, 'order');
+			Assert.equal(data[0].speed, 0);
+			Assert.equal(data[0].direction, 0);
+			Assert.equal(data[0].sense, 'sense');
 		}
 	});
 	
