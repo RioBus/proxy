@@ -43,6 +43,24 @@ describe('Bus API', () => {
 		}
 	});
 	
+	it('should get a list with only one bus from a GET request to /v3/search/order', function*() {
+		let data;
+		try {
+			var output = yield Http.get(`${host}/v3/search/order`);
+			data = JSON.parse(output);
+		} catch(e) {
+			data = e;
+		} finally {
+			Assert.equal(data instanceof Array, true);
+			Assert.equal(data.length, 1);
+			Assert.equal(data[0].line, '485');
+			Assert.equal(data[0].order, 'order');
+			Assert.equal(data[0].speed, 0);
+			Assert.equal(data[0].direction, 0);
+			Assert.equal(data[0].sense, 'sense');
+		}
+	});
+	
 	it('should get an empty list from a GET request to v3/search/unexisting', function*() {
 		let data;
 		try {

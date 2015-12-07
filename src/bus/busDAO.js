@@ -13,11 +13,11 @@ class BusDAO {
 	}
 	
 	getByLines(lines){
-		return this.bus.find({line:{$in:lines}});
+		return this.bus.find({ line: { $in: lines } });
 	}
 	
 	getByOrders(orders){
-		return this.bus.find({order:{$in:orders}});
+		return this.bus.find({ order: { $in: orders } });
 	}
 }
 module.exports = BusDAO;

@@ -10,13 +10,17 @@ class BusResource {
 	get base() { return '/v3/search'; }
 	
 	constructor(router) {
-		router.get('/:lines', wrap(this.getByLines));
+		router.get('/:data', wrap(this.getBuses));
 	}
 
-	*getByLines(request, response) {
+	*getBuses(request, response) {
 		const dao = new BusDAO();
-		const data = yield dao.getByLines(request.params.lines.split(','));
-		response.jsonp(data);	
+		let data = yield dao.getByLines(request.params.data.split(','));
+		if(data.length>0) response.jsonp(data);
+		else {
+			data = yield dao.getByOrders(request.params.data.split(','));
+			response.jsonp(data);
+		}	
 	}
 }
 module.exports = BusResource;
