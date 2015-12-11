@@ -42,6 +42,7 @@
     "moment": "2.10.6",
     "moment-timezone": "0.4.1",
     "mongodb": "1.4.4",
+    "nodealytics": "0.0.6",
     "request-promise": "1.0.2",
     "robe": "0.12.0"
   },
