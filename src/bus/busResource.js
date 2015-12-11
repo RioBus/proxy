@@ -4,6 +4,7 @@ const Core = require('../core');
 const Database = Core.Database;
 const Bus = require('./busModel');
 const BusDAO = require('./busDAO');
+const ItineraryDAO = require('../itinerary/itineraryDAO');
 
 class BusResource {
 
@@ -15,11 +16,18 @@ class BusResource {
 
 	*getBuses(request, response) {
 		const dao = new BusDAO();
-		let data = yield dao.getByLines(request.params.data.split(','));
+		const searchTerm = request.params.data;
+		let data = yield dao.getByLines(searchTerm.split(','));
 		if(data.length>0) response.jsonp(data);
 		else {
-			data = yield dao.getByOrders(request.params.data.split(','));
-			response.jsonp(data);
+			data = yield dao.getByOrders(searchTerm.split(','));
+			if(data.length>0) response.jsonp(data);
+			else {
+				let itineraryDao = new ItineraryDAO();
+				let lines = (yield itineraryDao.getByKeyword(searchTerm)).map((itinerary) => { return itinerary.line; });
+				data = yield dao.getByLines(lines);
+				response.jsonp(data);
+			}
 		}	
 	}
 }

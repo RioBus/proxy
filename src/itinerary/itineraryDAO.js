@@ -13,7 +13,7 @@ class ItineraryDAO {
 	}
 	
 	getByKeyword(keyword){
-		return this.collection.find({$text:{$search:keyword}});
+		return this.collection.find({keywords: new RegExp(keyword) });
 	}
 	
 	getByLine(line){
