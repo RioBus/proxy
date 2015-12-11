@@ -9,8 +9,8 @@ const Config = require('../config');
 class Analytics {
 
     constructor(ua, host) {
-		this.ua = (ua)? ua : Config.analytics.ua;
-		this.host = (host)? host : Config.analytics.host;
+		this.ua = ua || Config.analytics.ua;
+		this.host = host || Config.analytics.host;
         this.driver = require("nodealytics");
     }
     
@@ -19,7 +19,7 @@ class Analytics {
      * @return {boolean}
      */
     get disabled() {
-        return (!this.ua || !this.host);
+        return (!this.ua || this.ua==='' || !this.host || this.host==='');
     }
 
     /**
