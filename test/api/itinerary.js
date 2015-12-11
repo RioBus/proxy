@@ -3,6 +3,7 @@
 const base = `${__dirname}/../../src`;
 
 const Assert    = require('assert');
+const Config    = require(`${base}/config`);
 const Core      = require(`${base}/core`);
 const Database  = Core.Database;
 const Http	    = Core.Http;
@@ -21,7 +22,7 @@ describe('Itinerary API', () => {
 		yield global.database.collection('itinerary').insert(new Itinerary('lineCode', 'description', 'agency', 'keywords', []));
 		
 		let router = new Router();
-		router.registerResources(['itinerary/itineraryResource']);
+		router.registerResources(Config.resources);
 		server = router.start(ip, port);
 	});
 	
@@ -31,7 +32,7 @@ describe('Itinerary API', () => {
 			var output = yield Http.get(`${host}/v3/itinerary`);
 			data = JSON.parse(output);
 		} catch(e) {
-			data = e;
+			data = JSON.parse(e.response.body);
 		} finally {
 			Assert.equal(data instanceof Array, true);
 			Assert.equal(data.length, 1);
@@ -46,7 +47,7 @@ describe('Itinerary API', () => {
 			var output = yield Http.get(`${host}/v3/itinerary/lineCode`);
 			data = JSON.parse(output);
 		} catch(e) {
-			data = e;
+			data = JSON.parse(e.response.body);
 		} finally {
 			Assert.equal(data.line, 'lineCode');
 			Assert.equal(data.description, 'description');

@@ -30,6 +30,7 @@ module.exports = {
     },
     resources: [
         'main/mainResource',
+        'bus/busResource',
         'itinerary/itineraryResource'
     ]
 };

@@ -3,6 +3,7 @@
 const base = `${__dirname}/../../src`;
 
 const Assert    = require('assert');
+const Config    = require(`${base}/config`);
 const Core      = require(`${base}/core`);
 const Database  = Core.Database;
 const Http	    = Core.Http;
@@ -23,7 +24,7 @@ describe('Bus API', () => {
 		yield global.database.collection('itinerary').insert(new Itinerary('485', 'sense', '', '485 sense', []));
 		
 		let router = new Router();
-		router.registerResources(['bus/busResource']);
+		router.registerResources(Config.resources);
 		server = router.start(ip, port);
 	});
 	
@@ -33,7 +34,7 @@ describe('Bus API', () => {
 			var output = yield Http.get(`${host}/v3/search/485`);
 			data = JSON.parse(output);
 		} catch(e) {
-			data = e;
+			data = JSON.parse(e.response.body);
 		} finally {
 			Assert.equal(data instanceof Array, true);
 			Assert.equal(data.length, 1);
@@ -51,7 +52,7 @@ describe('Bus API', () => {
 			var output = yield Http.get(`${host}/v3/search/order`);
 			data = JSON.parse(output);
 		} catch(e) {
-			data = e;
+			data = JSON.parse(e.response.body);
 		} finally {
 			Assert.equal(data instanceof Array, true);
 			Assert.equal(data.length, 1);
@@ -69,7 +70,7 @@ describe('Bus API', () => {
 			var output = yield Http.get(`${host}/v3/search/sense`);
 			data = JSON.parse(output);
 		} catch(e) {
-			data = e;
+			data = JSON.parse(e.response.body);
 		} finally {
 			Assert.equal(data instanceof Array, true);
 			Assert.equal(data.length, 1);
@@ -87,7 +88,7 @@ describe('Bus API', () => {
 			var output = yield Http.get(`${host}/v3/search/unexisting`);
 			data = JSON.parse(output);
 		} catch(e) {
-			data = e;
+			data = JSON.parse(e.response.body);
 		} finally {
 			Assert.equal(data instanceof Array, true);
 			Assert.equal(data.length, 0);

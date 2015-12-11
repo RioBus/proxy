@@ -26,7 +26,8 @@ class BusResource {
 				let itineraryDao = new ItineraryDAO();
 				let lines = (yield itineraryDao.getByKeyword(searchTerm)).map((itinerary) => { return itinerary.line; });
 				data = yield dao.getByLines(lines);
-				response.jsonp(data);
+				if(data.length>0) response.status(200).jsonp(data);
+				else response.status(404).jsonp([]);
 			}
 		}	
 	}
