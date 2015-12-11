@@ -38,6 +38,9 @@ describe('Itinerary API', () => {
 			Assert.equal(data.length, 1);
 			Assert.equal(data[0].line, 'lineCode');
 			Assert.equal(data[0].description, 'description');
+			Assert.equal(data[0].agency, undefined);
+			Assert.equal(data[0].keywords, undefined);
+			Assert.equal(data[0].spots, undefined);
 		}
 	});
 	

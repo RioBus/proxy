@@ -18,10 +18,15 @@ describe('ItineraryDAO', () => {
 		saved = yield col.insert(new Itinerary('line', 'description', 'agency', 'keyword', []));
 	});
 	
-	it('should find all the itineraries', function*() {
-		let itinerary = yield dao.getAll();
-		Assert(itinerary instanceof Array);
-		Assert.notEqual(itinerary.length, 0);
+	it('should find all the itineraries headers', function*() {
+		let itineraries = yield dao.getHeaders();
+		Assert(itineraries instanceof Array);
+		Assert.notEqual(itineraries.length, 0);
+		Assert.equal(itineraries[0].line, saved.line);
+		Assert.equal(itineraries[0].description, saved.description);
+		Assert.equal(itineraries[0].agency, undefined);
+		Assert.equal(itineraries[0].keywords, undefined);
+		Assert.equal(itineraries[0].spots, undefined);
 	});
 		
 	it('should find the itinerary with the line equal to \'line\'', function*() {

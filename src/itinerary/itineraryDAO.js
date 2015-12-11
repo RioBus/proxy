@@ -8,8 +8,8 @@ class ItineraryDAO {
 		this.collection = connection.collection('itinerary');
 	}
 	
-	getAll() {
-		return this.collection.find({});
+	getHeaders() {
+		return this.collection.find({}, { fields: ['line', 'description'], sort: { line: 1 } });
 	}
 	
 	getByKeyword(keyword){

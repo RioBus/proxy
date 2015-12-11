@@ -16,7 +16,7 @@ class ItineraryResource {
 
 	*getMainRoute(request, response) {
 		const dao = new ItineraryDAO();
-		const data = yield dao.getAll();
+		const data = yield dao.getHeaders();
 		response.jsonp(data);	
 	}
 
