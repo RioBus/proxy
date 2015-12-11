@@ -7,7 +7,7 @@ const BusStopDAO = require('./busStopDAO');
 
 class BusStopResource {
 
-	get base() { return '/v3/busStop'; }
+	get base() { return '/v3/busstop'; }
 	
 	constructor(router) {
 		router.get('/:line', wrap(this.getByLine));
