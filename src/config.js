@@ -10,6 +10,7 @@ let time = `${data.getFullYear()}-${data.getMonth()}-${data.getDate()}`;
 module.exports = {
     root: __dirname,
     logs: {
+        provider: `/tmp/riobus/log/provider-${time}.log`,
         runtime: `/tmp/riobus/log/runtime-${time}.log`,
         server: `/tmp/riobus/log/server-${time}.log`
     },
@@ -32,6 +33,7 @@ module.exports = {
         'main/mainResource',
         'bus/busResource',
         'busStop/busStopResource',
-        'itinerary/itineraryResource'
+        'itinerary/itineraryResource',
+        'log/logResource'
     ]
 };
