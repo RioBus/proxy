@@ -6,14 +6,27 @@ const Bus = require('./busModel');
 const BusDAO = require('./busDAO');
 const ItineraryDAO = require('../itinerary/itineraryDAO');
 
+/**
+ * Responsible for Bus search API configuration
+ * @class {BusResource}
+ */
 class BusResource {
 
+	/**
+	 * API base path
+	 */
 	get base() { return '/v3/search'; }
 	
 	constructor(router) {
 		router.get('/:data', wrap(this.getBuses));
 	}
 
+	/**
+	 * Handles the requests looking for an specific bus line
+	 * @param {Object} request - HTTP request data dictionary
+	 * @param {Object} response - HTTP response data dictionary
+	 * @return {void}
+	 */
 	*getBuses(request, response) {
 		const dao = new BusDAO();
 		const searchTerm = request.params.data;
