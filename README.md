@@ -1,7 +1,7 @@
 RioBus
 ======
 
-[![Build Status](https://snap-ci.com/RioBus/proxy/branch/master/build_image)](https://snap-ci.com/RioBus/proxy/branch/master)
+[![Build Status](https://snap-ci.com/RioBus/proxy/branch/dev/build_image)](https://snap-ci.com/RioBus/proxy/branch/dev)
 
 O RioBus é um sistema colaborativo de monitoramento de ônibus em tempo real, que utiliza a API aberta de dados de
 mobilidade urbana fornecida pela parceria entre a Prefeitura do Rio de Janeiro e a FETRANSPOR.
@@ -14,13 +14,8 @@ Arquitetura
 A aplicação do servidor do RioBus foi desenvolvida em Node.js junto ao ExpressJS, que é
 uma solução bastante madura de framework para construir uma RESTful API.
 
-A organização da lógica da aplicação segue a metodologia de desenvolvimento do DDD (Domain-Driven Design), que deixa o
-código desacoplado e organizado, facilitando a manutenção e a adição de novas funcionalidades.
-
-Além disso, foi preparada uma infra-estrutura graças ao poder do GULP, um dos automatizadores de tarefas mais utilizados
-atualmente por equipes de desenvolvimento de Javascript. Desta forma foi possível escrever um código limpo e sucinto que
-garante flexibilidade e modularidade.
-
+A organização da lógica da aplicação segue um design bem modular, que deixa o código desacoplado e organizado, 
+facilitando a manutenção e a adição de novas funcionalidades.
 
 
 Instalação
@@ -50,10 +45,10 @@ em ```Config.database```.
 Comandos NPM
 ------------
 
-npm run test
+npm test
 > Invoca o Mocha e roda as rotinas de testes unitários configurados em test/
 
-npm run start
+npm start
 > Roda a aplicação
 
 ```OBS.: Para a aplicação funcionar, ela precisa estar em um projeto cujos módulos Node.js estejam instalados.```
@@ -61,4 +56,4 @@ npm run start
 Compatibilidade
 ---------------
 
-* nodejs >= 4.0
+* Node.js >= 4.0
