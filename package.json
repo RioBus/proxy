@@ -33,19 +33,19 @@
   },
   "homepage": "http://github.com/RioBus/proxy",
   "dependencies": {
-    "body-parser": "^1.14.1",
-    "co": "^4.6.0",
-    "co-express": "^1.2.1",
-    "compression": "^1.5.2",
-    "express": "^4.13.3",
-    "fs-extra": "^0.26.0",
-    "moment": "^2.10.6",
-    "moment-timezone": "^0.4.1",
-    "mongodb": "^1.4.4",
-    "request-promise": "^1.0.2",
-    "robe": "^0.12.0"
+    "body-parser": "1.14.1",
+    "co": "4.6.0",
+    "co-express": "1.2.1",
+    "compression": "1.5.2",
+    "express": "4.13.3",
+    "fs-extra": "0.26.0",
+    "moment": "2.10.6",
+    "moment-timezone": "0.4.1",
+    "mongodb": "1.4.4",
+    "request-promise": "1.0.2",
+    "robe": "0.12.0"
   },
   "devDependencies": {
-    "mocha-co": "^1.17.1-co.1"
+    "mocha-co": "1.17.1-co.1"
   }
 }
