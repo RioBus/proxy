@@ -12,7 +12,7 @@ class BusStopDAO {
 		return this.collection.find({});
 	}
 	
-	getByLine(line){
+	getByLine(line) {
 		return this.collection.findOne({line:line});
 	}
 }
