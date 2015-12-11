@@ -1,4 +1,5 @@
 'use strict';
+const Config = require('../config');
 /**
  * Implements Google Analytics tracking system
  *
@@ -7,9 +8,9 @@
  */
 class Analytics {
 
-    constructor(ua, host){
-		this.ua = ua;
-		this.host = host;
+    constructor(ua, host) {
+		this.ua = (ua)? ua : Config.analytics.ua;
+		this.host = (host)? host : Config.analytics.host;
         this.driver = require("nodealytics");
     }
     
