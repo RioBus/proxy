@@ -33,6 +33,7 @@ module.exports = {
         'main/mainResource',
         'bus/busResource',
         'busStop/busStopResource',
+        'infoBus/infoBusResource',
         'itinerary/itineraryResource',
         'log/logResource'
     ]
