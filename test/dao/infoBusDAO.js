@@ -20,8 +20,16 @@ describe('InfoBusDAO', () => {
 	
 	it('should find information about bus with order equal to \'order\'', function*() {
 		let data = yield dao.getByOrder([saved.order]);
-		Assert(data instanceof Array);
-		Assert.equal(data.length, 1);
+		Assert.equal(data.sign, 'sign');
+		Assert.equal(data.fabrication, 10);
+		Assert.equal(data.fuel, 'fuel');
+		Assert.equal(data.plant, 20);
+		Assert.equal(data.model, 'model');
+		Assert.equal(data.body, 'body');
+		Assert.equal(data.frame, 'frame');
+		Assert.equal(data.frameNumber, 'frameNumber');
+		Assert.equal(data.order, 'order');
+		Assert.equal(data.features, 'features');
 	});
 	
 	after(function*() {
