@@ -1,6 +1,6 @@
-/*'use strict';
+'use strict';
 /* global describe, it, after, before, __dirname, global; */
-/*const base = `${__dirname}/../../src`;
+const base = `${__dirname}/../../src`;
 
 const Assert    = require('assert');
 const Config    = require(`${base}/config`);
@@ -36,8 +36,6 @@ describe('InfoBus API', () => {
 		} catch(e) {
 			data = JSON.parse(e.response.body);
 		} finally {
-			Assert.equal(data instanceof Array, true);
-			Assert.equal(data.length, 1);
 			Assert.equal(data.sign, 'sign');
 			Assert.equal(data.fabrication, 0);
 			Assert.equal(data.fuel, 'fuel');
@@ -57,4 +55,4 @@ describe('InfoBus API', () => {
 		server.close();
 		yield global.database.collection('info-bus').remove({});
 	});
-});*/
+});
