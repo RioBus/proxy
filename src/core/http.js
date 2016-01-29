@@ -3,7 +3,7 @@ const request = require('request-promise');
 
 var optionsObj = {
     method: 'GET',
-    simple: true,
+    simple: false,
     resolveWithFullResponse: true,
     json: true
 }
@@ -20,9 +20,9 @@ class Http {
      */
     static request(options) {
         var data = JSON.parse(JSON.stringify(optionsObj));
-        for(var key in Object.keys(options)) {
+        Object.keys(options).forEach((key)=>{
             data[key] = options[key];
-        }
+        });
         return request(options);
     }
 
@@ -42,7 +42,7 @@ class Http {
      * @returns {Promise}
      */
     static post(host, data){
-        return Http.request({ method: 'POST', uri: host, body: data });
+        return Http.request({ method: 'POST', uri: host, form: data });
     }
 
     /**
@@ -52,7 +52,7 @@ class Http {
      * @returns {Promise}
      */
     static put(host, data){
-        return Http.request({ method: 'PUT', uri: host, body: data });
+        return Http.request({ method: 'PUT', uri: host, form: data });
     }
 
     /**
