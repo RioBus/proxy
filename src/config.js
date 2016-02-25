@@ -19,7 +19,7 @@ module.exports = {
         port: 8080
     },
     database: {
-        dbName: process.env.RIOBUS_DB_NAME  || 'riobus',
+        dbName: process.env.RIOBUS_DB_NAME  || 'nodejs',
         host: process.env.RIOBUS_DB_HOST    || 'localhost',
         port: process.env.RIOBUS_DB_PORT    || 27017,
         user: process.env.RIOBUS_DB_USER    || '',
@@ -33,6 +33,7 @@ module.exports = {
         'main/mainResource',
         'bus/busResource',
         'busStop/busStopResource',
+        'infoBus/infoBusResource',
         'itinerary/itineraryResource',
         'log/logResource'
     ]
