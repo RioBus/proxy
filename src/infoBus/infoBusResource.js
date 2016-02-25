@@ -7,7 +7,7 @@ const InfoBusDAO = require('./infoBusDAO');
 
 class InfoBusResource {
 
-	get base() { return '/v4/search'; }
+	get base() { return '/v4/infobus'; }
 	
 	constructor(router) {
 		router.get('/:order', wrap(this.getByOrder));

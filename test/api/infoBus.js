@@ -27,12 +27,11 @@ describe('InfoBus API', () => {
 		server = router.start(ip, port);
 	});
 	
-	it('should get a info about bus from a GET request to /v4/search/order', function*() {
+	it('should get a info about bus from a GET request to /v4/infobus/order', function*() {
 		let data;
 		try {
-			var output = yield Http.get(`${host}/v4/search/order`);
+			var output = yield Http.get(`${host}/v4/infobus/order`);
 			data = JSON.parse(output);
-			console.log(data);
 		} catch(e) {
 			data = JSON.parse(e.response.body);
 		} finally {
