@@ -13,12 +13,12 @@ class ReclaimDAO {
 	}
 	
 	/**
-	 * Put reclaim on database
-	 * @param {Object} order
+	 * Save reclaim on database
+	 * @param {Reclaim} data - Data to be saved 
 	 * @return {Object}
 	 */
-	save(reclaim){
-		return this.reclaim.insert(reclaim);
+	save(data){
+		return this.reclaim.insert(data);
 	}
 }
 module.exports = ReclaimDAO;

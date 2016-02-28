@@ -7,9 +7,9 @@
 class Reclaim {
 	
 	constructor(title, line, date, text) {
-		this.title = (!title || title==='')? '' : title.toString();
+		this.title = (!title)? '' : title.toString();
 		this.line = line.toString();
-		this.date = (!date|| date ==='')? '0/00/0000' :date.toString();
+		this.date = new Date(date.toISOString());
 		this.text = text.toString();
     }
 }

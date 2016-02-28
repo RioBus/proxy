@@ -17,24 +17,37 @@ describe('ReclaimDAO', () => {
 		dao = new ReclaimDAO(conn);
 	});
 	
-	it('should put the reclaims on database', function*() {
+	it('should save the reclaim to the database', function*() {
 		let result;
-		try{
-			result = yield dao.save(new Reclaim('title','line','date','text'));
+		try {
+			result = yield dao.save(new Reclaim('title', 'line', new Date(), 'text'));
 		}
-		catch(error){
-			result = error
+		catch(error) {
+			result = error;
 		}
-		finally{
+		finally {
+            Assert.notEqual(result._id, undefined);
 			Assert.equal(result.title, 'title');
 			Assert.equal(result.line, 'line');
-			Assert.equal(result.date, 'date');
+			Assert.equal(result.date instanceof Date, true);
 			Assert.equal(result.text, 'text');
 		}
 		
 	});
+	
+	it('should fail to save the data with unconsistent data', function*() {
+		let result;
+		try {
+			result = yield dao.save(new Reclaim('title', 'line', 'not a Date object', 'text'));
+		}
+		catch(error) {
+			result = error;
+		}
+		finally {
+            Assert.equal(result instanceof Error, true);
+		}
 		
-	after(function*() {
-		yield col.remove({});
 	});
+		
+	after(function*() { yield col.remove({}); });
 });
