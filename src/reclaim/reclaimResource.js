@@ -16,15 +16,15 @@ class ReclaimResource {
 	*postReclaim(request, response) {
 		const dao = new ReclaimDAO();
 		let data;
-		try{
+		try {
 			data = yield dao.save(request.body);
 			response.status(200);
 		}
-		catch(err){
+		catch(err) {
 			data = err.toString();
 			response.status(500);
 		}
-		finally{
+		finally {
 			response.jsonp(data);	
 		}
 	}
