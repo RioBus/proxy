@@ -30,12 +30,12 @@ module.exports = {
         host: process.env.RIOBUS_ANALYTICS_HOST || ''
     },
     resources: [
-        'main/mainResource',
         'bus/busResource',
-        'busStop/busStopResource',
         'busInfo/busInfoResource',
+        'busStop/busStopResource',
         'itinerary/itineraryResource',
         'log/logResource',
-        'reclaim/reclaimResource'
+        'main/mainResource',
+        'report/reportResource'
     ]
 };

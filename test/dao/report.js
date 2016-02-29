@@ -2,30 +2,28 @@
 /* global describe, it, before, global, __dirname, after; */
 const base = `${__dirname}/../../src`;
 
-const Assert     = require('assert');
-const Database   = require(`${base}/core`).Database;
-const Reclaim    = require(`${base}/reclaim/reclaimModel`);
-const ReclaimDAO = require(`${base}/reclaim/reclaimDAO`);
+const Assert    = require('assert');
+const Database  = require(`${base}/core`).Database;
+const Report    = require(`${base}/report/reportModel`);
+const ReportDAO = require(`${base}/report/reportDAO`);
 
-let dao, saved, col;
+let dao, col;
 
-describe('ReclaimDAO', () => {
+describe('ReportDAO', () => {
 	
 	before(function*() {
 		let conn = yield Database.connect();
-		col = conn.collection('reclaim');
-		dao = new ReclaimDAO(conn);
+		col = conn.collection('report');
+		dao = new ReportDAO(conn);
 	});
 	
 	it('should save the reclaim to the database', function*() {
 		let result;
 		try {
-			result = yield dao.save(new Reclaim('title', 'line', new Date(), 'text'));
-		}
-		catch(error) {
+			result = yield dao.save(new Report('title', 'line', new Date(), 'text'));
+		} catch(error) {
 			result = error;
-		}
-		finally {
+		} finally {
             Assert.notEqual(result._id, undefined);
 			Assert.equal(result.title, 'title');
 			Assert.equal(result.line, 'line');
@@ -38,12 +36,10 @@ describe('ReclaimDAO', () => {
 	it('should fail to save the data with unconsistent data', function*() {
 		let result;
 		try {
-			result = yield dao.save(new Reclaim('title', 'line', 'not a Date object', 'text'));
-		}
-		catch(error) {
+			result = yield dao.save(new Report('title', 'line', 'not a Date object', 'text'));
+		} catch(error) {
 			result = error;
-		}
-		finally {
+		} finally {
             Assert.equal(result instanceof Error, true);
 		}
 		
