@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * Describes a info bus instance
- * @class {InfoBus}
+ * Describes a bus info instance
+ * @class {BusInfo}
  */
-class InfoBus {
+class BusInfo {
 	
 	constructor(sign, fabrication, fuel, plant, model, body, frame, frameNumber, order, features, inclusionDate) {
 		this.sign = (!sign || sign==='')? 'indefinido' : sign.toString();
@@ -15,9 +15,9 @@ class InfoBus {
 		this.body = body.toString();
 		this.frame = frame.toString();
 		this.frameNumber = frameNumber.toString();
-		this.order = (!order || order == '')? 'indefinido' : order.toString();
+		this.order = (!order || order === '')? 'indefinido' : order.toString();
 		this.features = features.toString();
-		this.inclusionDate = inclusionDate.toString();
+		this.inclusionDate = inclusionDate.toISOString();
     }
 }
-module.exports = InfoBus;
+module.exports = BusInfo;

@@ -2,21 +2,21 @@
 const wrap = require('co-express');
 const Core = require('../core');
 const Database = Core.Database;
-const InfoBus = require('./infoBusModel');
-const InfoBusDAO = require('./infoBusDAO');
+const BusInfo = require('./busInfoModel');
+const BusInfoDAO = require('./busInfoDAO');
 
-class InfoBusResource {
+class BusInfoResource {
 
-	get base() { return '/v4/infobus'; }
+	get base() { return '/v4/bus/info'; }
 	
 	constructor(router) {
 		router.get('/:order', wrap(this.getByOrder));
 	}
 
 	*getByOrder(request, response) {
-		const dao = new InfoBusDAO();
+		const dao = new BusInfoDAO();
 		const data = yield dao.getByOrder(request.params.order);
 		response.jsonp(data);	
 	}
 }
-module.exports = InfoBusResource;
+module.exports = BusInfoResource;

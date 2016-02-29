@@ -4,15 +4,14 @@
 const Assert = require('assert');
 
 const base = '../../src';
-const InfoBus = require(`${base}/infoBus/infoBusModel`);
+const BusInfo = require(`${base}/busInfo/busInfoModel`);
 
-describe('InfoBus', () => {
+describe('BusInfo', () => {
 	
-	let infoBus, date;
+	let infoBus;
 	
 	before( () => {
-		date = new Date()
-		infoBus = new InfoBus('sign', 10, 'fuel', 20, 'model', 'body', 'frame', 'frameNumber', 'order', 'features', date);
+		infoBus = new BusInfo('sign', 10, 'fuel', 20, 'model', 'body', 'frame', 'frameNumber', 'order', 'features', new Date());
 	});
 	
 	it('should have a property \'string\' containing a string', () => {

@@ -28,12 +28,6 @@ describe('Bus API', () => {
 		server = router.start(ip, port);
 	});
 	
-	after(function*() {
-		server.close();
-		yield global.database.collection('bus').remove({});
-		yield global.database.collection('itinerary').remove({});
-	});
-	
 	it('should get a list of all buses from a GET request to /v3/search/485', function*() {
 		let data;
 		try {
@@ -99,5 +93,11 @@ describe('Bus API', () => {
 			Assert.equal(data instanceof Array, true);
 			Assert.equal(data.length, 0);
 		}
+	});
+	
+	after(function*() {
+		server.close();
+		yield global.database.collection('bus').remove({});
+		yield global.database.collection('itinerary').remove({});
 	});
 });
