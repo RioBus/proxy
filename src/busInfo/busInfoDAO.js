@@ -2,23 +2,23 @@
 /* global database; */
 
 /**
- * InfoBus Data Access Object
- * @class {InfoBusDAO}
+ * BusInfo Data Access Object
+ * @class {BusInfoDAO}
  */
-class InfoBusDAO {
+class BusInfoDAO {
 	
 	constructor(connection) {
 		if(!connection) connection = database;
-		this.infoBus = connection.collection('info-bus');
+		this.collection = connection.collection('bus-info');
 	}
 	
 	/**
 	 * Gets information about bus instance with the given order
 	 * @param {String} order
-	 * @return {InfoBus}
+	 * @return {BusInfo}
 	 */
 	getByOrder(order){
-		return this.infoBus.findOne({order:new RegExp(order)});
+		return this.collection.findOne({ order: new RegExp(order) });
 	}
 }
-module.exports = InfoBusDAO;
+module.exports = BusInfoDAO;

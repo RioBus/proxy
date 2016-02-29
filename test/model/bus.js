@@ -22,20 +22,20 @@ describe('Bus', () => {
 		Assert.equal(typeof bus.order, 'string');
 	});
 	
-	it('should have a property \'sense\' containing a string', () => {
-		Assert.equal(typeof bus.sense, 'string');
+	it('should have a property \'direction\' containing a string', () => {
+		Assert.equal(typeof bus.direction, 'string');
 	});
 	
 	it('should have a property \'timestamp\' containing a Date', () => {
-		Assert.equal(typeof bus.timestamp.getMonth, 'function');
+		Assert.equal(bus.timestamp instanceof Date, true);
 	});
 	
 	it('should have a property \'speed\' containing a number', () => {
 		Assert.equal(typeof bus.speed, 'number');
 	});
 	
-	it('should have a property \'direction\' containing a number', () => {
-		Assert.equal(typeof bus.direction, 'number');
+	it('should have a property \'directionDegrees\' containing a number', () => {
+		Assert.equal(typeof bus.directionDegrees, 'number');
 	});
 	
 	it('should have a property \'latitude\' containing a number', () => {

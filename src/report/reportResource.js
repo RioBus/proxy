@@ -2,19 +2,19 @@
 const wrap = require('co-express');
 const Core = require('../core');
 const Database = Core.Database;
-const Reclaim = require('./reclaimModel');
-const ReclaimDAO = require('./reclaimDAO');
+const Report = require('./reportModel');
+const ReportDAO = require('./reportDAO');
 
-class ReclaimResource {
+class ReportResource {
 
 	get base() { return '/'; }
 	
 	constructor(router) {
-		router.post('/v4/reclaim', wrap(this.postReclaim));
+		router.post('/v4/report', wrap(this.postReport));
 	}
 
-	*postReclaim(request, response) {
-		const dao = new ReclaimDAO();
+	*postReport(request, response) {
+		const dao = new ReportDAO();
 		let data;
 		try {
 			data = yield dao.save(request.body);
@@ -29,4 +29,4 @@ class ReclaimResource {
 		}
 	}
 }
-module.exports = ReclaimResource;
+module.exports = ReportResource;

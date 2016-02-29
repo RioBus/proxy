@@ -15,8 +15,10 @@ describe('BusDAO', () => {
 		let conn = yield Database.connect();
 		col = conn.collection('bus');
 		dao = new BusDAO(conn);
-		saved = yield col.insert(new Bus('line', 'order', 0, 0, 23, 45, (new Date()).toDateString(), 'sense'));
+		saved = yield col.insert(new Bus('line', 'order', 0, 0, 23, 45, (new Date()).toDateString(), 'direction'));
 	});
+	
+	after(function*() { yield col.remove({}); });
 	
 	it('should find all buses from the collection', function*() {
 		let data = yield dao.getAll();
@@ -34,9 +36,5 @@ describe('BusDAO', () => {
 		let data = yield dao.getByOrders([saved.order]);	
 		Assert(data instanceof Array);
 		Assert.equal(data.length, 1);
-	});
-	
-	after(function*() {
-		yield col.remove({});
 	});
 });

@@ -19,17 +19,17 @@ describe('BusStop API', () => {
 		host = `http://${ip}:${port}`;
 		
 		global.database = yield Database.connect();
-		yield global.database.collection('busStop').insert(new BusStop('lineCode', 'description', 'agency', []));
+		yield global.database.collection('bus-stop').insert(new BusStop('lineCode', 'description', 'agency', []));
 		
 		let router = new Router();
 		router.registerResources(Config.resources);
 		server = router.start(ip, port);
 	});
 	
-	it('should get a single bus stop by doing a GET request to /v3/busStop/lineCode', function*() {
+	it('should get a single bus stop by doing a GET request to /v3/bus/stop/lineCode', function*() {
 		let data;
 		try {
-			var output = yield Http.get(`${host}/v3/busStop/lineCode`);
+			var output = yield Http.get(`${host}/v3/bus/stop/lineCode`);
 			data = JSON.parse(output);
 		} catch(e) {
 			data = JSON.parse(e.response.body);
@@ -42,6 +42,6 @@ describe('BusStop API', () => {
 	
 	after(function*() {
 		server.close();
-		yield global.database.collection('busStop').remove({});
+		yield global.database.collection('bus-stop').remove({});
 	});
 });

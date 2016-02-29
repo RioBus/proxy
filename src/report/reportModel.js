@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * Describes a reclaim instance
- * @class {Reclaim}
+ * Describes a report instance
+ * @class {Report}
  */
-class Reclaim {
+class Report {
 	
 	constructor(title, line, date, text) {
 		this.title = (!title)? '' : title.toString();
@@ -13,4 +13,4 @@ class Reclaim {
 		this.text = text.toString();
     }
 }
-module.exports = Reclaim;
+module.exports = Report;

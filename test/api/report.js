@@ -8,9 +8,9 @@ const Core      = require(`${base}/core`);
 const Database  = Core.Database;
 const Http	    = Core.Http;
 const Router    = Core.Router;
-const Reclaim   = require(`${base}/reclaim/reclaimModel`);
+const Report   = require(`${base}/report/reportModel`);
 
-describe('Reclaim API', () => {
+describe('Report API', () => {
 	
 	let server, host;
 	
@@ -24,12 +24,12 @@ describe('Reclaim API', () => {
 		server = router.start(ip, port);
 	});
 	
-	it('should post a reclaim from a POST request to /v4/reclaim', function*() {
+	it('should post a report from a POST request to /v4/report', function*() {
 		
 		let data;
-		let obj = {title:'bus reclaim', line:'485', date: (new Date()).toISOString(), text:'content'};
+		let obj = {title:'bus report', line:'485', date: (new Date()).toISOString(), text:'content' };
 		try {		
-			var output = yield Http.post(`${host}/v4/reclaim`, obj);
+			var output = yield Http.post(`${host}/v4/report`, obj);
 			data = JSON.parse(output);
 		} catch(e) {
 			data = JSON.parse(e.response.body);
@@ -48,6 +48,6 @@ describe('Reclaim API', () => {
 	
 	after(function*() {
 		server.close();
-		yield global.database.collection('reclaim').remove({});
+		yield global.database.collection('report').remove({});
 	});
 });
