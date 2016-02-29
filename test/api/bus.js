@@ -20,12 +20,18 @@ describe('Bus API', () => {
 		host = `http://${ip}:${port}`;
 		
 		global.database = yield Database.connect();
-		yield global.database.collection('bus').insert(new Bus('485', 'order', 0, 0, 20, 30, (new Date()).toDateString(), 'sense'));
-		yield global.database.collection('itinerary').insert(new Itinerary('485', 'sense', '', '485 sense', []));
+		yield global.database.collection('bus').insert(new Bus('485', 'order', 0, 0, 20, 30, (new Date()).toDateString(), 'direction'));
+		yield global.database.collection('itinerary').insert(new Itinerary('485', 'direction', '', '485 direction', []));
 		
 		let router = new Router();
 		router.registerResources(Config.resources);
 		server = router.start(ip, port);
+	});
+	
+	after(function*() {
+		server.close();
+		yield global.database.collection('bus').remove({});
+		yield global.database.collection('itinerary').remove({});
 	});
 	
 	it('should get a list of all buses from a GET request to /v3/search/485', function*() {
@@ -41,8 +47,8 @@ describe('Bus API', () => {
 			Assert.equal(data[0].line, '485');
 			Assert.equal(data[0].order, 'order');
 			Assert.equal(data[0].speed, 0);
-			Assert.equal(data[0].direction, 0);
-			Assert.equal(data[0].sense, 'sense');
+			Assert.equal(data[0].directionDegrees, 0);
+			Assert.equal(data[0].direction, 'direction');
 		}
 	});
 	
@@ -59,15 +65,15 @@ describe('Bus API', () => {
 			Assert.equal(data[0].line, '485');
 			Assert.equal(data[0].order, 'order');
 			Assert.equal(data[0].speed, 0);
-			Assert.equal(data[0].direction, 0);
-			Assert.equal(data[0].sense, 'sense');
+			Assert.equal(data[0].directionDegrees, 0);
+			Assert.equal(data[0].direction, 'direction');
 		}
 	});
 	
-	it('should get a list with only one bus from a GET request to v3/search/sense', function*() {
+	it('should get a list with only one bus from a GET request to v3/search/direction', function*() {
 		let data;
 		try {
-			var output = yield Http.get(`${host}/v3/search/sense`);
+			var output = yield Http.get(`${host}/v3/search/direction`);
 			data = JSON.parse(output);
 		} catch(e) {
 			data = JSON.parse(e.response.body);
@@ -77,8 +83,8 @@ describe('Bus API', () => {
 			Assert.equal(data[0].line, '485');
 			Assert.equal(data[0].order, 'order');
 			Assert.equal(data[0].speed, 0);
-			Assert.equal(data[0].direction, 0);
-			Assert.equal(data[0].sense, 'sense');
+			Assert.equal(data[0].directionDegrees, 0);
+			Assert.equal(data[0].direction, 'direction');
 		}
 	});
 	
@@ -93,11 +99,5 @@ describe('Bus API', () => {
 			Assert.equal(data instanceof Array, true);
 			Assert.equal(data.length, 0);
 		}
-	});
-	
-	after(function*() {
-		server.close();
-		yield global.database.collection('bus').remove({});
-		yield global.database.collection('itinerary').remove({});
 	});
 });
