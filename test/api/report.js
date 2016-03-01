@@ -25,9 +25,8 @@ describe('Report API', () => {
 	});
 	
 	it('should post a report from a POST request to /v4/report', function*() {
-		
 		let data;
-		let obj = {title:'bus report', line:'485', date: (new Date()).toISOString(), text:'content' };
+		let obj = {title:'bus report', order: 'C12345', line:'485', message: 'content' };
 		try {		
 			var output = yield Http.post(`${host}/v4/report`, obj);
 			data = JSON.parse(output);
@@ -38,13 +37,25 @@ describe('Report API', () => {
 			Assert.notEqual(data, undefined);
 			Assert.equal(data.title, obj.title);
 			Assert.equal(data.line, obj.line);
-			Assert.equal(data.date, obj.date);
-			Assert.equal(data.text, obj.text);
+			Assert.equal(data.order, obj.order);
+			Assert.notEqual(data.timestamp, undefined);
+			Assert.equal(data.message, obj.message);
 			Assert.notEqual(data._id, undefined);					
 		}
 	});
-
-
+	
+	it('should fail to post a report due to an unconsistent request to /v4/report', function*() {
+		let data;
+		let obj = {order: 'C12345', line:'485', message: 'content' };
+		try {		
+			var output = yield Http.post(`${host}/v4/report`, obj);
+			data = JSON.parse(output);
+		} catch(e) {
+			data = e;
+		} finally {
+			Assert.equal(data instanceof Error, true);				
+		}
+	});
 	
 	after(function*() {
 		server.close();

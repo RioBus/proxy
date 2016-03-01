@@ -20,15 +20,16 @@ describe('ReportDAO', () => {
 	it('should save the reclaim to the database', function*() {
 		let result;
 		try {
-			result = yield dao.save(new Report('title', 'line', new Date(), 'text'));
+			result = yield dao.save(new Report('line', 'order', 'title', 'text content'));
 		} catch(error) {
 			result = error;
 		} finally {
             Assert.notEqual(result._id, undefined);
 			Assert.equal(result.title, 'title');
 			Assert.equal(result.line, 'line');
-			Assert.equal(result.date instanceof Date, true);
-			Assert.equal(result.text, 'text');
+			Assert.equal(result.order, 'order');
+			Assert.equal(result.message, 'text content');
+			Assert.equal(result.timestamp instanceof Date, true);
 		}
 		
 	});
@@ -36,13 +37,12 @@ describe('ReportDAO', () => {
 	it('should fail to save the data with unconsistent data', function*() {
 		let result;
 		try {
-			result = yield dao.save(new Report('title', 'line', 'not a Date object', 'text'));
+			result = yield dao.save(new Report('line', 'order', 'title', 'text content', 'not a Date string'));
 		} catch(error) {
 			result = error;
 		} finally {
             Assert.equal(result instanceof Error, true);
 		}
-		
 	});
 		
 	after(function*() { yield col.remove({}); });

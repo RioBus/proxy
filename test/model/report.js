@@ -11,12 +11,7 @@ describe('Report', () => {
 	let report;
 	
 	before( () => {
-		report = new Report('title','line', new Date(), 'text');
-	});
-	
-	it('should have a property \'title\' containing a string', () => {
-		Assert.equal(typeof report.title, 'string');
-		Assert.equal(report.title, 'title');
+		report = new Report('line', 'order', 'title', 'text content');
 	});
 	
 	it('should have a property \'line\' containing a string', () => {
@@ -24,12 +19,27 @@ describe('Report', () => {
 		Assert.equal(report.line, 'line');
 	});
 	
-	it('should have a property \'date\' containing a string', () => {
-		Assert.equal(report.date instanceof Date, true);
+	it('should have a property \'order\' containing a string', () => {
+		Assert.equal(typeof report.order, 'string');
+		Assert.equal(report.order, 'order');
 	});
 	
-	it('should have a property \'text\' containing a string', () => {
-		Assert.equal(typeof report.text, 'string');
-		Assert.equal(report.text, 'text');
+	it('should have a property \'title\' containing a string', () => {
+		Assert.equal(typeof report.title, 'string');
+		Assert.equal(report.title, 'title');
+	});
+	
+	it('should have a property \'message\' containing a string', () => {
+		Assert.equal(typeof report.message, 'string');
+		Assert.equal(report.message, 'text content');
+	});
+	
+	it('should have a property \'timestamp\' containing a string', () => {
+		Assert.equal(typeof report.timestamp.toISOString(), 'string');
+	});
+	
+	it('should have a method \'isResolved\' which returns a boolean', () => {
+		Assert.equal(typeof report.isResolved(), 'boolean');
+		Assert.equal(report.isResolved(), false);
 	});
 });
