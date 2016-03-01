@@ -11,6 +11,7 @@ class ReportResource {
 	
 	constructor(router) {
 		router.post('/v4/report', wrap(this.postReport));
+		router.get('/v4/report/:order', wrap(this.getActiveReports));
 	}
     
     static checkConsistency(data) {
@@ -28,14 +29,27 @@ class ReportResource {
             ReportResource.checkConsistency(request.body);
 			data = yield dao.save(new Report(request.body.line, request.body.order, request.body.title, request.body.message));
 			response.status(200);
-		}
-		catch(error) {
+		} catch(error) {
 			data = error;
 			response.status(500);
-		}
-		finally {
+		} finally {
 			response.jsonp(data);	
 		}
 	}
+    
+    *getActiveReports(request, response) {
+        const dao = new ReportDAO();
+        let data;
+		try {
+            let order = request.params.order.toString();
+			data = yield dao.getActiveByOrder(order);
+			response.status(200);
+		} catch(error) {
+			data = error;
+			response.status(500);
+		} finally {
+			response.jsonp(data);	
+		}
+    }
 }
 module.exports = ReportResource;

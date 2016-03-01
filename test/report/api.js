@@ -26,7 +26,7 @@ describe('Report API', () => {
 	
 	it('should post a report from a POST request to /v4/report', function*() {
 		let data;
-		let obj = {title:'bus report', order: 'C12345', line:'485', message: 'content' };
+		let obj = {title:'bus report', order: 'C12345', line:'485', message: 'content'};
 		try {		
 			var output = yield Http.post(`${host}/v4/report`, obj);
 			data = JSON.parse(output);
@@ -44,9 +44,30 @@ describe('Report API', () => {
 		}
 	});
 	
+	it('should get a active reports list from a GET request to /v4/report/C12345', function*() {
+		let data;
+		const obj = {title:'bus report', order: 'C12345', line:'485', message: 'content'};
+		try {		
+			var output = yield Http.get(`${host}/v4/report/C12345`);
+			data = JSON.parse(output);
+		} catch(e) {
+			data = JSON.parse(e.response.body);
+		} finally {
+			Assert.equal(data instanceof Array, true);
+            Assert.equal(data.length, 1);
+            let tmp = data[0];
+			Assert.equal(tmp.title, obj.title);
+			Assert.equal(tmp.line, obj.line);
+			Assert.equal(tmp.order, obj.order);
+			Assert.notEqual(tmp.timestamp, undefined);
+			Assert.equal(tmp.message, obj.message);
+			Assert.notEqual(tmp._id, undefined);					
+		}
+	});
+	
 	it('should fail to post a report due to an unconsistent request to /v4/report', function*() {
 		let data;
-		let obj = {order: 'C12345', line:'485', message: 'content' };
+		let obj = {order: 'C12345', line:'485', message: 'content'};
 		try {		
 			var output = yield Http.post(`${host}/v4/report`, obj);
 			data = JSON.parse(output);
