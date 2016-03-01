@@ -6,11 +6,18 @@
  */
 class Report {
 	
-	constructor(title, line, date, text) {
-		this.title = (!title)? '' : title.toString();
+	constructor(line, order, title, message, timestamp, resolvedTimestamp, id) {
 		this.line = line.toString();
-		this.date = new Date(date.toISOString());
-		this.text = text.toString();
+		this.order = order.toString();
+		this.title = (!title)? '' : title.toString();
+		this.message = message.toString();
+		this.timestamp = (timestamp)? new Date(timestamp.toISOString()) : new Date();
+        this.resolvedTimestamp = resolvedTimestamp || null;
+        if(id) this._id = id;
+    }
+    
+    isResolved() {
+        return (this.resolvedTimestamp !== null) && (this.resolvedTimestamp instanceof Date);
     }
 }
 module.exports = Report;

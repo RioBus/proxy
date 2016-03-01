@@ -2,7 +2,7 @@
 /* global describe, it, before; */
 
 const Assert = require('assert');
-const Database = require('../src/core').Database;
+const Database = require('../../src/core').Database;
 
 describe('Database', () => {
 	

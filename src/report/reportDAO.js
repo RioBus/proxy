@@ -20,5 +20,14 @@ class ReportDAO {
 	save(data) {
 		return this.collection.insert(data);
 	}
+	
+	/**
+	 * Get all active reports stored for a given order
+	 * @param {string} order - Bus order to search for 
+	 * @return {Report[]}
+	 */
+    getActiveByOrder(order) {
+        return this.collection.find({ order: order, resolvedTimestamp: null });
+    }
 }
 module.exports = ReportDAO;
