@@ -10,7 +10,7 @@ class File {
         var splittedPath = path.split('/');
         this.file = splittedPath.pop();
         this.directory = splittedPath.join('/');
-        this.fs = require("fs-extra");
+        this.fs = require('fs-extra');
 		this.fs.ensureFileSync(this.fullPath);
     }
     
@@ -62,6 +62,25 @@ class File {
      */
     read() {
         return this.fs.readFileSync(this.fullPath, 'utf8');
+    }
+
+    /**
+     * Removes the loaded file
+     * @return {void}
+     */
+    remove() {
+        this.fs.removeSync(this.fullPath);
+    }
+
+    /**
+     * Renames the loaded file
+     * @param {string} newPath - path to place the new file
+     * @return {File}
+     */
+    moveTo(newPath) {
+        this.fs.outputFileSync(newPath, this.read());
+        this.remove();
+        return new File(newPath);
     }
 }
 module.exports = File;
