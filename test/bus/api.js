@@ -32,17 +32,18 @@ describe('Bus API', () => {
 		let data;
 		try {
 			var output = yield Http.get(`${host}/v3/search/485`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data instanceof Array, true);
-			Assert.equal(data.length, 1);
-			Assert.equal(data[0].line, '485');
-			Assert.equal(data[0].order, 'order');
-			Assert.equal(data[0].speed, 0);
-			Assert.equal(data[0].directionDegrees, 0);
-			Assert.equal(data[0].direction, 'direction');
+			Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body instanceof Array, true);
+			Assert.equal(data.body.length, 1);
+			Assert.equal(data.body[0].line, '485');
+			Assert.equal(data.body[0].order, 'order');
+			Assert.equal(data.body[0].speed, 0);
+			Assert.equal(data.body[0].directionDegrees, 0);
+			Assert.equal(data.body[0].direction, 'direction');
 		}
 	});
 	
@@ -50,17 +51,18 @@ describe('Bus API', () => {
 		let data;
 		try {
 			var output = yield Http.get(`${host}/v3/search/order`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data instanceof Array, true);
-			Assert.equal(data.length, 1);
-			Assert.equal(data[0].line, '485');
-			Assert.equal(data[0].order, 'order');
-			Assert.equal(data[0].speed, 0);
-			Assert.equal(data[0].directionDegrees, 0);
-			Assert.equal(data[0].direction, 'direction');
+            Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body instanceof Array, true);
+			Assert.equal(data.body.length, 1);
+			Assert.equal(data.body[0].line, '485');
+			Assert.equal(data.body[0].order, 'order');
+			Assert.equal(data.body[0].speed, 0);
+			Assert.equal(data.body[0].directionDegrees, 0);
+			Assert.equal(data.body[0].direction, 'direction');
 		}
 	});
 	
@@ -68,17 +70,18 @@ describe('Bus API', () => {
 		let data;
 		try {
 			var output = yield Http.get(`${host}/v3/search/direction`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data instanceof Array, true);
-			Assert.equal(data.length, 1);
-			Assert.equal(data[0].line, '485');
-			Assert.equal(data[0].order, 'order');
-			Assert.equal(data[0].speed, 0);
-			Assert.equal(data[0].directionDegrees, 0);
-			Assert.equal(data[0].direction, 'direction');
+            Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body instanceof Array, true);
+			Assert.equal(data.body.length, 1);
+			Assert.equal(data.body[0].line, '485');
+			Assert.equal(data.body[0].order, 'order');
+			Assert.equal(data.body[0].speed, 0);
+			Assert.equal(data.body[0].directionDegrees, 0);
+			Assert.equal(data.body[0].direction, 'direction');
 		}
 	});
 	
@@ -86,12 +89,11 @@ describe('Bus API', () => {
 		let data;
 		try {
 			var output = yield Http.get(`${host}/v3/search/unexisting`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data instanceof Array, true);
-			Assert.equal(data.length, 0);
+            Assert.equal(data.statusCode, 404);
 		}
 	});
 	
