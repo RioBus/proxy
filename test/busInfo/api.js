@@ -30,22 +30,23 @@ describe('BusInfo API', () => {
 		let data;
 		try {
 			var output = yield Http.get(`${host}/v4/bus/info/order`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data.sign, saved.sign);
-			Assert.equal(data.fabrication, saved.fabrication);
-			Assert.equal(data.fuel, saved.fuel);
-			Assert.equal(data.plant, saved.plant);
-			Assert.equal(data.model, saved.model);
-			Assert.equal(data.body, saved.body);
-			Assert.equal(data.frame, saved.frame);
-			Assert.equal(data.frameNumber, saved.frameNumber);
-			Assert.equal(data.order, saved.order);
-			Assert.equal(data.features, saved.features);					
-			Assert.equal(data.inclusionDate, saved.inclusionDate);
-			Assert.equal(data._id, saved._id);
+			Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body.sign, saved.sign);
+			Assert.equal(data.body.fabrication, saved.fabrication);
+			Assert.equal(data.body.fuel, saved.fuel);
+			Assert.equal(data.body.plant, saved.plant);
+			Assert.equal(data.body.model, saved.model);
+			Assert.equal(data.body.body, saved.body);
+			Assert.equal(data.body.frame, saved.frame);
+			Assert.equal(data.body.frameNumber, saved.frameNumber);
+			Assert.equal(data.body.order, saved.order);
+			Assert.equal(data.body.features, saved.features);					
+			Assert.equal(data.body.inclusionDate, saved.inclusionDate);
+			Assert.equal(data.body._id, saved._id);
 		}
 	});
     

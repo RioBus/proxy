@@ -30,13 +30,14 @@ describe('BusStop API', () => {
 		let data;
 		try {
 			var output = yield Http.get(`${host}/v3/bus/stop/lineCode`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data.line, 'lineCode');
-			Assert.equal(data.description, 'description');
-			Assert.equal(data.agency, 'agency');
+			Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body.line, 'lineCode');
+			Assert.equal(data.body.description, 'description');
+			Assert.equal(data.body.agency, 'agency');
 		}
 	});
 	

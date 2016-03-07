@@ -31,12 +31,13 @@ describe('Log API', () => {
 		let data;
 		try {
 			var output = yield Http.get(`${host}/v2/log/dataprovider/1`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data instanceof Array, true);
-			Assert.equal(data.join('').indexOf(content)>-1, true);
+            Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body instanceof Array, true);
+			Assert.equal(data.body.join('').indexOf(content)>-1, true);
 		}
 	});
 	
@@ -44,12 +45,13 @@ describe('Log API', () => {
 		let data;
 		try {
 			var output = yield Http.get(`${host}/v2/log/runtime/1`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data instanceof Array, true);
-			Assert.equal(data.join('').indexOf(content)>-1, true);
+			Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body instanceof Array, true);
+			Assert.equal(data.body.join('').indexOf(content)>-1, true);
 		}
 	});
 	
@@ -57,12 +59,13 @@ describe('Log API', () => {
 		let data;
 		try {
 			var output = yield Http.get(`${host}/v2/log/server/1`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data instanceof Array, true);
-			Assert.equal(data.join('').indexOf(content)>-1, true);
+			Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body instanceof Array, true);
+			Assert.equal(data.body.join('').indexOf(content)>-1, true);
 		}
 	});
 	
