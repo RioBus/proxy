@@ -29,18 +29,19 @@ describe('Report API', () => {
 		let obj = {title:'bus report', order: 'C12345', line:'485', message: 'content'};
 		try {		
 			var output = yield Http.post(`${host}/v4/report`, obj);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data instanceof Error, false);
-			Assert.notEqual(data, undefined);
-			Assert.equal(data.title, obj.title);
-			Assert.equal(data.line, obj.line);
-			Assert.equal(data.order, obj.order);
-			Assert.notEqual(data.timestamp, undefined);
-			Assert.equal(data.message, obj.message);
-			Assert.notEqual(data._id, undefined);					
+            Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body instanceof Error, false);
+			Assert.notEqual(data.body, undefined);
+			Assert.equal(data.body.title, obj.title);
+			Assert.equal(data.body.line, obj.line);
+			Assert.equal(data.body.order, obj.order);
+			Assert.notEqual(data.body.timestamp, undefined);
+			Assert.equal(data.body.message, obj.message);
+			Assert.notEqual(data.body._id, undefined);					
 		}
 	});
 	
@@ -49,13 +50,14 @@ describe('Report API', () => {
 		const obj = {title:'bus report', order: 'C12345', line:'485', message: 'content'};
 		try {		
 			var output = yield Http.get(`${host}/v4/report/C12345`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data instanceof Array, true);
-            Assert.equal(data.length, 1);
-            let tmp = data[0];
+            Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body instanceof Array, true);
+            Assert.equal(data.body.length, 1);
+            let tmp = data.body[0];
 			Assert.equal(tmp.title, obj.title);
 			Assert.equal(tmp.line, obj.line);
 			Assert.equal(tmp.order, obj.order);
