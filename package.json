@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha test/* test/**/*",
     "start": "node src/app.js",
-    "install": "npm install -g mocha-co"
+    "install": "npm install -g mocha-co@1.17.1-co.1"
   },
   "repository": {
     "type": "git",
@@ -45,8 +45,5 @@
     "nodealytics": "0.0.6",
     "request-promise": "1.0.2",
     "robe": "0.12.0"
-  },
-  "devDependencies": {
-    "mocha-co": "1.17.1-co.1"
   }
 }
