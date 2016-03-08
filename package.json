@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha test/* test/**/*",
     "start": "node src/app.js",
-    "install": "npm install -g mocha-co"
+    "install": "npm install -g mocha-co@1.17.1-co.1"
   },
   "repository": {
     "type": "git",
