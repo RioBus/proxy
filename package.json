@@ -15,17 +15,18 @@
   "keywords": [
     "riobus",
     "transporte",
+    "transport",
     "mobilidade",
+    "mobility",
     "publico",
+    "public",
     "rj",
     "onibus",
-    "typescript",
+    "bus",
     "nodejs",
     "node",
     "desktop",
-    "server",
-    "wrapper",
-    "infrastructure"
+    "server"
   ],
   "license": "http://github.com/RioBus/proxy/blob/master/LICENSE",
   "bugs": {
