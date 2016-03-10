@@ -4,7 +4,6 @@ const base = `${__dirname}/../../src`;
 
 const Assert = require('assert');
 const Database = require(`${base}/core`).Database;
-const Bus = require(`${base}/bus/busModel`);
 const BusDAO = require(`${base}/bus/busDAO`);
 
 var dao, saved, col;
@@ -15,7 +14,7 @@ describe('BusDAO', () => {
 		let conn = yield Database.connect();
 		col = conn.collection('bus');
 		dao = new BusDAO(conn);
-		saved = yield col.insert(new Bus('line', 'order', 0, 0, 23, 45, (new Date()).toDateString(), 'direction'));
+		saved = yield col.insert({ line: '485', order: 'order', speed: 0, direction: 0, latitude: 20, longitude: 30, timestamp: new Date(), direction: 'direction'});
 	});
 	
 	after(function*() { yield col.remove({}); });
