@@ -38,6 +38,10 @@ describe('Report', () => {
 		Assert.equal(typeof report.timestamp.toISOString(), 'string');
 	});
 	
+	it('should have a property \'comments\' containing an Array', () => {
+		Assert.equal(report.comments instanceof Array, true);
+	});
+	
 	it('should have a method \'isResolved\' which returns a boolean', () => {
 		Assert.equal(typeof report.isResolved(), 'boolean');
 		Assert.equal(report.isResolved(), false);
