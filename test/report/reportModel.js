@@ -5,6 +5,7 @@ const Assert = require('assert');
 
 const base = '../../src';
 const Report = require(`${base}/report/reportModel`);
+const Comment = require(`${base}/report/commentModel`);
 
 describe('Report', () => {
 	
@@ -45,5 +46,17 @@ describe('Report', () => {
 	it('should have a method \'isResolved\' which returns a boolean', () => {
 		Assert.equal(typeof report.isResolved(), 'boolean');
 		Assert.equal(report.isResolved(), false);
+	});
+	
+	it('should have a method \'addComent\' which adds a \'Comment\' instance to the comments list', () => {
+        report.addComment(new Comment('userid', 'user name', 'text'));
+		Assert.equal(report.comments.length, 1);
+		Assert.equal(report.comments[0] instanceof Comment, true);
+	});
+	
+	it('should have a method \'removeComment\' which removes a \'Comment\' from to the comments list', () => {
+        let com = report.comments[0];
+        report.removeComment(com);
+		Assert.equal(report.comments.length, 0);
 	});
 });
