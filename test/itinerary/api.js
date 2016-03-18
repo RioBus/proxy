@@ -30,17 +30,20 @@ describe('Itinerary API', () => {
 		let data;
 		try {
 			var output = yield Http.get(`${host}/v3/itinerary`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data instanceof Array, true);
-			Assert.equal(data.length, 1);
-			Assert.equal(data[0].line, 'lineCode');
-			Assert.equal(data[0].description, 'description');
-			Assert.equal(data[0].agency, undefined);
-			Assert.equal(data[0].keywords, undefined);
-			Assert.equal(data[0].spots, undefined);
+            Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body instanceof Array, true);
+			Assert.equal(data.body.length, 1);
+			Assert.equal(data.body[0].line, 'lineCode');
+			Assert.equal(data.body[0].description, 'description');
+			Assert.equal(data.body[0].keywords, undefined);
+			Assert.equal(data.body[0].agency, undefined);
+			Assert.equal(data.body[0].spots, undefined);
+            Assert.equal(data.body[0].strets, undefined);
+            Assert.equal(data.body[0]._id, undefined);
 		}
 	});
 	
@@ -48,14 +51,18 @@ describe('Itinerary API', () => {
 		let data;
 		try {
 			var output = yield Http.get(`${host}/v3/itinerary/lineCode`);
-			data = JSON.parse(output);
+			data = output;
 		} catch(e) {
-			data = JSON.parse(e.response.body);
+			data = e;
 		} finally {
-			Assert.equal(data.line, 'lineCode');
-			Assert.equal(data.description, 'description');
-			Assert.equal(data.agency, 'agency');
-			Assert.equal(data.keywords, 'keywords');
+			Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body.line, 'lineCode');
+			Assert.equal(data.body.description, 'description');
+			Assert.equal(data.body.agency, 'agency');
+			Assert.equal(data.body.keywords, 'keywords');
+            Assert.equal(data.body.spots instanceof Array, true);
+			Assert.equal(data.body.streets, undefined);
+            Assert.equal(data.body._id, undefined);
 		}
 	});
 	

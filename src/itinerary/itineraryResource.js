@@ -17,12 +17,14 @@ class ItineraryResource {
 	*getMainRoute(request, response) {
 		const dao = new ItineraryDAO();
 		const data = yield dao.getHeaders();
+        for(let i=0;i<data.length; i++) delete data[i]._id;
 		response.jsonp(data);	
 	}
 
 	*getByLine(request, response) {
 		const dao = new ItineraryDAO();
-		const data = yield dao.getByLine(request.params.line);
+		const data = yield dao.getByLine(request.params.line, ['line', 'description', 'agency', 'keywords', 'spots']);
+        delete data._id;
 		response.jsonp(data);	
 	}
 }
