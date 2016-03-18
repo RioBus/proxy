@@ -66,6 +66,25 @@ describe('Itinerary API', () => {
 		}
 	});
 	
+	it('should get a single itinerary by doing a GET request to /v4/itinerary/lineCode', function*() {
+		let data;
+		try {
+			var output = yield Http.get(`${host}/v4/itinerary/lineCode`);
+			data = output;
+		} catch(e) {
+			data = e;
+		} finally {
+			Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body.line, 'lineCode');
+			Assert.equal(data.body.description, 'description');
+			Assert.equal(data.body.agency, 'agency');
+			Assert.equal(data.body.keywords, 'keywords');
+            Assert.equal(data.body.spots instanceof Array, true);
+            Assert.equal(data.body.streets instanceof Array, true);
+            Assert.equal(data.body._id, undefined);
+		}
+	});
+	
 	after(function*() {
 		server.close();
 		yield global.database.collection('itinerary').remove({});
