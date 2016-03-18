@@ -22,7 +22,7 @@ class ItineraryResource {
 
 	*getByLine(request, response) {
 		const dao = new ItineraryDAO();
-		const data = yield dao.getByLine(request.params.line);
+		const data = yield dao.getByLine(request.params.line, ['line', 'description', 'agency', 'keywords', 'spots']);
 		response.jsonp(data);	
 	}
 }

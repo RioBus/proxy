@@ -16,8 +16,8 @@ class ItineraryDAO {
 		return this.collection.find({keywords: new RegExp(keyword) });
 	}
 	
-	getByLine(line){
-		return this.collection.findOne({line:line});
+	getByLine(line, fields){
+        return (!fields)? this.collection.findOne({line:line}) : this.collection.findOne({line:line},{fields:fields});
 	}
 }
 module.exports = ItineraryDAO;
