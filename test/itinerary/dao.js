@@ -24,7 +24,7 @@ describe('ItineraryDAO', () => {
 		Assert.notEqual(itineraries.length, 0);
 		Assert.equal(itineraries[0].line, saved.line);
 		Assert.equal(itineraries[0].description, saved.description);
-		Assert.equal(itineraries[0].keywords, 'keyword');
+		Assert.equal(itineraries[0].keywords, undefined);
 		Assert.equal(itineraries[0].agency, undefined);
 		Assert.equal(itineraries[0].spots, undefined);
 	});

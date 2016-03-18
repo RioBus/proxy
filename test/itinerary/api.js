@@ -39,7 +39,7 @@ describe('Itinerary API', () => {
 			Assert.equal(data.body.length, 1);
 			Assert.equal(data.body[0].line, 'lineCode');
 			Assert.equal(data.body[0].description, 'description');
-			Assert.equal(data.body[0].keywords, 'keywords');
+			Assert.equal(data.body[0].keywords, undefined);
 			Assert.equal(data.body[0].agency, undefined);
 			Assert.equal(data.body[0].spots, undefined);
             Assert.equal(data.body[0].strets, undefined);
