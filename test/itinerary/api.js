@@ -43,6 +43,7 @@ describe('Itinerary API', () => {
 			Assert.equal(data.body[0].agency, undefined);
 			Assert.equal(data.body[0].spots, undefined);
             Assert.equal(data.body[0].strets, undefined);
+            Assert.equal(data.body[0]._id, undefined);
 		}
 	});
 	
@@ -61,6 +62,7 @@ describe('Itinerary API', () => {
 			Assert.equal(data.body.keywords, 'keywords');
             Assert.equal(data.body.spots instanceof Array, true);
 			Assert.equal(data.body.streets, undefined);
+            Assert.equal(data.body._id, undefined);
 		}
 	});
 	
