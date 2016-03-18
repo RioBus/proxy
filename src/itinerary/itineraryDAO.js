@@ -5,11 +5,11 @@ class ItineraryDAO {
 	
 	constructor(connection) {
 		if(!connection) connection = database;
-		this.collection = connection.collection('itinerary', { indexes: [{ fields: { line: 1, description: 1, keywords: 1 } }] });
+		this.collection = connection.collection('itinerary', { indexes: [{ fields: { line: 1, description: 1 } }] });
 	}
 	
 	getHeaders() {
-		return this.collection.find({}, { fields: ['line', 'description', 'keywords'], sort: { line: 1 } });
+		return this.collection.find({}, { fields: ['line','description'] });
 	}
 	
 	getByKeyword(keyword){
