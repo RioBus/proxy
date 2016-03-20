@@ -24,6 +24,22 @@ describe('RegisterDAO', () => {
 		Assert.notEqual(data._id, undefined);
 		
 	});
+	
+	it('should get user by email and password', function*(){
+		let data = yield dao.getUser({email:'email', password:'pass'});
+		Assert.equal(data.name, 'name');
+		Assert.equal(data.email, 'email');
+		Assert.notEqual(data.password, 'pass');
+		Assert.notEqual(data._id, undefined);
+	});
+	
+	it('should get user by email', function*(){
+		let data = yield dao.getUserByEmail('email');
+		Assert.equal(data.name, 'name');
+		Assert.equal(data.email, 'email');
+		Assert.notEqual(data.password, 'pass');
+		Assert.notEqual(data._id, undefined);
+	});
 
 	after(function*() {
 		yield col.remove({});

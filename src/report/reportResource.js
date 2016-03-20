@@ -4,6 +4,8 @@ const Core = require('../core');
 const Database = Core.Database;
 const Report = require('./reportModel');
 const ReportDAO = require('./reportDAO');
+const SecurityUtil = require('../common/securityUtil');
+const RegisterDAO = require('../register/registerDAO');
 
 class ReportResource {
 
@@ -21,8 +23,26 @@ class ReportResource {
         if(!data.line || data.line==='') throw new Error("Line not set.");
         if(!data.message || data.message==='') throw new Error("Message not set.");
     }
+	
+	static *checkAuth(request, response, next){
+		let token = request.headers['authorization'];
+		if(!token) return false;
+		else{
+			let data = yield SecurityUtil.decodeToken(token);
+			let dao = new RegisterDAO();
+			let user = yield dao.getUserByEmail(data.value);
+			if(!user) return false;
+			else return true;
+		}
+		
+	}
 
 	*postReport(request, response) {
+		let canAccess = yield ReportResource.checkAuth(request, response);
+		if(!canAccess){
+			response.status(403).send('You not allowed here.');
+			return;
+		}
 		const dao = new ReportDAO();
 		let data;
 		try {
@@ -38,6 +58,11 @@ class ReportResource {
 	}
     
     *getActiveReports(request, response) {
+		let canAccess = yield ReportResource.checkAuth(request, response);
+		if(!canAccess){
+			response.status(403).send('You not allowed here.');
+			return;
+		}
         const dao = new ReportDAO();
         let data;
 		try {
