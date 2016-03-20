@@ -8,7 +8,6 @@ class RegisterDAO {
 		this.collection = connection.collection('register', { indexes: [{ fields: { line: 1, description: 1 } }] });
 	}
 	
-
 	getByName(name){
 		return this.collection.find({name:name});
 	}
