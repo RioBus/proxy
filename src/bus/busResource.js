@@ -39,20 +39,44 @@ class BusResource {
 		for(let line of searchTerm.split(',')) BusResource.track('REST+Hit', 'Bus Code', line);
 		
 		let data = yield dao.getByLines(searchTerm.split(','));
-		if(data.length>0) response.jsonp(data);
+		if(data.length>0) response.jsonp(BusResource.prepareForV3(data));
 		else {
 			data = yield dao.getByOrders(searchTerm.split(','));
-			if(data.length>0) response.jsonp(data);
+			if(data.length>0) response.jsonp(BusResource.prepareForV3(data));
 			else {
 				let itineraryDao = new ItineraryDAO();
 				let lines = (yield itineraryDao.getByKeyword(searchTerm)).map((itinerary) => { return itinerary.line; });
 				data = yield dao.getByLines(lines);
-				if(data.length>0) response.status(200).jsonp(data);
+				if(data.length>0) response.status(200).jsonp(BusResource.prepareForV3(data));
 				else response.status(404).jsonp([]);
 			}
 		}	
 	}
+    
+    /**
+     * Prepares the output data list to fit to v3 API contract
+     * @param {Array} data - The bus list data
+     * @return {Array}
+     */
+    static prepareForV3(data) {
+        return data.map((bus) => {
+            bus.timeStamp = bus.timestamp;
+            bus.sense = bus.direction;
+            bus.direction = bus.directionDegrees;
+            delete bus.timestamp;
+            delete bus.directionDegrees;
+            delete bus._id;
+            return bus;
+        });
+    }
 	
+    /**
+     * Sends to Google Analytics an event to track the request
+     * @param {string} event - Event name
+     * @param {string} id - Event ID
+     * @param {string} value - Value attached to the event
+     * @return {void} 
+     */
 	static track(event, id, value) {
 		let analytics = new Analytics();
 		analytics.initialize();

@@ -37,13 +37,16 @@ describe('Bus API', () => {
 			data = e;
 		} finally {
 			Assert.equal(data.statusCode, 200);
+            console.log(data.body);
 			Assert.equal(data.body instanceof Array, true);
 			Assert.equal(data.body.length, 1);
-			Assert.equal(data.body[0].line, '485');
 			Assert.equal(data.body[0].order, 'order');
 			Assert.equal(data.body[0].speed, 0);
-			Assert.equal(data.body[0].directionDegrees, 0);
-			Assert.equal(data.body[0].direction, 'direction');
+			Assert.equal(data.body[0].direction, 0);
+			Assert.equal(data.body[0].sense, 'direction');
+			Assert.equal(data.body[0].line, '485');
+			Assert.equal(typeof data.body[0].timeStamp, 'string');
+			Assert.equal(data.body[0].timestamp, undefined);
 		}
 	});
 	
@@ -61,8 +64,10 @@ describe('Bus API', () => {
 			Assert.equal(data.body[0].line, '485');
 			Assert.equal(data.body[0].order, 'order');
 			Assert.equal(data.body[0].speed, 0);
-			Assert.equal(data.body[0].directionDegrees, 0);
-			Assert.equal(data.body[0].direction, 'direction');
+			Assert.equal(data.body[0].direction, 0);
+			Assert.equal(data.body[0].sense, 'direction');
+			Assert.equal(typeof data.body[0].timeStamp, 'string');
+			Assert.equal(data.body[0].timestamp, undefined);
 		}
 	});
 	
@@ -80,8 +85,10 @@ describe('Bus API', () => {
 			Assert.equal(data.body[0].line, '485');
 			Assert.equal(data.body[0].order, 'order');
 			Assert.equal(data.body[0].speed, 0);
-			Assert.equal(data.body[0].directionDegrees, 0);
-			Assert.equal(data.body[0].direction, 'direction');
+			Assert.equal(data.body[0].direction, 0);
+			Assert.equal(data.body[0].sense, 'direction');
+			Assert.equal(typeof data.body[0].timeStamp, 'string');
+			Assert.equal(data.body[0].timestamp, undefined);
 		}
 	});
 	
