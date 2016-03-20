@@ -12,6 +12,7 @@ class RegisterResource {
 	
 	constructor(router) {
 		router.post('/signup',wrap(this.signUp));
+		router.post('/login',wrap(this.login));
 	}
 
 	*signUp(request,response){
@@ -42,5 +43,29 @@ class RegisterResource {
 			response.status(400).jsonp(e);
 		}		
 	}
+
+	*login(request,response){
+		const dao = new RegisterDAO();
+		var aux = {};
+		try{
+			if(!request.body)throw new Error("body is empty.");
+			if(typeof(request.body.email)!=='string' || request.body.email.lenght == 0) throw new Error("email is invalid");
+			if(typeof(request.body.password)!=='string' || request.body.password.lenght == 0) throw new Error("password is invalid");
+			aux.email = request.body.email;
+			aux.password = request.body.password;
+			let user = yield dao.getUser(aux);
+			let data = {
+				auth_token: yield Security.generateToken(user.email),
+				data:{
+					name:user.name,
+					email:user.email
+				}
+			};
+			response.status(200).jsonp(data);
+		}catch(e){
+			response.status(400).jsonp(e);
+		}		
+	}
+
 }
 module.exports = RegisterResource;
