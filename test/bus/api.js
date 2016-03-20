@@ -22,11 +22,11 @@ describe('Bus API', () => {
 			line: '000', 
 			order: 'order', 
 			speed: 0, 
-			direction: 0, 
+			directionDegrees: 0, 
 			latitude: 20, 
 			longitude: 30, 
 			timestamp: new Date(), 
-			sense: 'direction'
+			direction: 'direction'
 		};
 		
 		global.database = yield Database.connect();
@@ -54,6 +54,8 @@ describe('Bus API', () => {
 			Assert.equal(data.body[0].speed, 0);
 			Assert.equal(data.body[0].direction, 0);
 			Assert.equal(data.body[0].sense, 'direction');
+			Assert.equal(typeof data.body[0].timeStamp, 'string');
+			Assert.equal(data.body[0].timestamp, undefined);
 		}
 	});
 	
@@ -73,6 +75,8 @@ describe('Bus API', () => {
 			Assert.equal(data.body[0].speed, 0);
 			Assert.equal(data.body[0].direction, 0);
 			Assert.equal(data.body[0].sense, 'direction');
+			Assert.equal(typeof data.body[0].timeStamp, 'string');
+			Assert.equal(data.body[0].timestamp, undefined);
 		}
 	});
 	
@@ -92,6 +96,8 @@ describe('Bus API', () => {
 			Assert.equal(data.body[0].speed, 0);
 			Assert.equal(data.body[0].direction, 0);
 			Assert.equal(data.body[0].sense, 'direction');
+			Assert.equal(typeof data.body[0].timeStamp, 'string');
+			Assert.equal(data.body[0].timestamp, undefined);
 		}
 	});
 	

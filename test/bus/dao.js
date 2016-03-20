@@ -14,7 +14,7 @@ describe('BusDAO', () => {
 		let conn = yield Database.connect();
 		col = conn.collection('bus');
 		dao = new BusDAO(conn);
-		saved = yield col.insert({ line: '485', order: 'order', speed: 0, direction: 0, latitude: 20, longitude: 30, timestamp: new Date(), direction: 'direction'});
+		saved = yield col.insert({ line: '000', order: 'order', speed: 0, directionDegrees: 0, latitude: 20, longitude: 30, timestamp: new Date(), direction: 'direction'});
 	});
 	
 	after(function*() { yield col.remove({}); });
@@ -36,4 +36,8 @@ describe('BusDAO', () => {
 		Assert(data instanceof Array);
 		Assert.equal(data.length, 1);
 	});
+    
+    after(function*() {
+        col.remove({});
+    });
 });

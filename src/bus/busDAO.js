@@ -9,8 +9,8 @@ var queryFields = {
 	order: true,
 	speed: true,
 	direction: true,
-	timestamp: true,
-	sense: true
+    directionDegrees: true,
+	timestamp: true
 };
 
 /**
