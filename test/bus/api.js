@@ -37,7 +37,6 @@ describe('Bus API', () => {
 			data = e;
 		} finally {
 			Assert.equal(data.statusCode, 200);
-            console.log(data.body);
 			Assert.equal(data.body instanceof Array, true);
 			Assert.equal(data.body.length, 1);
 			Assert.equal(data.body[0].order, 'order');
