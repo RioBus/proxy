@@ -15,18 +15,18 @@ describe('Bus API', () => {
 	let server, host;
 	
 	before(function*() {
-		let ip = '0.0.0.0', port = 8080;
+		let ip = '0.0.0.0', port = Config.server.port;
 		host = `http://${ip}:${port}`;
 
 		var busMock = {
 			line: '000', 
 			order: 'order', 
 			speed: 0, 
-			directionDegrees: 0, 
+			direction: 0, 
 			latitude: 20, 
 			longitude: 30, 
 			timestamp: new Date(), 
-			direction: 'direction'
+			sense: 'direction'
 		};
 		
 		global.database = yield Database.connect();

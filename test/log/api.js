@@ -14,7 +14,7 @@ describe('Log API', () => {
 	let server, host, content;
 	
 	before(() => {
-		let ip = '0.0.0.0', port = 8080;
+		let ip = '0.0.0.0', port = Config.server.port;
 		host = `http://${ip}:${port}`;
 		content = 'INFO';
 		
