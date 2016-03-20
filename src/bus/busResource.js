@@ -3,7 +3,6 @@
 const wrap = require('co-express');
 const Core = require('../core');
 const Database = Core.Database;
-const Bus = require('./busModel');
 const BusDAO = require('./busDAO');
 const ItineraryDAO = require('../itinerary/itineraryDAO');
 const Analytics = require('../common/analytics');

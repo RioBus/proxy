@@ -1,6 +1,18 @@
 'use strict';
 /* global database; */
 
+var queryFields = {
+	_id: false,
+	latitude: true,
+	longitude: true,
+	line: true,
+	order: true,
+	speed: true,
+	direction: true,
+    directionDegrees: true,
+	timestamp: true
+};
+
 /**
  * Bus Data Access Object
  * @class {BusDAO}
@@ -17,7 +29,7 @@ class BusDAO {
 	 * @return {Bus[]}
 	 */
 	getAll() {
-		return this.bus.find({});
+		return this.bus.find({}, { fields: queryFields });
 	}
 	
 	/**
@@ -26,7 +38,7 @@ class BusDAO {
 	 * @return {Bus[]}
 	 */
 	getByLines(lines){
-		return this.bus.find({ line: { $in: lines } });
+		return this.bus.find({ line: { $in: lines } }, { fields: queryFields });
 	}
 	
 	/**
@@ -35,7 +47,7 @@ class BusDAO {
 	 * @return {Bus[]}
 	 */
 	getByOrders(orders){
-		return this.bus.find({ order: { $in: orders } });
+		return this.bus.find({ order: { $in: orders } }, { fields: queryFields });
 	}
 }
 module.exports = BusDAO;
