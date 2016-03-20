@@ -8,11 +8,11 @@ const Core      = require(`${base}/core`);
 const Database  = Core.Database;
 const Http	    = Core.Http;
 const Router    = Core.Router;
-const Report   = require(`${base}/report/reportModel`);
+const Report    = require(`${base}/report/reportModel`);
 
 describe('Report API', () => {
 	
-	let server, host;
+	let server, host, token;
 	
 	before(function*() {
 		let ip = '0.0.0.0', port = Config.server.port;
@@ -22,13 +22,17 @@ describe('Report API', () => {
 		let router = new Router();
 		router.registerResources(Config.resources);
 		server = router.start(ip, port);
+		
+		let user = {name:'name', email:'email', password:'pass'};
+		user = yield Http.post(`${host}/signup`, user);
+		token = user.body.auth_token.value;
 	});
 	
-	it('should post a report from a POST request to /v4/report', function*() {
+	it('should post a report from a POST request to /v4/report with token', function*() {
 		let data;
 		let obj = {title:'bus report', order: 'C12345', line:'485', message: 'content'};
-		try {		
-			var output = yield Http.post(`${host}/v4/report`, obj);
+		try {	
+			var output = yield Http.post(`${host}/v4/report`, obj, {'Authorization': token});
 			data = output;
 		} catch(e) {
 			data = e;
@@ -45,11 +49,24 @@ describe('Report API', () => {
 		}
 	});
 	
+	it('should fail to post a report from a POST request to /v4/report without token', function*() {
+		let data;
+		let obj = {title:'bus report', order: 'C12345', line:'485', message: 'content'};
+		try {	
+			var output = yield Http.post(`${host}/v4/report`, obj);
+			data = output;
+		} catch(e) {
+			data = e;
+		} finally {
+            Assert.equal(data.statusCode, 403);				
+		}
+	});
+	
 	it('should get a active reports list from a GET request to /v4/report/C12345', function*() {
 		let data;
 		const obj = {title:'bus report', order: 'C12345', line:'485', message: 'content'};
 		try {		
-			var output = yield Http.get(`${host}/v4/report/C12345`);
+			var output = yield Http.get(`${host}/v4/report/C12345`, {}, {'Authorization': token});
 			data = output;
 		} catch(e) {
 			data = e;
@@ -63,7 +80,19 @@ describe('Report API', () => {
 			Assert.equal(tmp.order, obj.order);
 			Assert.notEqual(tmp.timestamp, undefined);
 			Assert.equal(tmp.message, obj.message);
-			Assert.notEqual(tmp._id, undefined);					
+			Assert.notEqual(tmp._id, undefined);				
+		}
+	});
+	
+	it('should fail to get a active reports list from a GET request to /v4/report/C12345 without token', function*() {
+		let data;
+		try {		
+			var output = yield Http.get(`${host}/v4/report/C12345`, {});
+			data = output;
+		} catch(e) {
+			data = e;
+		} finally {
+            Assert.equal(data.statusCode, 403);				
 		}
 	});
 	
@@ -71,7 +100,7 @@ describe('Report API', () => {
 		let data;
 		let obj = {order: 'C12345', line:'485', message: 'content'};
 		try {		
-			var output = yield Http.post(`${host}/v4/report`, obj);
+			var output = yield Http.post(`${host}/v4/report`, obj, {'Authorization': token});
 			data = JSON.parse(output);
 		} catch(e) {
 			data = e;
@@ -80,6 +109,19 @@ describe('Report API', () => {
 		}
 	});
 	
+	it('should fail to post a report due to an unconsistent request to /v4/report without token', function*() {
+		let data;
+		let obj = {order: 'C12345', line:'485', message: 'content'};
+		try {		
+			var output = yield Http.post(`${host}/v4/report`, obj);
+			data = JSON.parse(output);
+		} catch(e) {
+			data = e;
+		} finally {
+			Assert.equal(data.statusCode, 403);				
+		}
+	});
+		
 	after(function*() {
 		server.close();
 		yield global.database.collection('report').remove({});

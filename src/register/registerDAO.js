@@ -17,5 +17,9 @@ class RegisterDAO {
 		return this.collection.findOne({email:user.email, password:md5(user.password).toString()});
 	}
 	
+	getUserByEmail(email){
+		return this.collection.findOne({email: email});
+	}
+	
 }
 module.exports = RegisterDAO;
