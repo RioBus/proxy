@@ -66,6 +66,18 @@ describe('Itinerary API', () => {
 		}
 	});
 	
+	it('should fail to get an itinerary by doing querying for an unexisting line with a GET request to /v3/itinerary/unexisting', function*() {
+		let data;
+		try {
+			var output = yield Http.get(`${host}/v3/itinerary/unexisting`);
+			data = output;
+		} catch(e) {
+			data = e;
+		} finally {
+			Assert.equal(data.statusCode, 404);
+		}
+	});
+	
 	it('should get a single itinerary by doing a GET request to /v4/itinerary/lineCode', function*() {
 		let data;
 		try {
@@ -82,6 +94,18 @@ describe('Itinerary API', () => {
             Assert.equal(data.body.spots instanceof Array, true);
             Assert.equal(data.body.streets instanceof Array, true);
             Assert.equal(data.body._id, undefined);
+		}
+	});
+	
+	it('should fail to get an itinerary by doing querying for an unexisting line with a GET request to /v4/itinerary/unexisting', function*() {
+		let data;
+		try {
+			var output = yield Http.get(`${host}/v4/itinerary/unexisting`);
+			data = output;
+		} catch(e) {
+			data = e;
+		} finally {
+			Assert.equal(data.statusCode, 404);
 		}
 	});
 	

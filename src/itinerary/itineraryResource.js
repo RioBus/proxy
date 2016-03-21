@@ -24,15 +24,29 @@ class ItineraryResource {
 
 	*getByLine(request, response) {
 		const dao = new ItineraryDAO();
-		const data = yield dao.getByLine(request.params.line, ['line', 'description', 'agency', 'keywords', 'spots', 'streets']);
-        delete data._id;
-		response.jsonp(data);	
+        let data;
+        try {
+            data = yield dao.getByLine(request.params.line, ['line', 'description', 'agency', 'keywords', 'spots', 'streets']);
+            delete data._id;
+            response.status(200);
+        } catch(e) {
+            data = e;
+            response.status(404);
+        }
+		response.jsonp(data);
 	}
 
 	*oldGetByLine(request, response) {
 		const dao = new ItineraryDAO();
-		const data = yield dao.getByLine(request.params.line, ['line', 'description', 'agency', 'keywords', 'spots']);
-        delete data._id;
+        let data;
+        try {
+            data = yield dao.getByLine(request.params.line, ['line', 'description', 'agency', 'keywords', 'spots']);
+            delete data._id;
+            response.status(200);
+        } catch(e) {
+            data = e;
+            response.status(404);
+        }
 		response.jsonp(data);	
 	}
 }
