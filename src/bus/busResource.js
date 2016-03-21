@@ -60,11 +60,7 @@ class BusResource {
     static prepareForV3(data) {
         return data.map((bus) => {
             bus.timeStamp = bus.timestamp;
-            bus.sense = bus.direction;
-            bus.direction = bus.directionDegrees;
             delete bus.timestamp;
-            delete bus.directionDegrees;
-            delete bus._id;
             return bus;
         });
     }

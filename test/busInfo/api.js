@@ -15,7 +15,7 @@ describe('BusInfo API', () => {
 	let server, host, saved;
 	
 	before(function*() {
-		let ip = '0.0.0.0', port = 8080;
+		let ip = '0.0.0.0', port = Config.server.port;
 		host = `http://${ip}:${port}`;
 		
 		global.database = yield Database.connect();
