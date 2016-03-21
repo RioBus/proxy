@@ -1,7 +1,7 @@
 'use strict';
 class MainResource {
 
-	get base() { return '/main'; }
+	get base() { return '/'; }
 
 	constructor(router) {
 		router.get('/', this.getMainRoute);
