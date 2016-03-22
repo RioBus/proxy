@@ -13,7 +13,7 @@ describe('BusInfoDAO', () => {
 	
 	before(function*() {
 		let conn = yield Database.connect();
-		col = conn.collection('bus-info');
+		col = conn.collection('bus_info');
 		dao = new BusInfoDAO(conn);
 		saved = yield col.insert(new BusInfo('sign', 10, 'fuel', 20, 'model', 'body', 'frame', 'frameNumber', 'order', 'features', new Date()));
 	});

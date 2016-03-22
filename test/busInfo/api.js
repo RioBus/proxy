@@ -19,7 +19,7 @@ describe('BusInfo API', () => {
 		host = `http://${ip}:${port}`;
 		
 		global.database = yield Database.connect();
-        saved = yield global.database.collection('bus-info').insert(new BusInfo('sign', 0, 'fuel', 10, 'model', 'body', 'frame', 'frameNumber', 'order', 'features', new Date()));
+        saved = yield global.database.collection('bus_info').insert(new BusInfo('sign', 0, 'fuel', 10, 'model', 'body', 'frame', 'frameNumber', 'order', 'features', new Date()));
 		
 		let router = new Router();
 		router.registerResources(Config.resources);
@@ -52,6 +52,6 @@ describe('BusInfo API', () => {
     
 	after(function*() {
 		server.close();
-		yield global.database.collection('bus-info').remove({});
+		yield global.database.collection('bus_info').remove({});
 	});
 });

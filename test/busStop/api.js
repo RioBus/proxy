@@ -19,7 +19,7 @@ describe('BusStop API', () => {
 		host = `http://${ip}:${port}`;
 		
 		global.database = yield Database.connect();
-		yield global.database.collection('bus-stop').insert(new BusStop('lineCode', 'description', 'agency', []));
+		yield global.database.collection('bus_stop').insert(new BusStop('lineCode', 'description', 'agency', []));
 		
 		let router = new Router();
 		router.registerResources(Config.resources);
@@ -43,6 +43,6 @@ describe('BusStop API', () => {
 	
 	after(function*() {
 		server.close();
-		yield global.database.collection('bus-stop').remove({});
+		yield global.database.collection('bus_stop').remove({});
 	});
 });
