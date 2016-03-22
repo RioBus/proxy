@@ -5,7 +5,7 @@ class BusStopDAO {
 	
 	constructor(connection) {
 		if(!connection) connection = database;
-		this.collection = connection.collection('bus-stop');
+		this.collection = connection.collection('bus_stop');
 	}
 	
 	getAll() {

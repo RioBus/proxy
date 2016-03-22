@@ -9,7 +9,7 @@ class BusInfoDAO {
 	
 	constructor(connection) {
 		if(!connection) connection = database;
-		this.collection = connection.collection('bus-info');
+		this.collection = connection.collection('bus_info');
 	}
 	
 	/**
