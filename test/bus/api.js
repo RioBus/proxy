@@ -122,6 +122,27 @@ describe('Bus API', () => {
 		}
 	});
 	
+	it('should get a list with only one bus from a GET request to /v3/search/direction even with different case', function*() {
+		let data;
+		try {
+			var output = yield Http.get(`${host}/v3/search/DiRectION`);
+			data = output;
+		} catch(e) {
+			data = e;
+		} finally {
+            Assert.equal(data.statusCode, 200);
+			Assert.equal(data.body instanceof Array, true);
+			Assert.equal(data.body.length, 1);
+			Assert.equal(data.body[0].line, '000');
+			Assert.equal(data.body[0].order, 'order');
+			Assert.equal(data.body[0].speed, 0);
+			Assert.equal(data.body[0].direction, 0);
+			Assert.equal(data.body[0].sense, 'direction');
+			Assert.equal(typeof data.body[0].timeStamp, 'string');
+			Assert.equal(data.body[0].timestamp, undefined);
+		}
+	});
+	
 	it('should get an empty list from a GET request to /v3/search/unexisting', function*() {
 		let data;
 		try {
