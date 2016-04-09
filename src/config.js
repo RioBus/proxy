@@ -15,8 +15,8 @@ module.exports = {
         server: `/tmp/riobus/log/server-${time}.log`
     },
     server: {
-        ip: '0.0.0.0',
-        port: 8080
+        ip: process.env.RIOBUS_SERVER_IP     || '0.0.0.0',
+        port: process.env.RIOBUS_SERVER_PORT || 8080
     },
     database: {
         dbName: process.env.RIOBUS_DB_NAME  || 'nodejs',
